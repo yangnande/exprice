@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>当前时间，倒计时，省市区联动jquery练习</title>
+  <style>
+    span,
+    b {
+      color: red;
+    }
+  </style>
+</head>
+
+<body onload="nowTime(),countDown()">
+  <!-- 获取当前时间的年月日时分秒星期 -->
+  <div>
+    现在的时间是：<span></span>年<span></span>月<span></span>日<span></span>时<span></span>分<span></span>秒 星期<span></span>
+  </div>
+  <div id="count">
+    距离活动的时间：<b></b>天<b></b>时<b></b>分<b></b>秒
+  </div>
+  </div>
+
+  <!-- 省市区三级联动 -->
+  <select id="province">
+    <option>省</option>
+  </select>
+  <select id="city">
+    <option>市</option>
+  </select>
+  <select id="area">
+    <option>区</option>
+  </select>
+  <script src="./js/jquery-1.12.1.min.js"></script>
+  <script src="./js/areaData.js"></script>
+  <script>
+    // 获取当前时间的年月日时分秒星期
+    function nowTime() {
+      var now = new Date(),
+        year = now.getFullYear(),
+        month = handleTime(now.getMonth() + 1),
+        day = handleTime(now.getDate()),
+        hour = handleTime(now.getHours()),
+        min = handleTime(now.getMinutes()),
+        sec = handleTime(now.getSeconds()),
+        week = ['日', '一', '二', '三', '四', '五', '六'];
+      $("span").eq(0).html(year);
+      $("span").eq(1).html(month);
+      $("span").eq(2).html(day);
+      $("span").eq(3).html(hour);
+      $("span").eq(4).html(min);
+      $("span").eq(5).html(sec);
+      $("span").eq(6).html(week[now.getDay()]);
+      setTimeout(function () {
+        nowTime()
+      }, 1000)
+      // setTimeout(
+      //   ' nowTime()'
+      //   , 1000)
+    }
+    //倒计时
+    // 获取截止日期
+    var deadline = new Date('2019/07/3').getTime();
+    function countDown() {
+      // 获取当前日期
+      var currentTime = new Date().getTime(),
+        // 获取剩余日期
+        remainTime = (deadline - currentTime) / 1000,
+        // 获取天
+        d = Math.floor(remainTime / 60 / 60 / 24),
+        // 获取小时
+        h = handleTime(Math.floor((remainTime / 60 / 60) % 24)),
+        // 获取分钟
+        m = handleTime(Math.floor((remainTime / 60) % 60)),
+        // 获取秒
+        s = handleTime(Math.floor(remainTime % 60));
+      var bs = document.getElementsByTagName('b')
+      $("b").eq(0).html(d)
+      $("b").eq(1).html(h)
+      $("b").eq(2).html(m)
+      $("b").eq(3).html(s)
+      var t = setTimeout(function () {
+        countDown()
+      }, 1000)
+      //到了截止时间，停止定时器
+      if (remainTime < 0) {
+        clearTimeout(t)
+        $("#count").html("亲，活动结束了！！")
+      }
+    }
+    // 处理天，时分秒，小于10补0
+    function handleTime(time) {
+      if (time < 10) {
+        time = '0' + time
+      }
+      return time
+    }
+    // 省市区三级联动
+    $(function () {
+      // 获取省
+      var provinces = areaData.sheng;
+      // 添加省的下拉选项
+      provinces.forEach(v => $("#province").append('<option>' + v + '</option>'))
+      // 当省份变化时，添加市的下拉选项
+      $("#province").change(function () {
+        // 获取省份对应的下标
+        var cityIndex = this.selectedIndex - 1,
+          // 获取对应省份下面市的下拉选项
+          citys = areaData.shi['a_' + cityIndex];
+        console.log(cityIndex, 'cityIndex')
+        // 初始化市的下拉选项
+        $("#city").html('<option>市</option>')
+        if (cityIndex >= 0) {// 避免选市时，下标成-1，报错
+          // 只有选择初始化-省以下的下拉选项添加下面市的下拉选项
+          citys.forEach(v => {
+            $("#city").append('<option>' + v + '</option>')
+          })
+        }
+        // 当市变化时，添加区的下拉选项
+        $("#city").change(function () {
+          // 初始化区的下拉选项
+          $("#area").html('<option>区</option>')
+          // 获取市对应的下标
+          var areaIndex = this.selectedIndex - 1;
+          console.log(areaIndex, 'areaIndex')
+          // 获取对应市下面区的下拉选项
+          var areas = areaData.xian['a_' + cityIndex + '_' + areaIndex]
+          if (areaIndex >= 0) { // 避免选区时，下标成-1，报错
+            // 只有选择初始化-市以下的下拉选项添加下面区的下拉选项
+            areas.forEach(v => {
+              $("#area").append('<option>' + v + '</option>')
+            })
+          }
+        })
+      })
+    })
+
+  </script>
+</body>
+
+</html>
