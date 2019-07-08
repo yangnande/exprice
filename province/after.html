@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>心意送你 红包有礼</title>
+    <style>
+      .app {
+        margin:20px;
+        height: 100%;
+      }
+      .choose {
+        position: relative;
+      }
+      .choose::after {
+        content: "";
+        border-top: 10px solid #000;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        left: 60px;
+      }
+      .actived {
+        position: relative;
+        color: red;
+      }
+      .actived::after {
+        content: "";
+        border-bottom: 10px solid red;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        left: 60px;
+      }
+      .cancel {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .4);
+        /* 不能用relative */
+        position: absolute; 
+        top: 0;
+        left: 0;
+        z-index: 99;
+      }
+      .cancelButton {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        top: 30px;
+        left: 50%;
+        margin-left: -50px;
+        z-index: 200;
+        text-align: center;
+        color: red;
+        background: #fff;
+      }
+    </style>
+</head>
+<body>
+    
+    <div class="app">
+      <div :class="[isSelect? 'actived': 'choose']" @click="change">选择</div>
+      <div v-if="isCancel" class="cancel">
+        <div @click="cancel" class="cancelButton">取消</div>
+      </div>
+    </div>
+    <!-- <script type="text/javascript" src="../public/js/vconsole.min.js"></script>  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="./js/autoScale.js"></script>
+    <script type="text/javascript">
+      new Vue({
+        el: '.app',
+        data: {
+          isSelect: false,
+          isCancel: false
+        },
+        methods: {
+          change() {
+            this.isSelect = !this.isSelect;
+            this.isCancel = true
+          },
+          cancel() {
+            this.isSelect = false;
+            this.isCancel = false;
+          }
+        }
+      })
+    </script>
+</body>
+</html>
