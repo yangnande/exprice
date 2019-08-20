@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .item {
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #eee;
+    }
+    .item:not(:first-child) {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+    <ul>
+      <script id="tpl" type="text/template">
+        {@each list as item,index}
+          {@if index===0}
+          <li class="item">1111</li>
+          {@else if index === 1}
+          <li class="item">2222</li>
+          {@else}
+          <li class="item">3333</li>
+          {@/if}
+        {@/each}
+      </script>
+    </ul>
+    <script src="./js/juicer-min.js"></script>
+    <script src="../public/js/jquery-1.12.1.min.js"></script>
+    <script>
+      
+        var data = {
+          list: [
+            {name:' 11', show: true},
+            {name:' 22', show: false},
+            {name:' 33', show: true}
+           ]
+        };
+        var tpl = $("#tpl").html();
+        var html = juicer(tpl, data);
+        $("ul").append(html)
+        console.log($(".item:not(:first-child)").length, '$(".item:not(:first-child)").length')
+    </script>
+</body>
+</html>

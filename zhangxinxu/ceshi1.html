@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../public/css/reset.css">
+  <style>
+    
+    /* 1浮动，注意：1不要容器定高的问题 2 50%的问题 处理：左侧安全宽度，右侧自动分配剩余空间 */
+    /* 
+    dl {
+      padding: .64rem;
+      border: 1px solid #e4e4e4;
+      box-sizing: border-box;
+      margin: .64rem auto 0;
+      overflow:hidden;  // 处理父元素内的浮动产生的高度问题
+    }
+    dt {
+      width: 20%;
+      float: left;
+    }
+    dd {
+      width: 80%;
+      float: right;
+      text-align: right;
+    } */
+    /* 2定位 */
+    dl {
+      position: relative;
+      word-break: break-all;
+    }
+    dd {
+      position: absolute;
+      right: 0;
+    }
+    /* 维护起来麻烦 */
+    /* dl>dd:nth-child(2) {
+      top: 0;
+    }
+    dl>dd:nth-child(4) {
+      top: 20px;
+    }
+    dl>dd:nth-child(6) {
+      top: 40px;
+    }
+    dl>dd:nth-child(8) {
+      top: 60px;
+    } */
+    /* top缓成margin */
+    dd {
+      margin-top: -1.92rem;
+    }
+  </style>
+</head>
+<body>
+  <dl>
+    <dt>手机系统</dt>
+    <dd>Android</dd>
+    <dt>登录方式</dt>
+    <dd>QQ互联网登录</dd>
+    <dt>绑定时间</dt>
+    <dd>2019-07-25 16:18</dd>
+    <dt>绑定状态</dt>
+    <dd>wwffafdfdafdasfwwffafdfdafdasfwwffafdfdafdasfwwffafdfdafdasf</dd>
+  </dl>
+  <script src="../public/autoScale.js"></script>
+</body>
+</html>

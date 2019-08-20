@@ -11,6 +11,7 @@
     b {
       color: red;
     }
+ 
   </style>
 </head>
 
@@ -34,9 +35,10 @@
   <select id="area">
     <option>区</option>
   </select>
-  <script src="./js/jquery-1.12.1.min.js"></script>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script src="./js/areaData.js"></script>
   <script>
+    console.log($('.item:not(:first-child)').size())
     // 获取当前时间的年月日时分秒星期
     function nowTime() {
       var now = new Date(),
@@ -100,7 +102,7 @@
     }
     // 省市区三级联动
     $(function () {
-      // 获取省
+      
       var provinces = areaData.sheng;
       // 添加省的下拉选项
       provinces.forEach(v => $("#province").append('<option>' + v + '</option>'))

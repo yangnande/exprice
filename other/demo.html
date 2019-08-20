@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    ul {
+      margin: 0 auto;
+    }
+    li {
+      border: 1px solid black;
+      width: 3.2rem;
+      height: 1.706667rem;
+      /* line-height: 1.706667rem; */
+      text-align: center;
+      float: left;
+      list-style:none; 
+      font-size: .64rem;
+      color:blue;
+    }
+    li::before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 0;
+      height: 100%;
+      margin-top: .021333rem;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>乐乐</li>
+    <li>哈哈</li>
+    <li>开开</li>
+    <li>心心</li>
+  </ul>
+  <script src="public/js/autoScale.js">
+  </script>
+  <script>
+  // 按数组对象中的属性进行排序
+  var floorList =  [
+      {
+        "productType": 3,
+        "sortNo": 3,
+        "goodsSize": 1,
+        "goodsList": [
+          {
+            "goodsId": "1388",
+            "goodsName": "安徽测试小时包",
+            "goodsSubtitle": "安徽测试小时包",
+            "goodsDesc": "安徽测试小时包",
+            "productId": "36",
+            "productType": "1",
+            "productTraffic": "1G",
+            "exchangeType": "1",
+            "cashPrice": 100,
+            "pointsPrice": 0,
+            "discount": []
+          }
+        ]
+      },
+      {
+        "productType": 0,
+        "sortNo": 4,
+        "goodsSize": 1,
+        "goodsList": [
+          {
+            "goodsId": "1390",
+            "goodsName": "10元1G日包",
+            "goodsSubtitle": "10元1G日包",
+            "goodsDesc": "10元1G日包",
+            "productId": "95",
+            "productType": "2",
+            "productTraffic": "1G",
+            "exchangeType": "1",
+            "cashPrice": 100,
+            "pointsPrice": 0,
+            "discount": []
+          }
+        ]
+      },
+      {
+        "productType": 2,
+        "sortNo": 1,
+        "goodsSize": 1,
+        "goodsList": [
+          {
+            "goodsId": "1546",
+            "goodsName": "安徽5元5GB",
+            "goodsSubtitle": "",
+            "productId": "153",
+            "productType": "3",
+            "productTraffic": "5G",
+            "exchangeType": "1",
+            "cashPrice": 500,
+            "pointsPrice": 0,
+            "discount": []
+          }
+        ]
+      }
+    ]
+  function compare (property) {
+    return function (a,b) {
+      var value1 = a[property];
+      var value2 = b[property];
+      return value2 -value1
+    }
+  }
+  console.log(floorList.sort(compare('sortNo')))
+  
+  </script>
+</body>
+</html>

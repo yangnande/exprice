@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组合应用函数</title>
+</head>
+<body>
+  <script type="text/javascript">
+   var str = "hello"
+    // 将字符串大写
+    function stringToUpper (str) {
+      return str.toUpperCase()
+    }
+    // 获取三个字符串
+    function getThreeCharacters (str) {
+      return str.substring(0,3)
+    }
+    // 将字符串转为数组
+    function stringToArray(str) {
+      return str.split('')
+    }
+    // 组合函数 从右向左执行
+    function compose (...fns) {
+      console.log(fns)
+      return function(x) {
+        return fns.reduceRight(function(arg,fn) {
+          console.log(x, 'x')
+          return fn(arg)
+        },x)
+      }
+    }
+    var a = compose(stringToArray,getThreeCharacters,stringToUpper);
+    console.log(a(str))
+  </script>
+</body>
+</html>

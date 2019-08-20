@@ -64,7 +64,7 @@
 </head>
 <body>
     
-    <div class="app">
+    <div class="app">{{b}}
       <div :class="[isSelect? 'actived': 'choose']" @click="change">选择</div>
       <div v-if="isCancel" class="cancel">
         <div @click="cancel" class="cancelButton">取消</div>
@@ -72,13 +72,15 @@
     </div>
     <!-- <script type="text/javascript" src="../public/js/vconsole.min.js"></script>  -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script type="text/javascript" src="./js/autoScale.js"></script>
+    <script type="text/javascript" src="../public/js/autoScale.js"></script>
     <script type="text/javascript">
       new Vue({
         el: '.app',
         data: {
           isSelect: false,
-          isCancel: false
+          isCancel: false,
+          a: '111',
+          b: this.a + '666'
         },
         methods: {
           change() {
