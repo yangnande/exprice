@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>select单选和多选</title>
+</head>
+<body>
+  <div id="app">
+    <!--  原生是通过name将checkbox的value提交表单-->
+    <h1>单选</h1>
+    <select name="fruit" id="" v-model="fruit">
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="西瓜">西瓜</option>
+      <option value="水蜜桃">水蜜桃</option>
+    </select>
+    <h2>你选择的水果是：{{fruit}}</h2>
+    <h1>多选</h1>
+    <select name="fruits" id="" v-model="fruits" multiple>
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="西瓜">西瓜</option>
+      <option value="水蜜桃">水蜜桃</option>
+    </select>
+    <h2>你选择的水果是：{{fruits}}</h2>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        fruit: "苹果", // 单选框
+        fruits: ["苹果"], // 多选框
+      }
+    })
+  </script>
+</body>
+</html>

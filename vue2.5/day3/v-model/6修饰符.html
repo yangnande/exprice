@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>修饰符</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1 lazy:将实时更新变为失去焦点和用户按下回车键时，更新数据 -->
+    <input type="text" v-model.lazy="test1">
+    <h2>{{test1}}</h2>
+    <!-- 1 number:将数据转为数字类型，v-model默认会将数据类型转为字符串 -->
+    <input type="text" v-model.number="test2">
+    <h2>{{typeof test2}}</h2>
+    <!-- 1 trim:取出数据左右两边的空格 -->
+    <input type="text" v-model.trim="test3">
+    <h2>测试{{test3}}</h2>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        test1: 'aaa',
+        test2: '111',
+        test3: ' 333 '
+      }
+    })
+  </script>
+</body>
+</html>

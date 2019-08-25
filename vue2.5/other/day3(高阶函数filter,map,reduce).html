@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>高阶函数filter,map,reduce</title>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+  <script src="../../public/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        array: [20,40,60,100,120,140],
+        obj: [
+          {price:10,count:2},
+          {price:20,count:3},
+          {price:30,count:4},
+          {price:40,count:5},
+        ]
+      },
+      mounted() {
+        // 循环 普通的循环，for in/of 
+        // let total = 0
+        // for (let i = 0;i < this.obj.length; i++) {
+        //   let obj = this.obj[i]
+        //   total += obj.price * obj.count
+        // }
+        // for (let i in this.obj) { // i 为下标 
+        //   let obj = this.obj[i]
+        //   total += obj.price * obj.count
+        // }
+        // for (let item of this.obj) { // item 为元素 
+        //   total += item.price * item.count
+        // }
+        // console.log(total)
+
+        // 知识点：编程：命令式编程（jquery），声明式编程(vue)，面向对象编程，函数式编程
+        // 1 取出小于100的数字
+        // 2 将小于100的数字转换:都乘2
+        // 3 将步骤2所有的数字相加，得到最终结果
+        var arr1 = [],
+            arr2 = [],
+            total = 0;
+        // for (var i = 0;i < this.array.length; i++ ) {
+        //   let arr = this.array[i]
+        //   if (arr < 100) {
+        //     arr1.push(arr)
+        //   }
+        // }
+        
+        // for (var i = 0;i < arr1.length; i++) {
+        //   let arr = arr1[i]
+        //   arr2.push(arr*2)
+        // }
+        // for (var i = 0;i < arr2.length; i++) {
+        //   let arr = arr2[i]
+        //   total += arr
+        // }
+
+        // filter 过滤数组 参数为回调函数 currentValue(当前元素),index(下标),arr(当前数组)
+        // filter返回true或false，生成一个新的数组，返回true的值会存入新的数组，过滤掉返回false的值
+        // map 映射数组，参数为回调函数 currentValue(当前元素),index(下标),arr(当前数组)
+        // map 返回一个新数组，适用于要改变数组中的每一个元素
+        // reduce 累加器 参数为回调函数和初始值 参数为total(初始值或计算结束的返回值), currentValue(当前元素),index(下标),arr(当前数组)
+        // reduce 适用于计算总和
+        // arr1 = this.array.filter(function(item) {
+        //   return item < 100
+        // })
+        // arr2 = arr1.map(function(item) {
+        //   return item * 2
+        // })
+        // total = arr2.reduce(function(preValue,item) {
+        //   return preValue + item
+        // }, 0)
+
+        // this.array.filter(function(item) {
+        //   return item < 100
+        // }).map(function(item) {
+        //   return item * 2
+        // }).reduce(function(preValue,item) {
+        //   return preValue + item
+        // }, 0)
+        // 不知道为什么reduce不能进行链式操作
+        // this.array.filter(item => item < 100).map(item => item * 2).reduce((preValue,item) => preValue + item)
+        arr2 = this.array.filter(item => item < 100).map(item => item * 2)
+        total = arr2.reduce((preValue,item) => preValue + item)
+        console.log(arr1)
+        console.log(arr2)
+        console.log(total)
+      }
+    })
+  </script>
+</body>
+</html>

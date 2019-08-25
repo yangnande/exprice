@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-model基本用法和原理</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-model原理：本质上包含两个操作，相当于v-bind绑定input的value和方法：实时监听input的value,并将value赋值给input和data的属性 -->
+    <!-- <input type="text" v-model="message"> -->
+    <!-- <input type="text" :value="message" @input="change"> -->
+    <!-- 不用传event,因为浏览器会默认带此参数 -->
+    <input type="text" :value="message" @input="message=$event.target.value">
+    {{message}}
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hel1o'
+      },
+      methods: {
+        change (event) {
+          this.message = event.target.value
+        }
+      }
+    })
+  </script>
+</body>
+</html>

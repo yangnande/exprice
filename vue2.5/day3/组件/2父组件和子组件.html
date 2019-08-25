@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父组件和自组件</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 3使用 -->
+    <cpn2></cpn2>
+   
+  </div>
+
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    // 1创建组件构造对象 子组件
+    var cpn1 = Vue.extend({
+      template: `
+       <h1>组件</h1>
+      `
+    })
+    var cpn2 = Vue.extend({
+      template: `
+      <div>
+        <h1>创建组件</h1>
+        <cpn1></cpn1>
+      </div>
+      `,
+      components: {
+        'cpn1': cpn1
+      }
+    })
+    // 2注册组件构造对象(自定义的组件标签名，组件构造对象) 注册的是全局组件
+    // root根组件
+    let app = new Vue({
+      el: '#app',
+      data: {
+      },
+      components: { // 注册的是局部组件
+        'cpn2': cpn2
+      }
+    })
+  </script>
+</body>
+</html>

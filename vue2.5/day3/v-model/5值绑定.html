@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>值绑定</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 值绑定：value不写死，动态绑定-->
+    <label :for="item" v-for="item in hobbies">
+      <input type="checkbox" :name="item" :id="item" :value="item" v-model="hobby">{{item}}
+    </label>
+    <h2>你的爱好：{{hobby}}</h2>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        hobby: [],
+        hobbies: ["篮球","足球","兵乓球","兵乓球"] // 多选框
+      }
+    })
+  </script>
+</body>
+</html>
