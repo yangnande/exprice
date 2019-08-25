@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件使用的语法糖3个</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 3使用 -->
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    // 1创建组件构造对象
+    // var cpn = Vue.extend({
+    //   template: `
+    //    <h1>创建组件</h1>
+    //   `
+    // })
+    // 2注册组件构造对象(自定义的组件标签名，组件构造对象) 注册的是全局组件
+    Vue.component('cpn1', {
+      template: `
+       <h1>创建全局组件</h1>
+      `
+    })
+    let app = new Vue({
+      el: '#app',
+      data: {
+      },
+      components: { // 注册的是局部组件
+        'cpn2': {
+          template: `
+          <h1>创建局部组件</h1>
+          `
+        }
+      }
+    })
+  </script>
+</body>
+</html>
