@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>5子组件的data为什么是函数</title>
+</head>
+<body>
+  <div id="app">
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+    <cpn2></cpn2>
+    <cpn2></cpn2>
+  </div>
+  <template id="tem">
+    <!-- 子组件不能访问父组件vue实例的数据 -->
+    <!-- <p>{{test}}</p> -->
+    <p>{{title}}</p>
+  </template>
+  <template id="tem1">
+    <div>
+      <h1>{{count}}</h1>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  
+  <script>
+    Vue.component('cpn1', {
+      template: '#tem',
+      data () {
+        return {
+          title: 'hahahah'
+        }
+      }
+    })
+    Vue.component('cpn2', {
+      template: '#tem1',
+      data () { // 写成函数，就是为了各自使用各自的变量，互不影响
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment () {
+          this.count++
+        },
+        decrement () {
+          this.count--
+        }
+      }
+    })
+    let app = new Vue({
+      el: '#app',
+      data: {
+        test: 'vue实例'
+      }
+    })
+  </script>
+  <script>
+    // 返回一个对象，一个变了，影响其他的变量
+    // var a = {
+    //   name: 'tom'
+    // }
+    // function abc () {
+    //   return a
+    // }
+    // 返回三个对象，一个变了，互不影响
+    // function abc () {
+    //   return {
+    //     name: 'tom'
+    //   }
+    // }
+    // var obj1 = abc()
+    // var obj2 = abc()
+    // var obj3 = abc()
+    // obj1.name = 'lel'
+    // console.log(obj1)
+    // console.log(obj2)
+    // console.log(obj3)
+  </script>
+</body>
+</html>
