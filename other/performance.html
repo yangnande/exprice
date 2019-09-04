@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>性能优化总结</title>
+</head>
+<body>
+  <script type="text/javascript">
+    console.time('页面加载的时间：')
+    // 1 避免全局查找
+    // function search () {
+    //   console.log(window.location.href + window.location.host)
+    // }
+    // function search () {
+    //   var location = window.location
+    //   console.log(location.href + location.host)
+    // }
+    // search ()
+    // 2 定时器 不断运行的代码，一般选择setInterval,因为只初始化一个定时器，而setTimeout,条件走几次就初始化几个定时器
+    
+    // var num = 0;
+    // function timer() {
+    //   num++;
+    //   if (num < 5) {
+    //     var a = setTimeout(timer,100)
+    //     console.log(a)
+    //   }
+    // }
+    // timer()
+    // function timer () {
+    //   num++;
+    //   if (num == 5) {
+    //     clearInterval(a)
+    //     console.log(a)
+    //   }
+    // }
+    // var a = setInterval(timer,100)
+    // 3字符串连接
+    // var a = 1, b = 2, c = 3, d = 4, s = '';
+    // s+=a
+    // s+=b
+    // s+=c
+    // s+=d
+    // s += a + b + c + d
+    // 数字转换成字符串
+    // var a = 123
+    // a += ''
+    // b = String(a)
+    // b = a.toString()
+    // console.log(typeof(b))
+    // 4 浮点数转换成整型
+    // var a = 3.1415926;
+    // console.log(parseInt(a))
+    // console.log(Math.floor(a))
+    // console.log(Math.round(a))
+    console.timeEnd('页面加载的时间：')
+  </script>
+</body>
+</html>
