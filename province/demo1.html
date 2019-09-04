@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .hidden {
+      display: none
+    }
+  </style>
+</head>
+<body>
+  <ul>
+      <li class="exchange-item back huafei5">
+        <p class="exchange-surplus"></p>
+        <div class="exchange-button back" click="ok">1000金币兑换</div>
+      </li>
+      <li class="exchange-item back huafei5 hidden">
+        <p class="exchange-surplus"></p>
+        <div class="exchange-button back" click="ok">1000金币兑换</div>
+      </li>
+      <li class="exchange-item back huafei5">
+        <p class="exchange-surplus"></p>
+        <div class="exchange-button back" click="ok">1000金币兑换</div>
+      </li>
+      <li class="exchange-item back huafei5">
+        <p class="exchange-surplus"></p>
+        <div class="exchange-button back" click="ok">1000金币兑换</div>
+      </li>
+  </ul>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+    $(".exchange-item").on('click','.exchange-button',function() {
+      console.log($(this).parent().index('.exchange-item:visible'))
+    })
+    // $(".exchange-button").click(function() {
+    //   console.log($(this).index())
+    // })
+  </script>
+</body>
+</html>
