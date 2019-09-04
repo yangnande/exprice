@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <cpn>
+      <button slot="left">left</button>
+      <button slot="right">right</button>
+    </cpn>
+  </div>
+  <template id="cpn"> 
+    <div>
+      <slot name="left"><span>left</span></slot>
+      <slot name="right"><span>right</span></slot>
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+      },
+      components: { // 注册的是局部组件
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

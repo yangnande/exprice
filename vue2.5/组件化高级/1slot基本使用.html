@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1插槽：占位，决定放什么内容 基本使用：<slot></slot>-->
+    <!-- 不传就为默认 -->
+    <cpn></cpn>
+    <!-- 传了就替换默认插槽 -->
+    <cpn>
+      <button>slot</button>
+    </cpn>
+    <!-- 传了多个，多个一起占位插槽 -->
+    <cpn>
+      <button>slot</button>
+      <button>slot</button>
+      <button>slot</button>
+    </cpn>
+  </div>
+  <template id="cpn"> 
+    <div>
+      <p>111</p>
+      <p>2222</p>
+      <slot><p>我是默认</p></slot>
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+      },
+      components: { // 注册的是局部组件
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
