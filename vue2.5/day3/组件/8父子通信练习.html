@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>8父子通信-练习</title>
+</head>
+<body>
+  <div id="app">
+    <cpn :znum1="num1" :znum2="num2" @click1="click1" @click2="click2"></cpn>
+  </div>
+  <template id="tem">
+    <div>
+      <p>子组件</p>
+      <p>prop:{{znum1}}</p>
+      <p>data:</p>
+      <!-- 避免直接改变父组件传过来的值，因为只要父组件重新渲染，该值就会被覆盖,prop的值使用数据或计算属性 -->
+      <!-- <input type="text" v-model="znum1"> -->
+      <input type="text" :value="dnum1"  @input="input1" :key="dnum1">
+      <p>prop:{{znum2}}</p>
+      <p>data:</p>
+      <!-- <input type="text" v-model="znum2"> -->
+      <!-- <input type="text" :value="dnum2" @input="input2"> -->
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  
+  <script>
+    // 需求
+    // 1父组件给子组件传两个数值
+    // 2子组件通过v-model改变这两个数值，并将这两个数字传给父组件
+    // 3第一个数字改变了，第二个数字是他的100倍
+    // 4第二个数字改变了，第一个数字是他的1/100倍
+    let cpn = {
+      template: '#tem',
+      data() {
+        return {
+          dnum1: this.znum1,
+          dnum2: this.znum2
+        }
+      },
+      props: {
+        znum1: {
+          // type: Number
+        },
+        znum2: {
+          // type: Number
+        }
+      },
+      created(){
+        
+      },
+      methods: {
+        input1(event) {
+          this.dnum1 = event.target.value
+          // this.$emit('click1',this.dnum1)
+        },
+        input2(event) {
+  
+          this.$emit('click2',event.target.value)
+        }
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      data: {
+        num1: 1,
+        num2: 0
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        click1(v) {
+          this.num1 = v
+        },
+        click2(v) {
+          this.num2 = parseFloat(v)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

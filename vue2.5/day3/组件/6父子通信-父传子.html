@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6父子通信-父传子(属性props)</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <cpn :test="test"></cpn> -->
+    <!-- <cpn></cpn> -->
+    <!-- 驼峰应注意 -->
+    <!-- <cpn :cChild='test'></cpn> -->
+    <cpn :c-child='test'></cpn>
+  </div>
+  <template id="tem">
+    <div>
+      <p>我是子组件</p>
+      <p>{{cChild}}</p>
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  
+  <script>
+    let cpn = {
+      template: '#tem',
+      // props: ['test']
+      // props: {
+      //   test: String
+      // }
+      // props: {
+      //   test: {
+      //     type: String,
+      //     required: true,
+      //     default: 'aaa'
+      //   }
+      // },
+      props: {
+        cChild: {
+          type: String,
+          required: true,
+          default: 'aaa'
+        }
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      data: {
+        test: 'vue实例'
+      },
+      components: {
+        cpn
+      }
+    })
+  </script>
+
+</body>
+</html>

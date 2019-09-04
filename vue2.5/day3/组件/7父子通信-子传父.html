@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父7子通信-子传父$emit</title>
+</head>
+<body>
+  <div id="app">
+    <cpn @handleclick="handle"></cpn>
+  </div>
+  <template id="tem">
+    <div>
+      <p>我是子组件</p>
+      <button v-for="v in list" @click="itemClick(v)">{{v.name}}</button>
+    </div>
+  </template>
+  <script src="../../../public/js/vue.js"></script>
+  
+  <script>
+    let cpn = {
+      template: '#tem',
+      data() {
+        return {
+          list: [
+            {id: '0',name:'00'},
+            {id: '1',name:'11'},
+            {id: '2',name:'22'},
+            {id: '3',name:'33'}
+          ]
+        }
+      },
+      methods: {
+        itemClick(val) {
+          this.$emit('handleclick', val)
+        }
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      data: {
+        test: 'vue实例'
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        handle(v) {
+          console.log(v,'8888')
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
