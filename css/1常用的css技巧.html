@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>常用的css技巧</title>
+  <style>
+    .main {
+      color:chartreuse;
+      font-size: 30px;
+    }
+    /* 1. 快速重置表单元素 unset */
+    .main button {
+      /* border: none;
+      outline: none;
+      background: none;
+      color:inherit;
+      font-size:inherit; */
+      all: unset;
+    }
+    /* 2.文本省略号显示 */
+    /* 一行时省略 white-space: nowrap;文本不换行*/
+    /* .main p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    } */
+    /* 两行时省略 */
+    .main p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-wrap: break-word; /* 文本换行 */ 
+      -webkit-line-clamp: 2;
+      display: -webkit-box; /* 将对象作为弹性伸缩盒子模型显示 */ 
+      -webkit-box-orient: vertical;  /* 设置或检索伸缩盒对象的子元素的排列方式 */ 
+    }
+    /* 3改变盒模型的宽高计算方式 */
+    .main .change {
+      width: 46px;
+      height: 199.9988px;
+      border: 0.9982px solid red;
+      padding: 10.0004px;
+      margin: 10.0004px;
+      box-sizing: border-box; /* 不改变盒模型的宽高 */
+    }
+    .main .scroll {
+      height: 200px;
+      overflow-y: scroll;
+      border: 1px solid green;
+    }
+    .main .scroll p{
+      height: 100px;
+      border: 1px solid red;
+    }
+    div::-webkit-scrollbar {
+      /* 这里的宽是指竖向滚动条的宽，高是指横向滚动条的高*/      
+      width: 16px;      
+      height: 16px;      
+      background: pink;    
+    }
+    div::-webkit-scrollbar-thumb {      
+      border-radius: 10px;      
+      background: url("../image/1.jpg") no-repeat;
+      /* background-size: 16px 10px; */
+    }
+    /* 5.获取最后一个div */
+    div:not(:last-child) {
+      border-bottom: 1px solid red;
+    }
+    /* 6.设置文本俩端对齐 */
+    .justify {
+      background: yellow;
+      padding: 5px;
+      width: 150px;
+      text-align-last: justify;
+    }
+    /* 7.行内元素的水平居中和垂直居中同一行字 */
+    .font .big-font{
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background: pink;
+    }
+    .big-font {
+      font-size: 30px;
+    }
+    .small-font {
+      font-size: 15px;
+      vertical-align: middle; /* 同一行字的小字也垂直居中 */
+    }
+    /* 7.块级元素的水平居中和垂直居中-绝对定位 */
+    /* .block-justify {
+      width: 80%;
+      height: 100px;
+      background: pink;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%)
+    } */
+    /* 7.块级元素的水平居中和垂直居中-flex */
+    .block-justify {
+      width: 80%;
+      height: 100px;
+      background: pink;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* 8.线性渐变 */ 
+    .linear {
+      background: linear-gradient(0deg,red,blue);
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 学习网站：https://juejin.im/post/5cc7afdde51d456e671c7e48 -->
+  <div class="main">
+    <button>testtesttest</button>
+    <p>afjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojq</p>
+    <div class="change">hello</div>
+    <div class="scroll">
+      <p>1111</p>
+      <p>1111</p>
+      <p>1111</p>
+      <p>1111</p>
+      <p>1111</p>
+    </div>
+    <p class="justify">你好</p>
+    <p class="justify">你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</p>
+    <p class="justify">你好好</p>
+    <div class="font">
+      <span class="big-font">中华人民共和国<span class="small-font">中华人民共和国</span></span>
+    </div>
+    <div class="block-justify">
+      块级垂直水平居中
+    </div>
+    <div class="linear"></div>
+  </div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+
+  </script>
+</body>
+</html>
