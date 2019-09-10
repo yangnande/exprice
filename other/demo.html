@@ -37,7 +37,7 @@
     <li>开开</li>
     <li>心心</li>
   </ul>
-  <script src="public/js/autoScale.js">
+  <script src="../public/js/autoScale.js">
   </script>
   <script>
   // 按数组对象中的属性进行排序
@@ -109,8 +109,21 @@
       return value1 > value2 ? 1 : value1 < value2 ? -1 : 0
     }
   }
+  // 获取版本号
   console.log(floorList.sort(compare('sortNo')))
-  
+  var version = '5.6.0'
+  console.log(Number(version.substring(0,version.indexOf('.')+2)))
+  console.log(version.indexOf('.'))
+  // 获取手机的宽和高
+  console.log(document.documentElement.clientHeight, 'clientHeight')
+  console.log(document.documentElement.clientWidth, 'clientWidth')
+  console.log(window.innerHeight, 'innerHeight')
+  console.log(window.innerWidth, 'innerWidth')
+  console.log(screen.height, 'height')
+  console.log(screen.width, 'width')
+  // html的高度和宽度
+  console.log(document.documentElement.getBoundingClientRect().width, 'width')
+  console.log(document.documentElement.getBoundingClientRect().height, 'height')
   </script>
 </body>
 </html>

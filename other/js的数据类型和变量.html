@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>https://juejin.im/post/5d7371df6fb9a06afc2565b5</title>
+</head>
+<body>
+  <script>
+    // 原始类型和引用类型的区别
+    // 1原始类型的值是不可变的,引用类型的值是可变的
+    var a = 'muzishuiji'
+    console.log(a, '初始值')
+    a.substring(0,2)
+    a.toUpperCase()
+    console.log(a, 'a')
+    var obj = {
+      name: 'haha'
+    }
+    console.log(obj, '初始值')
+    obj.name = 'lele'
+    console.log(obj, 'obj')
+    // 2. 原始类型的变量是存放在栈区的,引用类型的变量是在堆内存中申请地址存放变量值,然后在栈内存中存放该变量在内存中的地址.
+    // 3. 原始类型的比较是值的比较,引用类型类型的比较是变量值所在地址的比较:
+    var c = 'aa'
+    var d = 'aa'
+    console.log(c===d,'原始类型的比较')
+    var e = {
+      name: 'lele'
+    }
+    var f = {
+      name: 'lele'
+    }
+    console.log(e===f,'引用类型的比较')
+    // 4.Symbol类型
+    var s1 = Symbol()
+    console.log(s1,'s1')
+    var s2 = Symbol('s2')
+    console.log(s2,'s2')
+    var s3 = Symbol(['aaa','bbb'])
+    console.log(s3,'s3')
+    var s4 = Symbol({'name':'lele'})
+    console.log(s4,'s4')
+    // 4.1  Symbol类型的特性
+    // 4.1.1 独一无二的特性 使用Symbol()创建的变量使独一无二的,因此,比较两个Symbol()创建的变量总是返回false
+    var s5 =Symbol()
+    var s6 =Symbol()
+    console.log(s5===s6,'比较两个Symbol()')
+    var s7 =Symbol('aaa')
+    var s8 =Symbol('aaa')
+    console.log(s7===s8,'比较两个Symbol()')
+    // 4.1.1js提供了Symbol.for(key)来创建两个相等的变量,使用给定的key搜索现有的Symbol,如果找到则返回该Symbol,否则将使用给定的key在全局Symbol注册表中创建一个新的Symbol
+    var s9 = Symbol.for('aaa')
+    var s10 = Symbol.for('aaa')
+    console.log(s9===s10, 'Symbol.for(key)')
+    // var s11 = new Symbol()
+    // console.log(s11, 's11')
+    // 4.1.2不可枚举
+    // 使用Symbol创建的属性名是不可枚举的,使用for...in, Object.keys(), Object.getOwnPropertyNames()等方法是无法获取的.可以调用Object.getOwnPropertySymbols()和Reflect.ownKeys()来获取对象的Symbol属性.
+    var s12 = {
+      name: 'lele',
+      [Symbol('aa')]: '66'
+    }
+    for(var i in s12) {
+      console.log(i, 'for.in')
+    }
+    console.log(Object.keys(s12), 'Object.keys')
+    console.log(Object.getOwnPropertySymbols(s12), 'getOwnPropertySymbols')
+    console.log(Reflect.ownKeys(s12), 'ownKeys')
+    // 4.2 Symbol类型的使用场景
+    // 使用Symbol来定义属性名,防止属性污染,有时候我们想给一个对象添加属性名,但又担心和别的同事重名,我们可以这样:
+    var s13 = Symbol('aa')
+    var s14 = {
+      name: 'haha'
+    }
+    s14[s13] = 'lele'
+    console.log(s14, 's14')
+  </script>
+  
+</body>
+</html>
