@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悬浮球练习</title>
+  <style>
+    #ball {
+      width: 1.706667rem;
+      height: 1.706667rem;
+      background: pink;
+      position: fixed;
+      left: 0;
+      top: 10px;
+      border-radius: 50%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div id="ball">
+    <img src="../image/1.jpg" alt="">
+  </div>
+  <script src="../public/js/autoScale.js"></script>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+    // document.getElementById('ball').addEventListener('touchstart', function(e) {
+    //   console.log(e, '获取原生的事件对象') // 获取原生的事件对象
+    // })
+    var startX,startY,moveX,moveY,endX,endY,startLeft,startTop;
+    // 悬浮球触摸开始时获取的数据
+    $("#ball").on('touchstart',function(e) {
+      // console.log(e, 'jquery的事件对象') // jquery的事件对象
+      // console.log(e.originalEvent, '通过jquery获取原生的事件对象') // 通过jquery获取原生的事件对象
+      var ev = e.originalEvent;
+      startX = ev.touches[0].pageX; // 获取起点触摸的x位置
+      startY = ev.touches[0].pageY; // 获取起点触摸的Y位置
+      startLeft = $("#ball").css("left"), // 获取悬浮球距离左边的距离
+      startTop = $("#ball").css("top");  // 获取悬浮球距离上边的距离
+      // console.log(startX, 'startX')
+      // console.log(startY, 'startY')
+      // console.log(startLeft, 'startLeft')
+      // console.log(startTop, 'startTop')
+    })
+    // 悬浮球触摸移动
+    $("#ball").on("touchmove", function(e) {
+      var ev = e.originalEvent;
+      moveX = ev.touches[0].pageX; // 获取移动结束后触摸的x位置
+      moveY = ev.touches[0].pageY; // 获取移动结束后触摸的y位置
+      // console.log(moveX, 'moveX')
+      // console.log(moveY, 'moveY')
+      // 移动的悬浮球的左侧距离= 移动结束的x位置-起点x位置+本身左侧的距离
+      $(this).css('left',moveX-startX+parseFloat(startLeft)+'px') 
+             .css('top',moveY-startY+parseFloat(startTop)+'px') 
+    })
+    // 悬浮球结束操作
+    $("#ball").on("touchend", function(e) {
+      e.preventDefault()
+      var ev = e.originalEvent;
+      endX = ev.changedTouches[0].pageX;
+      endY = ev.changedTouches[0].pageY;
+      screenWidth = $(window).width();
+      screenHeight = $(window).height();
+      ballWidth = $(this).width()
+      ballHeight = $(this).height()
+      // 如果移动结束时x小于宽度一半，居左侧，如果大于宽度一半，居右侧
+      if (endX < screenWidth/2) {
+        $(this).css('left', 0)
+      } else {
+        $(this).css('left',screenWidth-ballWidth)
+      }
+      // 如果移动时，超出屏幕顶端，则top为0 
+      // if(endY < ballHeight/2) {
+      if(parseFloat($("#ball").css("top")) < 0) {
+        console.log('如果移动时，超出屏幕顶端，则top为0')
+        $("#ball").css('top', 0)
+        console.log( $("#ball").css('top'), '----')
+      }
+      // 如果移动时，超出屏幕底端，则top为屏幕高度-悬浮球的高度
+      console.log(endY, 'endY-ballHeight')
+      console.log(ballHeight, 'ballHeight')
+      console.log(screenHeight, 'screenHeight')
+      if(screenHeight-endY < ballHeight/2) {
+        console.log('如果移动时，超出屏幕底端，则top为0')
+        $("#ball").css('top', screenHeight-ballHeight+'px')
+      }
+    })
+  </script>
+</body>
+</html>
