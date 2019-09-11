@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta httli-equiv="X-UA-Comliatible" content="ie=edge">
+  <title>自定义滚动条练习</title>
+  <style>
+    html {
+      font-size: 30px!important;
+    }
+    .uls {
+      font-size: .64rem;
+      margin: .64rem auto 0;
+      width: 80%;
+      height: 10.666667rem;
+      overflow-y: scroll;
+      list-style-type: decimal;
+      padding: .64rem;
+      background: #5b82dd;
+    }
+    .uls::-webkit-scrollbar { /*滚动条整体样式*/
+      width: .576rem;  /*高宽分别对应横竖滚动条的尺寸*/
+      height: 1px;
+    }
+    .uls::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+      width: .576rem;
+      border-radius: .576rem;
+      border: .064rem #fff solid;
+      background: #5b82dd;  
+    }
+    .uls::-webkit-scrollbar-track {/*滚动条里面轨道*/
+      border-radius: .576rem;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+    <ul class="uls">
+      <li>本活动仅限新疆移动客户参与（公话、话吧、数据卡、空充代理商、8元卡、合帐、成员卡、移动大手机客户、移动大手机客户无法领取奖励）。</li>
+      <li>活动期间，每位客户每天可进入活动页面进行签到，每位客户每天只有1次签到机会，每月为一个周期，次月1日将上月签到数据清空，包括累计数量，从0开始再次累计；</li>
+      <li>客户累计签到满5、10、15、20可获得0.5元话费、500M流量日包、2元话费、1G流量月包，当月累计签到满25次可获得抽奖机会，抽取100元话费奖励；</li>
+      <li>获得的流量在领取成功后立即生效，次月失效；</li>
+      <li>获得的话费在领取成功后立即发放，100元话费按月分摊，具体到帐时间以短信提示为准；</li>
+      <li>客户须开通GPRS业务功能，须确保手机处于正常通信状态才能活动相应奖励，若客户手机号码处于欠费、停机等非正常状态，包括客户手机号码有信用度能够正常通信但处于欠费状态，均不能享受流量赠送。</li>
+    </div>
+    <script src="../public/js/autoScale.js"></script>
+    <script src="../public/js/jquery-1.12.1.min.js"></script>
+</body>
+</html>
