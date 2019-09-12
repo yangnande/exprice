@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this的指向</title>
+</head>
+<body>
+  <div class="test">test</div>
+  <!-- 内联事件的this 指向触发事件的元素 -->
+  <div onclick="console.log(this,'内联事件的this')">内联事件的this</div>
+  <!-- 内联事件函数中的this 指向window -->
+  <div onclick="!function() {console.log(this,'内联事件函数中的this')}()">内联事件函数中的this</div>
+  <div class="arrow">箭头函数</div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+    // 1. 全局环境中 
+    // console.log(this, 'this') // 指向window
+
+    // 2. 事件处理函数 指向事件点前的dom
+    $(".test").on("click", function() {
+      console.log($(this), '事件处理函数') // 指向事件点前的dom
+     !function(){ 
+        console.log(this, '事件处理函数里的函数') // window
+      }()
+    })
+    // 3.1 函数内部-非严格模式-函数直接执行
+    function test () {
+      console.log(this, '函数内部-非严格模式')
+    }
+    // test() // window
+    // window.test() // window
+
+    // 3.2函数内部-严格模式-函数直接执行
+    function test1 () {
+      'use strict'
+      console.log(this, '函数内部-严格模式')
+    }
+    // test1() // undefined 
+    // window.test1() // window
+
+    // 3.3函数自执行
+    // !function(){ 
+    //   console.log(this, '!') // window
+    // }()
+    // +function(){ 
+    //   console.log(this, '+') // window
+    // }()
+    // -function(){ 
+    //   console.log(this, '-') // window
+    // }()
+    // ~function(){ 
+    //   console.log(this, '~') // window
+    // }();
+    // // 下面这两个括号不用;会有问题 解决用;分隔 ECMAScript规范具有分号自动插入规则，它会把自动执行的两段代码看成一个整体
+    // (function(){ 
+    //   console.log(this, '()') // window
+    // })();
+    // (function(){ 
+    //   console.log(this, '()') // window
+    // }());
+
+    // 3.4call,bind,apply 改变this指向
+    // 3.4.1 call 函数.call(obj,arg1,arg2) 会直接调用该函数且第一个参数就是函数执行时的this,后面的参数可有多个
+    // function test2 (m,n) {
+    //   console.log(this,m,n,'call')
+    // }
+    // test2(1,2)  // window,1,2
+    // test2.call({name:'tom'},1,2)  // {name:'tom'},1,2
+
+    // 3.4.2 apply 函数.apply(obj,[arg1,arg2]) 会直接调用该函数且第一个参数就是函数执行时的this,后面的参数为数组,执行时会将数组变成参数列表
+    // function test3 (m,n) {
+    //   console.log(this,m,n,'apply')
+    // }
+    // test3(1,2)  // window,1,2
+    // test3.apply({name:'tom'},[1,2])  // {name:'tom'},1,2
+
+    // 3.4.3借助call apply 去使用Math 或 Array 的方法案例
+    // console.log(Math.max(2,3,4), 'Math.max-参数为列表')
+    // console.log(Math.max.apply(null,[2,3,4]), 'Math.max-参数为数组')
+    // console.log(document.getElementsByTagName("*").slice(), '伪类数组使用直接使用slice-报错')
+    // var arr = Array.prototype.slice.call(document.getElementsByTagName("*"))
+    // console.log(arr, '具有length属性的对象(key值为数字)转成数组')
+
+    // 3.4.4 bind 函数.bind(obj) 创建一个新函数，并不会立即调用，新函数只能绑定一次
+    // function test4 () {
+    //   console.log(this,'bind')
+    // }
+    // test4() // window
+    // var fn = test4.bind({name:'lele'})
+    // fn() // {name: "lele"}
+    // var fn1 = fn.bind({name:'11'})
+    // fn1() // {name: "lele"}
+
+    // 3.4.5箭头函数 => 与定义时环境上下文中this一致 ，不能用bind,call,apply修改其内部指向，没有arguments对象
+    // var test5 = ()=>{
+    //   console.log(this,'箭头函数') // window
+    // }
+    // test5()
+    // $(".arrow").on("click", function() {
+    //   setTimeout(function() {
+    //     console.log(this, 'function函数内部') // window
+    //     this.style.backgroundColor ="red" // 报错
+    //   },1000)
+    //   setTimeout(()=> {
+    //     console.log(this, '箭头函数内部') // $(".arrow")
+    //     this.style.backgroundColor ="red"
+    //   },1000)
+    // })
+
+    // 4对象内部 为对象的方法调用 this指向调用该函数的对象
+    // var obj1 = {
+    //   name: 'lele',
+    //   con: function() {
+    //     console.log(this.name, 'obj内部的function')
+    //   }
+    // }
+    // obj1.con() // 'lele'
+    // var age = 13
+    // var obj2 = {
+    //   age: 16,
+    //   con: function() {
+    //     console.log(this.age, 'obj内部的function') // 调用该函数的对象
+    //   },
+    //   arrow: () => {
+    //     console.log(this.age, 'obj内部的箭头function') // window
+    //   }
+    // }
+    // obj2.con() // 16
+    // obj2.arrow() // 13
+
+    // 4.1 多层嵌套的对象 this 就近绑定
+    // var a = 3
+    // var obj3 = {
+    //   a: 1,
+    //   b: {
+    //     a: 2,
+    //     fun: function() {
+    //       console.log(this.a, 'obj内部的function')
+    //     },
+    //     arr: ()=>{
+    //       console.log(this.a, 'obj内部的箭头function')
+    //     }
+    //   }
+    // } 
+    // obj3.b.fun() // function会就近找-2
+    // obj3.b.arr() // window-3,全局没有则为undefined
+    // var tem = obj3.b.fun;
+    // tem() // 通过赋值调用，指向window-3,全局没有则为undefined
+
+    // 4.2 函数作为返回值使用
+    // var b = 13
+    // var obj4 = {
+    //   b: 16,
+    //   con: function() {
+    //     return function () {
+    //       console.log(this.b, 'obj内部的function') // 调用该函数的对象
+    //     }
+    //   },
+    //   arrow: function() {
+    //     return () => {
+    //       console.log(this.b, 'obj内部的箭头function') // window
+    //     }
+    //   }
+    // }
+    // console.log(obj4.con()) // 返回的函数
+    // console.log(obj4.arrow()) // 返回的箭头函数
+    // obj4.con()() // 指向window-13
+    // obj4.arrow()() // 指向obj4-16
+
+    // 5 构造函数
+    // function Person () {
+    //   console.log(this, '构造函数')
+    //   this.name = 'bob'
+    // }
+    // Person() // window
+    // var p = new Person()
+    // console.log(p.name) // 构造函数-bob
+    // 6原型链
+    // function Name (name) {
+    //   this.name = name
+    // }
+    // Name.prototype.con = function() {
+    //   console.log(this.name, '原型链')
+    // }
+    // var p = new Name('tom')
+    // console.log(p.name) // 构造函数-tom
+    // console.log(Name.prototype, 'Name.prototype')
+    // console.log(p.__proto__, 'p.__proto__')
+    // console.log(p.__proto__ == Name.prototype, 'p.__proto__ == Name.prototype')
+  </script>
+</body>
+</html>
