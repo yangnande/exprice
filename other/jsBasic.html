@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js基础</title>
+  <style>
+    #app {
+      width: 100px;
+      height: 100px;
+      background: orange;
+      height: 3000px;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    body {
+      
+    }
+    /* 滚动添加平滑效果 */
+    html {
+      behavior: 'smooth'
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button id="btn">点击</button>
+  </div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+    // addEventListener(event, function, useCapture)  useCapture:false为冒泡，true为捕获
+    var btn = document.getElementById("btn"),
+        app = document.getElementById("app");
+    btn.addEventListener('click', function() {
+      console.log('我是子元素')
+    },true)
+    app.addEventListener('click', function() {
+      console.log('我是父元素')
+    },false)
+    // 1 scrollTo就是把滚动高度设置成100，scrollBy是每次都增加100，这就是为什么称之为相对滚动了
+    // window.scrollTo({
+    //   left: 0,
+    //   top: 200
+    // })
+    // window.scrollBy({
+    //   left: 0,
+    //   top: 200
+    // })
+    // 2 如何指定一个元素显示在视窗 让元素返回到顶部
+    // var offsetTop = $("#app").offset().top
+    // window.scrollTo(0,offsetTop)
+    // document.getElementById("app").scrollIntoView(true)
+    // 3 如何设置滚动具有平滑的过渡效果 或者用css属性设置：
+    // window.scrollTo({
+    //   left: 0,
+    //   top: 300,
+    //   behavior: 'smooth'
+    // })
+    // document.getElementById("app").scrollIntoView({
+    //   behavior: 'smooth'
+    // }) 
+    // 4 获取滚动高度，滚动距离顶部距离 
+    // 以前的写法
+    // var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+    // scrollingElement 兼容地获取scrollTop、scrollHeight等属性，在移动端跟PC端都屡试不爽 MDN中是这样介绍它的：标准模式返回documentElement，怪异模式返回body；
+    // var scrollHeight = document.scrollingElement.scrollHeight
+    // console.log(scrollHeight)
+    // 5 滚动到底部
+    // window.scrollTo({
+    //   left: 0,
+    //   top: document.scrollingElement.scrollHeight
+    // })
+    // window.scrollTo(0,999999999)
+    // 6 判断是否到达底部
+    // window.addEventListener('scroll', ()=>{
+    //   var {scrollTop, clientHeight, scrollHeight} = document.scrollingElement;
+    //   // console.log(scrollTop, 'scrollTop')
+    //   // console.log(clientHeight, 'clientHeight')
+    //   // console.log(scrollHeight, 'scrollHeight')
+    //   console.log(scrollTop+clientHeight)
+    //   if(scrollTop+clientHeight>=scrollHeight) {
+    //     console.log('到达底部了')
+    //   }
+    // })
+    // 7 函数节流
+    // 不加函数节流-代码执行次数多
+    // window.addEventListener('scroll',() => {
+    //   console.log('我在滚动')
+    // })
+    // 加函数节流-减少代码执行次数
+    // function throttle(fn, interval = 500) {
+    //   let run = true;
+    //   return function () {
+    //     if (!run) return;
+    //     run = false;
+    //     setTimeout(() => {
+    //       fn.apply(this, arguments);
+    //       run = true;
+    //     }, interval);
+    //   };
+    // }
+    // window.addEventListener('scroll',throttle(() => {
+    //   console.log('我在滚动')
+    // }))
+    // 8 函数防抖
+    function debounce(fn, interval = 500) {
+      let timeout = null;
+
+      return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          fn.apply(this, arguments);
+        }, interval);
+      };
+    }
+    window.addEventListener('scroll',debounce(() => {
+      console.log('我在滚动')
+    }))
+  </script>
+</body>
+</html>
