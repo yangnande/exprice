@@ -19,24 +19,24 @@
     // console.log(this, 'this') // 指向window
 
     // 2. 事件处理函数 指向事件点前的dom
-    $(".test").on("click", function() {
-      console.log($(this), '事件处理函数') // 指向事件点前的dom
-     !function(){ 
-        console.log(this, '事件处理函数里的函数') // window
-      }()
-    })
-    // 3.1 函数内部-非严格模式-函数直接执行
-    function test () {
-      console.log(this, '函数内部-非严格模式')
-    }
+    // $(".test").on("click", function() {
+    //   console.log($(this), '事件处理函数') // 指向事件点前的dom
+    //  !function(){ 
+    //     console.log(this, '事件处理函数里的函数') // window
+    //   }()
+    // })
+    // 3.1 函数内部-非严格模式-函数直接执行 这是函数的最常通用法，属于全局性调用，因此this就代表全局对象
+    // function test () {
+    //   console.log(this, '函数内部-非严格模式')
+    // }
     // test() // window
     // window.test() // window
 
     // 3.2函数内部-严格模式-函数直接执行
-    function test1 () {
-      'use strict'
-      console.log(this, '函数内部-严格模式')
-    }
+    // function test1 () {
+    //   'use strict'
+    //   console.log(this, '函数内部-严格模式')
+    // }
     // test1() // undefined 
     // window.test1() // window
 
@@ -75,6 +75,7 @@
     // }
     // test3(1,2)  // window,1,2
     // test3.apply({name:'tom'},[1,2])  // {name:'tom'},1,2
+    // test3.apply()  // window undefined undefined apply()的参数为空时，默认调用全局变量
 
     // 3.4.3借助call apply 去使用Math 或 Array 的方法案例
     // console.log(Math.max(2,3,4), 'Math.max-参数为列表')
@@ -169,7 +170,7 @@
     // obj4.con()() // 指向window-13
     // obj4.arrow()() // 指向obj4-16
 
-    // 5 构造函数
+    // 5 构造函数 this就指这个新对象
     // function Person () {
     //   console.log(this, '构造函数')
     //   this.name = 'bob'
@@ -189,6 +190,18 @@
     // console.log(Name.prototype, 'Name.prototype')
     // console.log(p.__proto__, 'p.__proto__')
     // console.log(p.__proto__ == Name.prototype, 'p.__proto__ == Name.prototype')
+    // 7 this永远指向最后调用它的那个对象
+    var name = "windowsName";
+    var a = {
+        name : null,
+        fn : function () {
+            console.log(this.name);      // windowsName
+        }
+    }
+    // a.fn() // null
+    // var f = a.fn;
+    // f(); // windowsName
+
   </script>
 </body>
 </html>

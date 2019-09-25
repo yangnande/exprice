@@ -10,8 +10,8 @@
       width: 100px;
       height: 100px;
       background: orange;
-      height: 3000px;
-      overflow-y: scroll;
+      /* height: 3000px; */
+      /* overflow-y: scroll; */
       -webkit-overflow-scrolling: touch;
     }
     body {
@@ -21,23 +21,32 @@
     html {
       behavior: 'smooth'
     }
+    #box {
+      width: 0;
+      height: 0;
+      border-left: 50px transparent solid;
+      border-right: 50px transparent solid;
+      border-top: 50px transparent solid;
+      border-bottom: 50px black solid;
+    }
   </style>
 </head>
 <body>
-  <div id="app">
-    <button id="btn">点击</button>
+  <div id="box">
+    <!-- <button id="btn">点击</button> -->
   </div>
+
   <script src="../public/js/jquery-1.12.1.min.js"></script>
-  <script>
+  <script type="text/javascript">
     // addEventListener(event, function, useCapture)  useCapture:false为冒泡，true为捕获
-    var btn = document.getElementById("btn"),
-        app = document.getElementById("app");
-    btn.addEventListener('click', function() {
-      console.log('我是子元素')
-    },true)
-    app.addEventListener('click', function() {
-      console.log('我是父元素')
-    },false)
+    // var btn = document.getElementById("btn"),
+    //     app = document.getElementById("app");
+    // btn.addEventListener('click', function() {
+    //   console.log('我是子元素')
+    // },true)
+    // app.addEventListener('click', function() {
+    //   console.log('我是父元素')
+    // },false)
     // 1 scrollTo就是把滚动高度设置成100，scrollBy是每次都增加100，这就是为什么称之为相对滚动了
     // window.scrollTo({
     //   left: 0,
@@ -104,19 +113,101 @@
     //   console.log('我在滚动')
     // }))
     // 8 函数防抖
-    function debounce(fn, interval = 500) {
-      let timeout = null;
+    // function debounce(fn, interval = 500) {
+    //   let timeout = null;
 
-      return function () {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          fn.apply(this, arguments);
-        }, interval);
-      };
-    }
-    window.addEventListener('scroll',debounce(() => {
-      console.log('我在滚动')
-    }))
+    //   return function () {
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(() => {
+    //       fn.apply(this, arguments);
+    //     }, interval);
+    //   };
+    // }
+    // window.addEventListener('scroll',debounce(() => {
+    //   console.log('我在滚动')
+    // }))
+    // 9 this的指向
+    // var obj1 = {
+    //     name: 'bytedance',
+    //     getName() {
+    //       console.log(this)
+    //         console.log(this.name)
+    //     }
+    // }
+    // var fb1 = obj1.getName;
+    // fb1(); // this指向window 要么是undefined，要么是若window中定义了，则是window中定义的啥值
+    // obj1.getName() // this指向调用它的那个对象 因此console的是bytedance
+    // 10 设计一个简单的任务队列，要求分别在1,3,4秒后打印出”1“，”2“，”3“
+    // setTimeout(() => {
+    //   console.log(1)
+    // }, 1000);
+    // setTimeout(() => {
+    //   console.log(2)
+    // }, 3000);
+    // setTimeout(() => {
+    //   console.log(3)
+    // }, 4000);
+    // function task (con,time) {
+    //   setTimeout(() => {
+    //     console.log(con)
+    //   }, time);
+    // }
+    // task(1,1000)
+    // task(2,3000)
+    // task(3,4000)
+    // function Quene() {
+    //   this.task = (time, callback) => {
+    //     setTimeout(callback, time);
+    //     // console.log(this)
+    //     return this;
+    //   };
+    //   this.start = () => {
+    //       return this;
+    //   };
+    // }
+    // new Quene()
+    // .task(1000,()=>{console.log(1)})
+    // .task(2000,()=>{console.log(2)})
+    // .task(1000,()=>{console.log(3)})
+    // new Quene()
+    // .task(1000, () => {
+    //     console.log(1)
+    // })
+    // .task(2000, () => {
+    //     console.log(2)
+    // })
+    // .task(1000, () => {
+    //     console.log(3)
+    // })
+    // .start()
+    // var arr = [0,1,2,4,5,7,13,15,16]
+    // function Arr(arr) {
+    //     var len = arr.length,
+    //         j,
+    //         newArr = [],
+    //         str = '';
+    //     for (var i = 0; i < len; i++) {
+    //         j = i;
+    //         console.log(arr[i] + 1 === arr[j + 1], 'arr[i] + 1 === arr[j + 1]')
+    //         // console.log(arr[j + 1], 'arr[j + 1]')
+    //         if (arr[i] + 1 === arr[j + 1]) {
+    //             while (arr[j] + 1 === arr[j + 1]) {
+    //               // console.log(arr[j + 1], '----')
+    //                 str = '->' + arr[j + 1];
+    //                 j++;
+    //             }
+    //             str = arr[i] + str;
+    //             newArr.push(str)
+    //             i = j
+    //         } else {
+    //             newArr.push(arr[i].toString())
+    //         }
+    //     }
+    //     console.log(newArr)
+    //     return newArr;
+    // }
+    // Arr(arr)
+ 
   </script>
 </body>
 </html>
