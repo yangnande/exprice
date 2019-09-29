@@ -115,11 +115,18 @@
       width: 100px;
       height: 100px;
     }
+    .box {
+      width: 100px;
+      padding: 10px;
+      margin: 10px;
+      background: red;
+      box-sizing: content-box;
+    }
   </style>
 </head>
 <body>
   <!-- 学习网站：https://juejin.im/post/5cc7afdde51d456e671c7e48 -->
-  <div class="main">
+  <!-- <div class="main">
     <button>testtesttest</button>
     <p>afjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojqafjlafjaljfaifjaowjqirjlafafkjojq</p>
     <div class="change">hello</div>
@@ -140,10 +147,27 @@
       块级垂直水平居中
     </div>
     <div class="linear"></div>
+  </div> -->
+  <div class="box">
+
+  </div>
+  <div>
+    <input type="checkbox" name="" id="checkAll">全选
+    <input type="checkbox" name=""  class="check1">
+    <input type="checkbox" name=""  class="check1">
   </div>
   <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
-
+    // 全选和非全选
+    $("#checkAll").click(function() {
+      console.log($(".check1").prop("checked"))
+      if($(".check1").prop("checked")) {
+        $(".check1").prop("checked",false)
+      } else {
+        $(".check1").prop("checked",true)
+      }
+    })
+    console.log($(".box").width())
   </script>
 </body>
 </html>
