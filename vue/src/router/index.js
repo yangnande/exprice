@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router' // 1 引入路由
 import Home from '@/components/Home'
 import About from '@/components/about'
+import User from '@/components/user'
 
 Vue.use(Router) // 2 安装路由
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/about',
       name: About,
       component: About
+    },
+    {
+      path: '/user/:userId',
+      name: User,
+      component: User
     }
   ]
 })
