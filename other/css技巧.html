@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css技巧</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style: none;
+    }
+    /* 1 nth-child 首先找到所有当前元素的兄弟元素，然后按照位置先后顺序从1开始排序 */
+    .nth li:nth-child(even) {
+      background: red;
+    }
+    .nth li:nth-child(odd) {
+      background: yellow;
+    }
+    /* n从0开始计算，1,3,5 */
+    .nth li:nth-child(2n+1) {
+      background: green;
+    }
+    /* 2使用writing-mode排版竖文 */
+    .vertical-text{
+      writing-mode: vertical-rl;
+    }
+    /* 3使用text-align-last对齐两端文本 兼容问题：ios不兼容*/
+    .justify-text li {
+      margin-top: 5px;
+      padding: 0 20px;
+      width: 100px;
+      height: 40px;
+      background-color: red;
+      line-height: 40px;
+      /* text-align-last: justify; */
+      text-align: justify;
+      color: #fff;
+      list-style: none;
+    }
+    /*  但justify对最后一行是无能为力的。我们在对齐姓名时，因为只有一行，当作最后一行，所以不会两端对齐的效果 
+    就想到了用text-align:justify;但怎么解决单行不能两端对齐呢，思路就是：让浏览器认为这不是最后一行就行了,
+    在元素里面加一个会换行的空的子元素比如: */
+    .justify-text li span{display:inline-block;width:100%;height:0;}
+    .arter li {
+      width: 300px;
+    }
+    /* 4 使用:not()去除无用属性 */
+    .first-line span:not(:last-child)::after {
+      content:","
+    }
+    /* 5 使用object-fit规定图像尺寸 */
+    h1 {
+      line-height: 50px;
+      font-weight: bold;
+      font-size: 30px;
+      color: red;
+    }
+    .image-size {
+      display: flex;
+      justify-content: space-between;
+      width: 1000px;
+      height: 300px;
+      
+    }
+    .image-size li {
+      width: 200px;
+      list-style: none;
+    }
+    h3 {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    img {
+      width: 100%;
+      height: 260px;
+      background-color: green;
+      
+    }
+    img.cover {
+      object-fit: cover;
+    }
+    img.contain {
+      object-fit: contain;
+    }
+    img.fill {
+      object-fit: fill;
+    }
+    img.scale-down {
+      object-fit: scale-down;
+    }
+    /* 6 使用overflow-x排版横向列表 */
+    .horizontal-list {
+      /* overflow: hidden; */
+      width: 300px;
+      height: 100px;
+      margin: 0 auto;
+    }
+    .horizontal-list ul {
+      overflow-x: scroll;
+    }
+    .horizontal-list ul::-webkit-scrollbar {
+      height: 10px;
+    }
+    .horizontal-list ul::-webkit-scrollbar-track {
+      background-color: yellow;
+    }
+    .horizontal-list ul::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: red;
+    }
+    .horizontal-list li {
+      overflow: hidden;
+      margin-left: 10px;
+      height: 90px;
+      background-color: purple;
+      line-height: 90px;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      
+    }
+    .horizontal-list li:first-child {
+      margin-left: 0;
+    }
+  .flex ul {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .flex li {
+    flex-shrink: 0;
+    flex-basis: 90px;
+  }
+  .inline {
+    margin-top: 10px;
+    height: 102px;
+  }
+  .inline ul {
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  .inline li {
+    display: inline-block;
+    width: 90px;
+  }
+  /* 7 使用text-overflow控制文本溢出 */
+  p[class*=-line] {
+    line-height: 30px;
+    font-size: 20px;
+  }
+  .single-line {
+    width: 200px;
+  }
+  .multiple-line {
+    margin-top: 10px;
+    width: 400px;
+    text-align: justify;
+  }
+  .sl-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ml-ellipsis {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+  }
+  /* 8 使用transform描绘1px边框 */
+  .bruce .normal {
+    border: 1px solid red;
+  }
+  .bruce .onepx-border {
+    position: relative;
+    /* 取消点击事件 */
+    /* pointer-events: none; */
+  }
+  .bruce .onepx-border::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: 0 0;
+  }
+    /* 8 使用transform翻转内容 */
+    .horizontal-flip li {
+      position: relative;
+      margin-top: 10px;
+      width: 121px;
+      height: 51px;
+      line-height: 51px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+      color: red;
+    }
+    .horizontal-flip li::before,
+    .horizontal-flip li::after {
+      position: absolute;
+      background-color: purple;
+      content: "";
+    }
+    .horizontal-flip li:first-child {
+      margin-top: 0;
+    }
+    .x-axis {
+      transform: scale3d(1, -1, 1);
+    }
+    .x-axis::after {
+      left: 0;
+      top: 25px;
+      width: 100%;
+      height: 1px;
+    }
+    .y-axis {
+      transform: scale3d(-1, 1, 1);
+    }
+    .y-axis::after {
+      left: 60px;
+      top: 0;
+      width: 1px;
+      height: 100%;
+    }
+    .reverse {
+      transform: scale3d(-1, -1, 1);
+    }
+    .reverse::before {
+      left: 0;
+      top: 25px;
+      width: 100%;
+      height: 1px;
+    }
+    .reverse::after {
+      left: 60px;
+      top: 0;
+      width: 1px;
+      height: 100%;
+    }
+    /* 9 使用letter-spacing排版倒序文本 */
+    .reverse-text {
+      font-weight: bold;
+      font-size: 50px;
+      color: red;
+      text-align: center;
+      /* letter-spacing最少是font-size的2倍 */
+      letter-spacing: -100px; 
+    }
+    /* 10 使用margin-left排版左重右轻列表  */
+    .left-list {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      width: 600px;
+      height: 60px;
+      background-color: green;
+    }
+    li {
+      padding: 0 10px;
+      height: 40px;
+      background-color: orange;
+      line-height: 40px;
+      font-size: 16px;
+      color: #fff;
+    }
+    li + li {
+      margin-left: 10px;
+    }
+    li:last-child {
+      margin-left: auto;
+    }
+    /*  11 使用overflow-scrolling支持弹性滚动 iOS页面非body元素的滚动操作会非常卡(Android不会出现此情况)*/
+    body {
+      -webkit-overflow-scrolling: touch;
+    }
+    .ios {
+      height:2000px;
+      background:pink;
+      overflow: auto;
+    }
+    /* 12 使用attr()抓取data-* */
+    .tooltips {
+      position: relative;
+      margin-top: 10px;
+      padding: 0 20px;
+      border-radius: 10px;
+      height: 40px;
+      background-color: purple;
+      line-height: 40px;
+      color: #fff;
+    }
+   .tooltips::after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(#000, .5);
+      opacity: 0;
+      text-align: center;
+      font-size: 12px;
+      content: attr(data-msg);
+      transition: all 300ms;
+    }
+    .tooltips:first-child {
+      margin-top: 0;
+    }
+    .tooltips:hover::after {
+      left: calc(100% + 20px);
+      opacity: 1;
+    }
+    .tooltips[href]:empty::before {
+      content: attr(href);
+    }
+    .tooltips[href]:empty:hover::after {
+      display: none;
+    }
+    /* 13.1 行内元素水平居中-给行内元素的父级元素设置 */
+    /* .parent{
+      text-align: center;
+    } */
+    /* 13.2 行内元素水平居中-给行内元素设置宽度，使用margin:0 auto */
+    .parent span {
+      display: block;
+      width: 100px;
+      margin: 0 auto;
+    }
+    /* 14.1 块级元素水平居中-有width和margin */
+    /* .block {
+      width: 130px;
+      margin: 0 auto;
+    } */
+    /* 14.2 块级元素水平居中-绝对定位和margin-left: -width/2, 前提是父元素position: relative */
+    .block {
+      position: relative;
+    }
+    .block p{
+      width: 130px;
+      position: absolute;
+      left: 50%;
+      margin-left:-75px;
+    }
+    /* 15.1 对于宽度未知的块级元素水平居中-table标签配合margin左右auto实现水平居中*/
+    /* .noWidth p{
+      display: table;
+      margin: 0 auto;
+    } */
+    /* 15.2 对于宽度未知的块级元素水平居中-inline-block实现水平居中方法 */
+    /* .noWidth p{
+      text-align: center;
+    } */
+    /* 15.3 对于宽度未知的块级元素水平居中-flex */
+    /* .noWidth p{
+      display: flex;
+      justify-content: center;
+    } */
+    /* 15.4 对于宽度未知的块级元素水平居中-flex */
+    .noWidth{
+      position: relative;
+    }
+    .noWidth p{
+      position: absolute;
+      transform: translateX(50%);
+    }
+    /* 16.1 垂直居中 已知宽高绝对定位和margin-top*/
+    /* .vertical {
+      height: 500px;
+      position: relative;
+    }
+    .vertical p{
+      width: 100px;
+      height: 50px;
+      border: 1px solid red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -25px;
+      margin-left: -50px;
+    } */
+    /* 16.2 垂直居中 transform*/
+    /* .vertical {
+      height: 500px;
+      position: relative;
+    }
+    .vertical p{
+      width: 100px;
+      height: 50px;
+      border: 1px solid red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    } */
+    /* 16.2 垂直居中 flex*/
+    /* .vertical { 
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .vertical p{
+      width: 100px;
+      height: 50px;
+      border: 1px solid red;
+    } */
+  </style>
+</head>
+<body>
+  <!-- 1 nth-child -->
+  <!-- <ul class="nth">
+    <li>1111</li>
+    <li>2222</li>
+    <li>3333</li>
+    <li>4444</li>
+    <li>5555</li>
+    <li>6666</li>
+    <p>77777</p>
+  </ul> -->
+  <!-- 2使用writing-mode排版竖文 -->
+  <!-- <div class="vertical-text">
+    <h3>情</h3>
+    <p>我见犹怜，<br>爱不释手。<br>雅俗共赏，<br>君子好逑。</p>
+  </div> -->
+  <!-- 3使用text-align-last对齐两端文本 -->
+  <!-- <ul class="justify-text">
+    <li>账号<span></span></li>
+    <li>密码<span></span></li>
+    <li>电子邮件<span></span></li>
+    <li>通讯地址<span></span></li>
+  </ul> -->
+  <!-- 4 使用:not()去除无用属性 -->
+  <!-- <div class="bruce flex-ct-x">
+    <ul class="cleared-attr">
+      <li class="first-line">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+      </li>
+      <li class="second-line">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+      </li>
+    </ul>
+  </div> -->
+  <!-- 5 使用object-fit规定图像尺寸-->
+  <!-- <div class="bruce flex-ct-y">
+    <h1>我家乖狗狗：AB</h1>
+    <ul class="image-size">
+      <li>
+        <h3>Cover</h3>
+        <img src="../image/dog.jpg" class="cover">
+      </li>
+      <li>
+        <h3>Contain</h3>
+        <img src="../image/dog.jpg" class="contain">
+      </li>
+      <li>
+        <h3>Fill</h3>
+        <img src="../image/dog.jpg" class="fill">
+      </li>
+      <li>
+        <h3>ScaleDown</h3>
+        <img src="../image/dog.jpg" class="scale-down">
+      </li>
+    </ul>
+  </div> -->
+  <!-- 6 使用overflow-x排版横向列表 -->
+  <!-- <div class="bruce flex-ct-y">
+    <div class="horizontal-list flex">
+      <ul>
+        <li>Alibaba</li>
+        <li>Tencent</li>
+        <li>Baidu</li>
+        <li>Jingdong</li>
+        <li>Ant</li>
+        <li>Netease</li>
+        <li>Meituan</li>
+        <li>ByteDance</li>
+        <li>360</li>
+        <li>Sina</li>
+      </ul>
+    </div>
+    <div class="horizontal-list inline">
+      <ul>
+        <li>Alibaba</li>
+        <li>Tencent</li>
+        <li>Baidu</li>
+        <li>Jingdong</li>
+        <li>Ant</li>
+        <li>Netease</li>
+        <li>Meituan</li>
+        <li>ByteDance</li>
+        <li>360</li>
+        <li>Sina</li>
+      </ul>
+    </div>
+  </div> -->
+  <!-- 7 使用text-overflow控制文本溢出 -->
+  <!-- <div class="bruce flex-ct-y">
+    <p class="single-line sl-ellipsis">CSS非常有趣和搞怪，可以做一些JS也能做的事情</p>
+    <p class="multiple-line ml-ellipsis">层叠样式表(CSS)是一种用来表现HTML(标准通用标记语言的一个应用)或XML(标准通用标记语言的一个子集)等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+  </div> -->
+  <!-- 8 使用transform描绘1px边框 -->
+  <!-- <div class="bruce flex-ct-y">
+    <div class="onepx-border normal">1px</div>
+  </div> -->
+  <!-- 8 使用transform翻转内容 -->
+  <!-- <div class="bruce flex-ct-x">
+    <ul class="horizontal-flip">
+      <li>正常文本</li>
+      <li>水平翻转</li>
+      <li class="x-axis">水平翻转</li>
+      <li>垂直翻转</li>
+      <li class="y-axis">垂直翻转</li>
+      <li>倒序翻转</li>
+      <li class="reverse">倒序翻转</li>
+    </ul>
+  </div> -->
+  <!-- 9 使用letter-spacing排版倒序文本 -->
+  <!-- <div class="bruce flex-ct-x">
+    <div class="reverse-text">恭喜发财</div>
+  </div> -->
+  <!-- 10 使用margin-left排版左重右轻列表 -->
+  <!-- <div class="bruce flex-ct-x">
+    <ul class="left-list">
+      <li>Alibaba</li>
+      <li>Tencent</li>
+      <li>Baidu</li>
+      <li>Jingdong</li>
+      <li>Ant</li>
+      <li>Netease</li>
+    </ul>
+  </div> -->
+  <!-- 11 使用overflow-scrolling支持弹性滚动 -->
+  <!-- <div class="ios">
+    
+  </div> -->
+  <!--  12 使用attr()抓取data-*-->
+  <!-- <div class="bruce flex-ct-y">
+    <a class="tooltips" href="https://www.baidu.com" data-msg="Hello World">提示框</a>
+    <a class="tooltips" href="https://www.baidu.com"></a>
+  </div> -->
+  <!-- 13  行内元素水平居中 -->
+  <!-- <div class="parent">
+    <span>行内元素水平居中</span>
+  </div> -->
+  <!-- 14  块级元素水平居中 -->
+  <!-- <div class="block">
+    <p>块级元素水平居中</p>
+  </div> -->
+  <!-- 15 对于宽度未知的块级元素水平居中 -->
+  <!-- <div class="noWidth">
+    <p>宽度未知的块级元素水平居中</p>
+  </div> -->
+  <!-- 16 垂直居中 -->
+  <div class="vertical">
+    <p>垂直居中垂直居中垂直居中垂直居中</p>
+  </div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
+  <script>
+    $(".onepx-border").click(function() {
+      console.log(8888)
+    })
+  </script>
+</body>
+</html>

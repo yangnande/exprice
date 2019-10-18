@@ -32,10 +32,11 @@
     // document.getElementById('ball').addEventListener('touchstart', function(e) {
     //   console.log(e, '获取原生的事件对象') // 获取原生的事件对象
     // })
+    // 
     var startX,startY,moveX,moveY,endX,endY,startLeft,startTop;
     // 悬浮球触摸开始时获取的数据
     $("#ball").on('touchstart',function(e) {
-      // console.log(e, 'jquery的事件对象') // jquery的事件对象
+      console.log(e, 'jquery的事件对象-touchstart') // jquery的事件对象
       // console.log(e.originalEvent, '通过jquery获取原生的事件对象') // 通过jquery获取原生的事件对象
       var ev = e.originalEvent;
       startX = ev.touches[0].pageX; // 获取起点触摸的x位置
@@ -49,6 +50,7 @@
     })
     // 悬浮球触摸移动
     $("#ball").on("touchmove", function(e) {
+      console.log(e, 'jquery的事件对象-touchmove') // jquery的事件对象
       var ev = e.originalEvent;
       moveX = ev.touches[0].pageX; // 获取移动结束后触摸的x位置
       moveY = ev.touches[0].pageY; // 获取移动结束后触摸的y位置
@@ -60,6 +62,7 @@
     })
     // 悬浮球结束操作
     $("#ball").on("touchend", function(e) {
+      console.log(e, 'jquery的事件对象-touchend') // jquery的事件对象
       e.preventDefault()
       var ev = e.originalEvent;
       endX = ev.changedTouches[0].pageX;
@@ -75,7 +78,7 @@
         $(this).css('left',screenWidth-ballWidth)
       }
       // 如果移动时，超出屏幕顶端，则top为0 
-      // if(endY < ballHeight/2) {
+      // if(endY < ballHeight) {
       if(parseFloat($("#ball").css("top")) < 0) {
         console.log('如果移动时，超出屏幕顶端，则top为0')
         $("#ball").css('top', 0)
