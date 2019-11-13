@@ -1,17 +1,23 @@
 <template>
   <div class="hello">
-    <h1>我是主页</h1>
-    <p>我是主页面内容，哈哈哈</p>
+    <h1>我是主页-消息</h1>
+    <p>我是消息内容，哈哈哈</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Message',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    // console.log('Message', 'created')
+  },
+  destroyed () {
+    // console.log('Message', 'destory')
   }
 }
 </script>

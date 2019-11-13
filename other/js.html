@@ -106,6 +106,46 @@
       console.log(aa,bb,cc)
     }
     defaultParams('aa','bb')
+    var a = [{
+		"id": "1",
+		"location": "3",
+		"redPacketTheme": "朋友",
+		"blessings": "祝福语",
+		"thumbnail": "http://www.fenxiao.com/1.img",
+		"redEnvelopeBg": "http://www.fenxiao.com/2.img",
+		"bgOfUnpacking": "http://www.fenxiao.com/3.img",
+		"shareThemes": "分享主题",
+		"shareContent": "分享文案",
+		"shareImage": "http://www.fenxiao.com/4.img"
+	}, {
+		"id": "3",
+		"location": "4",
+		"redPacketTheme": "朋友2",
+		"blessings": "祝福语2",
+		"thumbnail": "http://www.fenxiao.com/5.img",
+		"redEnvelopeBg": "http://www.fenxiao.com/6.img",
+		"bgOfUnpacking": "http://www.fenxiao.com/7.img",
+		"shareThemes": "分享主题",
+		"shareContent": "分享文案",
+		"shareImage": "http://www.fenxiao.com/8.img"
+	}]
+  var b = [
+        {"location": "1", title: '默认'},
+        {"location": "2", title: '朋友'},
+        {"location": "3", title: '家人'},
+        {"location": "4", title: '思念'},
+        {"location": "5", title: '生日'}
+      ]
+  
+  for(var i=0;i<b.length;i++) {
+    for(var j=0;j<a.length;j++) {
+      if(a[j].location == b[i].location) {
+        console.log(i,j)
+        b.splice(i,1,a[j])
+      }
+    }
+  }
+  console.log(b, 'v')
   </script>
 </body>
 </html>

@@ -12,6 +12,14 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    // 点击时，让标题变成组件的名字
+    // document.title = '用户'
+    console.log('user', 'created')
+  },
+  destroyed () {
+    console.log('user', 'destory')
   }
 }
 </script>

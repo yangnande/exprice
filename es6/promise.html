@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1 new Promise方法
+    // new Promise((resolve,reject) => {
+    //   // 第一次请求
+    //   setTimeout(()=> {
+    //     // 成功请求调用resolve
+    //     resolve('第一次请求')
+    //     // reject('第一次请求-失败')
+    //   },1000)
+    // }).then(data => {
+    //   // 第一次处理
+    //   console.log(data)
+    //   // 第二次请求
+    //   return new Promise((resolve,reject)=>{
+    //     setTimeout(() =>{
+    //       // resolve('第二次请求')
+    //       reject('第二次请求-失败')
+    //     },2000)
+    //   })
+    // }).then(data => {
+    //   // 第二次处理
+    //   console.log(data)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+    // 2 new Promise方法-失败的请求写法一
+    // new Promise((resolve,reject) => {
+    //   // 第一次请求
+    //   setTimeout(()=> {
+    //     // 成功请求调用resolve
+    //     resolve('第一次请求-成功了-')
+    //     // 失败请求调用reject
+    //     // reject('第一次请求-失败了-')
+    //   },3000)
+    // }).then(data => {
+    //   // 成功时-第一次处理
+    //   console.log(data)
+    // }).catch(err => {
+    //   // 失败时-第一次处理
+    //   console.log(err)
+    // })
+    // 3 new Promise方法-失败的请求写法二
+    // new Promise((resolve,reject) => {
+    //   // 第一次请求
+    //   setTimeout(()=> {
+    //     // 成功请求调用resolve
+    //     // resolve('第一次请求-成功了-')
+    //     // 失败请求调用reject
+    //     reject('第一次请求-失败了-')
+    //   },3000)
+    // }).then(data => {
+    //   // 成功时-第一次处理
+    //   console.log(data)
+    // },err => {
+    //   // 失败时-第一次处理
+    //   console.log(err)
+    // })
+    // 4 练习一
+    // new Promise((resolve,reject) => {
+    //   setTimeout(() => {
+    //     resolve('aaa')
+    //   })
+    // }).then(data => {
+    //   console.log(data,'第一次处理')
+    //   return new Promise((resolve,reject) => {
+    //       resolve(data+'111')
+    //   })
+    // }).then(data => {
+    //   console.log(data,'第二次处理')
+    //   return new Promise((resolve,reject) => {
+    //       resolve('data'+222)
+    //   })
+    // }).then(data => {
+    //   console.log(data,'第三次处理')
+    // })
+    // 5 练习一的简写一Promise.resolve,Promise.reject
+    // new Promise((resolve,reject) => {
+    //   setTimeout(() => {
+    //     resolve('aaa')
+    //   })
+    // }).then(data => {
+    //   console.log(data,'第一次处理')
+    //   // return Promise.resolve(data+'111')
+    //   return Promise.reject('第二次请求失败了') // 输出'aaa','第一次请求失败了'
+    // }).then(data => {
+    //   console.log(data,'第二次处理')
+    //   return Promise.resolve(data+'222')
+    // }).then(data => {
+    //   console.log(data,'第三次处理')
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+    // 6 练习一的简写二-省略掉Promise.resolve,Promise.reject
+    // new Promise((resolve,reject) => {
+    //   setTimeout(() => {
+    //     resolve('aaa')
+    //   })
+    // }).then(data => {
+    //   console.log(data,'第一次处理')
+    //   // return data + '111'
+    //   throw '第二次请求失败了' // 输出'aaa','第二次请求失败了'
+    // }).then(data => {
+    //   console.log(data,'第二次处理')
+    //   return data + '222'
+    // }).then(data => {
+    //   console.log(data,'第三次处理')
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+    // 7 如果必须等到两个请求的结果，才能做处理 Promise.all
+    Promise.all([
+      new Promise((resolve,reject) => {
+        setTimeout(() => {
+          // resolve('第一个值')
+          resolve({age:12,sex:'女'})
+        },1000)
+      }),
+      new Promise((resolve,reject) => {
+        setTimeout(() => {
+          // resolve('第二个值')
+          resolve({age:13,sex:'男'})
+        },2000)
+      })
+    ]).then(datas => {
+      if(datas.length > 1) {
+        console.log(datas)
+      }
+    })
+  </script>
+</body>
+</html>
