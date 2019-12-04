@@ -50,7 +50,14 @@ export default new Vuex.Store({
       state.students.filter(v => v.age > 15)
     }
   },
-  action: {},
+  actions: {
+    addStudents (context) {
+      // console.log(context, 'context')
+      setTimeout(() => {
+        context.commit('addStu', { 'age': 11, 'name': 'new' })
+      }, 1000)
+    }
+  },
   getters: {
     // 获取年龄大于15的人
     more20Students (state) {

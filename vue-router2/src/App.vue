@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h2>action---------</h2>
+    <button @click="addstu">添加学生</button>
     <h2>父页面----state</h2>
     {{$store.state.counter}}
     <h2>父页面----getter</h2>
@@ -25,6 +27,9 @@ export default {
   methods: {
     addInfo () {
       this.$store.commit('updateInfo')
+    },
+    addstu () {
+      this.$store.dispatch('addStudents')
     }
   }
 }
