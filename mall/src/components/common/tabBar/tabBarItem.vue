@@ -19,12 +19,10 @@ export default {
   computed: {
     isActive() {
       // this.$route:new Router this.$router 激活状态下的路由
-      console.log(this.$route.path,this.path, 'ppp')
-
-      return this.$route.path.indexOf(this.path)
+      return this.$route.path.indexOf(this.path)!=-1
     },
     activeStyle() {
-      this.isActive ? {color: this.activeColor} : {color: 'red'}
+      return this.isActive ? {color: this.activeColor} : {}
     }
   },
   methods: {
