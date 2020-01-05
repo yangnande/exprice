@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js练习</title>
+</head>
+<body>
+  <script>
+    // 1.不要使用隐式类型转换
+    // demo 实现一个获取对象属性的函数。如果属性不存在，函数返回一个默认值
+    var hero = {
+      name: 'Batman',
+      isVillian: false
+    };
+    function getProp (obj,property,defaultValue) {
+      // 1.1 isVillian为false,!(obj[property])隐式转换，有问题
+      // if(!(obj[property])) {
+      //   return defaultValue
+      // }
+      // 1.2 就要明确验证值的类型，这里建议避免直接使用undefined
+      // if(obj[property]===undefined) {
+      //   return defaultValue
+      // }
+      // 1.3 确保变量和函数参数始终具有相同的类型，必要时使用显式类型转换。
+      if(!(property in obj)) {
+        return defaultValue
+      }
+      return obj[property]
+    }
+    // console.log(getProp(hero,'name',true))
+    // console.log(getProp(hero,'isVillian',true))
+    // 2. 不要使用早期的JavaScript技巧
+    // 一个典型的例子是查看数组是否包含某个元素
+    var beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+    // 2.1 array.indexOf
+    // if(beasts.indexOf('222') === -1) {
+    //   console.log(beasts.indexOf('222')) // -1
+    // }
+    // 2.3 array.includes
+    // if(!beasts.includes('222')) {
+    //   console.log(beasts.includes('222')) // false
+    // }
+    // 2.3 for 或 foreach 循环,然后 if 判断
+    // beasts.forEach(v => {
+    //   if(v === 'ant') {
+    //     console.log('ant') // ant
+    //   }
+    // })
+    // 3. 不要污染函数作用域
+    // demo
+    function test (arr) { 
+      // 不好的例子
+      // var i,
+      // length = arr.length,
+      // v = 'duck';
+      // for(i = 0;i<length;i ++) {
+      //   if(arr[i] === v) {
+      //     console.log('不要污染函数作用域')
+      //   }
+      // }
+      // 好的例子 变量不会分散在整个函数作用域内，它们存在于使用地方的附近。在使用的块作用域定义变量
+      const length = arr.length;
+      const v = 'duck';
+      for(let i = 0;i<length;i ++) {
+        if(arr[i] === v) {
+          console.log('不要污染函数作用域')
+        }
+      }
+    }
+    test(beasts)
+    // 3.1 if 块作用域
+    // 不好的例子
+    // let a;
+    // if (true) {
+    //   a = 'if 块作用域'
+    //   console.log(a)
+    // }
+    // 好的例子
+    if (true) {
+      const a = 'if 块作用域'
+      console.log(a)
+    }
+    // 3.2 for 块作用域
+    // 不好的例子
+    let arr = ['ant', 'bison', 'camel', 'duck', 'bison'];
+    // let v;
+    // for(v of arr) {
+    //   console.log(v)
+    // }
+    // 好的例子
+    // for(const v of arr) {
+    //   console.log(v)
+    // }
+    // 4.尽量避免 undefined 和 null
+    // 4.1默认函数参数
+    // function defaultParams(aa,bb,cc){
+    //   if (cc === undefined) {
+    //     cc = 'cc'
+    //     console.log(aa,bb,cc)
+    //     return 
+    //   }
+    // }
+    function defaultParams(aa,bb,cc='cc'){
+      console.log(aa,bb,cc)
+    }
+    defaultParams('aa','bb')
+    var a = [{
+		"id": "1",
+		"location": "3",
+		"redPacketTheme": "朋友",
+		"blessings": "祝福语",
+		"thumbnail": "http://www.fenxiao.com/1.img",
+		"redEnvelopeBg": "http://www.fenxiao.com/2.img",
+		"bgOfUnpacking": "http://www.fenxiao.com/3.img",
+		"shareThemes": "分享主题",
+		"shareContent": "分享文案",
+		"shareImage": "http://www.fenxiao.com/4.img"
+	}, {
+		"id": "3",
+		"location": "4",
+		"redPacketTheme": "朋友2",
+		"blessings": "祝福语2",
+		"thumbnail": "http://www.fenxiao.com/5.img",
+		"redEnvelopeBg": "http://www.fenxiao.com/6.img",
+		"bgOfUnpacking": "http://www.fenxiao.com/7.img",
+		"shareThemes": "分享主题",
+		"shareContent": "分享文案",
+		"shareImage": "http://www.fenxiao.com/8.img"
+	}]
+  var b = [
+        {"location": "1", title: '默认'},
+        {"location": "2", title: '朋友'},
+        {"location": "3", title: '家人'},
+        {"location": "4", title: '思念'},
+        {"location": "5", title: '生日'}
+      ]
+  
+  for(var i=0;i<b.length;i++) {
+    for(var j=0;j<a.length;j++) {
+      if(a[j].location == b[i].location) {
+        console.log(i,j)
+        b.splice(i,1,a[j])
+      }
+    }
+  }
+  console.log(b, 'v')
+  </script>
+</body>
+</html>

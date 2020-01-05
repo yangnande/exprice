@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>clipboard-剪切和复制</title>
+
+</head>
+<body>
+  <!-- 1div -->
+  <div id="div">div</div>
+  <!-- 2input -->
+  <input type="text" name="" id="tex" value="text"><br/>
+  <!-- 3texteara -->
+  <textarea name="textarea" id="area" cols="30" rows="10" value="textarea"></textarea><br/>
+  <!-- data-clipboard-action="copy" 定义是复制还是剪切，值是copy和cut,data-clipboard-target定义触发器元素，对应的值是要复制内容的dom选择器 -->
+  <!-- cut操作仅对<input>或起作用<textarea> -->
+  <button data-clipboard-target="div" class="btn">copy-div</button>
+  <button data-clipboard-target="#tex" class="btn">copy-text</button>
+  <button data-clipboard-action="cut"data-clipboard-target="#tex" class="btn">cut-text</button>
+  <button data-clipboard-target="#area" class="btn">copy-textarea</button>
+  <button data-clipboard-action="cut"data-clipboard-target="#area" class="btn">cut-textarea</button>
+  <button class="btn">动态设置text</button>
+  <button class="btn" data-clipboard-text="从属性上复制文本">从属性上复制文本</button>
+  <script src="../public/js/clipboard.min.js"></script>
+  <script>
+    // 通过传递DOM选择器，HTML元素或HTML元素列表来实例化它。
+    // var btn = document.getElementsByClassName('btn')[0];
+    // var clipboard = new ClipboardJS(btn, {
+    var clipboard = new ClipboardJS('.btn', {
+        // 动态设置text-复制内容,则将返回String
+        // text: function(e) {
+        //     return '动态设置text,则将返回String';
+        // },
+        // 动态设置target-要复制的dom，则需要返回一个Node。
+        // target: function(e) {
+        //   return document.getElementById('tex')
+        // }
+    });
+    
+    // 自定义事件-复制/剪切操作之后的操作
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+</body>
+</html>
