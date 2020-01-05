@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 变量的类型和计算 1 值类型（数字，字符串，布尔，undefined，null）和引用类型（对象，数组，函数）
+    // 区别：从存储空间来讲，值类型存储是一个变量一个值，而引用类型是变量的值是一个指针，通过指针指向值
+    // 1.1 值类型 
+    var a = 100
+    b = a 
+    a = 200
+    console.log(b,'值类型') // b为100
+    // 1.2 引用类型
+    var info1 = {age: 20}
+    var info2 = info1
+    info2.age = 21
+    console.log(info1.age, '引用类型') // info1.age为21
+    // 1.3 typeof 只能区分值类型
+    console.log(typeof undefined) // 'undefined'
+    console.log(typeof 11)  // 'number'
+    console.log(typeof '你好') // 'string'
+    console.log(typeof true) // 'boolean'
+    console.log(typeof []) // 'object'
+    console.log(typeof {}) // 'object'
+    console.log(typeof null) // 'object'
+    console.log(typeof function() {}) // 'function'
+  // 2 变量计算-强制类型的转换
+  // 2.1 字符串拼接
+  console.log(100 + 10)  // '110'
+  console.log(100 + '10') // '10010'
+  // 2.2 == 
+  console.log(0 == '') // false
+  console.log(100 == '100')  // false
+  console.log(null == undefined)  // false
+  // 什么时候用两个等号，什么时候用三个等号
+  var obj = {}
+  if(obj.a == null){
+    // jquery源码推荐的写法
+    // 这里相当于obj.a === null||obj.a === undefined的简写形式 ，其他的比较都用三等号
+  }
+  // 2.3 if NaN,'',0,null,undefined,false 都是false
+  var val1 = true
+  if (val1) {
+    // 会执行
+  }
+  var val2 = 100
+  if (val2) {
+    // 100会转换成true会执行
+  }
+  var val3 = ''
+  if (val3) {
+    // ''会转换成false不会执行
+  }
+  // 2.4 逻辑运算符
+  console.log(0&&9) // 0 第一个是false,返回第一个值，否则不管第二个值返回true或false就返回第二个值
+  console.log('abc'||'') // 'abc' 第一个是true,返回第一个值，否则不管第二个值返回true或false就返回第二个值
+  console.log(!window.abc) // true
+  var aaa = 100
+  console.log(!!100) // true
+  // 2.5js有哪些内置函数 Number,String,Boolean,Array,Object,Function,Date,RegExp,Error
+  // 2.6 如何理解json 是一个js对象，还是一个数据格式
+  // 2.6.1 常用的两个方法
+  console.log(JSON.stringify({a:10,b:20})) // js对象转换成json字符串
+  console.log(JSON.parse('{"a":10,"b":20}'))// json字符串转换成js对象
+  // 3如何准备判断一个变量是一个数组
+  // 4 写一个原型链继承的例子
+  // 5 描述new一个对象的过程
+  // 6 zepto（或其他框架）源码中如何使用原型链
+  // 7 构造函数 特点：1函数名第一个字母大写2使用时用new
+  function Foo(name,age) {
+    this.name = name
+    this.age = age
+    this.class = 'class-1'
+    // return this // 默认有这一行
+  } 
+  var f = new Foo('tom',12)
+  var f1 = new Foo('jerry',13) // 创建多个对象
+  console.log(f,f1)
+  // 8 构造函数-扩展
+  var a = {} // 其实是var a = new Object()的语法糖
+  var a = [] // 其实是var a = new Array()的语法糖
+  function Foo() {} // 其实是var Foo = new Function()的语法糖
+  // 使用instanceOf判断一个函数是否是一个变量的构造函数
+  // 5条原型规则 原型规则是学习原型链的基础
+  // 原型规则1，所有的引用类型（函数，数组，对象），都具有对象的属性，即可自由扩展属性
+  // 原型规则2，所有的引用类型（函数，数组，对象），都有一个__proto__（隐性类型）属性，属性值是一个普通的对象
+  // 原型规则3，所有的函数，都有一个prototype(显性类型)属性，属性值也是一个普通的对象
+  // 原型规则4，所有的引用类型（函数，数组，对象），__proto__（隐性类型）属性的值指向它的构造函数的prototype(显性类型)属性值
+  // 原型规则5，当试图得到一个对象的某个属性值时，如果这个对象本身没有这个属性，那么会去它的__proto__(即它的构造函数的prototype)中寻找
+  
+  var obj = {};obj.a = 100
+  var arr = {};arr.a = 100
+  function fn () {};fn.a = 100;
+
+  console.log(obj.__proto__)
+  console.log(arr.__proto__)
+  console.log(fn.__proto__)
+
+  console.log(fn.prototype)
+
+  console.log(obj.__proto__ === Object.prototype)
+  function Foo1 (name) {
+    this.name = name
+  }
+  Foo1.prototype.sayHi = function () {
+    console.log(this.name,'say hi')
+  }
+  var f2 = new Foo1('zhangsan')
+  f2.sayHello = function () {
+    console.log(this.name,'say hello')
+  }
+  f2.sayHi()
+  f2.sayHello()
+  // 总结不管是f2在调用属性时，不管Foo1函数的显性原型还是f2自身函数的this 都指向f2
+  // 循环对象自身的属性
+  for(var item in f2) {
+    // for in 高级浏览器已经屏蔽了来自原型的属性
+    // 为了保证代码的健壮性，要加一层判断
+    if (f2.hasOwnProperty(item)) {
+      console.log(item)
+    }
+  }
+  </script>
+</body>
+</html>
