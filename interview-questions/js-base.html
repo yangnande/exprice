@@ -167,13 +167,174 @@
   // var fn2 = function () {
   //   console.log('fn2')
   // }
-  // 10 说一下对变量提升的理解
-  // 11 说明this几种不同的场景
+  // 10 说一下对变量提升的理解-变量的定义和函数的声明
+  // 11 说明this几种不同的场景-1作为构造函数2作为普通函数3作为对象4call,bind,apply
   // 12 创建10个<a>标签，点击的时候弹出对应的序号
-  // 13 如何理解作用域
+  // 错误的写法
+  // var i,a;
+  // for(i = 0;i<10;i++) {
+  //   a = document.createElement('a');
+  //   a.innerHTML = i + '<br/>'
+  //   a.addEventListener('click', function(e) {
+  //     e.preventDefault()
+  //     alert(i) // 每个都是10
+  //   })
+  //   document.body.appendChild(a)
+  // }
+  
+  // 正确的写法
+  // var i,a;
+  // for(i = 0;i<10;i++) {
+  //   (function(i) {
+  //     a = document.createElement('a');
+  //     a.innerHTML = i + '<br/>'
+  //     a.addEventListener('click', function(e) {
+  //       e.preventDefault()
+  //       alert(i) // 每个都是10
+  //     })
+  //     document.body.appendChild(a)
+  //   }) (i)
+  // }
+  // 13 如何理解作用域 a自由变量b作用域链即自由变量的查找c闭包的两个场景
   // 14 实际开发中闭包的作用
   // 执行上下文 a范围：一段<script>或者一个函数 b全局：变量定义，函数声明 c函数：变量定义、函数声明、this/arguments
-
+  // 15 this要在执行时才能确认值，定义时无法确认
+  // 15.1对象中的this
+  // var obj = {
+  //   name: 'zhangsan',
+  //   fn: function () {
+  //     console.log(this)
+  //   }
+  // }
+  // obj.fn() // this指向obj
+  // obj.fn.call({name:'lisi'}) // this指向{name:'lisi'}
+  // var fn1 = obj.fn
+  // fn1() // this指向window
+  // 15.2构造函数中的this
+  // function Foo(name) {
+    // console.log(this) // {}
+    // this.name = name
+    // console.log(this) // {name: '张三'}
+  // }
+  // var foo1 = new Foo('张三')
+  // 15.3 函数中的this
+  // function fn() {
+  //   console.log(this) // window
+  // }
+  // fn()
+  // 15.4 call bind apply
+  // function fun2(name) {
+  //   console.log(this)
+  // }
+  // fun2('lele')
+  // fun2.call({name:'call'},'call')
+  // 只有函数表达式才能用bind
+  // var fun3 = function () {
+  //   console.log(this)
+  // }.bind({name:'bind'})
+  // fun3('bind')
+  // 16 作用域 a没有块级作用域b只有全局作用域和函数作用域
+  // 16.1无块级作用域
+  // if(true) {
+  //   var name = 'lele'
+  // }
+  // console.log(name, '无块级作用域')
+  // 16.2无块级作用域
+  // var a = 100
+  // function fn4 () {
+  //   var a = 200
+  //   console.log(a, '函数作用域')
+  // }
+  // console.log(a, '全局作用域')
+  // fn4()
+  // 17 作用域链 在定义的时候值已经确定 跟执行时的作用域无关
+  // var a = 100
+  // function fun5 () {
+  //   var b = 200
+  //   // 当前作用域没有定义的变量，即为'自由变量'
+  //   console.log(a)
+  //   console.log(b)
+  // }
+  // fun5()
+  // var a = 100
+  // function fun6 () {
+  //   var b = 200
+  //   function fun7 () {
+  //     var c = 300
+  //     // 当前作用域没有定义的变量，即为'自由变量'
+  //     console.log(a)
+  //     console.log(b)
+  //     console.log(c)
+  //   }
+  //   fun7()
+  // }
+  // fun6()
+  // 18闭包
+  // function fn5 () {
+  //   var a = 100
+  //   return function () {
+  //     // 自由变量，会像父级去寻找
+  //     console.log(a)
+  //   }
+  // }
+  // // f3 得到一个函数
+  // var f3 = fn5()
+  // var a = 200
+  // f3() // 100
+  // 18.1闭包的使用场景
+  // 18.1.1 函数作为一个返回值，如第一个例子
+  // 18.1.2 函数作为参数传递
+  // function fn5 () {
+  //   var a = 100
+  //   return function () {
+  //     // 自由变量，会像父级去寻找
+  //     console.log(a)
+  //   }
+  // }
+  // f3 得到一个函数
+  // var f3 = fn5()
+  // function fn6 (fn) {
+  //   var a = 200
+  //   fn()
+  // }
+  // fn6(f3)
+  // 18.1.3闭包在实际生活的应用-数组中有没有重复的值
+  // function isFirstLoad () {
+  //   var _list = []
+  //   return function (id) {
+  //     if (_list.indexOf(id)>=0) {
+  //       return false
+  //     } else {
+  //       _list.push(id)
+  //       return true
+  //     }
+  //   }
+  // }
+  // var firstLoad = isFirstLoad()
+  // console.log(firstLoad(100)) // true
+  // console.log(firstLoad(100)) // false
+  // console.log(firstLoad(200)) // true
+  // console.log(firstLoad(200)) // false
+  // 19同步和异步
+  // 19.1同步和异步的区别，分别举一个同步和异步的例子
+  // 19.1.1什么是异步
+  // console.log(100)
+  // setTimeout(function() {
+  //   console.log(200)
+  // },1000)
+  // console.log(300)
+  // 19.1.2 对比同步 一个执行完才能执行另一个 alert阻塞了后边的执行
+  // console.log(100)
+  // alert(200)
+  // console.log(300)
+  // 19.1.3何时需要异步 a在可能发生等待的情况b等待过程中不能出现像alert一样阻塞程序的运行c因此"所有的情况"都需要异步
+  // 19.1.4前端使用异步的情景
+  // a定时任务：setTimeout,setInterval b、ajax请求，动态img加载c时间绑定
+  
+  // 打印结果100,300,200
+  // 19.2一个关于setTimeout的例子
+  // 19.3前端使用的异步场景有哪些
+  
   </script>
 </body>
 </html>
