@@ -7,6 +7,8 @@
   <title>Document</title>
 </head>
 <body>
+  <button>你点我呀</button>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
     // 变量的类型和计算 1 值类型（数字，字符串，布尔，undefined，null）和引用类型（对象，数组，函数）
     // 区别：从存储空间来讲，值类型存储是一个变量一个值，而引用类型是变量的值是一个指针，通过指针指向值
@@ -317,6 +319,7 @@
   // console.log(firstLoad(200)) // false
   // 19同步和异步
   // 19.1同步和异步的区别，分别举一个同步和异步的例子
+  // 同步会阻塞代码，而异步不会 alert是同步 setTimeout是异步
   // 19.1.1什么是异步
   // console.log(100)
   // setTimeout(function() {
@@ -327,14 +330,104 @@
   // console.log(100)
   // alert(200)
   // console.log(300)
+  // 打印结果100,300,200
   // 19.1.3何时需要异步 a在可能发生等待的情况b等待过程中不能出现像alert一样阻塞程序的运行c因此"所有的情况"都需要异步
   // 19.1.4前端使用异步的情景
-  // a定时任务：setTimeout,setInterval b、ajax请求，动态img加载c时间绑定
-  
-  // 打印结果100,300,200
+  // a定时任务：setTimeout,setInterval b、ajax请求，动态img加载c事件绑定
   // 19.2一个关于setTimeout的例子
   // 19.3前端使用的异步场景有哪些
-  
+  // console.log('start')
+  // $.get("./json/data.json",function(data) {
+  //   console.log(data)
+  // })
+  // var img = document.createElement('img')
+  // img.onload = function() {
+  //   console.log('load')
+  // }
+  // img.src="./img/1.jpg"
+  // document.getElementsByTagName('button')[0].addEventListener('click', function() {
+  //   alert(666)
+  // })
+  // console.log('end') 
+  // 打印结果start,end,data
+  // 20 单线程 特点：只能干一件事，不能同时干两件事
+  // console.log(100)
+  // setTimeout(function() {
+  //   console.log(200)
+  // },1000)
+  // console.log(300)
+  // 1执行354行代码，打印出100
+  // 2执行355行代码，发现是异步，会把setTimeout里的函数暂存起来
+  // 3执行357行代码，打印出300
+  // 4待同步的执行完毕，空闲时会检查暂存区有么有要执行的代码
+  // 5发现暂存的代码，无需时间，所以立即执行
+  // 21获取2017-06-10格式的日期
+  // 21.1日期的api
+  // console.log(Date.now())
+  // var date = new Date() // 当前日期
+  // var ms = date.getTime() // 当前毫秒数
+  // var year = date.getFullYear() // 年(0-11)
+  // var month = date.getMonth() // 月
+  // var dates = date.getDate() // 日
+  // var hours = date.getHours() // 时
+  // var minutes = date.getMinutes() // 分
+  // var seconds = date.getSeconds() // 秒
+  // var week = date.getDay() // 秒
+  // console.log(date,ms,year,month,dates,hours,minutes,seconds,week)
+  // 22获取随机数，要求长度一致的字符串
+  // console.log(Math.random())
+  // 23写一个能遍历数组和对象的通用的forEach函数
+  // 23.1 forEach 无返回值 不改变原数组
+  var arr = [1,5,2,3,4]
+  // var arr1 = arr.forEach(function(item,index) {
+  //   arr[index]*2
+  //   console.log(item,index)// item为值，index为val
+  // })
+  // 23.2 every 全部符合条件返回true
+  // var arr1 = arr.every(function(item,index) {
+  //   if (item>3) {
+  //     return true
+  //   }
+  //   console.log(item,index)// item为值，index为val
+  // })
+  // 23.3 some 一个符合条件返回true
+  // var arr1 = arr.some(function(item,index) {
+  //   if (item>3) {
+  //     return true
+  //   }
+  //   console.log(item,index)// item为值，index为val
+  // })
+  // 23.3 some 一个符合条件返回true
+  // var arr1 = arr.some(function(item,index) {
+  //   if (item>3) {
+  //     return true
+  //   }
+  //   console.log(item,index)// item为值，index为val
+  // })
+  // 23.4 sort 排序 改变原数组
+  // var arr1 = arr.sort(function(a,b) {
+  //   return b-a // 从大到小
+  //   // return a-b // 从小到大
+  // })
+  // console.log(arr1,arr) // true [1,2,3,4]
+  // 23.5 filter 新数组，过滤出符合元素数组 不改变原数组
+  // var arr1 = arr.filter(function(v,i) {
+  //   return v>2
+  // })
+  // console.log(arr1,arr) // true [1,2,3,4]
+  // 24 对象的api
+  // var obj = {
+  //   a: 100,
+  //   b: 200,
+  //   c: 300
+  // }
+  // 24.1for in
+  // for(var key in obj) {
+  //   // 判断是自己本身的属性，而不是原型链上的属性
+  //   if(obj.hasOwnProperty(key)) {
+  //     console.log(key,obj[key])
+  //   }
+  // }
   </script>
 </body>
 </html>
