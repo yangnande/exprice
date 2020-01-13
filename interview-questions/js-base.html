@@ -8,6 +8,14 @@
 </head>
 <body>
   <button>你点我呀</button>
+  <div id="div1" class="div1">
+    <p id="p1" data-name="p1" class="p">我是p1</p>
+    <p id="p2" class="p">我是p2</p>
+  </div>
+  <div id="div2">
+    <p id="p3" data-name="p1">我是p3</p>
+    <p id="p4">我是p4</p>
+  </div>
   <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
     // 变量的类型和计算 1 值类型（数字，字符串，布尔，undefined，null）和引用类型（对象，数组，函数）
@@ -362,6 +370,35 @@
   // 4待同步的执行完毕，空闲时会检查暂存区有么有要执行的代码
   // 5发现暂存的代码，无需时间，所以立即执行
   // 21获取2017-06-10格式的日期
+    // function formDate (date) {
+    //   if(!date) {
+    //     date = new Date()
+    //   }
+    //   var year = date.getFullYear()
+    //   var month = date.getMonth() + 1
+    //   var day = date.getDate()
+    //   var hours = date.getHours()
+    //   var minute = date.getMinutes()
+    //   var seconds = date.getSeconds()
+    //   if (month < 10) {
+    //     month = '0' + month
+    //   }
+    //   if (day < 10) {
+    //     day = '0' + day
+    //   }
+    //   if (hours < 10) {
+    //     hours = '0' + hours
+    //   }
+    //   if (minute < 10) {
+    //     minute = '0' + minute
+    //   }
+    //   if (seconds < 10) {
+    //     seconds = '0' + seconds
+    //   }
+    //   console.log(year + '-' + month + '-' + day + ' ' + hours + ':' + minute + ':' + seconds)
+    //   return year + '-' + month + '-' + day + '-' + hours + ':' + minute + ':' + seconds
+    // }
+    // formDate(new Date())
   // 21.1日期的api
   // console.log(Date.now())
   // var date = new Date() // 当前日期
@@ -375,10 +412,35 @@
   // var week = date.getDay() // 秒
   // console.log(date,ms,year,month,dates,hours,minutes,seconds,week)
   // 22获取随机数，要求长度一致的字符串
-  // console.log(Math.random())
+  // var randoms = Math.random() + '0000000000' // 为了代码的健壮性，补10个0
+  //     randoms = randoms.substr(0,10)
+  // console.log(randoms)
   // 23写一个能遍历数组和对象的通用的forEach函数
+  // function forEach (obj,fn) {
+  //   if(obj instanceof Array) {
+  //     obj.forEach(function (item,index) {
+  //       fn(index,item)
+  //     })
+  //   } else {
+  //     for(var key in obj) {
+  //       fn(key, obj[key])
+  //     }
+  //   }
+  // }
+  // var arr = [1,5,2,3,4]
+  // forEach(arr,function fn (index,item) {
+  //   console.log(index,item, 'arr')
+  // })
+  // var obj = {
+  //   'a': 1,
+  //   'b': 2,
+  //   'c': 3,
+  // }
+  // forEach(obj,function fn (index,item) {
+  //   console.log(index,item, 'obj')
+  // })
   // 23.1 forEach 无返回值 不改变原数组
-  var arr = [1,5,2,3,4]
+  // var arr = [1,5,2,3,4]
   // var arr1 = arr.forEach(function(item,index) {
   //   arr[index]*2
   //   console.log(item,index)// item为值，index为val
@@ -428,6 +490,50 @@
   //     console.log(key,obj[key])
   //   }
   // }
+  // 25 常说的js分为两个部分：aJS基础知识（ ECMA262标准）bJS-Web-API(W3C标准)
+  // 26DOM:浏览器把拿到的html代码，结构化一个浏览器能识别并且js可操作的一个模型而已
+  // 26.1 获取DOM节点
+  
+  // var div1 = document.getElementById('div1')
+  // console.log(div1,'div1')
+  // var divList = document.getElementsByTagName('div')
+  // console.log(divList,'divList')
+  // var pList = document.querySelectorAll('p')
+  // console.log(pList,'pList')
+  // pClasses = document.getElementsByClassName('p')
+  // console.log(pClasses,'pClasses')
+  // 26.2 prototype(js的标准属性) attribute（html元素上的属性）
+  // prototype(js的标准属性)
+  // console.log(div1.className,'div.className1')
+  // div1.className = 'aaa'
+  // console.log(div1.className,'div.className2')
+  // attribute（html元素上的属性）
+  // var p1 = document.getElementById('p1')
+  // console.log(p1.getAttribute('data-name'))
+  // p1.setAttribute('data-name','6666')
+  // console.log(p1.getAttribute('data-name'))
+  // 27新增节点
+  // var p5 = document.createElement('p')
+  // p5.innerHTML = 'new p'
+  // var div1 = document.getElementById('div1')
+  // div1.appendChild(p5)
+  // 27节点改变位置
+  // var div2 = document.getElementById('div2')
+  // var p1 = document.getElementById('p1')
+  // div2.appendChild(p1)
+  // 28查找父节点/子节点
+  // var p1 = document.getElementById('p1')
+  // var div2 = document.getElementById('div2')
+  // console.log(p1.parentElement)
+  // console.log(div2.parentElement)
+  // console.log(div2.childNodes) // 5个 3个text 1个p1 1个p2
+  // 29移除子节点
+//  var child = div2.childNodes
+//  console.log(div2.childNodes[0].nodeType) // text 3
+//  console.log(div2.childNodes[1].nodeType) // div 1
+//  console.log(div2.childNodes[0].nodeName) // text #text
+//  console.log(div2.childNodes[1].nodeName) // div p
+//  div2.removeChild(child[1])
   </script>
 </body>
 </html>
