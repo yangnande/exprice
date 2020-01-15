@@ -7,8 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-  <button>你点我呀</button>
+  <!-- <button>你点我呀</button> -->
   <div id="div1" class="div1">
+    <a href="https:www.baidu.com" id="link1">link1</a>
+    <a href="https:www.baidu.com" id="link2">link2</a>
+    <a href="https:www.baidu.com" id="link3">link3</a>
+    <a href="https:www.baidu.com" id="link4">link4</a>
+    <a href="https:www.baidu.com" id="link5">link5</a>
     <p id="p1" data-name="p1" class="p">我是p1</p>
     <p id="p2" class="p">我是p2</p>
   </div>
@@ -528,12 +533,83 @@
   // console.log(div2.parentElement)
   // console.log(div2.childNodes) // 5个 3个text 1个p1 1个p2
   // 29移除子节点
-//  var child = div2.childNodes
-//  console.log(div2.childNodes[0].nodeType) // text 3
-//  console.log(div2.childNodes[1].nodeType) // div 1
-//  console.log(div2.childNodes[0].nodeName) // text #text
-//  console.log(div2.childNodes[1].nodeName) // div p
-//  div2.removeChild(child[1])
+  //  var child = div2.childNodes
+  //  console.log(div2.childNodes[0].nodeType) // text 3
+  //  console.log(div2.childNodes[1].nodeType) // div 1
+  //  console.log(div2.childNodes[0].nodeName) // text #text
+  //  console.log(div2.childNodes[1].nodeName) // div p
+  //  div2.removeChild(child[1])
+  // 30DOM是哪种的基本的数据结构 -树
+  // 31DOM常用的api有哪些-a获取dom节点，以及节点的property和attribute b 获取父节点，获取子节点
+  // 32DOM的property和attribute的区别a property只是一个js对象的属性的修改battribute对html标签属性的修改
+  // 33BOM browser object model
+  // 33.1如何检测浏览器的类型
+  // var ua = navigator.userAgent
+  // console.log(ua,'ua')
+  // 33.2拆解浏览器url的各个部分
+  // console.log(location.href)
+  // console.log(location.protocol) // 协议
+  // console.log(location.hostname) // 协议
+  // console.log(location.pathname) // 路径
+  // console.log(location.search) // 携参
+  // console.log(location.hash) //哈希
+  </script>
+  <script>
+  // 1事件绑定
+  //  var p1 = document.getElementById('p1')
+  //  var link1 = document.getElementById('link1')
+  //  var body1 = document.body
+  //  p1.addEventListener('click',function(e) {
+  //    e.stopPropagation() // 阻止向上事件冒泡只打印p1,不打印body
+  //    console.log('我是p1')
+  //  })
+  //  function bindEvent(ele,type,fn) {
+  //   ele.addEventListener(type,fn)
+  //  }
+  //  bindEvent(link1,'click',function(e) {
+  //    e.preventDefault() // 取消元素的默认事件
+  //    console.log('link1')
+  //  })
+  //  bindEvent(body1,'click',function(e) {
+  //    console.log('body')
+  //  })
+  // 代理
+  var div1 = document.getElementById('div1')
+  // div1.addEventListener('click',function(e) {
+  //   e.preventDefault()
+  //   if(e.target.nodeName == 'A') {
+  //     console.log(e.target)
+  //   }
+  // })
+  function bindEvent(el,type,selector,fn) {
+    if(fn == null) {
+      console.log(selector,fn,'111')
+      fn = selector
+      selector = null
+      console.log(selector,fn,'222')
+    }
+    el.addEventListener(type,function(e) {
+      e.preventDefault()
+      if(selector) {
+      //是代理
+        var target = e.target
+        // console.log(target.matches(selector)) // 检测字符串是否匹配给定的正则
+        if(target.matches(selector)) {
+          fn.call(target,e)
+          // fn(e)
+        }
+      }else {
+        fn(e)
+      }
+    })
+  }
+  // bindEvent(div1,'click',function(e) {
+  //   console.log(e.target)
+  // })
+  bindEvent(div1,'click','a',function(e) {
+    console.log(this) // 指向e.target
+    // console.log(e.target)
+  })
   </script>
 </body>
 </html>
