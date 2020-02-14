@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue-animate</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <style>
+    /* 进入前，离开后 */
+    /* @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    } */
+
+    /* 进入的过程 */
+    /* 离开的过程 */
+    /* .fade-enter-active {
+        transform-origin: left center;
+        animation: bounce-in 2s;
+    }
+    .fade-leave-active {
+        transform-origin: left center;
+        animation: bounce-in 2s reverse;
+    } */
+    /* 自定义的class */
+    /* .enter {
+        transform-origin: left center;
+        animation: bounce-in 2s;
+    }
+    .leave {
+        transform-origin: left center;
+        animation: bounce-in 2s reverse;
+    } */
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- <transition 
+      name="fade"
+      enter-active-class="enter"
+      leave-active-class="leave"
+    > -->
+    <transition 
+      name="fade"
+      appear
+      enter-active-class="animated swing"
+      leave-active-class="animated shake"
+      appear-active-class="animated swing"
+    >
+        <div v-if="show">helloWorld</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                show: true
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show
+            }
+        }
+    })
+  </script>
+</body>
+</html>

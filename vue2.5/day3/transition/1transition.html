@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue动画效果</title>
+  <style>
+    /* 进入前，离开后 */
+    .fade-enter,.fade-leave-to {
+        opacity: 0;
+    }
+    /* 进入的过程，离开的过程 */
+    .fade-enter-active,.fade-leave-active {
+        transition: opacity 2s;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <transition name="fade">
+        <div v-if="show">helloWorld</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+  </div>
+  <script src="../../../public/js/vue.js"></script>
+  <script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                show: false
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show
+            }
+        }
+    })
+  </script>
+</body>
+</html>
