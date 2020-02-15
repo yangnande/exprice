@@ -7,19 +7,22 @@
       <span class="iconfont search-icon">&#xe643;</span>
       <div>输入城市/景点/游玩主题</div>
     </div>
-    <div class="header-right">城市<span class="iconfont arrow-icon">&#xe601;</span></div>
+    <router-link to="/city">
+      <div class="header-right">{{city}}<span class="iconfont arrow-icon">&#xe601;</span></div>
+    </router-link>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'Header',
-  props: {
-    'city': String
-  },
   data () {
     return {
     }
+  },
+  computed: {
+    ...mapState(['city'])
   }
 }
 </script>
@@ -51,8 +54,11 @@ export default {
     .search-icon
       margin-right: .04rem
   .header-right
-    width: 1.04rem
+    display flex
+    min-width: 1.04rem
     text-align: center
+    color: #fff
+    padding-left .1rem
     .arrow-icon
       font-size: .24rem
 </style>
