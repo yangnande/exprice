@@ -50,8 +50,9 @@ export default {
     display:flex
     align-items: center
     padding-left: .2rem
-    font-size: .12rem
+    font-size: .32rem
     .search-icon
+      font-size: .32rem
       margin-right: .04rem
   .header-right
     display flex

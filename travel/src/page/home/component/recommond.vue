@@ -1,14 +1,14 @@
 <template>
   <div class="recommond">
     <p class="rec-title">热门推荐</p>
-    <div class="rec-list border-bottom" v-for="item in list" :key="item.id">
+    <router-link class="rec-list border-bottom" v-for="item in list" :key="item.id" tag="div" :to="'/detail/'+item.id">
       <img class="rec-img" :src="item.imgUrl" alt="">
       <div class="rec-info">
         <p class="info-title ellipsis">{{item.title}}</p>
         <p class="info-desc ellipsis">{{item.desc}}</p>
         <button>查看详情</button>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 

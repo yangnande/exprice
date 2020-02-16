@@ -3,7 +3,7 @@
     <li v-for="(v,i) of letters" :key="i"
     :ref="v"
     @click="selectLetter"
-    @touchstart="letterTouchStart"
+    @touchstart.prevent="letterTouchStart"
     @touchmove="letterTouchMove"
     @touchend="letterTouchEnd"
     >{{v}}</li>
