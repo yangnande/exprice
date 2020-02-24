@@ -1,28 +1,33 @@
 <template>
   <div class="home">
     <nav-bar class="home-bar"><div slot="center">购物街</div></nav-bar>
-    <home-swiper :banners="banners" v-if="banners.length>0"></home-swiper>
-    <recommond-view :recommonds="recommonds" v-if="recommonds.length>0"></recommond-view>
-    <feature-view/>
-    <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
-    <goods-list :goods="this.goods[currentType].list"></goods-list>
-    <scroll ref="scroll" :probeType='3' @scroll="contentScroll" :pullUpLoad="true" @pullUpLoad="pullUpLoad"></scroll>
-    <back-up @click.native="backClick" v-show="isShowBackTop"></back-up>
+    <tab-control ref="tabControl1" :titles="['流行', '新款', '精选']" @tabClick="tabClick" class="isFixed" v-show="isFixed"></tab-control>
+    <scroll ref="scroll" class="content" :probeType='3' @scroll="contentScroll" :pullUpLoad="true" @pullUpLoad="pullUpLoad">
+      <home-swiper :banners="banners" v-if="banners.length>0" @swiperLoad="swiperLoad"></home-swiper>
+      <recommond-view :recommonds="recommonds" v-if="recommonds.length>0"></recommond-view>
+      <feature-view/>
+      <tab-control ref="tabControl2" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
+      <goods-list :goods="showGoods"></goods-list>
+    </scroll>
+
+    <!-- <scroll ref="scroll" :probeType='3' @scroll="contentScroll" :pullUpLoad="true" @pullUpLoad="pullUpLoad"></scroll> -->
+    <back-up @click.native="backClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
 <script>
-import navBar from '@/components/common/navBar/navBar'
-import scroll from '@/components/common/scroll/scroll'
-import tabControl from '@/components/content/tabControl/tabControl'
-import goodsList from '@/components/content/goods/goodsList'
-import backUp from '@/components/content/backUp/backUp'
+import navBar from 'components/common/navBar/navBar'
+import scroll from 'components/common/scroll/scroll'
+import tabControl from 'components/content/tabControl/tabControl'
+import goodsList from 'components/content/goods/goodsList'
+import backUp from 'components/content/backUp/backUp'
 
 import homeSwiper from './childComps/homeSwiper'
 import recommondView from './childComps/recommondView'
 import featureView from './childComps/featureView'
 
-import {getHomeMultidata,getHomeGoods} from '@/network/home'
+import {getHomeMultidata,getHomeGoods} from 'network/home'
+import {debounce} from 'common/util'
 export default {
   name: 'home',
   components: {
@@ -45,33 +50,39 @@ export default {
         'new': {page: 0,list: []},
         'sell': {page: 0,list: []}
       }, // 商品列表数据
-      isShowBackTop: false // 回到顶部图标是否显示
+      isShowBackTop: false, // 回到顶部图标是否显示
+      tabControlOffsetTop: 0,
+      isFixed:false, // 是否是固定定位
+      saveY: 0 // 记录离开页面滚动的距离
     }
   },
   created () {
     this.getHomeMultidata()
+  },
+  mounted () {
+    // this.getHomeGoods(this.currentType)
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
-  },
-  mounted () {
-    this.$bus.$on('itemImageLoad', function() {
-      console.log('图片加载完成')
-      this.$ref.scroll.refresh()
+    let refresh = debounce(this.$refs.scroll.refresh,200)
+    this.$bus.$on('itemImageLoad', ()=> {
+      refresh()
     })
+
   },
   methods: {
     getHomeMultidata () {
       getHomeMultidata().then(res => {
-        this.banners = res.data.data.banner.list;
-        this.recommonds = res.data.data.recommend.list;
+        if(res.data&&res.data.banner&&res.data.recommend) {
+          this.banners = res.data.banner.list;
+          this.recommonds = res.data.recommend.list;
+        }
       })
     },
     getHomeGoods (type) {
       const page = this.goods[type].page + 1
       getHomeGoods(type,page).then(
         res => {
-          console.log(res, 'res')
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page += 1
           // 加载更多只调用一次 如果想调用多次 就得使用这个方法
@@ -91,30 +102,76 @@ export default {
         case 2:
           this.currentType = 'sell'
       }
+      this.$refs.tabControl1.currentIndex = i
+      this.$refs.tabControl2.currentIndex = i
     },
     // 点击回到顶部
     backClick () {
-      this.refs.scroll.scrollTo(0,0,500)
+      this.$refs.scroll.scrollTo(0,0,500)
     },
     // 监听滚动距离
     contentScroll (position) {
+      // 返回顶部
       this.isShowBackTop = -(position.y) > 1000
+      // tabcontrol 固定定位
+      if(-(position.y) > this.tabControlOffsetTop) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
     },
     // 滚动到底部调商品列表接口
     pullUpLoad () {
       this.getHomeGoods(this.currentType)
+    },
+    swiperLoad() {
+      // 获取tabControl的offsetTop 组件没有offsetTop  $el获取组件内的元素
+      this.tabControlOffsetTop = this.$refs.tabControl2.$el.offsetTop
+    }
+  },
+  // 组件激活时
+  activated () {
+    this.$refs.scroll.scrollTo(0,this.saveY,200)
+    // 最好刷新一下
+    this.$refs.scroll.refresh()
+  },
+  // 组件停止使用时
+  deactivated () {
+    this.saveY = this.$refs.scroll.getY()
+  },
+  computed: {
+    showGoods() {
+      return this.goods[this.currentType].list
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .home {
-  margin-bottom: 200px;
+  /* position: relative; */
+  /* margin-bottom: 200px; */
 }
 .home-bar {
-  background-color: #fff;
-  color: #ff8198;
+  position: relative;
+  z-index: 88;
+  color: #fff;
+  background-color: #ff8198;
   font-size: 38px;
+}
+.content {
+  position: absolute;
+  top: 120px;
+  bottom: 140px;
+  left: 0;
+  right:0;
+}
+.isFixed {
+  position: fixed;
+  top: 120px;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  background: #fff;
 }
 </style>

@@ -55,3 +55,8 @@ a {
   float: right;
 }
 
+.ellipse {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

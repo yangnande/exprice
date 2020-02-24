@@ -15,10 +15,11 @@ export default {
 <style>
   .nav-bar {
     display: flex;
-    height: 88px;
-    line-height: 88px;
+    height: 120px;
+    line-height: 120px;
     text-align: center;
-    box-shadow: 0 1px 1px rgba(100,100,100,.2)
+    box-shadow: 0 2px 2px rgba(100,100,100,.4);
+    box-sizing: border-box;
   }
   .left,.right {
     width: 120px;

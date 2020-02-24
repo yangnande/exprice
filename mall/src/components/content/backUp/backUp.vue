@@ -1,6 +1,6 @@
 <template>
   <div class="back-up">
-    <img src="@/assets/img/common/top.png" alt="">
+    <img src="~assets/img/common/top.png" alt="">
   </div>
 </template>
 
@@ -14,10 +14,10 @@ export default {
 .back-up {
   position: fixed;
   right: 16px;
-  bottom: 120px;
+  bottom: 130px;
 }
 .back-up img {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
 }
 </style>

@@ -30,22 +30,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tab-control {
   display: flex;
   text-align: center;
-  font-size: 30px;
-  height: 40px;
-  line-height: 40px;
+  font-size: 50px;
+  height: 120px;
+  line-height: 120px;
 }
 .tab-control-item {
   flex: 1;
 }
 .tab-control-item span {
-  padding: 5px;
+  padding: 8px;
 }
 .active {
-  border-bottom: 3px solid #ff8198;
+  border-bottom: 6px solid #ff8198;
   color: #ff8198;
 }
 </style>

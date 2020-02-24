@@ -24,7 +24,8 @@ export default {
 
 <style>
 .recommond {
-  margin-top: 10px;
+  margin-top: 30px;
+  padding-bottom: 30px;
   display: flex;
   font-size: 36px;
   text-align: center;
@@ -37,14 +38,5 @@ export default {
   width: 140px;
   height: 140px;
   margin-bottom: 10px;
-}
-.recommond-item .title {
-  padding: 0;
-  margin: 0;
-}
-a:-webkit-any-link {
-  color: black;
-  cursor: pointer;
-  text-decoration: unset;
 }
 </style>

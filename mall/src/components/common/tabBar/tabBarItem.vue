@@ -13,7 +13,7 @@ export default {
     path: String,
     activeColor: {
       type: String,
-      default: 'red'
+      default: '#ff8198'
     }
   },
   computed: {
@@ -36,16 +36,17 @@ export default {
 
 <style>
 .tab-bar-item {
+  height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* justify-content: space-between; */
   flex: 1;
-  font-size: 30px;
+  font-size: 40px;
 }
 .tab-bar-item img {
-  width: 48px;
-  height: 48px;
-  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+  margin: 10px 0 10px;
 }
 </style>
