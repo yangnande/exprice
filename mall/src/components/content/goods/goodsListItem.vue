@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item" @click="goodJump">
-    <img :src="goodsItem.show.img" alt="" @load="imgLoad">
+    <img :src="showImage" alt="" @load="imgLoad">
     <div class="goods-info">
       <p class="ellipse">{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -17,8 +17,10 @@ export default {
       default: []
     }
   },
-  mounted () {
-    // this.$bus.$emit('itemImageLoad')
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img
+    }
   },
   methods: {
     imgLoad() {

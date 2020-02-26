@@ -30,13 +30,20 @@ export default {
       this.currentIndex = index
     },
     backJump() {
-      this.$router.back(-1)
+      this.$router.back()
+      // this.$router.go(-1)
+      // this.$router.forward()
     }
   }
 }
 </script>
 
 <style scoped>
+.detail-nav-bar {
+  position: relative;
+  background-color: #fff;
+  z-index: 22;
+}
 .back img{
   margin-top: 26px;
 }

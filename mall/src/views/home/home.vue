@@ -28,6 +28,7 @@ import featureView from './childComps/featureView'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 import {debounce} from 'common/util'
+import {itemImgListenerMixin} from 'common/mixin'
 export default {
   name: 'home',
   components: {
@@ -56,6 +57,7 @@ export default {
       saveY: 0 // 记录离开页面滚动的距离
     }
   },
+  mixins: [itemImgListenerMixin],
   created () {
     this.getHomeMultidata()
   },
@@ -64,11 +66,6 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
-    let refresh = debounce(this.$refs.scroll.refresh,200)
-    this.$bus.$on('itemImageLoad', ()=> {
-      refresh()
-    })
-
   },
   methods: {
     getHomeMultidata () {
@@ -137,7 +134,10 @@ export default {
   },
   // 组件停止使用时
   deactivated () {
+    // 1保存滚动的距离
     this.saveY = this.$refs.scroll.getY()
+    // 2销毁事件
+    this.$bus.$off('itemImageLoad',this.itemImgListener)
   },
   computed: {
     showGoods() {

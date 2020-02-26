@@ -7,7 +7,7 @@
     <div class="info-content">
       <div class="info-left">
         <div class="info sales">
-          <p>{{shop.cSellS}}</p>
+          <p>{{shop.cSellS|getSellCount}}</p>
           <p>总销量</p>
         </div>
         <div class="info all-goods">
@@ -39,14 +39,22 @@ export default {
       }
     }
   },
-  data() {
-    return {
+  filters: {
+    getSellCount(val) {
+      let result = val
+      if(val>10000) {
+        result = (val/10000).toFixed(1) + '万'
+      }
+      return result
     }
   }
 }
 </script>
 
 <style scoped>
+.detail-shop-info {
+  padding-bottom: 20px;
+}
 .info-title {
   margin: 80px 0 50px 30px;
   display: flex;
@@ -107,7 +115,7 @@ export default {
   background-color: #f13e3a;
 }
 .enter-shop {
-  width: 300px;
+  width: 500px;
   height: 100px;
   line-height: 100px;
   text-align: center;
