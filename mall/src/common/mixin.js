@@ -15,3 +15,21 @@ export const itemImgListenerMixin = {
     this.$bus.$on('itemImageLoad', this.itemImgListener)
   }
 }
+
+import backUp from 'components/content/backUp/backUp'
+export const backTopMixin = {
+  data() {
+    return {
+      isShowBackTop: false // 回到顶部图标是否显示
+    }
+  },
+  components: {
+    backUp
+  },
+  methods: {
+    // 点击回到顶部
+    backClick () {
+      this.$refs.scroll.scrollTo(0,0,500)
+    }
+  }
+}

@@ -34,7 +34,7 @@
 
 <style scoped>
   .param-info {
-    padding: 20px 15px;
+    margin: 20px 15px;
     font-size: 40px;
     border-bottom: 5px solid #f2f5f8;
   }

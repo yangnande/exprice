@@ -20,7 +20,6 @@ import navBar from 'components/common/navBar/navBar'
 import scroll from 'components/common/scroll/scroll'
 import tabControl from 'components/content/tabControl/tabControl'
 import goodsList from 'components/content/goods/goodsList'
-import backUp from 'components/content/backUp/backUp'
 
 import homeSwiper from './childComps/homeSwiper'
 import recommondView from './childComps/recommondView'
@@ -28,7 +27,7 @@ import featureView from './childComps/featureView'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 import {debounce} from 'common/util'
-import {itemImgListenerMixin} from 'common/mixin'
+import {itemImgListenerMixin,backTopMixin} from 'common/mixin'
 export default {
   name: 'home',
   components: {
@@ -38,8 +37,7 @@ export default {
     featureView,
     tabControl,
     goodsList,
-    scroll,
-    backUp
+    scroll
   },
   data () {
     return {
@@ -51,13 +49,12 @@ export default {
         'new': {page: 0,list: []},
         'sell': {page: 0,list: []}
       }, // 商品列表数据
-      isShowBackTop: false, // 回到顶部图标是否显示
       tabControlOffsetTop: 0,
       isFixed:false, // 是否是固定定位
       saveY: 0 // 记录离开页面滚动的距离
     }
   },
-  mixins: [itemImgListenerMixin],
+  mixins: [itemImgListenerMixin,backTopMixin],
   created () {
     this.getHomeMultidata()
   },
@@ -101,10 +98,6 @@ export default {
       }
       this.$refs.tabControl1.currentIndex = i
       this.$refs.tabControl2.currentIndex = i
-    },
-    // 点击回到顶部
-    backClick () {
-      this.$refs.scroll.scrollTo(0,0,500)
     },
     // 监听滚动距离
     contentScroll (position) {
@@ -157,7 +150,7 @@ export default {
   z-index: 88;
   color: #fff;
   background-color: #ff8198;
-  font-size: 38px;
+  font-size: 46px;
 }
 .content {
   position: absolute;

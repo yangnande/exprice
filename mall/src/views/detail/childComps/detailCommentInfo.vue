@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 .detail-comment-info {
-  padding: 0 30px;
+  margin: 0 30px 30px;
 }
 .title {
   display: flex;

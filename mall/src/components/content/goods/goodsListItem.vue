@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item" @click="goodJump">
-    <img :src="showImage" alt="" @load="imgLoad">
+    <img v-lazy="showImage" alt="" @load="imgLoad">
     <div class="goods-info">
       <p class="ellipse">{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .goods-list-item {
   width: 48%;
 }
