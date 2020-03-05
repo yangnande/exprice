@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    {{msg}}
+    {{msg}}
+    {{msg}}
+    {{name}}
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: '哈哈哈',
+          name: '乐乐'
+        }
+      }
+    })
+    // 1app.msg修改数据，vue内部是怎么监听数据发生改变的？- Object.defineProperty
+  var obj = {
+    msg: '哈哈哈',
+    name: '乐乐'
+  }
+  Object.keys(obj).forEach(key=>{
+    var val = obj[key]
+    Object.defineProperty(obj,key,{
+      set(newVal) {
+        console.log(val,'数据发生变化了')
+        //根据解析html代码，获取到谁用到了哪个属性
+        val= newVal
+        dep.notify()
+      },
+      get() {
+        console.log('获取到数据了')
+        return val
+      }
+    })
+  })
+
+    // 2当数据发生变化，vue是如何通知那些人，并进行页面刷新的-发布订阅者模式
+    // 发布者
+    class Dep {
+      constructor() {
+        // 存储所有订阅者
+        this.subs=[]
+      }
+      addsub(watcher) {
+        this.subs.push(watcher)
+      }
+      notify() {
+        this.subs.forEach(item => {
+          item.update()
+        })
+      }
+    }
+    // 订阅者
+    class Watcher {
+      constructor(name) {
+        this.name = name
+      }
+      update() {
+        console.log(this.name,'发生变化了')
+      }
+    }
+    const dep = new Dep()
+    const w1 = new Watcher('w1')
+    dep.addsub(w1)
+    const w2 = new Watcher('w2')
+    dep.addsub(w2)
+    const w3 = new Watcher('w3')
+    dep.addsub(w3)
+
+  </script>
+</body>
+</html>
