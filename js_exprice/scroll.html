@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    height: 3000px;
+    background-color: aquamarine;
+  }
+</style>
+<body>
+  <div class="box">
+
+  </div>
+  <script>
+    console.log(document.documentElement.clientHeight)
+    window.addEventListener('scroll',function() {
+      var box = document.getElementsByClassName('box')[0]
+      console.log(box.getBoundingClientRect())
+    })
+  </script> 
+</body>
+</html>

@@ -15,11 +15,17 @@
   }
 </style>
 <body>
-  <ul id="myLink">
+  <img src="../image/2.jpg" alt="">
+  <!-- <ul id="myLink">
     <li id="aa"><span>aaa</span></li>
     <li id="2">bbb</li>
     <li id="3">ccc</li>
   </ul>
+  <div class="box1">
+    <div class="box2">
+      <div class="box3">box3</div>
+    </div>
+  </div>
   <p>
     https://github.com/rohan-paul/Awesome-JavaScript-Interviews
     https://github.com/nieyafei/front-end-interview-js
@@ -70,7 +76,7 @@
     前端大厂面经大全集
     https://q.shanyue.tech/base/
     计算机基础面试题小计
-  </p>
+  </p> -->
   <script>
 
     // 1事件委托-方法一
@@ -107,11 +113,98 @@
     // })
 
     //2 冒泡
-    myLink.addEventListener('click',()=>alert('父亲'))
-    aa.addEventListener('click',e=>{
-      // e.stopPropagation()
-      alert('儿子')
-    })
+    // myLink.addEventListener('click',()=>alert('父亲'))
+    // aa.addEventListener('click',e=>{
+    //   // e.stopPropagation()
+    //   alert('儿子')
+    // })
+
+    // 3 阻止冒泡
+    // var box1 = document.getElementsByClassName('box1')[0]
+    // var box2 = document.getElementsByClassName('box2')[0]
+    // var box3 = document.getElementsByClassName('box3')[0]
+    // box1.onclick = function(event) {
+    //   console.log(event.target,event.currentTarget,'111')
+    //   if(event.target == event.currentTarget) {
+    //     console.log('box1')
+    //   }
+    // }
+    // box2.onclick = function(event) {
+    //   console.log(event.target,event.currentTarget,'222')
+    //   if(event.target == event.currentTarget) {
+    //     console.log('box2')
+    //   }
+    // }
+    // box3.onclick = function(event) {
+    //   console.log(event.target,event.currentTarget,'333')
+    //   if(event.target == event.currentTarget) {
+    //     console.log('box3')
+    //   }
+    // }
+    // 数组去重
+    var ary = [1, 2, 3, 3, 1, 2, 3, 1, 1, 2, 3, 2, 3]
+    // 方法一:对比当前项和除了当前项的后面所有项
+    // for(var i = 0;i<ary.length;i++){
+    //   // 1获取数组中的当前项
+    //   var item = ary[i]
+    //   // 2获取数组除了当前项的后面所有项
+    //   for(var j=i+1;j<ary.length;j++){
+    //     var lastItems = ary[j]
+    //     // 对比当前项和除了当前项的后面所有项，如果有重复的则删除
+    //     if(item == lastItems) {
+    //       ary.splice(j,1)
+    //       // splice删除导致数组塌陷，为防止，下标--
+    //       // j--
+    //     }
+    //   }
+    // }
+    // console.log(ary)
+    // 方法二:indexOf
+    // 创建一个新数组
+    // var newArr = []
+    // // 循环数组的每一项
+    // for(var i = 0;i<ary.length;i++){
+    //   var item = ary[i]
+    //   // 将数组的每一项添加进新数组，indexOf查询新数组中有没有重复的，有不添加，没有就添加
+    //   // if(newArr.indexOf(item) < 0) {
+    //   if(!newArr.includes(item)) {
+    //     newArr.push(item)
+    //   }
+    // }
+    // console.log(newArr)
+    // 方法三:利用对象的属性不能重复特点
+    // 创建一个空对象
+    // var obj = {}
+    // for(var i=0;i<ary.length;i++){
+    //   var item = ary[i]
+    //   // 给对象添加属性和对应的值，添加前，查看当前属性有无值，如果该属性是undefined,删除对应位置的值
+    //   if(obj[item] != undefined) {
+    //     // 基于splice实现删除性能不好：当前项被删除后，后面每一项的索引都要向前提一位，如果后面内容过多，一定影响性能
+    //     ary.splice(i,1)
+    //     i--
+    //   }
+    //   obj[item] = item
+    // }
+    // console.log(ary)
+    // 方法四：值得推荐的一个
+    // function unique(ary) {
+    //   var obj = {}
+    //   for(var i=0;i<ary.length;i++){
+    //     var item = ary[i]
+    //     // 给对象添加属性和对应的值，添加前，查看当前属性有无值，如果该属性是undefined,删除对应位置的值
+    //     if(obj[item] != undefined) {
+    //       // 把最后一项赋值给当前项
+    //       ary[i] = ary[ary.length-1]
+    //       // 最后一项删除
+    //       ary.length--
+    //       // 为了避免数组塌陷，当前位置下标--
+    //       i--
+    //     }
+    //     obj[item] = item
+    //   }
+    //   return ary
+    // }
+    // console.log(unique(ary))
   </script>
 </body>
 </html>
