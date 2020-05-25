@@ -78,7 +78,204 @@
     计算机基础面试题小计
   </p> -->
   <script>
-
+    // 对数组的属性first_word根据大小写字母排序，并且，组合数组
+    // var data = [
+    //   {
+    //     "name": "小米",
+    //     "sequence": 0,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/355152e0-45ec-46fc-9b5b-3bf617544d26.jpg",
+    //     "recommend": false,
+    //     "audit": 1,
+    //     "userStatus": 1,
+    //     "remark": "",
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "X",
+    //     "id": 15,
+    //     "addTime": "2020-05-13 10:23:02"
+    //   },
+    //   {
+    //     "name": "华为",
+    //     "sequence": 0,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/8bc7d6a1-5515-44c8-8e0b-e1b0b834af09.jpg",
+    //     "recommend": false,
+    //     "audit": 1,
+    //     "userStatus": 1,
+    //     "remark": "",
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "H",
+    //     "id": 16,
+    //     "addTime": "2020-05-13 10:23:45"
+    //   },
+    //   {
+    //     "name": "Apple(苹果)",
+    //     "sequence": 0,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/aca784fb-87de-413c-b1ae-b11b3f630883.jpg",
+    //     "recommend": false,
+    //     "audit": 1,
+    //     "userStatus": 1,
+    //     "remark": "",
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "A",
+    //     "id": 17,
+    //     "addTime": "2020-05-13 10:26:05"
+    //   },
+    //   {
+    //     "name": "华为",
+    //     "sequence": 0,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/135ea7f9-013e-46a8-9fbf-9b8f98969bc6.jpg",
+    //     "recommend": false,
+    //     "audit": 1,
+    //     "userStatus": 1,
+    //     "remark": "",
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "H",
+    //     "id": 18,
+    //     "addTime": "2020-05-15 11:32:34"
+    //   },
+    //   {
+    //     "name": "华硕",
+    //     "sequence": 2,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/efde8ef1-e6e8-437c-b3ad-c49de684d3bc.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "H",
+    //     "id": 3,
+    //     "addTime": "2013-12-24 09:51:57"
+    //   },
+    //   {
+    //     "name": "得峰",
+    //     "sequence": 6,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/a7da11fb-7d22-42e3-978a-69b833803219.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "D",
+    //     "id": 7,
+    //     "addTime": "2013-12-24 10:03:16"
+    //   },
+    //   {
+    //     "name": "戴尔",
+    //     "sequence": 7,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/257b0bbc-d07c-4d49-bcf0-5393a34d1299.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "D",
+    //     "id": 8,
+    //     "addTime": "2013-12-24 10:04:10"
+    //   },
+    //   {
+    //     "name": "三星",
+    //     "sequence": 8,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/0ffed031-864a-4e89-b7dc-05853ddfd599.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "S",
+    //     "id": 9,
+    //     "addTime": "2013-12-24 10:07:10"
+    //   },
+    //   {
+    //     "name": "索尼",
+    //     "sequence": 9,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/adb5dacd-def9-4b4e-a670-63265ee9129e.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "S",
+    //     "id": 10,
+    //     "addTime": "2013-12-24 10:07:30"
+    //   },
+    //   {
+    //     "name": "神州",
+    //     "sequence": 10,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/057ae5aa-4b79-4c99-9974-fc80ac1e4889.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "S",
+    //     "id": 11,
+    //     "addTime": "2013-12-24 10:09:05"
+    //   },
+    //   {
+    //     "name": "海尔",
+    //     "sequence": 11,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/60098b9f-b7d4-406d-95ee-8904d6b95ff5.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": true,
+    //     "weixin_shop_recommendTime": "2015-03-01 00:00:00",
+    //     "first_word": "H",
+    //     "id": 12,
+    //     "addTime": "2013-12-24 10:09:36"
+    //   },
+    //   {
+    //     "name": "机械革命",
+    //     "sequence": 12,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/b805bc9e-f799-4499-a934-a91ec15efd25.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "j",
+    //     "id": 13,
+    //     "addTime": "2013-12-24 10:10:22"
+    //   },
+    //   {
+    //     "name": "联想",
+    //     "sequence": 13,
+    //     "brandLogo": "http://shop.029-smart.com/upload/brand/2df181a9-df2f-429d-96f2-d3f9e81dfd5d.jpg",
+    //     "recommend": true,
+    //     "audit": 1,
+    //     "userStatus": 0,
+    //     "weixin_shop_recommend": false,
+    //     "first_word": "L",
+    //     "id": 14,
+    //     "addTime": "2013-12-24 10:15:17"
+    //   }
+    // ]
+    // var compare = (a,b) => {
+    //   //   var textA = a.first_word.toUpperCase();
+    //   // var textB = b.first_word.toUpperCase();
+    //   // return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    //   return a.first_word.localeCompare(b.first_word)
+    // }
+    // data.sort((a,b) => {
+    //   // var textA = a.first_word.toUpperCase();
+    //   // var textB = b.first_word.toUpperCase();
+    //   // return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    //   return a.first_word.localeCompare(b.first_word)
+    // })
+    // var newData = []
+    // let dataInfo = {};
+    // data.forEach((item, index) => {
+    //   let { first_word } = item;
+    //   if (!dataInfo[first_word]) {
+    //     dataInfo[first_word] = {
+    //       first_word,			
+    //       childArr: []
+    //     }
+    //   }
+    //   dataInfo[first_word].childArr.push(item);
+    // });
+    // // console.log(data,'data')
+    // console.log(dataInfo,'dataInfo')
+    // let list = Object.values(dataInfo); // list 转换成功的数据
+    // console.log(list)
     // 1事件委托-方法一
 
     // var fn = function (a,b,c) {
