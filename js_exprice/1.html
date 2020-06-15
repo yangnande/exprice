@@ -79,7 +79,7 @@
   </p> -->
   <script>
     // 对数组的属性first_word根据大小写字母排序，并且，组合数组
-    // var data = [
+    // var priviIdsArr = [
     //   {
     //     "name": "小米",
     //     "sequence": 0,
@@ -254,7 +254,7 @@
     //   // return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     //   return a.first_word.localeCompare(b.first_word)
     // }
-    // data.sort((a,b) => {
+    // priviIdsArr.sort((a,b) => {
     //   // var textA = a.first_word.toUpperCase();
     //   // var textB = b.first_word.toUpperCase();
     //   // return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -262,7 +262,7 @@
     // })
     // var newData = []
     // let dataInfo = {};
-    // data.forEach((item, index) => {
+    // priviIdsArr.forEach((item, index) => {
     //   let { first_word } = item;
     //   if (!dataInfo[first_word]) {
     //     dataInfo[first_word] = {
@@ -272,7 +272,7 @@
     //   }
     //   dataInfo[first_word].childArr.push(item);
     // });
-    // // console.log(data,'data')
+    // // console.log(priviIdsArr,'priviIdsArr')
     // console.log(dataInfo,'dataInfo')
     // let list = Object.values(dataInfo); // list 转换成功的数据
     // console.log(list)
@@ -402,6 +402,144 @@
     //   return ary
     // }
     // console.log(unique(ary))
+    var data =  [
+            {
+                "groupName": "基础信息",
+                "priviList": [
+                    {
+                        "priviId": "1",
+                        "priviCode": "JCXX",
+                        "priviName": "基础信息",
+                        "priviDesc": "获取用户基础信息接口",
+                        "priviFunc": "getUserInfo"
+                    },
+                    {
+                        "priviId": "2",
+                        "priviCode": "JCXX",
+                        "priviName": "基础信息",
+                        "priviDesc": "会话校验",
+                        "priviFunc": "checkSessionIsvalid"
+                    },
+                    {
+                        "priviId": "3",
+                        "priviCode": "JCXX",
+                        "priviName": "基础信息",
+                        "priviDesc": "获取用户登录状态",
+                        "priviFunc": "userStatus"
+                    },
+                    {
+                        "priviId": "87",
+                        "priviCode": "JCXX",
+                        "priviName": "基础信息",
+                        "priviDesc": "获取网络及运营商信息-6.3新增",
+                        "priviFunc": "getNetInfo"
+                    }
+                ]
+            },
+            {
+                "groupName": "基本操作",
+                "priviList": [
+                    {
+                        "priviId": "4",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "调用登录接口",
+                        "priviFunc": "showLogin"
+                    },
+                    {
+                        "priviId": "5",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "注销登录",
+                        "priviFunc": "quitLogin"
+                    },
+                    {
+                        "priviId": "6",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "超时接口",
+                        "priviFunc": "overTime"
+                    },
+                    {
+                        "priviId": "7",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "打开native功能页面",
+                        "priviFunc": "goNativePage"
+                    },
+                    {
+                        "priviId": "8",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "打开webview新页面",
+                        "priviFunc": "newWebview"
+                    },
+                    {
+                        "priviId": "9",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "关闭当前webview",
+                        "priviFunc": "closeCurrentWebView"
+                    },
+                    {
+                        "priviId": "10",
+                        "priviCode": "JBCZ",
+                        "priviName": "基本操作",
+                        "priviDesc": "关闭所有二级页面跳转至一级页面",
+                        "priviFunc": "backToRootView"
+                    }
+                ]
+            },
+            {
+                "groupName": "分享功能",
+                "priviList": [
+                    {
+                        "priviId": "11",
+                        "priviCode": "FXGN",
+                        "priviName": "分享功能",
+                        "priviDesc": "图片分享",
+                        "priviFunc": "imagesShare"
+                    },
+                    {
+                        "priviId": "12",
+                        "priviCode": "FXGN",
+                        "priviName": "分享功能",
+                        "priviDesc": "分享功能",
+                        "priviFunc": "shareMessage"
+                    },
+                    {
+                        "priviId": "13",
+                        "priviCode": "FXGN",
+                        "priviName": "分享功能",
+                        "priviDesc": "显示分享按钮设置分享内容",
+                        "priviFunc": "enableShared"
+                    },
+                    {
+                        "priviId": "14",
+                        "priviCode": "FXGN",
+                        "priviName": "分享功能",
+                        "priviDesc": "隐藏分享按钮-V5.1新增",
+                        "priviFunc": "hiddenShareButton"
+                    }
+                ]
+            },
+        ]
+    var priviIdsArr = []
+    data.forEach((v,i)=> {
+      priviIdsArr.push({priviIds:[]})
+      v.priviList.forEach(v=>{
+        priviIdsArr[i].priviIds.push(v.priviId)
+      })
+    })
+    console.log(priviIdsArr,'priviIdsArr')
+    // let dataInfo = {};
+    data.forEach((v,i)=> {
+      v.priviList.length=1
+      v.priviList[0].priviIds = priviIdsArr[i].priviIds
+    })
+    console.log(data,'data')
+    var a = "[{\n   \"sequence\" :2,\n   \"value\" :\"2GB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :15,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :3,\n   \"value\" :\"14.0英寸\",\n   \"specImage\" :\"http://www.sbnws.cn/upload/spec/972ffcce-3737-45e2-be64-3ab811c20b6f.jpg\",\n   \"spec\" :{\n      \"name\" :\"屏幕尺寸\",\n      \"sequence\" :7,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :32768,\n      \"addTime\" :\"2013-12-24 09:41:36\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :32771,\n   \"addTime\" :\"2020-05-09 16:43:47\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :6,\n   \"value\" :\"512MB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :19,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :10,\n   \"value\" :\"8GB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :23,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}]"
+    console.log(JSON.parse(a),'a')
   </script>
 </body>
 </html>
