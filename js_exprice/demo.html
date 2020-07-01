@@ -4,74 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .parent {
+      height: 60px;
+      background: pink;
+      text-align: center;
+    }
+    .son {
+      background: yellowgreen;
+    }
+  </style>
 </head>
 <body>
-  <div>
-    测试页面
+  <div class="parent">
+    <div class="son">222</div>
   </div>
-  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
-    goods_specs = [
-        {
-          "sequence": 2,
-          "value": "2GB",
-          "specImage": "",
-          "spec": {
-            "name": "显存容器",
-            "sequence": 6,
-            "type": "text",
-            "properties": ["512MB","6GB","8GB"],
-            "id": 2,
-            "addTime": "2013-12-24 08:59:56",
-            "deleteStatus": false
-          },
-          "id": 15,
-          "addTime": "2020-05-13 18:53:35",
-          "deleteStatus": false
-        },
-        {
-          "sequence": 2,
-          "value": "2GB",
-          "specImage": "",
-          "spec": {
-            "name": "显存容器",
-            "sequence": 6,
-            "type": "text",
-            "properties": ["5MB","60GB","80GB"],
-            "id": 2,
-            "addTime": "2013-12-24 08:59:56",
-            "deleteStatus": false
-          },
-          "id": 15,
-          "addTime": "2020-05-13 18:53:35",
-          "deleteStatus": false
-        }
-      ]
-   
-    // for(var i of goods_specs) {
-    //   let properties = i.spec.properties
-    //   i.spec.properties = []
-    //   for(var j in properties) {
-    //     i.spec.properties.push({
-    //       value: properties[j],
-    //       active: false
-    //     })
-    //   }
-    // }
-    goods_specs.forEach(v=>{
-      let properties = v.spec.properties
-      v.spec.properties = []
-      properties.forEach(val=>{
-        v.spec.properties.push({
-          value: val,
-          active: false
-        })
-      })
-    })
-    goods_specs.forEach(v => {
-      v.spec.properties[0].active=true
-    });
-    console.log(goods_specs)
+    
   </script>
 </body>
 </html>

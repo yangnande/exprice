@@ -9,6 +9,24 @@
 
 <body>
   <script>
+    // 面向对象的三个特点：封装，继承，多态
+    // 1 最基础的概念
+    // 构造函数
+    // function Cat(name) {
+    //   this.name = name
+    //   console.log(this.name)
+    // }
+    // 构造函数的原型对象
+    // Cat.prototype
+    // 创建实例guaiguai-通过Cat的构造函数
+    // var guaiguai = new Cat('guaiguai')
+    // 构造函数的静态方法 fn
+    // guaiguai.fn = function() {}
+    // 原型对象上的方法
+    // Cat.prototype.fn = function() {}
+    // console.log(guaiguai,'guaiguai')
+    // 2 语法糖：现有技术本可以实现，但是使用某种写法使代码看上去更简洁，比如 封装使用的class
+    
     // 1 ES6之前的封装
     // 都知道ES6的class实际就是一个语法糖，那么在ES6之前，是没有类这个概念的，因此是借助于原型对象和构造函数来实现。
     // 私有属性和方法：只能在构造函数内访问不能被外部所访问(在构造函数内使用var声明的属性)
@@ -55,8 +73,8 @@
     //   }
 
     // }
-    // // 添加静态属性，方法 在构造函数上也就是使用Cat.xxx定义的就是 
-    // // 应用 Promise.all()、Promise.race()、Object.assign()、Array.from()
+    // 添加静态属性，方法 在构造函数上也就是使用Cat.xxx定义的就是 
+    // 应用 Promise.all()、Promise.race()、Object.assign()、Array.from()
     // Cat.description = '我这个构造函数是用来生产出一只猫的'
     // Cat.actingCute = function () {
     //   console.log('一听到猫我就想到了它会卖萌')
@@ -72,7 +90,7 @@
     // // 静态属性，方法它们不能存在于乖乖这个实例上，所以打印出undefined。
     // console.log(guai.description,guai.actingCute) // undefined undefined
     // // 定义在原型对象prototype中的，属于公有方法(实例方法),不能使用构造函数访问
-    // console.log(guai.cleanTheBody) // undefined undefined
+    // console.log(Cat.cleanTheBody) // undefined undefined
     // // 定义在原型对象prototype中的，属于公有方法(实例方法)
     // console.log(guai.cleanTheBody()) // 我会用唾液清洁身体
 
@@ -103,16 +121,17 @@
     // }
     // var guai = new Cat('rabbit','white')
     // 使用for...in...能获取到实例对象自身的属性和原型链上的属性
-    // 使用Object.keys()和Object.getOwnPropertyNames()只能获取实例对象自身的属性
+    // 使用Object.keys()和Object.getOwnPropertyNames() 只能获取实例对象自身的属性
     // 可以通过.hasOwnProperty()方法传入属性名来判断一个属性是不是实例自身的属性
-
+    // for(var key in guai) {
+    //   // console.log(key)
     //   if(guai.hasOwnProperty(key)) {
     //     console.log('我是自有属性-' + key)
     //   } else {
     //     console.log('我不是自有属性-' + key)
     //   }
     // }
-    // console.log('-------------');
+    // // console.log('-------------');
     // console.log(Object.keys(guai));
     // console.log(Object.getOwnPropertyNames(guai));
 
@@ -185,14 +204,15 @@
     
     // 总结-构造函数
     // 现在在来回头看看那句话：
-    // 把客观事物封装成抽象的类，隐藏属性和方法，仅对外公开接口
+    // 含义:把客观事物封装成抽象的类，隐藏属性和方法，仅对外公开接口
     // 是不是好理解多了呢？
     // 然后让我们对构造函数配合原型对象封装来做一个总结吧：
     // (一) 私有属性、公有属性、静态属性概念：
+    // 私有属性和方法：只能在构造函数内访问不能被外部所访问(在构造函数内使用var声明的属性)，见题1.1
+    // 公有属性和方法(或实例方法)：对象外可以访问到对象内的属性和方法(在构造函数内使用this设置，或者设置在构造函数原型对象上比如Cat.prototype.xxx)，见题1.2
+    // 静态属性和方法：定义在构造函数上的方法(比如Cat.xxx)，不需要实例就可以调用(例如Object.assign())
 
-    // 私有属性和方法：只能在构造函数内访问不能被外部所访问(在构造函数内使用var声明的属性)，见题1.1公有属性和方法(或实例方法)：对象外可以访问到对象内的属性和方法(在构造函数内使用this设置，或者设置在构造函数原型对象上比如Cat.prototype.xxx)，见题1.2静态属性和方法：定义在构造函数上的方法(比如Cat.xxx)，不需要实例就可以调用(例如Object.assign())
     // (二) 实例对象上的属性和构造函数原型上的属性：
-
     // 定义在构造函数原型对象上的属性和方法虽然不能直接表现在实例对象上，但是实例对象却可以访问或者调用它们。(见题1.3)当访问一个对象的属性 / 方法时，它不仅仅在该对象上查找，还会查找该对象的原型，以及该对象的原型的原型，一层一层向上查找，直到找到一个名字匹配的属性 / 方法或到达原型链的末尾（null）。(见题1.7)
     // (三) 遍历实例对象属性的三种方法:
 
@@ -222,7 +242,7 @@
     // var guai = new Cat('rabbit', 'white')
     // console.log(guai,'guai') // Cat {name: "rabbit", color: "white", jump: ƒ}
     // console.log(guai.name,'guai') // rabbit 
-    // console.log(guai.heart,'guai') // undefined
+    // console.log(guai.heartBeat,'guai') // undefined
     // 2.2（弄懂在类中定义属性或方法的4种方式）
     // class Cat {  
     //   constructor () {
@@ -232,7 +252,7 @@
     //     this.name = 'guaiguai'    
     //     this.jump = function () {}  
     //   }
-    //   // 3 在class中使用=来定义一个属性和方法，效果与第二点相同，会被定义到实例上
+    //   // 3 在class中使用=来定义一个属性和方法，会被定义到实例上
     //   color = 'white' 
     //   // 定义一个函数呀，为什么cleanTheBody就可以在实例对象中，而hideTheShit是在原型对象中呢 ？ 
     //   // 在类的所有方法都定义在类的prototype属性上面。cleanTheBody只是一个普通的变量，只不过这个变量是个函数，所以它并不算是定义在类上的函数，因此不会存在于原型对象上。
@@ -287,7 +307,7 @@
     // // 静态属性
     // Cat.staticName = 'staticName'
 
-    // var guaiguai = new Cat('guaiguai', 'white')
+    // var guaiguai = new Cat('guaiguai', 'white') // ❤️跳
     // console.log(guaiguai) // Cat{name:'guaiguai',color:'white',jump:f,cleanTheBody:f}
     // guaiguai.jump() // Cat实例对象-Cat{name:'guaiguai',color:'white',jump:f,cleanTheBody:f}  我跳起来了~来追我啊
     // guaiguai.cleanTheBody() // 我会用唾液清洁身体
@@ -322,7 +342,8 @@
     // var type = 'window'
     // var guaiguai = new Cat()
     // guaiguai.getType()
-    // 2.6 坑三 class的本质是个函数吗？所以碰到class内有箭头函数的题目，把它当成构造函数创建对象来处理就可以了。在构造函数中如果使用了箭头函数的话，this指向的就是这个实例对象
+    // 2.6 不理解   坑三 class的本质是个函数吗？所以碰到class内有箭头函数的题目，把它当成构造函数创建对象来处理就可以了。
+    // 在构造函数中如果使用了箭头函数的话，this指向的就是这个实例对象
     // class Cat {  
     //     constructor () {    
     //         this.name = 'guaiguai'    
@@ -415,7 +436,9 @@
     // 在class中直接定义一个方法，会被添加到原型对象prototype上
     // 在class中使用了static修饰符定义的属性和方法被认为是静态的，被添加到类本身，不会添加到实例上
     // (三) other:
-    // class本质虽然是个函数，但是并不会像函数一样提升至作用域最顶层如遇class中箭头函数等题目请参照构造函数来处理使用class生成的实例对象，也会有沿着原型链查找的功能
+    // class本质虽然是个函数，但是并不会像函数一样提升至作用域最顶层
+    // 如遇class中箭头函数等题目请参照构造函数来处理
+    // 使用class生成的实例对象，也会有沿着原型链查找的功能
 
   </script>
 </body>

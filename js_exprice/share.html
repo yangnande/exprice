@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>h5页面实现微信分享</title>
+</head>
+<body>
+  <div class="test">
+    测试页面
+  </div>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <!-- <script type="text/javascript" src="../public/js/vconsole.min.js"></script> -->
+  <script>
+    // 注意本地没法测分享，必须经过部署进行测试
+    wxShare ()
+    function wxShare () {
+      // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+      if (typeof WeixinJSBridge === 'undefined') { // 安卓
+        if (document.addEventListener) {
+          document.addEventListener('WeixinJSBridgeReady', shareWxa.bind(this), false)
+        }
+      } else {  // ios
+        shareWxa()
+      }
+    }
+    function shareWxa () {
+      console.log(wx, 'wx')
+      var obj = {
+            img_url: 'https://flow.clientaccess.10086.cn/activity/flowRedactive/images/shareind.png',
+            link: 'https://flow.clientaccess.10086.cn/activity/flowRedactive/images/shareind.png',
+            img_width: "120",
+            img_height: "120",
+            //desc这个属性要加上，虽然不会显示，但是不加暂时会导致无法转发至朋友圈，
+            desc: '我是内容',
+            title: '我是标题'
+        }
+        // 分享到朋友圈
+        WeixinJSBridge.on("menu:share:timeline", function() {
+            WeixinJSBridge.invoke("shareTimeline", obj, function(res) {
+                WeixinJSBridge.log(res.err_msg)
+            });
+        })
+        // 分享给朋友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke("sendAppMessage", obj, function(res) {
+                WeixinJSBridge.log(res)
+            });
+        })
+    }
+  </script>
+</body>
+</html>

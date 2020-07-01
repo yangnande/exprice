@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 
+      a：link 代表未点击时
+      a：hover 代表鼠标悬浮在a标签上时
+      a：active 代表着点下去到松开之前
+      a：visited 代表着点击之后 visited在hover后面，这样的话hover事件就失效了
+    */
+
+    a {
+      font-size: 30px;
+    }
+    a:link {
+      color: blue;
+    }
+    a:visited { 
+      color: green;
+    }
+    a:hover {
+      color: pink;
+    }
+    a:active {
+      color: yellowgreen;
+    }
+    
+    /* a:hover{
+      color: green;
+      text-decoration: none;
+    }
+    a:visited{ 
+      color: red;
+      text-decoration: none;
+    }   */
+  </style>
+</head>
+<body>
+  <a href="#">111</a>
+  <script>
+    // 1实现mask函数将"123456"转为"##3456",只保留最后四个字符
+    // var a = "123456"
+    // var arr = []
+    // for(var k of a) {
+    //   arr.push(k)
+    // }
+    // arr.splice(0,2,'#','#')
+    // console.log(arr.join(''))
+    // es8 padStart
+    // console.log(a.length);
+    // console.log(a.slice(-4).padStart(a.length,'#')); // slice不改变原数组长度
+    // const mask = (str,maskChar='#') => {
+    //   if(!str && str.length<4) return str
+    //   return str.slice(-4).padStart(str.length,maskChar)
+    // }
+    // console.log(mask('1234'));
+    // 2实现一个isNaN
+    // const isNaN = v => v !== v
+    // console.log(isNaN(NaN));
+    
+  </script>
+</body>
+</html>
