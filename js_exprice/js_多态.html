@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>https://juejin.im/post/5e945a15f265da47d31231dd</title>
+</head>
+
+<body>
+  <script>
+    // 多态：同一操作作用于不同的对象上，可以产生不同的解释和不同的执行结果。
+    // 同一个方法makeSound确实是实现了传入不同类型的对象就产生不同效果的功能
+    // 每次需要多添加一种动物的时候，都需要去改公共的方法makeSound，并不停的往里面堆砌条件分支，这显然不是我想要的。因为我们知道修改代码总是危险的，特别是修改这种带有公共性质的方法，程序出错的可能性会增大。并且随着动物种类越来越多，我们的makeSound函数的代码也会越来越多。
+    // function makeSound (animal) {  
+    //   if (animal instanceof Cat) {    
+    //     console.log('喵喵喵～')  
+    //   } else if (animal instanceof Dog) {    
+    //     console.log('汪汪汪！')  
+    //   } else if (animal instanceof Pig) {   
+    //     console.log('啂妮妮')  
+    //   }
+    // }
+    // class Cat {}
+    // class Dog {}
+    // class Pig {}
+    // makeSound(new Cat()) // '喵喵喵～'
+    // makeSound(new Dog()) // '汪汪汪！'
+    // makeSound(new Pig()) // '啂妮妮'
+    // 2. 对象的多态性 多态-最根本的作用就是通过把过程化的条件语句转化为对象的多态性，从而消除这些条件分支语句
+    // 把"不变的事物"和"可能改变的事物"分离开来
+    // function makeSound (animal) {  
+    //   if (animal.sound instanceof Function) { 
+    //     // 判断是否有animal.sound且该属性为函数    
+    //     animal.sound()  
+    //   }
+    // }
+    // class Cat {  
+    //     sound () { 
+    //     console.log('喵喵喵～')  
+    // }
+    // }
+    // class Dog {
+    //      sound () {
+    //      console.log('汪汪汪！')  
+    // }
+    // }
+    // class Pig {
+    //      sound () {
+    //      console.log('啂妮妮')  
+    // }
+    // }
+    // makeSound(new Cat()) // '喵喵喵～'
+    // makeSound(new Dog()) // '汪汪汪！'
+    // makeSound(new Pig()) // '啂妮妮'
+    // 绝大多数设计模式的实现都离不开多态性的思想
+  </script>
+</body>
+
+</html>
