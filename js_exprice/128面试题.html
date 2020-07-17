@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>https://juejin.im/post/5eb55ceb6fb9a0436748297d 128题汇总(含超详细答案)</title>
+</head>
+<body>
+  <script>
+    // 1. DIV+CSS布局的好处
+      // 代码精简，且结构与样式分离，易于维护
+      // 代码量减少了，减少了大量的带宽，页面加载的也更快，提升了用户的体验
+      // 对SEO搜索引擎更加友好，且H5又新增了许多语义化标签更是如此
+      // 允许更多炫酷的页面效果，丰富了页面
+      // 符合W3C标准，保证网站不会因为网络应用的升级而被淘汰
+
+      // 缺点:
+      // 不同浏览器对web标准默认值不同，所以更容易出现对浏览器的兼容性问题。
+      // 2. 如何解决a标点击后hover事件失效的问题?
+      //   改变a标签css属性的排列顺序
+      //   只需要记住LoVe HAte原则就可以了：
+      //   link→visited→hover→active
+      //   复制代码比如下面错误的代码顺序：
+      //   a:hover{
+      //     color: green;
+      //     text-decoration: none;
+      //   }
+      //   a:visited{ /* visited在hover后面，这样的话hover事件就失效了 */
+      //     color: red;
+      //     text-decoration: none;
+      //   }
+      //   复制代码正确的做法是将两个事件的位置调整一下。
+      //   注意⚠️各个阶段的含义：
+      //   a:link：未访问时的样式，一般省略成a
+      //   a:visited：已经访问后的样式
+      //   a:hover：鼠标移上去时的样式
+      //   a:active：鼠标按下时的样式
+      //   3. 点击一个input依次触发的事件
+      //   const text = document.getElementById('text');
+      //   text.onclick = function (e) {
+      //     console.log('onclick')
+      //   }
+      //   text.onfocus = function (e) {
+      //     console.log('onfocus')
+      //   }
+      //   text.onmousedown = function (e) {
+      //     console.log('onmousedown')
+      //   }
+      //   text.onmouseenter = function (e) {
+      //     console.log('onmouseenter')
+      //   }
+      //   复制代码答案： 
+      //   'onmouseenter' 
+      //   'onmousedown'
+      //   'onfocus'
+      //   'onclick'
+      // 首先当某个鼠标按钮被点击时，触发 onmousedown 事件，然后，当鼠标按钮被松开时，会触发 onmouseup 事件，最后，当鼠标点击完成时，触发 onclick 事件。
+      // 4. 响应式的好处
+      // 对某些数据的修改就能自动更新视图，让开发者不用再去操作DOM，有更多的时间去思考业务逻辑。
+      // 5. Vue的优点及缺点
+      // 首先Vue最核心的两个特点，响应式和组件化。
+      // 响应式：这也就是vue.js最大的优点，通过MVVM思想实现数据的双向绑定，通过虚拟DOM让我们可以用数据来操作DOM，而不必去操作真实的DOM，提升了性能。且让开发者有更多的时间去思考业务逻辑。
+      // 组件化：把一个单页应用中的各个模块拆分到一个个组件当中，或者把一些公共的部分抽离出来做成一个可复用的组件。所以组件化带来的好处就是，提高了开发效率，方便重复使用，使项目的可维护性更强。
+      // 虚拟DOM，当然，这个不是vue中独有的。
+      // 缺点：基于对象配置文件的写法，也就是options写法，开发时不利于对一个属性的查找。另外一些缺点，在小项目中感觉不太出什么，vuex的魔法字符串，对ts的支持。兼容性上存在一些问题。
+      // 另外还有评论区掘友黎生提供的一些缺点：
+
+      // 不利于seo。
+      // 导航不可用，如果一定要导航需要自行实现前进、后退。（由于是单页面不能用浏览器的前进后退功能，所以需要自己建立堆栈管理）。
+      // 初次加载时耗时多。
+      // Vue中hash模式和history模式的区别
+      // 最明显的是在显示上，hash模式的URL中会夹杂着#号，而history没有。
+      // Vue底层对它们的实现方式不同。hash模式是依靠onhashchange事件(监听location.hash的改变)，而history模式是主要是依靠的HTML5 history中新增的两个方法，pushState()可以改变url地址且不会发送请求，replaceState()可以读取历史记录栈,还可以对浏览器记录进行修改。
+      // 当真正需要通过URL向后端发送HTTP请求的时候，比如常见的用户手动输入URL后回车，或者是刷新(重启)浏览器，这时候history模式需要后端的支持。因为history模式下，前端的URL必须和实际向后端发送请求的URL一致，例如有一个URL是带有路径path的(例如www.lindaidai.wang/blogs/id)，如果后端没有对这个路径做处理的话，就会返回404错误。所以需要后端增加一个覆盖所有情况的候选资源，一般会配合前端给出的一个404页面。
+
+      // hash:
+      // window.onhashchange = function(event){
+      // location.hash获取到的是包括#号的，如"#heading-3"
+      // 所以可以截取一下
+      // let hash = location.hash.slice(1);
+      // }
+      // 6 null和undefined的区别
+      // null表示一个"无"的对象，也就是该处不应该有值；而undefined表示未定义。
+      // 在转换为数字时结果不同，Number(null)为0，而undefined为NaN。
+
+      // 使用场景上：
+      // null：
+
+      // 作为函数的参数，表示该函数的参数不是对象
+      // 作为对象原型链的终点
+
+      // undefined:
+
+      // 变量被声明了，但没有赋值时，就等于undefined
+      // 调用函数时，应该提供的参数没有提供，该参数等于undefined
+      // 对象没有赋值属性，该属性的值为undefined
+      // 函数没有返回值时，默认返回undefined
+      // 7 冒泡排序算法和数组去重
+      // 冒泡排序：
+      // function bubbleSort (arr) {
+      //   for (let i = 0; i < arr.length; i++) {
+      //     let flag = true;
+      //     for (let j = 0; j < arr.length - i - 1; j++) {
+      //       if (arr[j] > arr[j + 1]) {
+      //         flag = false;
+      //         let temp = arr[j];
+      //         arr[j] = arr[j + 1];
+      //         arr[j + 1] = temp;
+      //       }
+      //     }
+      //     if (flag) break;
+      //   }
+      //   return arr;
+      // }
+      // 这个是优化过后的冒泡排序。用了一个flag来优化，它的意思是：如果某一次循环中没有交换过元素，那么意味着排序已经完成了。
+
+      // 冒泡排序总会执行(N-1)+(N-2)+(N-3)+..+2+1趟，但如果运行到当中某一趟时排序已经完成，或者输入的是一个有序数组，那么后边的比较就都是多余的，为了避免这种情况，我们增加一个flag，判断排序是否在中途就已经完成（也就是判断有无发生元素交换）
+
+      // 数组去重：
+
+      // Array.from(new Set(arr))
+      // [...new Set(arr)]
+      // for循环嵌套，利用splice去重
+      // 新建数组，利用indexOf或者includes去重
+      // 先用sort排序，然后用一个指针从第0位开始，配合while循环去重
+
+      // 当然还有很多，例如用filter、reduce、Map、Object等，具体可以看：
+      // JavaScript数组去重(12种方法)
+      // Array.from(new Set(arr))或[...new Set(arr)]
+      // var arr = [1,1,2,5,6,3,5,5,6,8,9,8];
+      // console.log(Array.from(new Set(arr)))
+      // // console.log([...new Set(arr)])
+      // 复制代码for循环嵌套，利用splice去重：
+      // function unique (origin) {
+      //   let arr = [].concat(origin);
+      //   for (let i = 0; i < arr.length; i++) {
+      //     for (let j = i + 1; j < arr.length; j++) {
+      //       if (arr[i] == arr[j]) {
+      //         arr.splice(j, 1);
+      //         j--;
+      //       }
+      //     }
+      //   }
+      //   return arr;
+      // }
+      // var arr = [1,1,2,5,6,3,5,5,6,8,9,8];
+      // console.log(unique(arr))
+      // 复制代码新建数组，利用includes去重:
+      // function unique (arr) {
+      //   let res = []
+      //   for (let i = 0; i < arr.length; i++) {
+      //     if (!res.includes(arr[i])) {
+      //       res.push(arr[i])
+      //     }
+      //   }
+      //   return res;
+      // }
+      // var arr = [1,1,2,5,6,3,5,5,6,8,9,8];
+      // console.log(unique(arr))
+      // 复制代码先用sort排序，然后用一个指针从第0位开始，配合while循环去重：
+      // function unique (arr) {
+      //   arr = arr.sort(); // 排序之后的数组
+      //   let pointer = 0;
+      //   while (arr[pointer]) {
+      //     if (arr[pointer] != arr[pointer + 1]) { // 若这一项和下一项不相等则指针往下移
+      //       pointer++;
+      //     } else { // 否则删除下一项
+      //       arr.splice(pointer + 1, 1);
+      //     }
+      //   }
+      //   return arr;
+      // }
+      // var arr = [1,1,2,5,6,3,5,5,6,8,9,8];
+      // console.log(unique(arr))
+
+  </script>
+</body>
+</html>

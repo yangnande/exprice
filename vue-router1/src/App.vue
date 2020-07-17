@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <div v-if="a==0">0</div>
+    <div v-else-if="a==1">1</div>
+    <div  v-else>2</div>
+    {{redInfo.remainingTimes}}
+    {{redInfo.actityCycle}}
+    <input type="text" />
+    <button @click="changeShow">变化</button>
     <!-- 1 路由中对应组件的跳转 默认有返回是pushState-->
     <router-link to="/home">首页</router-link>
     <button  @click="aboutClick">关于</button>
@@ -25,19 +32,29 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'App',
   data () {
     return {
-      userId: 'lele'
+      userId: 'lele',
+      a: '1'
     }
   },
   computed: {
+    ...mapState(['redInfo']),
     userIds: function () {
       return this.userId
     }
   },
   methods: {
+    changeShow () {
+      this.$store.commit('setRedInfo', { // 企业微信红包剩余次数和活动周期
+        remainingTimes: '1',
+        actityCycle: '月'
+      })
+      console.log(this.redInfo)
+    },
     homeClick () {
       // pushState 默认有历史，可返回
       // this.$router.push('/home')
