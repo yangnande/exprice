@@ -8,9 +8,66 @@
 <body>
   <script>
     // a = ?
-    if(a==1&&a==2&&a==3) {
-      console.log('条件成立');
-    }
+    // if(a==1&&a==2&&a==3) {
+    //   console.log('条件成立');
+    // }
+    // 数组去重
+    // 1.ES6 new Set();
+    // 2.对象Key值法
+    // 3.前后比对法 （涉及知识点，数组塌陷：操作数组时候，改变长度，而发生索引跳过某项数据的情况）
+    // 4.先排序，再前后比较法
+    // 算法：
+    // var arr1 = [12,8,24,16,1]
+    // 数组排序
+    // 1.ES5
+    // arr1.sort((a,b)=>a-b)
+    // 2 冒泡排序
+    // 原理：每一轮比较后，当前数组中最大的放至末尾
+    // 一轮一轮的比较，每一轮都从第一项开始，拿出当前项A和后一项B进行比较，如果A大于B，则两者交换位置
+    // 最大轮数 arr1.length-1
+    // 外层循环 比较 arr1.length-1轮，每一轮比较完后，将当前数组中最大的放至末尾
+    // 内层循环 每轮比较原则：前后比较，前边比后边大的，交换两个位置，不包含最后侧，不包含上一轮中最右侧的最大值
+    // var temp = ''
+    // console.log(arr1,'arr1')
+    // for(var i=0;i<arr1.length-1;i++) {
+    //   console.log(arr1,i,'i----')
+    //   for(var j= 0;j<arr1.length-i-1;j++) {
+    //     if(arr1[j]>arr1[j+1]) {
+    //       temp = arr1[j]
+    //       arr1[j] = arr1[j+1]
+    //       arr1[j+1] = temp
+    //     }
+    //     console.log(arr1,j,'j')
+    //   }
+    // }
+    // 3 快速排序-递归找中间项，比较左右拼接数组
+    // [12,8,24,16,1]
+      
+    // 4 插入排序
+    // function quick (ary) {
+    //   if(ary.length==1) return ary 
+    //   var valMid = Math.floor(ary.length/2)
+    //   var mid = ary.splice(valMid,1)[0]
+    //   var left = []
+    //   var right = []
+    //   for(var i = 0;i<ary.length-1;i++) {
+    //     if(ary[i]<=valMid) {
+    //       left.push(ary[i])
+    //     }else {
+    //       right.push(ary[i])
+    //     }
+    //   }
+    //   return quick(left).concat([valMid],quick(right))
+    // }
+    // quick(arr1)
+    // console.log(arr1,'arr1')                                               
+    // 数组扁平化
+    // var arr2 =[1,2,[5,2,[12,41]]]
+    // 1.ES6
+    // 2.字符串方式
+    // 3.通过some方法以及展开运算符来实现
+    // 斐波那契数列
+    // [1,1,2,3,5....]
   </script>
 </body>
 </html>

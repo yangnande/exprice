@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 300px;
+      /* background: pink; */
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // 1 call和apply的区别是什么，哪个性能更好
+        // a 从类和实例上来讲，call和apply都是function原型上的方法，而每一个函数作为function这个类的实例，所以说可以调取原型上的call和apply方法，
+        // b call和apply都是改变函数中this指向的，唯一的区别就是传给函数参数的时候，call是一个一个传参(序列)，而apply是要求把所有参数以数组的形式传给函数（数组） 
+        // c 还有一个相类似的方法，bind也是改变函数this指向的，只不过bind没有立即执行，而是预先处理改变this
+      // call和apply，如果传三个参数或三个参数以内，性能差不多，如果超过三个以上，则call的性能要好一些 （jquery源码在注释的时候写过call的性能要优于apply，建议后期开发的时候要使用call）
+      // 什么时候用apply
+      // let arr = [10, 20, 30],
+  　　// obj = { }
+  　　// function fn (x, y, z) { }
+  　　// fn.apply (obj, arr);
+  　　// fn.call (obj, ...arr);  // 基于 ES6 的展开运算符也可以实现把数组中的每一项一次传递给函数
+
+      // 自己实现性能测试（只供参考），任何代码性能测试都是和测试的环境有关系的，比如CPU,内存等电脑当前性能不会有相同的情况，不同的浏览器也会导致性能上的不同
+      // 循环10w次
+      // let t1 =new Date()
+      // console.time 可以测试出一段代码执行的时间
+      // console.profile()在火狐浏览器中安装firebug,可更精准的获取到程序每一个步骤所消耗的时间
+      // console.time('a')
+      // for(let i = 0;i<100000;i++){}
+      // console.log(new Date()-t1)
+      // console.timeEnd('a')
+
+    // 2 实现 (5).add(3).Minus(2),使其输出结果为6
+      // 考察类和实例以及在类的原型上构建方法并且能够实现链式写法的面向对象作为基础和核心的知识点
+      // arr.push() arr是Array的实例，可以调用Array.prototype上的方法，push就是其中一个，可以实例调用原型上的方法
+      // ~function() {
+      //   // 容错处理
+      //   function check (n){
+      //     n = Number(n)
+      //     return isNaN(N)?0:n
+      //   }
+      //   // 每个方法执行完，都要返回NUMBER这个类的实例，这样才可以继续调取NUMBER类原型中的方法（链式写法）
+      //   // 想实现链式写法，就让当前方法执行完的返回结果还是当前类的实例。这样就可以调其他方法了
+      //   function add(n) {
+      //     n = check(n)
+      //     return this+n
+      //   }
+      //   function Minus(n) {
+      //     n = check(n)
+      //     return this-n
+      //   }
+        // Number.prototype.add = add
+        // Number.prototype.Minus = Minus
+        // ['add','Minus'].forEach(item=>{
+        //   // eval把字符串转换成js表达式 
+        //    // jquery源码这么写
+        //   Number.prototype.item = eval(item)
+        // })
+      // }()
+      // (5).Add() 5.fn一般变量是不可能单纯是一个纯数字的，一般要用()包起来
+      // 以后想实现链式写法或实例调取一个方法，只需要把方法放在当前实例所属类的原型上，不管是内置的还是自定义的，都是这么来的
+      // 表达式&& 和||
+      // var a=new Object(),b=0,c=Number.NaN,d=1,e="Hello"; 
+      // alert(a || b && c || d && e);  1 表达式从左往右执行，先&&后|| 2 在js中&&运算符优先级大于||
+
+
+    // 3箭头函数与普通函数(function)的区别是什么?构造函数(function)可使用new生成实例，那么箭头函数可以吗?为什么?
+        // 箭头函数与普通函数(function)的区别
+          //  1 箭头函数语法上比普通函数更简洁(ES6中的每一种函数都可以使用形参赋默认值和剩余运算符)
+          //  2 箭头函数没有自己的THIS，它里面的THIS是继承函数所处的上下文中的THIS(使用call，apply等任何方式都无法改变THIS的指向)
+          //  3 箭头函数中没有arguments(类数组),只能基于...arg获取传递的参数集合(获取到的是数组)
+          //  4 箭头函数不能被new执行(因为:箭头函数没有prototype)
+      
+      // 箭头函数不可以应用的场景-dom的点击事件
+      // document.body.onclick=()=>{
+      //   console.log(this) // window而不是body
+      // }
+      // arr.sort(function() {
+      //   console.log(this,'普通函数') // 函数作为参数传递，在非严格条件，this指向window
+      // })
+      
+      // 箭头函数可以应用的场景
+      // document.body.onclick=function(){
+      //   console.log(this,'1') // 指向body
+      //   arr.sort(function() {
+      //     console.log(this,'2') // 函数作为参数传递，在非严格条件，this指向window
+      //   })
+      // }
+      // document.body.onclick=function(){
+      //   console.log(this,'1') // 指向body
+      //   arr.sort(()=> {
+      //     console.log(this,'2') // 指向body
+      //   })
+      // }
+      // 回调函数：把一个函数b作为实参传递给函数a,函数a在执行的时候，可以把传递进来的函数b去执行（执行n次，可传值，可改变this）
+      // function each(arr,callback) {
+      //   for(var i = 0;i<arr.length;i++) {
+      //     var flag = callback.call(arr,arr[i],i)
+      //     console.log(i)
+      //     // 接受回调函数返回的结果，如果是false,结束循环
+      //     if(flag===false) {
+      //       break
+      //     }
+      //   }
+      // }
+      // each([10,20,30,40],function(item,i) {
+      //   console.log(this) // this指向原始数组arr
+      //   if(i>1) {
+      //     return false
+      //   }
+      // })
+      // 3-1
+      // let fn = ()=> {
+      //   // console.log(arguments)// Uncaught ReferenceError: arguments is not defined
+      // }
+      // fn(10,20,30)
+      // let fn = (...ary)=> {
+      //   console.log(ary) // [10, 20, 30]
+      // }
+      // fn(10,20,30)
+      // 4-1
+      // function Fn() {
+      //   this.x = 100
+      // }
+      // Fn.prototype.getX = function() {}
+      // var fn1 = new Fn()
+      // var Fn = ()=> {
+      //   this.x = 100
+      // }
+      // var fn1 = new Fn() // Uncaught TypeError: Fn is not a constructor
+      // 箭头函数没有prototype，创建出来的实例，不能找到实例上的原型，也没有protype所对应的constructor函数，所以导致不能new
+      
+      // 思考题-1 each
+      // let arr = [10,20,30,'AA',40],
+      //     obj = {};
+      // arr = arr.each(function(item,index){
+        // this有参数则是obj，没有参数是window即可
+      //   if(isNaN(item)) {
+      //     return false // 
+      //   }
+      // 
+      //   return item * 10 // 返回的结果是啥，就把当前项替换成啥
+      // },obj)
+      // 思考题-2 replace 重写这个方法，实现和内置一摸一样的效果（只需要考虑replace([REG],[CALLBACK])）这种传参格式的处理)
+      // let str = 'zhufeng2019zhufeng2'
+      // str = str.replace(/zhufeng/g,function(...arg){
+      //   // arg存储了每一次大正则匹配的信息和小分组匹配的信息
+      //   return '@' // 返回的是把当前正则匹配的内容替换成啥
+      // })
+    // 4 如何把一个字符串的大小写取反(大写变小写，小写变大写),例如'aBc'变成'AbC'
+      // let str = 'zhufengPEIxun的周老师很好，HAHA'
+      // console.log(str,'改变前')
+      // str = str.replace(/[a-zA-Z]/g,content=>{
+        // console.log(content) // content验证每一次正则匹配的结果
+        // 判断是否是大小写，方法一通过将字母转化成大写，如果和以前的一样，说明是大写，否则是小写；方法二通过ASCII表中找到大写字母的取值范围(65-90)
+        // return content.toUpperCase() === content ? content.toLowerCase() : content.toUpperCase()
+        // if(content.toUpperCase() === content) {
+        //   return content.toLowerCase()
+        // }else{
+        //   return content.toUpperCase()
+        // }
+        // return content.charCodeAt()>=65&&content.charCodeAt()<=90  ? content.toLowerCase() : content.toUpperCase()
+      // })
+      // console.log(str,'改变后')
+    // 5 实现一个字符串匹配算法，从字符串S中，查找是否存在字符串T，如果存在返回所在位置，如果不存在，返回-1（如果不能基于indexOf/includes）等内置方法，如何实现)
+      // ~function () {
+        
+        /*
+        * low的方法
+        * 思路：通过循环的方法，获取当前字符串，截取当前字符串位置到T.length长度的字符串，然后比较截取的字符串和字符串T是否相等，如果相等，返回字符串所在位置，如果不相等，返回-1
+        */
+        // function myIndexOf(t){
+        //   var res = -1
+        //   var tLen = t.length
+        //   var sLen = this.length
+        //   if(tLen>sLen) {
+        //     return -1
+        //   }
+        //   for(var i = 0;i<=sLen-tLen;i++) {
+        //     let str = this.substr(i,tLen)
+        //     if(str === t) {
+        //       res = i
+        //       break
+        //     }
+        //   }
+        //   return res
+        // }
+        // 好的方法，正则处理 正则中两个斜杠里边的内容都叫元字符
+        // function myIndexOf(t){
+        //   var tLen = t.length
+        //   var sLen = this.length
+        //   if(tLen>sLen) {
+        //     return -1
+        //   }
+        //   var reg = new RegExp(t)
+        //   var res = reg.exec(this)
+        //   return res != null ? res.index : -1
+        // }
+        // String.prototype.myIndexOf=myIndexOf
+        // let S = 'zhufengpeixun',
+        //   T = 'pei';
+        // var result = S.myIndexOf(T)
+        // console.log(result)
+      // }()
+      
+
+    // 6 输出下面代码运行结果
+      //  6.1
+      // var a = {},b='123',c=123
+      // a[b] = 'b'
+      // a[c] = 'c'
+      // console.log(a[b]) // c 因为a['123']===a[123]
+      //  6.2
+      // var a = {},b=Symbol('123'),c=Symbol('123')
+      // a[b] = 'b'
+      // a[c] = 'c'
+      // console.log(a[b]) // b Symbol是es6新增的数据类型，它创建的值是唯一值(Symbol('123')===Symbol('123') false)，typeof Symbol('123') = 'Symbol'
+      //  6.3
+      // var a = {},b={key:'123'},c={key:'456'}
+      // a[b] = 'b'
+      // a[c] = 'c'
+      // console.log(a[b]) // c
+      // 一个对象的属性名能是对象吗？不能（遇到对象属性名会默认转换成字符串）obj和数组举例
+      // 普通对象.toString()调取的是Object.prototype或Array.prototype上的方法（这个方法是用来检测数据类型的）
+      // var arr = [1,2] 
+      // a[arr] = 'b' // {'a,b':b} [1,2].toString()
+      // var obj = {key:'123'}
+      // a[obj] = 'b' // / {'[object object]':b} {key:'123'}.toString()
+    // 7 在输入框中如何判断输入的是一个正确的网址，例如，用户输入一个字符串，验证是否符合URL网址的格式
+        // 1协议://  http/https/ftp
+        // 2域名
+        // www.zhufeng.cn
+        // zhufeng.cn
+        // kbs.sports.qq.com
+        // kbs.sports.qq.com.cn
+        // 3请求路径
+        //  /
+        //  /index.html
+        //  /stu/index.html
+        //  /stu
+        // 4问号传参
+        // ?xxx=xxx&xxx=xxx
+        // 5哈希值
+        // #xxx
+        // ? 可有可无，匹配前面的子表达式零次或一次。? 等价于 {0,1}。
+        // i 忽略大小写匹配默认都会转成小写
+        // \w 匹配包括下划线的任何单词字符。等价于’[A-Za-z0-9_]’(数字字母下划线)。
+        // [^/?#]不包含/?#这几种开头的
+        // * 匹配前面的子表达式零次或多次。 
+        // .+除了\n以外的任意字符
+        // let reg = /^(?:(http|https|ftp):\/\/)?((?:[\w-]+\.)+[a-z0-9]+)((?:\/[^/?#]*)+)?(\?[^#]+)?(#.+)?$/i;
+        // let url = 'https://www.zhufengpeixun.cn?lx=111&lss=222#ddd'
+        // console.log(reg.exec(url));
+    // 8 
+        // function Foo () {
+        //   Foo.a = function() {
+        //     console.log(1)
+        //   }
+        //   this.a = function() {
+        //     console.log(2)
+        //   }
+        // }
+        // // 把Foo当做类，在原型上设置实例公有的属性和方法
+        // Foo.prototype.a = function() {
+        //   console.log(3)
+        // }
+        // // 把Foo当成普通对象设置私有的属性和方法
+        // Foo.a = function() {
+        //   console.log(4)
+        // }
+        // Foo.a(); // 4
+        // let obj = new Foo() // 把Foo.a=1
+        // obj.a() // 2 私有属性里有a方法，所以不用公有的方法
+        // Foo.a() // 1
+        // jQuery.prototype = {} // 调用$().xxx 实例上调用
+        // jQuery.xxx = {} // 当成普通对象 调用$.xxx 
+  </script>
+</body>
+</html>
