@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+    <a v-bind:[someAttr]="someAttr"> aaaaaaaaa </a>
     <div v-if="a==0">0</div>
     <div v-else-if="a==1">1</div>
     <div  v-else>2</div>
@@ -38,7 +40,9 @@ export default {
   data () {
     return {
       userId: 'lele',
-      a: '1'
+      a: '1',
+      isButtonDisabled: true,
+      someAttr: 'bar'
     }
   },
   computed: {
