@@ -6,13 +6,38 @@
   <title>Document</title>
   <style>
     body {
-      height: 300px;
+      /* height: 300px; */
       /* background: pink; */
+    }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .imgBox {
+      margin: 1000px auto;
+      width: 800px;
+      height: 160px;
+      overflow: hidden;
+      background: #bbb;
+    }
+    .imgBox img {
+      width: 100%;
+      /* min-height: 100%; */
     }
   </style>
 </head>
 <body>
+  <div class="imgBox">
+    <img src="" data-img="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596109576096&di=d4845d6da3d87b17e245a523a33808a8&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" alt="">
+  </div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
+    let $imgBox = $('.imgBox')
+    let $img = $('.imgBox').children('img')
+    // jquery中的事件支持多事件绑定:window.onload & window.scroll两个事件触发执行相同的操作
+    $(window).on('load scroll',function() {
+      console.log('ok')
+    })
     // 1 call和apply的区别是什么，哪个性能更好
         // a 从类和实例上来讲，call和apply都是function原型上的方法，而每一个函数作为function这个类的实例，所以说可以调取原型上的call和apply方法，
         // b call和apply都是改变函数中this指向的，唯一的区别就是传给函数参数的时候，call是一个一个传参(序列)，而apply是要求把所有参数以数组的形式传给函数（数组） 
@@ -284,7 +309,15 @@
         // Foo.a() // 1
         // jQuery.prototype = {} // 调用$().xxx 实例上调用
         // jQuery.xxx = {} // 当成普通对象 调用$.xxx 
-    // 9
+    // 9 编写代码实现图片的懒加载
+        // 1 前端性能优化的重要方案
+            // 通过图片或数据的延迟加载，我们可以加快页面渲染的速度，让第一次打开页面非常快
+            // 只有滑动到某个区域，我们才加载真实的图片，这样也可以节省加载的流量
+        // 2 处理方案
+            // 把所有需要延迟加载的图片用一个盒子包起来，设置宽高和默认占位图
+            // 开始让IMG的src为空，把真实的地址放到IMG的自定义属性上，让IMG隐藏
+            // 等到所有其它资源加载完后，开始加载图片
+            // 对于很多图片，需要页面滚动的时候，当前图片区域完全显示出来后在加载真实图片
         
   </script>
 </body>
