@@ -14,30 +14,32 @@
       margin: 0;
     }
     .imgBox {
-      margin: 1000px auto;
+      /* margin: 1000px auto; */
+      margin-bottom: 20px;
       width: 800px;
       height: 160px;
-      overflow: hidden;
+      /* overflow: hidden; */
       background: #bbb;
     }
     .imgBox img {
       width: 100%;
+      display: none;
+      height: 160px;
       /* min-height: 100%; */
     }
   </style>
 </head>
 <body>
-  <div class="imgBox">
-    <img src="" data-img="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596109576096&di=d4845d6da3d87b17e245a523a33808a8&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" alt="">
-  </div>
+  <div class="box container"></div>
+  <div myIn='1'></div>
+  <div myIn='2'></div>
+  <div myIn='1'></div>
+  <!-- <div class="imgBox">
+    <img src="" data-img="http://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596109576096&di=d4845d6da3d87b17e245a523a33808a8&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" alt="">
+  </div> -->
   <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
-    let $imgBox = $('.imgBox')
-    let $img = $('.imgBox').children('img')
-    // jquery中的事件支持多事件绑定:window.onload & window.scroll两个事件触发执行相同的操作
-    $(window).on('load scroll',function() {
-      console.log('ok')
-    })
+    
     // 1 call和apply的区别是什么，哪个性能更好
         // a 从类和实例上来讲，call和apply都是function原型上的方法，而每一个函数作为function这个类的实例，所以说可以调取原型上的call和apply方法，
         // b call和apply都是改变函数中this指向的，唯一的区别就是传给函数参数的时候，call是一个一个传参(序列)，而apply是要求把所有参数以数组的形式传给函数（数组） 
@@ -318,7 +320,102 @@
             // 开始让IMG的src为空，把真实的地址放到IMG的自定义属性上，让IMG隐藏
             // 等到所有其它资源加载完后，开始加载图片
             // 对于很多图片，需要页面滚动的时候，当前图片区域完全显示出来后在加载真实图片
-        
+      // 10 应用
+            // let $imgBox = $('.imgBox'),
+            //     $img = $('.imgBox').children('img'),
+            //     $window = $(window)
+            //   // jquery中的事件支持多事件绑定:window.onload & window.scroll两个事件触发执行相同的操作
+            //   $(window).on('load scroll',function() {
+            //     if($img.attr('isLoad')==='true') {
+            //       return
+            //     }
+            //     let $A = $imgBox.outerHeight() + $imgBox.offset().top,
+            //         $B = $window.outerHeight() + $window.scrollTop(),
+            //         srcVal = $img.attr('data-img')
+            //     // console.log($A,$B,'ok')
+            //     // A图片底边距离页面顶部的偏移=A图片的高度 + A图片距离body的上偏移
+            //     // B浏览器底边距离页面顶部的偏移=B浏览器一屏的高度（可视区域的高度）+ 滚动条卷去的距离
+            //     // A<=B时，图片区域完全出现在视野中，可加载真实的图片
+            //     if($A<=$B) {
+            //       console.log($img,'$img')
+            //       $img.attr('src',srcVal)
+            //       $img.on('load',function() {
+            //         // $img.css('display','block')
+            //         // $img.stop().fadeIn()
+            //       })
+            //       $img.attr('isLoad',true) // 自定义属性存储的值都是字符串
+            //     }
+            //   })
+              // 造假数据
+            //   let str = '',
+            //       $container = $('.container')
+            //   new Array(20).fill(null).forEach(item => {
+            //     str += `
+            //     <div class="imgBox"> <img src="" data-img="http://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596109576096&di=d4845d6da3d87b17e245a523a33808a8&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg" alt="">
+            //     </div>
+            //     `
+            //   })
+            //   $container.html(str)
+            //   // 多张图片的延迟加载
+            //   let $imgBox = $container.children('.imgBox'),
+            //       $window = $(window),
+            //       $img = $imgBox.children('img')
+            //       console.log($img,'$imgBox')
+            //   $window.on('load scroll', function() {
+            //     let $B = $window.outerHeight() + $window.scrollTop()
+            //     $imgBox.each((index,item) => {
+            //       let $item = $(item).children('img')
+            //       let $A = $(item).outerHeight() + $(item).offset().top
+            //       // console.log($item,$A,$B,$A<=$B,'$A')
+            //       if($A<=$B && $item.attr('isLoad')!=='true') {
+            //         $item.attr('src',$img.attr('data-img'))
+            //         $item.on('load',function() {
+            //           setTimeout(function(){
+            //             $item.stop().fadeIn()
+            //           },1000)
+            //         })
+            //         $item.attr('isLoad',true)
+            //       }
+            //     }) 
+            //   })
+      // 11 编写一条正则，用来验证此规则，一个6-16位的字符串，必须同时包含大小写字母和数字
+          // 正向预查和负向预查
+            // 正向预查(?=pattern) 要匹配的字符串，必须满足pattern这个条件
+            // 负向预查(?!pattern) 要匹配的字符串，必须不满足pattern这个条件
+          //  var reg = /(?!^[a-zA-Z]+$)(?!^[a-z0-9]+$)(?!^[0-9]+$)(?!^[A-Z0-9]+$)^[a-zA-z0-9]{6,16}$/
+          // var reg = /(?=[a-z]+)(?=[A-Z]+)(?=[0-9]+)^[a-zA-z0-9]{6,16}$/
+          //  var result = reg.test('aaaA1115')
+          //  console.log(result,'result')
+          // 拓展
+          // 1-10位：数字，字母，下划线组成字符串，必须有_
+          // var reg = /(?=_)\w{1,10}/
+          // var result = reg.test('_')
+          // console.log(result,'result')
+      // 12 实现一个$attr(name,value)遍历 属性为name,值为value的元素集合 如下面示例
+          // let ary = $attr('class','box') // 实现页面所有class为box的元素
+          // let ary = $attr('class','box') // 实现页面所有class为box的元素
+          // var reg = /\bval\b/ // 单词的分界处 匹配整个单词
+          // function $attr(property,val) {
+          //   var arr = []
+          //   var eles = Array.from(document.getElementsByTagName('*'))
+          //   eles.forEach(item => {
+          //     // 获取property对应的val值
+          //     let itemValue = item.getAttribute(property)
+          //     // 样式类属性名要做特殊处理
+          //     if(property === "class") {
+          //       new RegExp("\\b"+val+"\\b").test(itemValue) ? arr.push(item) : null
+          //       return
+          //     }
+          //     // 值校验成功，就能得到想要的元素
+          //     if(itemValue==val) {
+          //       arr.push(item)
+          //     }
+          //   });
+          //   console.log(arr)
+          //   return arr
+          // }
+          // $attr('class','container')
+      // 13 
   </script>
 </body>
 </html>
