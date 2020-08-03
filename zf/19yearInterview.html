@@ -394,7 +394,7 @@
       // 12 实现一个$attr(name,value)遍历 属性为name,值为value的元素集合 如下面示例
           // let ary = $attr('class','box') // 实现页面所有class为box的元素
           // let ary = $attr('class','box') // 实现页面所有class为box的元素
-          // var reg = /\bval\b/ // 单词的分界处 匹配整个单词
+          //  正则：var reg = /\bval\b/ // 单词的分界处 匹配整个单词
           // function $attr(property,val) {
           //   var arr = []
           //   var eles = Array.from(document.getElementsByTagName('*'))
@@ -415,7 +415,23 @@
           //   return arr
           // }
           // $attr('class','container')
-      // 13 
+      // 13 英文字母汉字组成的字符串，用正则给英文单词前后加空格
+          // 正则：replace 用一些字符替换另一些字符
+          // let str = "no作No死，你能你can，不能no比比"
+          // let reg = /\b[a-z]+\b/ig
+          // str = str.replace(reg,value=> {
+          //   // console.log(value)
+          //   return " " + value + " "
+          // }).trim() 
+          // // trim/trimLeft/trimRight 去除首尾/左边/右边字符串
+          // console.log(str)
+      // 14 编写一个程序，将数组扁平化，并去除其中重复部分的数据，最终得到一个升序且不重复的数组
+          let arr = [[1,2,2],[3,4,5,5],[6,7,8,9,[11,12,[12,13,[14]]]],10]
+          // 方法一 es6 flat
+            // arr = arr.flat(Infinity) // 按照一个可指定的深度递归遍历数组，并将数组中的元素和递归遍历的子数组的元素合并，形成一个新的数组
+            // new Set去重，也可以自己写方法去重
+            // arr = [...new Set(arr)].sort((a,b)=>a-b)
+            // console.log(arr)
   </script>
 </body>
 </html>
