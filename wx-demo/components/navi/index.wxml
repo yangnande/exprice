@@ -1,0 +1,5 @@
+<view class="container">
+  <image class="nav-icon nav-left" src="{{last?disLeftSrc:highLeftSrc}}" />
+  <text class="title">{{title}}</text>
+  <image class="nav-icon nav-right" src="{{first?disRightSrc:highRightSrc}}" />  
+</view>

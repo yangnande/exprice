@@ -27,9 +27,15 @@ Component({
       let like = this.properties.like
       let count = this.properties.count
       this.setData({
-        like: !like,
-        count: like? ++count : --count
+        like: !this.properties.like,
+        count: this.properties.like? --count  :  ++count
       })
+      // 确定是点赞还是取消
+      let behavior = this.properties.like ? 'like' : 'cancel'
+      // 激活自定义事件
+      this.triggerEvent('like',{
+        behavior:behavior
+      },{})
     }
   }
 })

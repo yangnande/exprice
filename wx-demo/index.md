@@ -37,4 +37,20 @@ font-family: "PingFangSC-Thin"
 12json中引入组件可以使用绝对路径，import不能使用绝对路径
 解决：使用相对路径
 13组件的两个特点 复用性和分离性（这个很重要，分离性可以让组件更灵活）
-13小程序中以4开头的状态码，不会走fail，而走success
+14小程序中以4开头的状态码，不会走fail，而走success
+15组件内属性赋值，页面渲染
+父组件获取到数据-通过属性赋值  
+子组件property里的数据，可以接收父组件属性传过来的值，然后渲染页面
+16setData，小程序修改数据或新增数据的方法（页面内的data和组件内的data和property,可直接在页面中渲染）
+17父元素设置display:flex，设置水平居中，如果文字长短不定，可以通过设置max-width:来解决水平不居中的问题。 
+18自定义事件使用场景，多个场景使用一个组件，组件内的事件要使用自定义事件。
+19data和property的奇怪现象
+data：不能定义val的类型 打印出来是对于类型的函数 property：能定义val的类型 小程序有相应的处理 打印出来的是默认val
+data和property不能定义相同类型的val property会覆盖data的val （小程序内部的处理）
+20observer监听 不能方法内部修改自身属性val 否则会造成内存泄露
+21 多个behavior和component里都有property的变量 component优先级高；
+多个behavior都有property的变量 最后一个behavior优先级高；
+多个behavior和component里都有生命周期方法 每个都会调用生命周期方法
+23 移动端触屏按键的区域尽可能大比实际图大一些，提高用户体验感
+24 flex必要时，设置宽度为100%
+25 组件内公共的部分，可以通过behavior来实现

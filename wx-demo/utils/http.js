@@ -20,7 +20,7 @@ class HTTP {
       success: res => {
         let code = res.statusCode.toString()
         if(code.startsWith('2')) {
-          params.success(res)
+          params.success&&params.success(res)
         }else{
           this._show_error(code)
         }
@@ -29,6 +29,7 @@ class HTTP {
         this._show_error(err.error_code)
       }
     })
+    // 剥夺了函数return的能力 因为res是通过异步的方法获取
   }
   // _开头代表是私有方法，外部环境不能调用
   _show_error(code) {

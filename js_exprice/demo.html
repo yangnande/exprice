@@ -20,12 +20,21 @@
   <div class="parent">
     <div class="son">222</div>
   </div>
+  <script src="../public/js/jquery-1.12.1.min.js"></script>
   <script>
     // 字面量对象中普通函数与箭头函数的区别: 只有一层函数的题目
     // 字面量对象中普通函数与箭头函数的区别：函数嵌套的题目
     // 构造函数对象中普通函数和箭头函数的区别：只有一层函数的题目
     // 构造函数对象中普通函数和箭头函数的区别：函数嵌套的题目
-
+    $.ajax({
+        type: "get",
+        url: "http://111.20.119.234:9080/39b1eee041.txt",
+        dataType: "jsonp"
+    }).done(function (data) {
+      console.log(data)
+        // $("#one").html(data.replace(/\r\n/ig, '</br>'));//替换回车行成换行符
+        //console.log(data.replace(/\r\n/ig,'</br>'));
+    });
 
 
 

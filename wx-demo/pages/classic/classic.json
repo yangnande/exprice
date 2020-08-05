@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "v-like": "/components/like/index"
+    "v-like": "/components/like/index",
+    "v-navi": "/components/navi/index",
+    "v-move": "/components/classic/move/index",
+    "v-epsoide": "/components/classic/epsoide/index"
   }
 }

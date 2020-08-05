@@ -1,0 +1,6 @@
+<view class="classic-container">
+  <image src="{{img}}"/>
+  <image src="{{playSrc}}"/>
+  <image src="image/music@tag.png"/>
+  <text>{{title}}</text>
+</view>

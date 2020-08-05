@@ -432,8 +432,10 @@
             // new Set去重，也可以自己写方法去重
             // arr = [...new Set(arr)].sort((a,b)=>a-b)
             // console.log(arr)
-          // 方法二
-            //  
+          // 方法二 把数组转换成字符串，不管有多少级，都会变成以逗号分隔的字符串，没有中括号和所谓的层级 相当于会扁平化了
+            // arr
+            // arr = JSON.stringify(arr)
+            // console.log(arr)
   </script>
 </body>
 </html>
