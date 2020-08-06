@@ -4,5 +4,5 @@
     <v-like class="like" count="{{classic.fav_nums}}" like="{{classic.like_status}}" bind:like="onLike"/>
   </view>
   <v-move content="{{classic.content}}" img="{{classic.image}}" />
-  <v-navi class="navi"/>
+  <v-navi class="navi" bind:left="onNext"  bind:right="onPrev" first="{{first}}" latest="{{latest}}"/>
 </view>

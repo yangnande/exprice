@@ -54,3 +54,13 @@ data和property不能定义相同类型的val property会覆盖data的val （小
 23 移动端触屏按键的区域尽可能大比实际图大一些，提高用户体验感
 24 flex必要时，设置宽度为100%
 25 组件内公共的部分，可以通过behavior来实现
+26 hidden="{{true}}"和wx:if的区别
+wx:if是dom的挂载和卸载
+hidden="{{true}}是dom的显示和隐藏（只能应用在标签的属性上，不能用在自定义组件上）
+
+
+like缓存的问题
+复用wxss move essay 样式
+music样式
+music功能
+兄弟之间通信

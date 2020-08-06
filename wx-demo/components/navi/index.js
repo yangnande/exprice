@@ -6,7 +6,7 @@ Component({
   properties: {
     titie: String,
     first: Boolean,
-    lastest: Boolean
+    latest: Boolean
   },
 
   /**
@@ -23,6 +23,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onLeft() {
+      console.log(this.properties.latest,'this.properties.latest')
+      if(!this.properties.latest) {
+        this.triggerEvent('left',{},{})
+      }
+    },
+    onRight() {
+      console.log(this.properties.first,'this.properties.first')
+      if(!this.properties.first) {
+        this.triggerEvent('right',{},{})
+      }
+    }
   }
 })
