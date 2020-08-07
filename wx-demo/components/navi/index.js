@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    titie: String,
+    title: String,
     first: Boolean,
     latest: Boolean
   },
@@ -24,13 +24,11 @@ Component({
    */
   methods: {
     onLeft() {
-      console.log(this.properties.latest,'this.properties.latest')
       if(!this.properties.latest) {
         this.triggerEvent('left',{},{})
       }
     },
     onRight() {
-      console.log(this.properties.first,'this.properties.first')
       if(!this.properties.first) {
         this.triggerEvent('right',{},{})
       }

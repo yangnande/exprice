@@ -43,6 +43,7 @@
   height: 120rpx;
   position: relative; 
   bottom: 271rpx; 
+  border: 1px soild #000;
 }
 
 .content {

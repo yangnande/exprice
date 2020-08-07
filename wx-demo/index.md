@@ -57,10 +57,6 @@ data和property不能定义相同类型的val property会覆盖data的val （小
 26 hidden="{{true}}"和wx:if的区别
 wx:if是dom的挂载和卸载
 hidden="{{true}}是dom的显示和隐藏（只能应用在标签的属性上，不能用在自定义组件上）
+27 增加用户体验，频繁调用接口时，可以使用缓存
 
-
-like缓存的问题
-复用wxss move essay 样式
-music样式
-music功能
 兄弟之间通信

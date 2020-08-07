@@ -11,5 +11,12 @@ class LikeModel extends HTTP {
       }
     })
   }
+  getClassicLikeStatus(cid,type,success) {
+    var params = {
+      url: 'classic/' + type + '/' + cid + '/favor',
+      success: success
+    }
+    this.request(params)
+  }
 }
 export {LikeModel}

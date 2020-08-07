@@ -11,39 +11,27 @@ Page({
   onLike: function(e) {
     // console.log(e,'classic')
     let behavior = e.detail.behavior
+    // console.log('like--',this.data.classic)
     likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
   },
   onPrev() {
-    let index = this.data.classic.index
-    classModel.getPrevious(index,data=> {
-      this.setData({
-        classic:data.data,
-        first: classModel.isFirst(data.data.index),
-        latest: classModel.isLatest(data.data.index)
-      })
-    })
+    this._updateClassic('previous')
   },
   onNext() {
-    let index = this.data.classic.index
-    classModel.getNext(index,data=> {
-      this.setData({
-        classic: data.data,
-        first: classModel.isFirst(data.data.index),
-        latest: classModel.isLatest(data.data.index)
-      })
-    })
+    this._updateClassic('next')
   },
   /**
    * 生命周期函数-监听页面加载（在onReady，onShow这些周期函数之前执行）
    */
   onLoad:function(options) {
-    classModel.getLatest(res=>{
+    classModel.getLatest(data=>{
+      this._getLikeStatus(data.id, data.type)
       this.setData({
-        classic: res.data,
-        first: classModel.isFirst(res.data.index),
-        latest: classModel.isLatest(res.data.index)
+        classic: data,
+        first: classModel.isFirst(data.index),
+        latest: classModel.isLatest(data.index)
       })
-      console.log(this.data,'res')
+      // console.log(this.data,'data')
     })
   },
   /**
@@ -66,5 +54,30 @@ Page({
   },
   methods: {
     
+  },
+  /**
+   *  公共部分-上一页，下一页
+   */
+  _updateClassic:function(nextOrPrevious) {
+    let index = this.data.classic.index
+    classModel._getClassic(index,nextOrPrevious,data=>{
+      this._getLikeStatus(data.id, data.type)
+      this.setData({
+        classic: data,
+        first: classModel.isFirst(data.index),
+        latest: classModel.isLatest(data.index)
+      })
+    })
+  },
+  /**
+   *  公共部分-喜欢状态
+   */
+  _getLikeStatus:function(cid,type) {
+    likeModel.getClassicLikeStatus(cid,type,data => {
+      this.setData({
+        like:data.like_status,
+        count:data.fav_nums
+      })
+    })
   }
 })

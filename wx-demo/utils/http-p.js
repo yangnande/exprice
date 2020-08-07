@@ -5,14 +5,16 @@ const tips = {
   '3000': '期刊不存在'
 }
 class HTTP {
-  request(params) {
-    if(!params.method){
-      params.method = 'GET'
-    }
+  request(url,data={},method='GET') {
+    return new Promise((resolve,reject)=>{
+      this._request(url,resolve,reject,data,method)
+    })
+  }
+  _request(url,resolve,reject,data={},method='GET') {
     wx.request({
-      url: config.api_base_url + params.url,
-      method: params.method,
-      data: params.data||{},
+      url: config.api_base_url + url,
+      method,
+      data,
       header: {
         'content-type': 'application/json',
         'appkey': config.appkey
@@ -20,13 +22,13 @@ class HTTP {
       success: res => {
         let code = res.statusCode.toString()
         if(code.startsWith('2')) {
-          params.success&&params.success(res.data)
+          resolve(res.data)
         }else{
-          this._show_error(code)
+          reject(this._show_error(code))
         }
       },
       fail: err=> {
-        this._show_error(err.error_code)
+        reject(this._show_error(code))
       }
     })
     // 剥夺了函数return的能力 因为res是通过异步的方法获取
