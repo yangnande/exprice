@@ -8,16 +8,18 @@ Page({
 
   },
   onLoad() {
-    const bookData = bookModel.getHotList()
-    bookData.then(res => {
+    bookModel.getHotList(res => {
       console.log(res)
+      this.setData({
+        books: res
+      })
     })
   },
   /**
    * 组件的初始数据
    */
   data: {
-
+    books: []
   },
 
   /**

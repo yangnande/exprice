@@ -1,11 +1,11 @@
-import {HTTP} from '../utils/http-p.js'
+import {HTTP} from '../utils/http.js'
 class BookModel extends HTTP {
-  getHotList() {
-    console.log('book1')
-    return this.request('book/hot_list',{
-      name: 1,
-      age: 18
-    })
+  getHotList(success) {
+    var params = {
+      url: 'book/hot_list',
+      success: success
+    }
+    this.request(params)    
   }
 }
 export{BookModel}
