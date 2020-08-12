@@ -5,12 +5,14 @@
   "author": "yangnan <yangnan@leadeon.cn>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.6.25",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "html2canvas": "^1.0.0-rc.7",
+    "qrcode": "^1.4.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

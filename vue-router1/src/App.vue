@@ -1,97 +1,79 @@
 <template>
-  <div id="app">
-    <button v-bind:disabled="isButtonDisabled">Button</button>
-    <a v-bind:[someAttr]="someAttr"> aaaaaaaaa </a>
-    <div v-if="a==0">0</div>
-    <div v-else-if="a==1">1</div>
-    <div  v-else>2</div>
-    {{redInfo.remainingTimes}}
-    {{redInfo.actityCycle}}
-    <input type="text" />
-    <button @click="changeShow">变化</button>
-    <!-- 1 路由中对应组件的跳转 默认有返回是pushState-->
-    <router-link to="/home">首页</router-link>
-    <button  @click="aboutClick">关于</button>
-    <!-- <router-link to="/about">关于</router-link> -->
-    <!-- 2 路由中对应组件的跳转 replace没有返回键,tag改变渲染的html元素，默认是a标签,active-class将class是button-active变成active-->
-    <!-- <button to="/home" replace tag="button" active-class="active">首页</button>
-    <button to="/about" replace tag="button"  active-class="active">关于</button> -->
-    <!-- 3 跳转的第二种方法 -->
-    <!-- <button @click="homeClick">首页</button>
-    <button  @click="aboutClick">关于</button> -->
-    <!-- 4 动态路由 -->
-    <!-- 4 $route 获取激活状态下的路由，$router是new Router -->
-    <router-link :to="'/user/'+userId">用户</router-link>
-    <!-- <h1>动态路由参数 {{userIds}}</h1> -->
-    <h1>动态路由参数:{{$route.params.userId}}</h1>
-    <!-- 占位-路由中对应组件的渲染 -->
-    <!-- keep-alive 创建一次dom,防止重复渲染DOM -->
-    <!-- include 包含哪些组件缓存， exclude排除哪些组件缓存,值可以是name,可以是正则 -->
-    <keep-alive exclude="User,About">
-      <router-view/>
-    </keep-alive>
+  <div>
+    <div ref="box" v-show="!imgUrl">
+      <img class="bgImg" :src='require("./assets/poster1.jpg")' alt="">
+      <img class="qrImg" :src='require("./assets/qr.png")' alt="">
+      <p>你好你好你好你好</p>
+    </div>
+    <img v-show="imgUrl" class="newImg" :src="imgUrl" alt="" ref="newImg">
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// npm i qrcode --save
+// import QRCode from 'qrcode'
+// npm i html2canvas --save
+import html2canvas from 'html2canvas'
+
 export default {
-  name: 'App',
+  name: 'Poster',
   data () {
     return {
-      userId: 'lele',
-      a: '1',
-      isButtonDisabled: true,
-      someAttr: 'bar'
+      imgUrl: ''
     }
   },
-  computed: {
-    ...mapState(['redInfo']),
-    userIds: function () {
-      return this.userId
-    }
+
+  async mounted () {
+    this.createQRCode()
   },
+
   methods: {
-    changeShow () {
-      this.$store.commit('setRedInfo', { // 企业微信红包剩余次数和活动周期
-        remainingTimes: '1',
-        actityCycle: '月'
+    createQRCode () {
+      var that = this
+      // let newImg = this.$refs.newImg
+      let newImg = document.getElementsByClassName('newImg')[0]
+      let bgImg = document.getElementsByClassName('bgImg')[0]
+      console.log(window.getComputedStyle(bgImg).width,window.getComputedStyle(bgImg).height)
+      html2canvas(that.$refs.box).then(function (canvas) {
+        // newImg.style.width = '16rem'
+        // newImg.style.height = '30.656rem'
+        newImg.style.width = window.getComputedStyle(bgImg).width
+        newImg.style.height = window.getComputedStyle(bgImg).height
+        that.imgUrl = canvas.toDataURL() // 将canvas转为base64图片(eg. data:image/png;base64,ijskjlkj)
       })
-      console.log(this.redInfo)
-    },
-    homeClick () {
-      // pushState 默认有历史，可返回
-      // this.$router.push('/home')
-      // replace 不可返回
-      this.$router.replace('/home')
-    },
-    aboutClick () {
-      // pushState 默认有历史，可返回
-      // 通过query传参 http://localhost:8080/about?name=about&age=13
-      this.$router.push({
-        path: '/about',
-        query: {
-          name: 'about',
-          age: 13
-        }
-      })
-      // replace 不可返回
-      // this.$router.replace('/about')
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  margin: 0;
+  padding: 0;
 }
-.active {
-  color: red;
+body {
+  height: 100%;
+}
+html {
+  font-size: 6.25vw;
+  height: 100%;
+}
+.bgImg {
+  width: 16rem;
+  height: 30.656rem;
+  position: relative;
+}
+.qrImg {
+  width: 8.4rem;
+  height: 8.4rem;
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+}
+p {
+  position: absolute;
+  top: 5rem;
+  left: 2rem;
+  color: #fff;
 }
 </style>
