@@ -1,0 +1,6 @@
+var format = function() {
+  return 123123
+}
+module.exports = {
+  format:format
+}
