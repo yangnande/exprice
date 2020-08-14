@@ -33,7 +33,7 @@ Component({
       // 确定是点赞还是取消
       let behavior = this.properties.like ? 'like' : 'cancel'
       // 激活自定义事件
-      this.triggerEvent('like',{
+      this.triggerEvent('like', {
         behavior:behavior
       },{})
     }

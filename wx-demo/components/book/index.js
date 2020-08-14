@@ -20,8 +20,8 @@ Component({
   methods: {
     onTap() {
       let bid = this.properties.book.id
-      wx.navigator({
-        url: '../../pages/detail/detail?bid' + bid
+      wx.navigateTo({
+        url: '../../pages/detail/detail?bid=' + bid
       })
     }
   }

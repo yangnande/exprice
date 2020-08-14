@@ -1,6 +1,15 @@
-var format = function() {
-  return 123123
+var format = function(text) {
+  if(!text) {
+    return
+  }
+  var reg = getRegExp('\\\\n','g')
+  var text = text.replace(reg,'\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+  return text
+}
+var limit = function (ary, leng) {
+  return ary.slice(0, leng)
 }
 module.exports = {
-  format:format
+  format: format,
+  limit: limit
 }
