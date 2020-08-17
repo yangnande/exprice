@@ -48,7 +48,10 @@
   height: 14px;
   margin-right: 10px;
 }
-
+.delete {
+  width: 20px;
+  height: 20px;
+}
 .books-container {
   width: 570rpx;
   margin-top:100rpx;

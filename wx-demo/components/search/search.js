@@ -37,10 +37,11 @@ Component({
     onCancel () {
       this.triggerEvent('cancel',{},{})
     },
-    onDelete(event) {
-      this.setData({
-        searching: false
-      })
+    onDelete() {
+      console.log('555',this.data.searching)
+      // this.setData({
+      //   searching: false
+      // })
     },
     onConfirm (event) {
       console.log(event)
