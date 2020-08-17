@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "book-cmp": "/components/book/index"
+    "book-cmp": "/components/book/index",
+    "v-search": "/components/search/search"
   }
 }

@@ -1,8 +1,9 @@
 // components/tag/index.js
 Component({
   options: {
-    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+    multipleSlots: true, // 在组件定义时的选项中启用多slot支持
   },
+  externalClasses: ['tag-class'],
   /**
    * 组件的属性列表
    */
@@ -21,6 +22,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onTap() {
+      this.triggerEvent('tapping', {
+        title: this.properties.title
+      })
+    }
   }
 })

@@ -9,7 +9,7 @@ Page({
   },
   onLoad() {
     bookModel.getHotList(res => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         books: res
       })
@@ -19,13 +19,18 @@ Page({
    * 组件的初始数据
    */
   data: {
-    books: []
+    books: [],
+    searchPanel: true
   },
 
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
+  onActivateSearch () {
+    this.setData({
+      searchPanel: true
+    })
+  },
+  onCancel () {
+    this.setData({
+      searchPanel: false
+    })
   }
 })
