@@ -46,11 +46,12 @@
 .cancel-img {
   width: 14px;
   height: 14px;
-  margin-right: 10px;
+  margin-right: 6px;
+  margin-top: 8px;
 }
-.delete {
-  width: 20px;
-  height: 20px;
+.deleteArea {
+  width: 30px;
+  height: 30px;
 }
 .books-container {
   width: 570rpx;
