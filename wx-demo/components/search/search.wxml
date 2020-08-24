@@ -30,9 +30,11 @@
     </view>
   </view>
   <view class="books-container" wx:if="{{searching}}">
-    <block wx:for="{{dataArray}}" wx:key="{{item}}">
+    <block wx:for="{{dataArray}}" wx:key="{{item}}" wx:if="{{!noneData}}">
       <book-cmp book="{{item}}" class="book" />
     </block>
   </view>
-
+  <text wx:if="{{noneData}}" class="empty-tip">没有搜索到书籍</text>
+  <v-loading class="loading-center" wx:if="{{loadCenter}}"/>
+  <v-loading class="loading-bottom" wx:if="{{loading}}"/>
 </view>

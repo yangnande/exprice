@@ -31,7 +31,6 @@ Page({
         first: classModel.isFirst(data.index),
         latest: classModel.isLatest(data.index)
       })
-      // console.log(this.data,'data')
     })
   },
   /**

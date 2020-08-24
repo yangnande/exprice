@@ -1,0 +1,10 @@
+.container{
+  padding: 0 !important;
+  border:none !important;
+  display: inline !important;
+}
+
+/* .img{
+  width:100%;
+  height:100%;
+} */

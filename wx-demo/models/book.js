@@ -33,14 +33,15 @@ class BookModel extends HTTP {
     this.request(params)
   }
   // 获取搜索的书籍
-  search(start,q,success) {
+  search(start,q,success,fail) {
     let params =  {
       url: 'book/search?summary=1',
       data: {
         q,
         start
       },
-      success
+      success,
+      fail
     }
     this.request(params)
   }

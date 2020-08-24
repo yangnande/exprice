@@ -35,3 +35,20 @@ page {
   position: absolute;
   bottom: 40rpx;
 }
+.like-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right:30rpx;
+}
+
+.share-btn{
+  margin-top:21rpx;
+  margin-left:10rpx;
+}
+
+.share{
+  width:40rpx;
+  height:40rpx;
+}

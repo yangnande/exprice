@@ -61,5 +61,12 @@ class ClassicModel extends HTTP {
     // console.log(partKey,'---22----')
     return this.prefix + '-' + partKey
   }
+  getMyFavor(success){
+    let params={
+      url:'classic/favor',
+      success:success
+    }
+    this.request(params)
+  }
 }
 export {ClassicModel}

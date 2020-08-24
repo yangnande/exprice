@@ -1,7 +1,12 @@
 <view class='container'>
   <view class='header'>
-    <v-epsoide class="epsoide" index="{{classic.index}}"/> 
-    <v-like class="like" count="{{classic.fav_nums}}" like="{{classic.like_status}}" bind:like="onLike"/>
+    <v-epsoide class="epsoide" index="{{classic.index}}"/>
+    <view class="like-container">
+      <v-like class="like" count="{{classic.fav_nums}}" like="{{classic.like_status}}" bind:like="onLike"/>
+      <v-button class="share-btn" open-type="share">
+        <image class="share" slot="img" src="/images/icon/share.png"/>
+      </v-button>
+    </view>
   </view>
   <v-move wx:if="{{classic.type==100}}" content="{{classic.content}}" img="{{classic.image}}" />
   <v-music wx:if="{{classic.type==200}}" content="{{classic.content}}" img="{{classic.image}}" src="{{classic.url}}"  title="{{classic.title}}"/>
