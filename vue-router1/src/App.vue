@@ -1,79 +1,112 @@
 <template>
-  <div>
-    <div ref="box" v-show="!imgUrl">
-      <img class="bgImg" :src='require("./assets/poster1.jpg")' alt="">
-      <img class="qrImg" :src='require("./assets/qr.png")' alt="">
-      <p>你好你好你好你好</p>
+  <div v-if="isShow">
+    <div class="regiter"></div>
+    <div class="close" @click="closePage"></div>
+    <div class="qrcode" v-show="!imgUrl" ref="box">
+      <div class="bg"></div>
+      <div class="desc">
+        <div class="qr" id="qrcode" ref="qrcode"></div>
+        <p>扫描添加专属助理为好友,一起瓜分流量红包！</p>
+      </div>
     </div>
     <img v-show="imgUrl" class="newImg" :src="imgUrl" alt="" ref="newImg">
   </div>
 </template>
 
 <script>
-// npm i qrcode --save
-// import QRCode from 'qrcode'
-// npm i html2canvas --save
 import html2canvas from 'html2canvas'
-
+import QRCode from 'qrcodejs2'
 export default {
-  name: 'Poster',
   data () {
     return {
-      imgUrl: ''
+      imgUrl: '',
+      isShow: true,
+      qrUrl: 'https://www.baidu.com'
     }
   },
-
-  async mounted () {
-    this.createQRCode()
+  mounted () {
+    this.qrcode()
   },
 
   methods: {
     createQRCode () {
       var that = this
-      // let newImg = this.$refs.newImg
       let newImg = document.getElementsByClassName('newImg')[0]
-      let bgImg = document.getElementsByClassName('bgImg')[0]
-      console.log(window.getComputedStyle(bgImg).width,window.getComputedStyle(bgImg).height)
-      html2canvas(that.$refs.box).then(function (canvas) {
-        // newImg.style.width = '16rem'
-        // newImg.style.height = '30.656rem'
-        newImg.style.width = window.getComputedStyle(bgImg).width
-        newImg.style.height = window.getComputedStyle(bgImg).height
+      let qrcode = document.getElementsByClassName('qrcode')[0]
+      // console.log(window.getComputedStyle(bgImg).width, window.getComputedStyle(bgImg).height)
+      html2canvas(that.$refs.box, {backgroundColor: null}).then(function (canvas) {
+        newImg.style.width = window.getComputedStyle(qrcode).width
+        newImg.style.height = window.getComputedStyle(qrcode).height
         that.imgUrl = canvas.toDataURL() // 将canvas转为base64图片(eg. data:image/png;base64,ijskjlkj)
       })
+    },
+    qrcode () {
+      /* eslint-disable  */
+      let qr = document.getElementsByClassName('qr')[0]
+      new QRCode(document.getElementById('qrcode'), {
+        width: parseFloat(window.getComputedStyle(qr).width), // 二维码宽度，单位像素
+        height: parseFloat(window.getComputedStyle(qr).height), // 二维码高度，单位像素
+        text: this.qrUrl, // 生成二维码的链接
+        correctLevel : QRCode.CorrectLevel.L
+      })
+      this.createQRCode()
+    },
+    closePage() {
+      this.isShow = false
     }
   }
 }
 </script>
-
-<style>
-*{
-  margin: 0;
-  padding: 0;
-}
-body {
+<style scoped>
+.regiter{
+  width:100%;
   height: 100%;
+  position: fixed;
+  background: #000000;
+  opacity: 0.8;
+  z-index: 480;
+  top: 0;
+  left: 0;
 }
-html {
-  font-size: 6.25vw;
-  height: 100%;
-}
-.bgImg {
-  width: 16rem;
-  height: 30.656rem;
-  position: relative;
-}
-.qrImg {
-  width: 8.4rem;
-  height: 8.4rem;
+.qrcode,.newImg {
+  width: 13.013333rem;
   position: absolute;
-  top: 4rem;
-  left: 2rem;
+  left: 50%;
+  top: 4.394667rem;
+  transform: translateX(-50%);
+  z-index: 500;
 }
-p {
+.close {
   position: absolute;
-  top: 5rem;
-  left: 2rem;
-  color: #fff;
+  right: 1.493333rem;
+  top: 2.24rem;
+  z-index: 502;
+}
+.bg {
+  width: 13.013333rem;
+  height: 16.085333rem;
+  background: url(./assets/wq1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.desc {
+  width: 13.013333rem;
+  height: 3.584rem;
+  padding: .597333rem 1.877333rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;;
+}
+.qr {
+  width: 2.389333rem;
+	height: 2.389333rem;
+	border: .042667rem solid  #c1c1c1;
+}
+.desc p {
+  width: 8.32rem;
+  color: #666666;
+  font-size: .554667rem;
+  margin-left: .512rem;
 }
 </style>
