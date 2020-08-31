@@ -9,7 +9,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "touristappid",
-	"projectname": "cloud",
+	"projectname": "uni",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
