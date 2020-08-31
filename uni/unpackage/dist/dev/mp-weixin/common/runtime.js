@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"pages/index/index":1,"components/nav-bar/nav-bar":1};
+/******/ 		var cssChunks = {"components/nav-bar/nav-bar":1,"components/tab/tab":1,"components/lz-icons/icons":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"pages/index/index":"pages/index/index","components/nav-bar/nav-bar":"components/nav-bar/nav-bar"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/nav-bar/nav-bar":"components/nav-bar/nav-bar","components/tab/tab":"components/tab/tab","components/lz-icons/icons":"components/lz-icons/icons"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

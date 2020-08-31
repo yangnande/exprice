@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "component": true,
+  "usingComponents": {
+    "icons": "/components/lz-icons/icons"
+  }
 }

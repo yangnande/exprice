@@ -2,8 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/my/my",
-    "pages/follow/follow",
-    "components/tab/tab"
+    "pages/follow/follow"
   ],
   "subPackages": [],
   "window": {

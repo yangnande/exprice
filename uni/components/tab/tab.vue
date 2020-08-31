@@ -8,17 +8,21 @@
 			</view>
 		</scroll-view>
 		<view class="tabs-icon">
-			<uni-icons type="icon-settings_light" size="26" color="#666"></uni-icons>
+			<icons type="icon-settings_light" size="26" color="#666"></icons>
 		</view>
 	</view>
 </template>
 
 <script>
+	import icons from "@/components/lz-icons/icons.vue"
 	export default {
 		data() {
 			return {
 				
 			}
+		},
+		components: {
+			icons
 		},
 		methods: {
 			
@@ -36,7 +40,6 @@
 		align-items: center;
 		.tab-scroll {
 			flex: 1;
-			
 			.tabs-scroll-box {
 				display: flex;
 				align-items: center;
