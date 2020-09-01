@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<nav-bar class="nav-bar"></nav-bar>
-		<tab></tab>
+		<tab :list="list" v-if="list.length>0"></tab>
 	</view>
 </template>
 
@@ -12,17 +12,31 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				list: []
 			}
 		},
 		// components: {
 		// 	tab
 		// },
-		onLoad() {
-
+		onShow() {
+			this.getLabel()
 		},
 		methods: {
-
+			getLabel() {
+				let _this = this
+				// uniCloud.callFunction({
+				// 	name: 'getLabel',
+				// 	success(res) {
+				// 		console.log(res)
+				// 		_this.list = res.result.data
+				// 	}
+				// })
+				uniCloud.callFunction({
+					name: 'getLabel'
+				}).then(res=> {
+					_this.list = res.result.data
+				})
+			}
 		}
 	}
 </script>

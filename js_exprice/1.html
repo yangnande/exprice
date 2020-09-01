@@ -78,6 +78,13 @@
     计算机基础面试题小计
   </p> -->
   <script>
+    for (let i = 0; i < 5; i++) {
+        if(i==2) {
+            continue;
+        }
+        console.log('外层循环'+i);
+        
+    }
     // 对数组的属性first_word根据大小写字母排序，并且，组合数组
     // var priviIdsArr = [
     //   {
@@ -531,15 +538,15 @@
         priviIdsArr[i].priviIds.push(v.priviId)
       })
     })
-    console.log(priviIdsArr,'priviIdsArr')
+    // console.log(priviIdsArr,'priviIdsArr')
     // let dataInfo = {};
     data.forEach((v,i)=> {
       v.priviList.length=1
       v.priviList[0].priviIds = priviIdsArr[i].priviIds
     })
-    console.log(data,'data')
+    // console.log(data,'data')
     var a = "[{\n   \"sequence\" :2,\n   \"value\" :\"2GB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :15,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :3,\n   \"value\" :\"14.0英寸\",\n   \"specImage\" :\"http://www.sbnws.cn/upload/spec/972ffcce-3737-45e2-be64-3ab811c20b6f.jpg\",\n   \"spec\" :{\n      \"name\" :\"屏幕尺寸\",\n      \"sequence\" :7,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :32768,\n      \"addTime\" :\"2013-12-24 09:41:36\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :32771,\n   \"addTime\" :\"2020-05-09 16:43:47\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :6,\n   \"value\" :\"512MB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :19,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}, {\n   \"sequence\" :10,\n   \"value\" :\"8GB\",\n   \"specImage\" :\"\",\n   \"spec\" :{\n      \"name\" :\"显存容器\",\n      \"sequence\" :6,\n      \"type\" :\"text\",\n      \"properties\" :[],\n      \"id\" :2,\n      \"addTime\" :\"2013-12-24 08:59:56\",\n      \"deleteStatus\" :false\n   },\n   \"id\" :23,\n   \"addTime\" :\"2020-05-13 18:53:35\",\n   \"deleteStatus\" :false\n}]"
-    console.log(JSON.parse(a),'a')
+    // console.log(JSON.parse(a),'a')
   </script>
 </body>
 </html>

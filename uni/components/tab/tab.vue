@@ -2,27 +2,34 @@
 	<view class="tabs">
 		<scroll-view scroll-x class="tab-scroll">
 			<view class="tabs-scroll-box">
-				<view v-for="item in 10" class="tab-scroll-item">
-					{{item}}内容
+				<view v-for="item in list" class="tab-scroll-item">
+					{{item.name}}
 				</view>
 			</view>
 		</scroll-view>
 		<view class="tabs-icon">
-			<icons type="icon-settings_light" size="26" color="#666"></icons>
+			<uni-icons type="gear" size="26" color="#666"></uni-icons>
 		</view>
 	</view>
 </template>
 
 <script>
-	import icons from "@/components/lz-icons/icons.vue"
 	export default {
+		props:{
+			list: {
+				type: Array,
+				default() {
+					return []
+				}
+			}
+		},
 		data() {
 			return {
 				
 			}
 		},
-		components: {
-			icons
+		created() {
+			
 		},
 		methods: {
 			
@@ -54,10 +61,23 @@
 				padding: 0 10px;
 			}
 		}
-		
+		.tabs-icon {
+			width: 45px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			&::after {
+				position: absolute;
+				top: 6px;
+				bottom: 4px;
+				left: 0;
+				content: '';
+				width: 1px;
+				background-color: #ddd;
+			}
+		}
 	}
-	.tabs-icon {
-		width: 45px;
-	}
+	
 	
 </style>
