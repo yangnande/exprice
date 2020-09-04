@@ -30,7 +30,7 @@
 			// 设置状态栏高度
 			this.statusBarHeight = info.statusBarHeight
 			this.windowWidth = info.windowWidth
-			console.log(info,'状态栏高度')
+			// console.log(info,'状态栏高度')
 			// h5 app mp-alipay
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			// 获取胶囊位置

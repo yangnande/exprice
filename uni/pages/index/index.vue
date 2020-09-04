@@ -23,7 +23,7 @@
 		},
 		methods: {
 			getLabel() {
-				let _this = this
+				// let _this = this
 				// uniCloud.callFunction({
 				// 	name: 'getLabel',
 				// 	success(res) {
@@ -31,11 +31,15 @@
 				// 		_this.list = res.result.data
 				// 	}
 				// })
-				uniCloud.callFunction({
-					name: 'getLabel'
-				}).then(res=> {
-					_this.list = res.result.data
+				// uniCloud.callFunction({
+				// 	name: 'getLabel'
+				// }).then(res=> {
+				// 	_this.list = res.result.data
+				// })
+				this.$api.getLabel().then(res => {
+					this.list = res.data
 				})
+				
 			}
 		}
 	}
