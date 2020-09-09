@@ -78,13 +78,15 @@
     计算机基础面试题小计
   </p> -->
   <script>
-    for (let i = 0; i < 5; i++) {
-        if(i==2) {
-            continue;
-        }
-        console.log('外层循环'+i);
-        
+    const countWords = (words) => {
+    const counts = { };
+    for (const word of words) {
+        counts[word] = (counts[word] || 0) + 1;
     }
+    return counts;
+    };
+    const counts = countWords(['constructor', 'creates', 'a', 'bug']);
+    console.log(counts)
     // 对数组的属性first_word根据大小写字母排序，并且，组合数组
     // var priviIdsArr = [
     //   {

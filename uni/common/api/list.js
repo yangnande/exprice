@@ -5,3 +5,9 @@ export const getLabel = (data) => {
 		data
 	})
 }
+export const getList = (data) => {
+	return $http({
+		url: 'get_list',
+		data
+	})
+}
