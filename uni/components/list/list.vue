@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" @change="indexChange" :current="activeIndex">
 		<swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item" >
-			<list-item :listData="listCatchData[index]"></list-item>
+			<list-item :listData="listCatchData[index]" :load="load[index]" @loadMore="loadMore"></list-item>
 		</swiper-item>
 	</swiper>
 </template>
@@ -27,7 +27,9 @@
 			return {
 				listData: [],
 				// js限制
-				listCatchData: {}
+				listCatchData: {},
+				load: {},
+				pageSize: 4
 			};
 		},
 		watch:{
@@ -44,18 +46,52 @@
 			listItem
 		},
 		methods: {
+			loadMore() {
+				if(this.load[this.activeIndex].loading === 'noMore') return
+				console.log(this.load,'触发上拉')
+				this.load[this.activeIndex].page++
+				this.getList(this.activeIndex)
+			},
 			indexChange(e) {
 				let { current } = e.detail
 				this.$emit('change',current)
-				this.getList(current)
+				if(!this.listCatchData[current] || this.listCatchData[current].length === 0 ) {
+					this.getList(current)
+				}
+				
 				// console.log(this.tab,current,this.tab[current])
 			},
 			getList(current) {
-				this.$api.getList({name:this.tab[current].name}).then(res => {
+				// 初始化
+				if(!this.load[current]){
+					this.load[current] = {
+						page: 1,
+						loading: 'loading'
+					}
+				}
+				this.$api.getList({
+					name:this.tab[current].name,
+					page: this.load[current].page,
+					pageSize: this.pageSize
+					}).then(res => {
 					// console.log('请求数据', res.data)
+					const {data} = res
+					// 没有数据loading的处理
+					if(data.length === 0){
+						let oldLoad = {}
+						oldLoad.loading = 'noMore'
+						// 底部出现没有更多数据时，给page赋值
+						oldLoad.page = this.load[current].page
+						this.$set(this.load,current,oldLoad)
+						// 强制渲染页面
+						this.$forceUpdate()
+						return
+					}
+					let oldList = this.listCatchData[current] || []
+					oldList.push(...data)
 					// this.listCatchData[current] = res.data
 					// 懒加载 只有需要哪部分的数据才加载哪部分的数据
-					this.$set(this.listCatchData,current,res.data)
+					this.$set(this.listCatchData,current,oldList)
 					// this.listData = res.data
 				})
 			}

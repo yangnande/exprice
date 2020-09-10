@@ -42,6 +42,9 @@
 				// 	_this.list = res.result.data
 				// })
 				this.$api.getLabel().then(res => {
+					res.data.unshift({
+						name:'全部'
+					})
 					this.list = res.data
 				})
 				
@@ -53,6 +56,7 @@
 			indexChange(val) {
 				// console.log(val)
 				this.tabIndex = val
+				this.activeIndex = val
 			}
 		}
 	}
