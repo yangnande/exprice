@@ -2,12 +2,20 @@
 	<view class="nav-bar">
 		<view class="nav-fixed">
 			<view :style="{height: statusBarHeight + 'px'}"></view>
-			<view class="content" :style="{height: navBarHeight + 'px',width: windowWidth + 'px'}">
-				<view class="search">
+			<view class="content" :class="{search: isSearch}" :style="{height: navBarHeight + 'px',width: windowWidth + 'px'}" @click.stop="open">
+				<view class="navbar-content__search_icon">
+					<uni-icons type="back" size="22" color="#fff"></uni-icons>
+				</view>
+				<view v-if="!isSearch" class="search-content">
+					<!-- 非搜索页显示 -->
 					<view class="icon">
 						<text  class="iconfont icon-sousuo"></text>
 					</view>
 					<view class="text">uni-app</view>
+				</view>
+				<view v-else class="search-content">
+					<!-- 搜索页显示 -->
+					<input class="text" type="text" v-model="val" placeholder="请输入您要搜索的内容" @input="inputChange">
 				</view>
 			</view>
 		</view>
@@ -17,11 +25,18 @@
 
 <script>
 	export default {
+		props: {
+			isSearch: {
+				type: Boolean,
+				default: false
+			}
+		},
 		data() {
 			return {
 				statusBarHeight: 20, // 状态栏高度
 				navBarHeight: 45, // 导航条高度
-				windowWidth: 375 // 导航条左侧宽度
+				windowWidth: 375, // 导航条左侧宽度
+				val: ''
 			}
 		},
 		created() {
@@ -43,7 +58,16 @@
 			// #endif
 		},
 		methods: {
-			
+			open() {
+				if(this.isSearch) return
+				uni.navigateTo({
+					url: '/pages/home-search/home-search'
+				})
+			},
+			inputChange(e) {
+				const {value} = e.detail
+				this.$emit('input',value)
+			}
 		}
 	}
 </script>
@@ -65,7 +89,7 @@
 				align-items: center;
 				padding: 0 15px;
 				box-sizing: border-box;
-				.search {
+				.search-content {
 					width: 100%;
 					height: 30px;
 					padding: 0 10px;
@@ -78,12 +102,20 @@
 						margin-right: 6px;
 					}
 					.text {
-						font-size: 12px;
+						font-size: 14px;
 						color: #999;
 					}
 				}
+				&.search {
+					padding-left: 0;
+					.navbar-content__search_icon {
+						margin:0 10px;
+					}
+					.search-content {
+						border-radius: 5px;
+					}
+				}
 			}
-			
 		}
 		
 	}
