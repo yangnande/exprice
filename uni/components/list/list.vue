@@ -69,12 +69,13 @@
 						loading: 'loading'
 					}
 				}
+				// console.log(this.tab[current].name,'this.tab')
 				this.$api.getList({
 					name:this.tab[current].name,
 					page: this.load[current].page,
 					pageSize: this.pageSize
 					}).then(res => {
-					// console.log('请求数据', res.data)
+					// console.log('请求数据', res)
 					const {data} = res
 					// 没有数据loading的处理
 					if(data.length === 0){

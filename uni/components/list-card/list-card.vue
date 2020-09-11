@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view @click="open">
 		<!-- 简单卡片 -->
 		<view class="listCard" v-if="item.mode === 'base'">
 			<view class="listCard-image">
@@ -8,10 +8,11 @@
 			<view class="listCard-content">
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
+					<like :item="item"></like>
 				</view>
 				<view class="listCard-content-des">
 					<view class="listCard-content__des-label">
-						<view class="listCard-content__des-label-item">{{item.classily}}</view>
+						<view class="listCard-content__des-label-item">{{item.classify}}</view>
 					</view>
 					<view class="listCard-content__des-browse">
 						{{item.browser_count}}浏览
@@ -24,6 +25,7 @@
 			<view class="listCard-content">
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
+					<like :item="item"></like>
 				</view>
 				<view class="listCard-image">
 					<view v-if="i<=3" v-for="(v,i) in item.cover" :key="i" class="listCard-image__item">
@@ -33,7 +35,7 @@
 				</view>
 				<view class="listCard-content-des">
 					<view class="listCard-content__des-label">
-						<view class="listCard-content__des-label-item">{{item.classily}}</view>
+						<view class="listCard-content__des-label-item">{{item.classify}}</view>
 					</view>
 					<view class="listCard-content__des-browse">
 						{{item.browser_count}}浏览
@@ -49,10 +51,11 @@
 				</view>
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
+					<like :item="item"></like>
 				</view>
 				<view class="listCard-content-des">
 					<view class="listCard-content__des-label">
-						<view class="listCard-content__des-label-item">{{item.classily}}</view>
+						<view class="listCard-content__des-label-item">{{item.classify}}</view>
 					</view>
 					<view class="listCard-content__des-browse">
 						{{item.browser_count}}浏览
@@ -78,6 +81,11 @@
 		},
 		mounted() {
 			// console.log(this.item,'item')
+		},
+		methods: {
+			open() {
+				console.log('详情')
+			}
 		}
 	}
 </script>
@@ -110,8 +118,9 @@
 			width: 100%;
 
 			.listCard-content-title {
-				position: relative;
-				padding-right: 30px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 				font-size: 14px;
 				color: #333;
 				font-weight: 400;
@@ -124,6 +133,7 @@
 					-webkit-line-clamp: 2;
 					-webkit-box-orient: vertical;
 				}
+				
 			}
 
 			.listCard-content-des {
