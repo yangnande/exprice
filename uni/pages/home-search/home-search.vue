@@ -1,8 +1,8 @@
 <template>
 	<view class="home">
-		<nav-bar :isSearch="true" @input="change"></nav-bar>
+		<nav-bar :isSearch="true" @input="change" v-model="value"></nav-bar>
 		<view class="home-list">
-			<view class="label-box">
+			<view class="label-box" v-if="is_history">
 				<view class="label-header">
 					<text class="label-title">搜索历史</text>
 					<text class="label-clear" @click="clear">清空</text>
@@ -14,7 +14,15 @@
 					没有搜索历史
 				</view>
 			</view>
-			<button type="default" @click="test">test</button>
+			<list-scroll v-else class="list-scroll" @loadMore="loadMore">
+				<uni-load-more v-if="loading" status="loading" iconType="snow" ></uni-load-more>
+				<view class="" v-if="searchList.length>0">
+					<list-card v-for="item in searchList" :item="item" @cardClick="setHistory"></list-card>
+				</view>
+				<view v-if="searchList.length === 0 && !loading" class="no-data">
+					没有搜索到相关数据
+				</view>
+			</list-scroll>
 		</view>
 	</view>
 </template>
@@ -24,18 +32,69 @@
 	export default {
 		data() {
 			return {
+				is_history: true,
+				searchList: [],
+				timer: null,
+				value: '',
+				loading: false
 			}
 		},
 		computed: {
 			...mapState(['historyLists'])
 		},
+		onLoad() {
+			console.log(this.value,'this.value')
+		},
 		methods: {
-			change(val) {
-				console.log('------',val)
-			},
-			test() {
+			setHistory(val) {
 				this.$store.dispatch('setHistory',{
-					name: 'test'
+					name: this.value
+				})
+			},
+			openHistroy(item) {
+				this.value = item.name
+				this.getSearch(this.value)
+			},
+			change(val) {
+				console.log(val)
+				this.value = val
+				let flag = false
+				if(!val) {
+					clearTimeout(this.timer)
+					this.getSearch(val)
+					return
+				}
+				
+				if(!flag) {
+					flag = true
+					this.timer = setTimeout(()=>{
+						this.getSearch(val)
+					},1000)
+				}
+			},
+			clear() {
+				this.$store.dispatch('clearHistory')
+				uni.showToast({
+					title: '清空完成'
+				})
+			},
+			getSearch(val) {
+				if(!val) {
+					this.is_history = true
+					this.searchList = []
+					return
+				}
+				this.is_history = false
+				this.loading = true
+				this.$api.getSearch({
+					value:val
+				}).then(res => {
+					this.loading = false
+					console.log('请求数据', res)
+					const {data} = res
+					this.searchList = data
+				}).catch(err=>{
+					this.loading = false
 				})
 			}
 		}

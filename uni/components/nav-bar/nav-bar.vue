@@ -3,7 +3,7 @@
 		<view class="nav-fixed">
 			<view :style="{height: statusBarHeight + 'px'}"></view>
 			<view class="content" :class="{search: isSearch}" :style="{height: navBarHeight + 'px',width: windowWidth + 'px'}" @click.stop="open">
-				<view class="navbar-content__search_icon">
+				<view class="navbar-content__search_icon" v-if="isSearch" @click="back">
 					<uni-icons type="back" size="22" color="#fff"></uni-icons>
 				</view>
 				<view v-if="!isSearch" class="search-content">
@@ -15,7 +15,7 @@
 				</view>
 				<view v-else class="search-content">
 					<!-- 搜索页显示 -->
-					<input class="text" type="text" v-model="val" placeholder="请输入您要搜索的内容" @input="inputChange">
+					<input class="text nav-bar-search-text" type="text" v-model="val" placeholder="请输入您要搜索的内容" @input="inputChange">
 				</view>
 			</view>
 		</view>
@@ -29,6 +29,15 @@
 			isSearch: {
 				type: Boolean,
 				default: false
+			},
+			value: {
+				type: [Number,String],
+				default: ''
+			}
+		},
+		watch: {
+			value(newVal) {
+				this.val = newVal
 			}
 		},
 		data() {
@@ -67,6 +76,11 @@
 			inputChange(e) {
 				const {value} = e.detail
 				this.$emit('input',value)
+			},
+			back() {
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
 			}
 		}
 	}
@@ -104,6 +118,9 @@
 					.text {
 						font-size: 14px;
 						color: #999;
+					}
+					.nav-bar-search-text {
+						width: 100%;
 					}
 				}
 				&.search {

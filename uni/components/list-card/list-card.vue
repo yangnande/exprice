@@ -84,7 +84,8 @@
 		},
 		methods: {
 			open() {
-				console.log('详情')
+				// console.log('详情')
+				this.$emit('cardClick',this.item)
 			}
 		}
 	}

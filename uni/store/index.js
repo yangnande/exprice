@@ -6,11 +6,14 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	// 数据源
 	state: {
-		historyLists: []
+		historyLists: uni.getStorageSync('__history') || []
 	},
 	mutations: {
 		SET_HISTORY_LIST(state,history) {
 			state.historyLists = history
+		},
+		CLEAR_HISTORY(state) {
+			state.historyLists = []
 		}
 	},
 	actions: {
@@ -18,6 +21,12 @@ const store = new Vuex.Store({
 			let list = state.historyLists
 			list.unshift(history)
 			commit('SET_HISTORY_LIST',list)
+			uni.setStorageSync('__history', list)
+		},
+		clearHistory({commit}) {
+			commit('CLEAR_HISTORY')
+			uni.removeStorage('__history')
+			// uni.setStorageSync('__history', [])
 		}
 	}
 })
