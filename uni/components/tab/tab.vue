@@ -7,7 +7,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="tabs-icon">
+		<view class="tabs-icon" @click="open">
 			<uni-icons type="gear" size="26" color="#666"></uni-icons>
 		</view>
 	</view>
@@ -48,6 +48,11 @@
 				this.$emit('tab',{
 					data: item,
 					index: index
+				})
+			},
+			open() {
+				uni.navigateTo({
+					url: '/pages/home-label/home-label'
 				})
 			}
 		}
