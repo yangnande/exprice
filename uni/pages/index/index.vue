@@ -41,7 +41,9 @@
 				// }).then(res=> {
 				// 	_this.list = res.result.data
 				// })
-				this.$api.getLabel().then(res => {
+				this.$api.getLabel({
+					type: 'all'
+				}).then(res => {
 					res.data.unshift({
 						name:'全部'
 					})

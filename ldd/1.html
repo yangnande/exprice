@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      p {
+        /* width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; */
+        /* display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; */
+      }
+
+  </style>
+</head>
+<body>
+  <p>第三题有点难，先放着 https://juejin.im/post/6844904170026172424#heading-5</p>
+  <!-- <p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</p> -->
+  <script>
+    // 第一期
+      // 一、Array(3)和Array(3, 4)的区别？
+        // console.log(Array(3)) // [empty x 3]
+        // console.log(Array(3, 4)) // [3, 4]
+
+        // console.log(new Array(3)) // [empty x 3]
+        // console.log(new Array(3, 4)) // [3, 4]
+
+        // console.log(Array.of(3)) // [3]
+        // console.log(Array.of(3, 4)) // [3, 4]
+        // 总结:
+        // 1 Array 加不加new都一样
+        // 2 Array的参数如果是一个，该参数表示数组的长度，并会创建该长度的空数组，数组的每一项都是empty,如果是两个或两个以上，该参数为数组的每一项，会按顺序返回数组
+        // 3 Array.of 参数为任意项，将参数作为数组中的每一项按顺序返回一个新数组
+      // 二、请创建一个长度为100，值为对应下标的数组
+        // [...Array(100).keys()]
+        // keys()从数组中创建一个可迭代对象  [...] 把可迭代对象转换成对象 == Array.from()
+        // Array(100).fill().map((v,i) => i)
+        // Array(100).join(',').split(',').map((v,i) => i)
+      // 三、实现 arr[-1] = arr[arr.length - 1]
+      // 四、addEventListener和attachEvent的区别？
+        // 1 前者是标准浏览器中的用法，后者IE8以下
+        // 2 addEventListener可有冒泡，可有捕获；attachEvent只有冒泡，没有捕获。
+        // 3 前者事件名不带on，后者带on
+        // 4 前者回调函数中的this指向当前元素，后者指向window
+      // 五、addEventListener函数的第三个参数
+        // 第三个参数涉及到冒泡和捕获，是true时为捕获，是false则为冒泡。
+        // 或者是一个对象{passive: true}，针对的是Safari浏览器，禁止/开启使用滚动的时候要用到。
+      // 六、文字单超出显示省略号
+        // div {
+        //   width: 200px;
+        //   overflow: hidden;
+        //   white-space: nowrap;
+        //   text-overflow: ellipsis;
+        // }
+      // 七、文字多行超出显示省略号
+        // div {
+        //   width: 200px;
+        //   overflow: hidden;
+        //   display: -webkit-box;
+        //   -webkit-box-orient: vertical;
+        //   -webkit-line-clamp: 3;
+        // }
+        // 「跨浏览器兼容方案：」
+        // p {
+        //   position:relative;
+        //   line-height:1.4em;
+        //   /* 3 times the line-height to show 3 lines */
+        //   height:4.2em;
+        //   overflow:hidden;
+        // }
+        // p::after {
+        //   content:"...";
+        //   font-weight:bold;
+        //   position:absolute;
+        //   bottom:0;
+        //   right:0;
+        //   padding:0 20px 1px 45px;
+        // }
+    // 第二期
+      // 一、设计一个方法提取对象中所有value大于2的键值对并返回最新的对象
+        // var obj = { a: 1, b: 3, c: 4 }
+        // foo(obj) // { b: 3, c: 4 }
+        // Object.fromEntries() // 方法把键值对列表转换为一个对象
+        // Object.entries() 方法返回一个给定对象自身可枚举属性的键值对数组
+        // var obj = { a: 1, b: 3, c: 4 }
+        // function foo (obj) {
+        //   return Object.fromEntries(
+        //     Object.entries(obj).filter(([key, value]) => value > 2)
+        //   )
+        // }
+        // var obj2 = foo(obj) // { b: 3, c: 4 }
+        // console.log(obj2)
+      // 二、实现一个padStart()或padEnd()的polyfill
+        
+  </script>
+</body>
+</html>

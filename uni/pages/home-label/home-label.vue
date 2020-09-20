@@ -43,8 +43,17 @@
 				list: []
 			}
 		},
+		onLoad() {
+			this.getLabel()
+		},
 		methods: {
-			
+			getLabel() {
+				this.$api.getLabel({
+					type: 'all'
+				}).then(res => {
+					console.log(res,'res')
+				})
+			}
 		}
 	}
 </script>
