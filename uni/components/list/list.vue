@@ -35,6 +35,9 @@
 		watch:{
 			tab(newval) {
 				if(newval.length === 0) return
+				// 解决key重复的问题
+				this.listCatchData = {}
+				this.load = {}
 				this.getList(this.activeIndex)
 			}
 		},

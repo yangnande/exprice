@@ -23,7 +23,15 @@
 		// components: {
 		// 	tab
 		// },
-		onShow() {
+		onLoad() {
+			uni.$on('labelChange',()=>{
+				// console.log('-----')
+				// 解决key重复的问题
+				this.list = []
+				this.tabIndex = 0,
+				this.activeIndex = 0
+				this.getLabel()
+			})
 			this.getLabel()
 		},
 		methods: {
@@ -41,12 +49,11 @@
 				// }).then(res=> {
 				// 	_this.list = res.result.data
 				// })
-				this.$api.getLabel({
-					type: 'all'
-				}).then(res => {
+				this.$api.getLabel().then(res => {
 					res.data.unshift({
 						name:'全部'
 					})
+					console.log(res,'首页')
 					this.list = res.data
 				})
 				

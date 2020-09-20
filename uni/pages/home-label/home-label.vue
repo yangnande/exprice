@@ -5,16 +5,15 @@
 				<view class="label-title">我的标签</view>
 				<view class="label-edit" @click="editLabel">{{is_edit?'完成':'编辑'}}</view>
 			</view>
-			<!-- <uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more> -->
+			<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
 			<view v-if="!loading" class="label-content">
-				<view class="label-content__item" v-for="(item,index) in 10" :key="item._id">
-					<!-- {{item.name}} -->
-					{{item}}标签
+				<view class="label-content__item" v-for="(item,index) in labelList" :key="item._id">
+					{{item.name}}
 					<uni-icons v-if="is_edit" class="icons-close" type="clear" size="20" color="red" @click="del(index)"></uni-icons>
 				</view>
-				<!-- <view v-if="labelList.length === 0 && !loading" class="no-data">
+				<view v-if="labelList.length === 0 && !loading" class="no-data">
 					当前没有数据
-				</view -->
+				</view>
 			</view>
 
 		</view>
@@ -22,9 +21,9 @@
 			<view class="label-header">
 				<view class="label-title">标签推荐</view>
 			</view>
-			<!-- <uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more> -->
-			<view  class="label-content">
-				<view class="label-content__item" v-for="(item,index) in 10" :key="item._id" @click="add(index)">{{item}}</view>
+			<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
+			<view v-if="!loading" class="label-content">
+				<view class="label-content__item" v-for="(item,index) in list" :key="item._id" @click="add(index)">{{item.name}}</view>
 			</view>
 			<view v-if="list.length === 0  && !loading" class="no-data">
 				当前没有数据
@@ -38,21 +37,63 @@
 		data() {
 			return {
 				is_edit: false,
-				labelList: [],
+				labelList: [], // 我的标签
 				loading: false,
-				list: []
+				list: [] // 标签推荐
 			}
 		},
 		onLoad() {
+			// 自定义的事件，只能再打开的页面中触发
 			this.getLabel()
 		},
 		methods: {
 			getLabel() {
+				this.loading = true
 				this.$api.getLabel({
 					type: 'all'
 				}).then(res => {
-					console.log(res,'res')
+					this.loading = false
+					var { data } = res
+					this.labelList = data.filter(v=>v.current === true)
+					this.list = data.filter(v=>v.current !== true)
+					console.log(res,'设置也')
 				})
+			},
+			editLabel() {
+				if(this.is_edit) {
+					this.is_edit = false
+					this.setUpdateLabel(this.labelList)
+				} else {
+					this.is_edit = true
+				}
+			},
+			setUpdateLabel(label) {
+				let newArrIds = []
+				label.forEach(v => {
+					newArrIds.push(v._id)
+				})
+				uni.showLoading()
+				this.$api.update_label({
+					label: newArrIds
+				}).then(res => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '更新成功',
+							icon: 'none'
+						})
+						uni.$emit('labelChange')
+						console.log(res)
+					}
+				)
+			},
+			del(index) {
+				this.list.push(this.labelList[index])
+				this.labelList.splice(index,1)
+			},
+			add(index) {
+				if(!this.is_edit) return
+				this.labelList.push(this.list[index])
+				this.list.splice(index,1)
 			}
 		}
 	}
