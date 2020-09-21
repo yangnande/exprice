@@ -85,7 +85,21 @@
 		methods: {
 			open() {
 				// console.log('详情')
-				this.$emit('cardClick',this.item)
+				const item = this.item
+				this.$emit('cardClick',item)
+				const params = {
+					_id: item._id,
+					title: item.title,
+					author: item.author,
+					create_time: item.create_time,
+					thumbs_up_count: item.thumbs_up_count,
+					browse_count: item.browse_count
+				}
+				// console.log(item,'item')
+				// 传参注意长度
+				uni.navigateTo({
+					url: "/pages/home-detail/home-detail?params=" + JSON.stringify(params)
+				})
 			}
 		}
 	}

@@ -25,6 +25,10 @@
             "path" : "pages/home-label/home-label",
             "style" : {}
         }
+        ,{
+            "path" : "pages/home-detail/home-detail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
