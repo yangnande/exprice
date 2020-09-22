@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      p {
+        /* width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; */
+        /* display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; */
+      }
+      .font_size_12 {
+        font-size: 12px;
+        font-style: italic;
+      }
+      .font_size_small {
+        /* font-size: 12px; */
+        display: inline-block;
+        font-size: 10px;
+        font-style: oblique;
+        -webkit-transform: scale(0.8);
+      }
+      html, body {
+        margin: 0;
+        height: 100%;
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+      }
+      /*扇形*/
+      /* .sector {
+        width: 0;
+        height: 0;
+        border: 100px solid red;
+        border-color: red transparent transparent transparent;
+        border-radius: 50%;
+      } */
+      /*或者*/
+      .sector {
+        width: 100px;
+        height: 100px;
+        border: 100px solid transparent;
+        border-top-color: red;
+        box-sizing: border-box; /* 这步很重要 */
+        border-radius: 50%;
+      }
+
+  </style>
+</head>
+<body>
+  <!-- <div class="font_size_12">
+    霖呆呆
+    <span class="font_size_small">
+      小号霖呆呆
+    </span>
+  </div>
+  <p>第一期 第三题有点难，先放着 https://juejin.im/post/6844904170026172424#heading-5</p> -->
+  <p>第二期 第四题有点难，先放着 https://juejin.im/post/6844904179568230414</p>
+  <!-- <div id="box"></div> -->
+  <div class="sector"></div>
+
+  <script>
+    // 第一期
+      // 一、Array(3)和Array(3, 4)的区别？
+        // console.log(Array(3)) // [empty x 3]
+        // console.log(Array(3, 4)) // [3, 4]
+
+        // console.log(new Array(3)) // [empty x 3]
+        // console.log(new Array(3, 4)) // [3, 4]
+
+        // console.log(Array.of(3)) // [3]
+        // console.log(Array.of(3, 4)) // [3, 4]
+        // 总结:
+        // 1 Array 加不加new都一样
+        // 2 Array的参数如果是一个，该参数表示数组的长度，并会创建该长度的空数组，数组的每一项都是empty,如果是两个或两个以上，该参数为数组的每一项，会按顺序返回数组
+        // 3 Array.of 参数为任意项，将参数作为数组中的每一项按顺序返回一个新数组
+      // 二、请创建一个长度为100，值为对应下标的数组
+        // [...Array(100).keys()]
+        // keys()从数组中创建一个可迭代对象  [...] 把可迭代对象转换成对象 == Array.from()
+        // Array(100).fill().map((v,i) => i)
+        // Array(100).join(',').split(',').map((v,i) => i)
+      // 三、实现 arr[-1] = arr[arr.length - 1]
+      // 四、addEventListener和attachEvent的区别？
+        // 1 前者是标准浏览器中的用法，后者IE8以下
+        // 2 addEventListener可有冒泡，可有捕获；attachEvent只有冒泡，没有捕获。
+        // 3 前者事件名不带on，后者带on
+        // 4 前者回调函数中的this指向当前元素，后者指向window
+      // 五、addEventListener函数的第三个参数
+        // 第三个参数涉及到冒泡和捕获，是true时为捕获，是false则为冒泡。
+        // 或者是一个对象{passive: true}，针对的是Safari浏览器，禁止/开启使用滚动的时候要用到。
+      // 六、文字单超出显示省略号
+        // div {
+        //   width: 200px;
+        //   overflow: hidden;
+        //   white-space: nowrap;
+        //   text-overflow: ellipsis;
+        // }
+      // 七、文字多行超出显示省略号
+        // div {
+        //   width: 200px;
+        //   overflow: hidden;
+        //   display: -webkit-box;
+        //   -webkit-box-orient: vertical;
+        //   -webkit-line-clamp: 3;
+        // }
+        // 「跨浏览器兼容方案：」
+        // p {
+        //   position:relative;
+        //   line-height:1.4em;
+        //   /* 3 times the line-height to show 3 lines */
+        //   height:4.2em;
+        //   overflow:hidden;
+        // }
+        // p::after {
+        //   content:"...";
+        //   font-weight:bold;
+        //   position:absolute;
+        //   bottom:0;
+        //   right:0;
+        //   padding:0 20px 1px 45px;
+        // }
+    // 第二期
+      // 一、设计一个方法提取对象中所有value大于2的键值对并返回最新的对象
+        // var obj = { a: 1, b: 3, c: 4 }
+        // foo(obj) // { b: 3, c: 4 }
+        // var obj = { a: 1, b: 3, c: 4 }
+        // function foo (obj) {
+        //   return Object.fromEntries(
+        //     Object.entries(obj).filter(([key, value]) => value > 2)
+        //   )
+        // }
+        // var obj2 = foo(obj) // { b: 3, c: 4 }
+        // console.log(obj2)
+        // ES8中 Object.entries()的作用：一个给定对象自身可枚举属性的键值对数组
+        // var obj = { a: 1, b: 2 }
+        // var entries = Object.entries(obj); // [['a', 1], ['b', 2]]
+        // // ES10中 Object.fromEntries()的作用：键值对列表转换为一个对象。
+        // Object.fromEntries(entries); // { a: 1, b: 2 }
+
+      // 二、实现一个padStart()或padEnd()的polyfill
+        // // String.prototype.padStart 和 String.prototype.padEnd是ES8新增的方法，允许将空字符串或其他字符串添加到原始字符串的开头或结尾。
+        // String.padStart(targetLength,[padString])
+        // 'x'.padStart(4, 'ab') // 'abax'
+        // 'x'.padEnd(5, 'ab') // 'xabab'
+
+        // // 1. 若是输入的目标长度小于字符串原本的长度则返回字符串本身
+        // 'xxx'.padStart(2, 's') // 'xxx'
+
+        // // 2. 第二个参数的默认值为 " "，长度是为1的
+        // // 3. 而此参数可能是个不确定长度的字符串，若是要填充的内容达到了目标长度，则将不要的部分截取
+        // 'xxx'.padStart(5, 'sss') // ssxxx
+
+        // // 4. 可用来处理日期、金额格式化问题
+        // '12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+        // '09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+        // String.prototype.myPadStart = function (targetLen, padString=" ") {
+        //   if(!targetLen) {
+        //     throw new Error('请输入要填充的长度')
+        //   }
+        //   // console.log(this) // String{"a"}
+        //   let orginStr = String(this) // // 获取到调用的字符串, 因为this原本是String{}，所以需要用String转为字符串
+        //   let orginLen = orginStr.length
+        //   if(orginLen>=targetLen) { return orginLen} // // 若是 原本 > 目标 则返回原本字符串
+        //   console.log(orginStr) // a
+        //   let diffNum = targetLen - orginLen
+        //   console.log(diffNum,'orginLen--')
+        //   for(var i = 0;i<diffNum;i++) {
+        //     for(var j = 0;j<padString.length;j++) { // 输入的padString的长度可能不为1
+        //       if(orginStr.length == targetLen) { // 判断每一次添加之后是否到了目标长度
+        //         break
+        //       }
+              
+        //       orginStr = `${padString[j]}${orginStr}`
+        //       console.log(orginStr,'orginLen')
+        //     }
+        //     if(orginStr.length == targetLen) {
+        //       break
+        //     }
+        //   }
+          
+        //   return orginStr
+        // }
+        // var str1 = 'a'.myPadStart(3)
+        // var str2 = 'a'.padStart(3)
+        // console.log(str1,'=====')
+        // console.log(str2,'=====')
+      // 三、用正则写一个根据name获取cookie中的值的方法
+        // function getCookie(name) {
+        //   document.cookie = "username=echo;"+"age=23;";
+        //   // console.log(document.cookie)
+        //   let reg = new RegExp('(^| )' + name + '=([^;]*)')
+        //   var match = document.cookie.match(reg)
+        //   // console.log(match)
+        //   if(match) {return unescape(match[2])}
+        // }
+        // var val = getCookie('username')
+        // console.log(val)
+        // 获取页面上的cookie可以使用 document.cookie
+        // 这里获取到的是类似于这样的字符串：
+        // 'username=lindaidai; user-id=12345; user-roles=home, me, setting'
+        // 复制代码
+        // 可以看到这么几个信息：
+
+        // 每一个cookie都是由 name=value 这样的形式存储的每一项的开头可能是一个空串''(比如username的开头其实就是), 也可能是一个空字符串' '（比如user-id的开头就是）每一项用";"来区分如果某项中有多个值的时候，是用","来连接的(比如user-roles的值)每一项的结尾可能是有";"的(比如username的结尾)，也可能是没有的(比如user-roles的结尾)
+
+        // 所以我们将这里的正则拆分一下：
+        // '(^| )'表示的就是获取每一项的开头，因为我们知道如果^不是放在[]里的话就是表示开头匹配。所以这里(^| )的意思其实就被拆分为(^)表示的匹配username这种情况，它前面什么都没有是一个空串(你可以把(^)理解为^它后面还有一个隐藏的'')；而|表示的就是或者是一个" "(为了匹配user-id开头的这种情况)
+        // +name+这没什么好说的=([^;]*)这里匹配的就是=后面的值了，比如lindaidai；刚刚说了^要是放在[]里的话就表示"除了^后面的内容都能匹配"，也就是非的意思。所以这里([^;]*)表示的是除了";"这个字符串别的都匹配(*应该都知道什么意思吧，匹配0次或多次)
+        // 有的大佬等号后面是这样写的'=([^;]*)(;|$)'，而最后为什么可以把'(;|$)'给省略呢？因为其实最后一个cookie项是没有';'的，所以它可以合并到=([^;]*)这一步。
+        // 最后获取到的match其实是一个长度为4的数组。比如：
+        // [
+        //   "username=lindaidai;",
+        //   "",
+        //   "lindaidai",
+        //   ";"
+        // ]
+      // 四、实现一个拖拽(兼容写法)
+        // 考察知识点」
+
+        // event的兼容性
+
+        // 其它浏览器window.event火狐下没有window.event，所以用传入的参数ev代替最终写法：var oEvent = ev || window.event
+
+        // 实现拖拽的事件有哪些(box为需要拖拽的元素)
+
+        // box.onmousedowndocument.onmousemovedocument.onmouseup
+
+        // 实现的事件顺序
+
+        // 首先监听box.onmousedown，即鼠标按下box时触发的事件，记录下鼠标按下时距离屏幕上边和左边的距离，以及box距离屏幕上边和左边的距离，再用前者减去后者得到差值distanceX和distanceY然后在此事件中监听document.onmousemove事件，记录下每次鼠标移动时距离屏幕上边和左边的距离，然后用它们减去distanceX和distanceY，再将其赋值给box的left和top，使其能跟着鼠标移动不过需要考虑box距离屏幕最上面/下面/左边/右边的边界情况当document.onmouseup的时候需要将document.onmousemove事件设置为null
+
+        // window.onload = function () {
+        //   var box = document.getElementById('box');
+        //   box.onmousedown = function (ev) {
+        //     var oEvent = ev || window.event; // 兼容火狐,火狐下没有window.event
+        //     var distanceX = oEvent.clientX - box.offsetLeft; // 鼠标到可视区左边的距离 - box到页面左边的距离
+        //     var distanceY = oEvent.clientY - box.offsetTop;
+        //     console.log(distanceX)
+        //     document.onmousemove = function (ev) {
+        //       var oEvent = ev || window.event;
+        //       var left = oEvent.clientX - distanceX;
+        //       var top = oEvent.clientY - distanceY;
+        //       console.log(left)
+        //       if (left <= 0) {
+        //         left = 0;
+        //       } else if (left >= document.documentElement.clientWidth - box.offsetWidth) {
+        //         left = document.documentElement.clientWidth - box.offsetWidth;
+        //       }
+        //       if (top <= 0) {
+        //         top = 0;
+        //       } else if (top >= document.documentElement.clientHeight - box.offsetHeight) {
+        //         top = document.documentElement.clientHeight - box.offsetHeight;
+        //       }
+        //       box.style.left = left + 'px';
+        //       box.style.top = top + 'px';
+        //     }
+        //     document.onmouseup = function () {
+        //       document.onmousemove = null;
+        //       document.onmouseup = null;
+        //     }
+        //   }
+        // }
+      // 五、如何阻止冒泡和默认事件(兼容写法)
+        // function stopBubble (e) { // 阻止冒泡
+        //   if (e && e.stopPropagation) {
+        //     e.stopPropagation();
+        //   } else {
+        //     // 兼容 IE
+        //     window.event.cancelBubble = true;
+        //   }
+        // }
+        // function stopDefault (e) { // 阻止默认事件
+        //   if (e && e.preventDefault) {
+        //     e.preventDefault();
+        //   } else {
+        //     // 兼容 IE
+        //     window.event.returnValue = false;
+        //     return false;
+        //   }
+        // }
+      // 六、如何画扇形？三角形？
+        
+        // 第0项：全量第1项：开头第2项：中间的值第3项：结尾
+        // 所以我们是要拿第2项match[2]的值。
+
+        // 为了防止获取到的值是%xxx这样的字符序列，需要用unescape()方法解码。
+    // 第七期
+      //  1. 几种字符串转为数字的方法，有什么区别？
+          // let str = '33.3c'
+          // console.log(Number(str)); // NaN
+          // console.log(parseInt(str)); // 33
+          // console.log(parseFloat(str)); // 33.3
+          // console.log(str++); // NaN
+          // console.log(str>>>2); // 0
+          // Number()方法会对传入的值进行强转换为数字，如果传入的字符串包含了非数字的话则被转为NaN
+          // parseInt()方法会将传入的值转为整数，若是碰到非数字部分则终止
+          // parseFloat()方法和parseInt()很像，不过它会保留小数，另外它在碰到非数字部分也会终止
+          // ++这种方式的话就是就会有一个隐式转换的过程，将字符串转换为数字，类似于Number()；
+          // >>>无符号右移，>>是有符号右移，在这里呆呆认为str应该是会被先隐式转换为数字，然后再进行右移的，因为str被转为数字的结果是NaN，而NaN右移的结果是0：
+      // 2. 转换类数组的几种方式
+        //  「类数组概念」：
+        //   拥有length属性和若干索引属性的对象就被称为类数组，它和数组类似，但是不能调用数组的方法。
+        //  「常见类数组：」
+        //   DOM方法返回的批量的DOM集合， arguments，另外「函数」也可以被看为是类数组，因为它拥有length属性，length的值就是它可接收的参数的个数。
+        //  「转换为数组」：
+        // function test () {
+        //   console.log(Array.isArray([].slice.call(arguments))) // false
+        // }
+        // test('霖', '呆', '呆')
+        // 通过call和数组的slice方法：
+        // [].slice.call(arguments)
+        // // 当然也可以是这样，因为slice是Array.prototype上的方法
+        // Array.prototype.slice.call(arguments)
+          // slice的原理
+            // 基本原理就类似我们上面开头写的for循环遍历原数组，根据start和end的值再复制一份到新数组并返回。所以当我们使用[].slice.call(arguments)，slice方法内部的this就会被替换成arguments，并循环遍历arguments，复制到新数组返回，这样就得到了一个复制arguments类数组的数组对象。
+            // var args = []; 
+            // var obj = {0:"www",1:"jianshu",2:"com",length:3};
+            // for (var i = 0; i < obj.length; i++) { 
+            //     args.push(obj[i]);
+            // }
+            // console.log(args);  //["www","jianshu","com"]
+            // //等价于以下的写法
+            // console.log([].slice.call(obj));  //["www","jianshu","com"]
+        // 通过call和数组的splice方法：
+        // [].splice.call(arguments)
+        // 通过apply和数组的concat方法：
+        // [].concat.apply(arguments)
+        // 通过Array.from()：
+        // Array.from(arguments)
+        // 复制代码
+        // ...展开操作符：
+        // [...arguments]
+        // 来写个简写吧：
+        // slice + callsplice + callconcat + applyArray.from...
+      // 3. 如何判断一个对象是否为空对象？
+        // let obj = {}
+        // for...in...
+        // function isEmptyObj (obj) {
+        //     for (i in obj) {
+        //       console.log(i)
+        //         return false
+        //     }
+        //     return true;
+        // }
+        // console.log(isEmptyObj(obj)); // true
+        // 复制代码
+        // 不过这种方法貌似有一个弊端，因为for...in...是会把对象原型链上的属性也列举出来，例如下面这样就会判断错误：
+        // function isEmptyObj (obj) {
+        //   for (i in obj) {
+        //     return false
+        //   }
+        //   return true;
+        // }
+        // let obj = {};
+        // obj.__proto__.num = 'dsfdf'
+        // console.log(isEmptyObj(obj)); // false
+        // 复制代码
+
+        // JSON.stringify()
+        // 这个是呆呆很久之前用的一种方法：
+        // function isEmptyObj (obj) {
+        //   return JSON.stringify(obj) === '{}';
+        // }
+        // console.log(isEmptyObj(obj)); // true
+        // 复制代码
+
+        // Object.keys()：
+        // function isEmptyObj (obj) {
+        //   return Object.keys(obj).length === 0;
+        // }
+        // console.log(isEmptyObj(obj)); // true
+      // 4. 如何让Chrome浏览器支持小于12px的字体大小？
+        // -webkit-transform: scale(0.8); 它修改的整个元素的大小，所以如果是内联元素的话则需要转换为块元素或者内联块元素
+        
+      // 5. font-style 属性中 italic 和 oblique 的区别？
+        // italic是使用当前字体的斜体字体
+        // oblique只是单纯地让文字倾斜
+        // 如果当前字体没有对应的斜体字体，则退而求其次，则会被当成oblique处理，也就是单纯形状倾斜。
+      // 6. 空元素(单标签)元素有哪些？ 
+        // 标签内没有内容的 HTML 标签 br hr input img link meta
+       
+      // 7. b与strong的区别以及i和em的区别？
+        // 被<b>和<strong>包裹的文字会被加粗
+        // 被<i>和<em>包裹的文字会以斜体的方式呈现
+        // <b>标签和<i>标签都是「自然样式标签」，都只是在样式上加粗和变斜，并没有什么实际的意义。并且据了解，这两种标签在HTML4.01中已经不被推荐使用了。
+        // <strong>标签和<em>的话是「语义样式标签」。就像是<h1>、<h2>一样都有自己的语义。<em>表示一般的强调文本，而<strong>表示更强的强调文本。另外在使用阅读设备的时候，<strong>会重读(这点呆呆也没有实践过所以不太敢保证)。
+  </script>
+</body>
+</html>
