@@ -20,7 +20,16 @@
 		</view>
 		<view class="detail-content">
 			<view class="detail-html">
-				<u-parse :content="fromData.content" :noData="noData"></u-parse>
+				<!-- <u-parse :content="fromData.content" :noData="noData"></u-parse> -->
+				<view>内容</view>
+			</view>
+			<view class="detail-comment">
+				<view class="comment-title">
+					最新评论
+				</view>
+				<view class="comment-content" v-for="v in commentList" :key="v.comment_id">
+					<comment-box :comments = "v" @reply="reply"></comment-box>
+				</view>
 			</view>
 		</view>
 		<!-- 工具栏 -->
@@ -69,12 +78,15 @@
 			return {
 				fromData: {},
 				noData: '<p style="text-align:center;color:#666;font-size: 14px;">详情加载中...</p>',
-				commentsValue: '' // 输入评论的值
+				commentsValue: '', // 输入评论的值
+				commentList: [], // 评论列表
+				replyFormData: {} // 回复的数据
 			}
 		},
 		onLoad (query) {
 			this.fromData = JSON.parse(query.params)
 			this.getDetail()
+			this.getComments()
 			// console.log(this.fromData,'this.fromData')
 		},
 		// 所有的页面渲染完毕时触发
@@ -82,13 +94,24 @@
 			
 		},
 		methods: {
+			// 获取详情信息
 			getDetail() {
 				this.$api.get_detail({
 				  article_id: this.fromData._id
 				}).then(res => {
 					const { data } = res
 					this.fromData = data
-					console.log(res,'res')
+					// console.log(res,'详情信息')
+				})
+			},
+			// 请求评论内容
+			getComments() {
+				this.$api.get_commenta({
+					article_id: this.fromData._id
+				}).then(res => {
+					console.log(res,'请求评论内容')
+					const { data } = res
+					this.commentList = data
 				})
 			},
 			// 打开评论窗口
@@ -102,7 +125,38 @@
 			// 发布评论窗口
 			submit() {
 				console.log('发布')
-				this.$refs.popup.close()
+				if(!this.commentsValue) {
+					uni.showToast({
+						title: '请输入评论内容',
+						icon: 'none'
+					})
+					return
+				}
+				this.update_comment({content:this.commentsValue,...this.replyFormData})
+			},
+			update_comment(content) {
+				const fromData = {
+					article_id: this.fromData._id,
+					...content
+				}
+				console.log(fromData,'fromData')
+				uni.showLoading()
+				this.$api.update_comment(fromData).then(res => {
+					uni.hideLoading()
+					this.close()
+					uni.showToast({
+						title: '评论发布成功',
+						icon: 'none'
+					})
+				})
+			},
+			// 点击回复
+			reply(e) {
+				this.replyFormData = {
+					"comment_id": e.comment_id
+				}
+				this.openComment()
+				console.log(this.replyFormData)
 			}
 				
 		}
@@ -161,6 +215,21 @@
 		.detail-html {
 			padding: 0 15px;
 			font-size: 14px;
+		}
+		.detail-comment {
+			margin-top: 30px;
+			.comment-title {
+				padding: 10px 15px;
+				font-size: 14px;
+				color: #666;
+				border-bottom: 1px solid #f5f5f5;
+			}
+			.comment-content {
+				padding: 0 15px;
+				border-top: 1px solid #eee;
+				
+			}
+			
 		}
 	}
 	.detail-bottom {
