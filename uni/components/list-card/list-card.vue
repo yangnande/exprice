@@ -8,7 +8,7 @@
 			<view class="listCard-content">
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
-					<like :item="item"></like>
+					<like :item="item" :types="types"></like>
 				</view>
 				<view class="listCard-content-des">
 					<view class="listCard-content__des-label">
@@ -25,7 +25,7 @@
 			<view class="listCard-content">
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
-					<like :item="item"></like>
+					<like :item="item" :types="types"></like>
 				</view>
 				<view class="listCard-image">
 					<view v-if="i<=3" v-for="(v,i) in item.cover" :key="i" class="listCard-image__item">
@@ -51,7 +51,7 @@
 				</view>
 				<view class="listCard-content-title">
 					<text>{{item.title}}</text>
-					<like :item="item"></like>
+					<like :item="item" :types="types"></like>
 				</view>
 				<view class="listCard-content-des">
 					<view class="listCard-content__des-label">
@@ -72,6 +72,10 @@
 		props: {
 			item: {
 				type: Object
+			},
+			types: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {

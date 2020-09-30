@@ -33,6 +33,7 @@
 				this.getLabel()
 			})
 			this.getLabel()
+			console.log('111111')
 		},
 		methods: {
 			getLabel() {

@@ -13,9 +13,13 @@
       font-size: 50px;
       font-weight: bold;white-space:nowrap
   }
+  img {
+      margin: 20px auto;
+      border-radius:10px;
+  }
 </style>
 <body>
-  <img src="../image/2.jpg" alt="">
+  <!-- <img src="../image/2.jpg" alt=""> -->
   <!-- <ul id="myLink">
     <li id="aa"><span>aaa</span></li>
     <li id="2">bbb</li>
@@ -77,16 +81,23 @@
     https://q.shanyue.tech/base/
     计算机基础面试题小计
   </p> -->
+  <img src="./mark.png" alt="">
   <script>
-    const countWords = (words) => {
-    const counts = { };
-    for (const word of words) {
-        counts[word] = (counts[word] || 0) + 1;
-    }
-    return counts;
-    };
-    const counts = countWords(['constructor', 'creates', 'a', 'bug']);
-    console.log(counts)
+    // var a = {a:{a:1,b:2}}
+    // console.log(JSON.stringify(a))
+    // console.time()
+    // a.a.c = 3
+    // console.log(JSON.stringify(a))
+    // console.timeEnd()
+    // const countWords = (words) => {
+    // const counts = { };
+    // for (const word of words) {
+    //     counts[word] = (counts[word] || 0) + 1;
+    // }
+    // return counts;
+    // };
+    // const counts = countWords(['constructor', 'creates', 'a', 'bug']);
+    // console.log(counts)
     // 对数组的属性first_word根据大小写字母排序，并且，组合数组
     // var priviIdsArr = [
     //   {

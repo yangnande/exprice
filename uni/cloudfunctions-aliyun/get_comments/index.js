@@ -6,7 +6,9 @@ exports.main = async (event, context) => {
 	console.log('event : ', event)
 	const {
 		user_id,
-		article_id
+		article_id,
+		pageSize = 10,
+		page = 1
 	} = event
 	const list = await db.collection('article')
 	.aggregate()
@@ -19,9 +21,10 @@ exports.main = async (event, context) => {
 		comments: 1
 	})
 	.replaceRoot({ // $comments 指定一个已有字段作为输出的根节点，也可以指定一个计算出的新字段作为根节点。 
-
 		newRoot:'$comments'
 	})
+	.skip(pageSize*(page-1))
+	.limit(pageSize)
 	.end()
 
 	//返回数据给客户端

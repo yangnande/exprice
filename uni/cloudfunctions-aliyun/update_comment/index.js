@@ -9,8 +9,9 @@ exports.main = async (event, context) => {
 		user_id, // 用户id
 		article_id, // 文章id
 		content, // 评论内容
-		comment_id ='' // 评论id
-		
+		comment_id ='', // 评论id
+		reply_id = '', // 子评论id
+		is_reply = false // 主回复（）还是子回复
 	} = event
 	let user = await db.collection('user').doc(user_id).get()
 	user = user.data[0]
@@ -23,6 +24,7 @@ exports.main = async (event, context) => {
 		comment_id: getID(5),
 		comment_content: content,
 		create_time: new Date().getTime(),
+		is_reply: is_reply, // 确定是主回复还是子回复
 		author: {
 			author_id: user._id,
 			author_name: user.author_name,
@@ -40,13 +42,21 @@ exports.main = async (event, context) => {
 		// 获取评论的索引
 		let commentIndex = comments.findIndex(item=>item.comment_id === comment_id)
 		// 获取作者信息
-		let commentAuthor = comments.find(item=>item.comment_id === comment_id)
+		let commentAuthor = ''
+		if(is_reply) {
+			// 子回复
+			commentAuthor = comments[commentIndex].replys.find(item=>item.comment_id === reply_id)
+		}else{
+			// 主回复
+			commentAuthor = comments.find(item=>item.comment_id === comment_id)
+		}
 		commentAuthor = commentAuthor.author.author_name
-		// to 给谁回复
 		commentObj.to = commentAuthor
 		// 更新回复信息
 		commentObj = {
-			[commentIndex]: dbCmd.unshift(commentAuthor)
+			[commentIndex]: {
+				replys: dbCmd.unshift(commentObj)
+			}
 		}
 	}
 	await db.collection('article').doc(article_id).update({

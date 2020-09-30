@@ -17,11 +17,12 @@
 					<text>{{fromData.thumbs_up_count}} 赞</text>
 				</view>
 			</view>
+			<button type="default" class="detail-header__button" @click="follow(fromData.author.id)">{{fromData.is_author_like ? '取消关注':'关注'}}</button>
 		</view>
 		<view class="detail-content">
 			<view class="detail-html">
-				<!-- <u-parse :content="fromData.content" :noData="noData"></u-parse> -->
-				<view>内容</view>
+				<u-parse :content="fromData.content" :noData="noData"></u-parse>
+				<!-- <view>内容</view> -->
 			</view>
 			<view class="detail-comment">
 				<view class="comment-title">
@@ -39,14 +40,14 @@
 				<uni-icons type="compose" size="16" color="#f07373"></uni-icons>
 			</view>
 			<view class="detail-bottom__icons">
-				<view class="detail-bottom__icons-box">
+				<view class="detail-bottom__icons-box" @click="open">
 					<uni-icons type="chat" size="22" color="#f07373"></uni-icons>
 				</view>
-				<view class="detail-bottom__icons-box">
-					<uni-icons type="heart" size="22" color="#f07373"></uni-icons>
+				<view class="detail-bottom__icons-box" @click="likeTab(fromData._id)">
+					<uni-icons :type="fromData.is_like ? 'heart-filled': 'heart'" size="22" color="#f07373"></uni-icons>
 				</view>
-				<view class="detail-bottom__icons-box">
-					<uni-icons type="hand-thumbsup" size="22" color="#f07373"></uni-icons>
+				<view class="detail-bottom__icons-box" @click="thumbsup(fromData._id)">
+					<uni-icons :type="fromData.is_thumbs_up ? 'hand-thumbsup-filled': 'hand-thumbsup'" size="22" color="#f07373"></uni-icons>
 				</view>
 			</view>
 		</view>
@@ -70,6 +71,7 @@
 
 <script>
 	import uParse from '@/components/gaoyia-parse/parse.vue'
+	
 	export default {
 		components: {
 			uParse
@@ -139,26 +141,94 @@
 					article_id: this.fromData._id,
 					...content
 				}
-				console.log(fromData,'fromData')
 				uni.showLoading()
 				this.$api.update_comment(fromData).then(res => {
 					uni.hideLoading()
 					this.close()
+					this.getComments()
 					uni.showToast({
 						title: '评论发布成功',
 						icon: 'none'
 					})
+					this.replyFormData = {}
+					this.commentsValue = ''
 				})
 			},
 			// 点击回复
 			reply(e) {
 				this.replyFormData = {
-					"comment_id": e.comment_id
+					"comment_id": e.comments.comment_id,
+					"is_reply": e.is_reply
+				}
+				if(e.comments.reply_id) {
+					this.replyFormData.reply_id = e.comments.reply_id
 				}
 				this.openComment()
-				console.log(this.replyFormData)
+				// console.log(this.replyFormData,'this.replyFormData')
+			},
+			// 作者关注
+			follow(author_id) {
+				this.setUpdateAuthor(author_id)
+			},
+			setUpdateAuthor(author_id) {
+				console.log(this.fromData)
+				uni.showLoading()
+				this.$api.update_author({
+					author_id: author_id
+				}).then(res => {
+					uni.hideLoading()
+					this.fromData.is_author_like = !this.fromData.is_author_like
+					uni.$emit('update_author')
+					uni.showToast({
+						title: this.fromData.is_author_like ? '关注作者成功' : '取消关注作者',
+						icon: 'none'
+					})
+				})
+			},
+			// 文章收藏
+			likeTab(article_id) {
+				console.log('文章收藏')
+				this.setUpdataLike(article_id)
+			},
+			setUpdataLike(article_id) {
+				uni.showLoading()
+				this.$api.updateLike({
+					article_id
+				}).then(res => {
+					uni.hideLoading()
+					this.fromData.is_like = !this.fromData.is_like
+					uni.$emit('update_article','follow') 
+					uni.showToast({
+						title: this.fromData.is_like ? '收藏成功' : '取消收藏',
+						icon: 'none'
+					})
+					console.log(res, 'res')
+				})
+			},
+			thumbsup(article_id) {
+				this.setUpdateThumbs(article_id)
+			},
+			setUpdateThumbs(article_id) {
+				uni.showLoading()
+				this.$api.update_thumbsup({
+					article_id
+				}).then(res => {
+					uni.hideLoading()
+					this.fromData.is_thumbs_up = !this.fromData.is_thumbs_up
+					this.fromData.thumbs_up_count++
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					})
+					console.log(res, 'res')
+				})
+			},
+			// 打开评论列表
+			open() {
+				uni.navigateTo({
+					url: '/pages/detail-comments/detail-comments?id=' + this.fromData._id
+				})
 			}
-				
 		}
 	}
 </script>
@@ -207,6 +277,13 @@
 			.detail-header__content-info {
 				color: #999;
 			}
+		}
+		.detail-header__button {
+			flex-shrink: 0;
+			height: 30px;
+			font-size: 12px;
+			background-color: $mk-base-color;
+			color: #fff;
 		}
 	}
 	.detail-content {

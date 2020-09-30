@@ -44,6 +44,14 @@
 		created() {
 			// tab 还没有拿到
 			// this.getList(0)
+			uni.$on('update_article',(e) => {
+				console.log(e,555)
+				if(e === 'follow') {
+					this.listCatchData = {}
+					this.load = {}
+					this.getList(this.activeIndex)
+				}
+			})
 		},
 		components: {
 			listItem
