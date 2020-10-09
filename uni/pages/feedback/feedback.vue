@@ -2,25 +2,25 @@
 	<view>
 		<view class="feedback-title">意见反馈</view>
 		<view class="feedback-content">
-			<textarea class="feedback-textarea" value="" placeholder="请输入您要反馈的问题" />
+			<textarea class="feedback-textarea" v-model="content" placeholder="请输入您要反馈的问题" />
 		</view>
 		<view class="feedback-title">反馈图片</view>
 		<view class="feedback-image-box">
-			<view class="feedback-image-item">
-				<view class="close-icon">
+			<view class="feedback-image-item" v-for="(v,i) in imageList" :key="i">
+				<view class="close-icon" @click="del(i)">
 					<uni-icons type="close" size="18" color="#fff"></uni-icons>
 				</view>
 				<view class="image-box">
-					<image src="../../static/logo.png" mode="aspectFill"></image>
+					<image :src="v.url" mode="aspectFill"></image>
 				</view>
 			</view>
-			<view class="feedback-image-item">
+			<view class="feedback-image-item" @click="addImage" v-if="imageList.length<5">
 				<view class="image-box">
 					<uni-icons type="plusempty" size="50" color="#eee"></uni-icons>
 				</view>
 			</view>
 		</view>
-		<button class="feedback-button" type="primary">提交反馈意见</button>
+		<button class="feedback-button" type="primary" @click="submit">提交反馈意见</button>
 	</view>
 </template>
 
@@ -28,11 +28,69 @@
 	export default {
 		data() {
 			return {
-				
+				content: '',
+				imageList: []
 			}
 		},
 		methods: {
-			
+			addImage() {
+				const count = 5 - this.imageList.length
+				uni.chooseImage({
+					count: count,
+					success: res => {
+						const tempFilePaths = res.tempFilePaths
+						tempFilePaths.forEach((v,i) => {
+							if(i < count) {
+								this.imageList.push({
+									url: v
+								})
+							}
+							
+						})
+					}
+				})
+			},
+			del(i) {
+				this.imageList.splice(i,1)
+			},
+			async submit() {
+				let imagesPath = []
+				uni.showLoading()
+				// 循环的目的 上传图片api每次只能上传一张图片 
+				for(let i = 0;i<this.imageList.length;i++) {
+					let filePath = this.imageList[i].url
+					filePath = await this.uploadFiles(filePath)
+					imagesPath.push(filePath)
+				}
+				this.updateFeedback({
+					content: this.content,
+					feedbackImages: imagesPath
+				})
+			},
+			async uploadFiles(filePath) {
+				const result = await uniCloud.uploadFile({
+					cloudPath: filePath
+				})
+				return result.fileID
+			},
+			updateFeedback({content,feedbackImages}) {
+				this.$api.update_feedback({
+					content,
+					feedbackImages
+				}).then(res => {
+					uni.hideLoading()
+					uni.showToast({
+						title:'反馈提交成功',
+						icon: 'none'
+					})
+				}).catch(()=>{
+					uni.hideLoading()
+					uni.showToast({
+						title:'反馈提交失败',
+						icon: 'none'
+					})
+				})
+			}
 		}
 	}
 </script>
