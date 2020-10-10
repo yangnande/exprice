@@ -69,7 +69,8 @@
 			},
 			async uploadFiles(filePath) {
 				const result = await uniCloud.uploadFile({
-					cloudPath: filePath
+					cloudPath: filePath,
+					filePath: filePath
 				})
 				return result.fileID
 			},
@@ -82,6 +83,9 @@
 					uni.showToast({
 						title:'反馈提交成功',
 						icon: 'none'
+					})
+					uni.switchTab({
+						url: "/pages/my/my"
 					})
 				}).catch(()=>{
 					uni.hideLoading()

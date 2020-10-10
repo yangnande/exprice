@@ -1,7 +1,9 @@
 <template>
 	<view class="nav-bar">
 		<view class="nav-fixed">
+			<!-- #ifndef MP-ALIPAY -->
 			<view :style="{height: statusBarHeight + 'px'}"></view>
+			<!-- #endif -->
 			<view class="content" :class="{search: isSearch}" :style="{height: navBarHeight + 'px',width: windowWidth + 'px'}" @click.stop="open">
 				<view class="navbar-content__search_icon" v-if="isSearch" @click="back">
 					<uni-icons type="back" size="22" color="#fff"></uni-icons>
@@ -64,6 +66,9 @@
 			this.navBarHeight = (menuButton.bottom - this.statusBarHeight) + (menuButton.top - this.statusBarHeight)
 			console.log(this.navBarHeight,'this.navBarHeight')
 			this.windowWidth = menuButton.left
+			// #endif
+			// #ifdef MP-ALIPAY
+			this.statusBarHeight = 0
 			// #endif
 		},
 		methods: {

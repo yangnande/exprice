@@ -1,0 +1,8 @@
+
+.no-data {
+	padding: 50px;
+	font-size: 14px;
+	color: #999;
+	text-align: center;
+}
+

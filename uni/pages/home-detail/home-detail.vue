@@ -281,6 +281,9 @@
 		.detail-header__button {
 			flex-shrink: 0;
 			height: 30px;
+			line-height: 30px;
+			border-radius: 5px;
+			padding: 0 15px;
 			font-size: 12px;
 			background-color: $mk-base-color;
 			color: #fff;
