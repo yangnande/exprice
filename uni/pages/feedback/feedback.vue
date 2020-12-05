@@ -69,7 +69,8 @@
 			},
 			async uploadFiles(filePath) {
 				const result = await uniCloud.uploadFile({
-					cloudPath: filePath
+					cloudPath: filePath,
+					filePath: filePath
 				})
 				return result.fileID
 			},
@@ -84,7 +85,7 @@
 						icon: 'none'
 					})
 					uni.switchTab({
-						url: "/pages/tabbar/my/my"
+						url: "/pages/my/my"
 					})
 				}).catch(()=>{
 					uni.hideLoading()

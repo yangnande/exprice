@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "评论列表",
+  "usingComponents": {
+    "comment-box": "/components/comment-box/comment-box",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}

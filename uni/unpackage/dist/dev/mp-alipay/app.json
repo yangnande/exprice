@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/follow/follow",
+    "pages/home-search/home-search",
+    "pages/home-label/home-label",
+    "pages/home-detail/home-detail",
+    "pages/detail-comments/detail-comments",
+    "pages/my-article/my-article",
+    "pages/feedback/feedback"
+  ],
+  "subPackages": [],
+  "window": {
+    "defaultTitle": "uni-app",
+    "titleBarColor": "#f07373",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "textColor": "#7A7E83",
+    "selectedColor": "#f07373",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "首页",
+        "icon": "./static/tabs/home-icon.png",
+        "activeIcon": "static/tabs/home-selectIcon.png"
+      },
+      {
+        "pagePath": "pages/follow/follow",
+        "name": "关注",
+        "icon": "./static/tabs/fen-icon.png",
+        "activeIcon": "static/tabs/fen-selectIcon.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "name": "我的",
+        "icon": "static/tabs/user-icon.png",
+        "activeIcon": "static/tabs/user-selectIcon.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
