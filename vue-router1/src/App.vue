@@ -1,15 +1,17 @@
 <template>
-  <div v-if="isShow">
+  <div v-if="isShow" class="container">
     <div class="regiter"></div>
-    <div class="close" @click="closePage"></div>
-    <div class="qrcode" v-show="!imgUrl" ref="box">
-      <div class="bg"></div>
-      <div class="desc">
-        <div class="qr" id="qrcode" ref="qrcode"></div>
-        <p>扫描添加专属助理为好友,一起瓜分流量红包！</p>
+    <div class="content">
+      <!-- <div class="close" @click="closePage"></div> -->
+      <div class="qrcode" v-show="!imgUrl" ref="box">
+        <div class="bg"></div>
+        <div class="desc">
+          <div class="qr" id="qrcode" ref="qrcode"></div>
+          <p>您不是该客户经理的好友，扫描添加客户经理为好友，即可瓜分流量红包！！</p>
+        </div>
       </div>
+      <img v-show="imgUrl" class="newImg" :src="imgUrl" alt="" ref="newImg">
     </div>
-    <img v-show="imgUrl" class="newImg" :src="imgUrl" alt="" ref="newImg">
   </div>
 </template>
 
@@ -17,11 +19,11 @@
 import html2canvas from 'html2canvas'
 import QRCode from 'qrcodejs2'
 export default {
+  props: ['qrUrl'],
   data () {
     return {
       imgUrl: '',
-      isShow: true,
-      qrUrl: 'https://www.baidu.com'
+      isShow: true
     }
   },
   mounted () {
@@ -46,7 +48,7 @@ export default {
       new QRCode(document.getElementById('qrcode'), {
         width: parseFloat(window.getComputedStyle(qr).width), // 二维码宽度，单位像素
         height: parseFloat(window.getComputedStyle(qr).height), // 二维码高度，单位像素
-        text: this.qrUrl, // 生成二维码的链接
+        text: 'https://www.baidu.com', // 生成二维码的链接
         correctLevel : QRCode.CorrectLevel.L
       })
       this.createQRCode()

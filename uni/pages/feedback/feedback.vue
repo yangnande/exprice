@@ -83,6 +83,9 @@
 						title:'反馈提交成功',
 						icon: 'none'
 					})
+					uni.switchTab({
+						url: "/pages/tabbar/my/my"
+					})
 				}).catch(()=>{
 					uni.hideLoading()
 					uni.showToast({
