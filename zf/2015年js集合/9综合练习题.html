@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num = 20 // 60 240
+        var obj = {
+            num: 30, // 120
+            fn:(function(num) {
+                this.num *= 3 // this=window window.num = 20*3=60
+                num += 15 // 私有变量 num = 20+15
+                var num = 45 // 私有变量 num = 45 65
+                return function() {
+                    this.num *= 4 // this=window window.num = 60*4=240  this=obj obj.num = 30*4 =120
+                    num += 20 // 向上级作用域找 num = 45+20=65 num = 65+20=85
+                    console.log(num); // 65 85
+                }
+            })(num) // 把全局变量num的值20赋值给了自执行函数的形参，而不是obj下的30,如果想是obj下的30，我们需要些obj.num
+        }
+        var fn = obj.fn
+        fn() // 65 
+        obj.fn() // 85
+        console.log(window.num,obj.num) // 240 120
+    </script>
+</body>
+</html>
