@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var jsPerson1 = {
+            name: "11",
+            age: 22,
+            writeJs:function() {
+                console.log("my name is "+this.name+" ,i can wirte js 啦~~");
+            }
+        }
+        var jsPerson2 = {
+            name: "22",
+            age: 22,
+            writeJs:function() {
+                console.log("my name is "+this.name+" ,i can wirte js 啦~~");
+            }
+        }
+        // 单例模式虽然解决了分组的作用，但是不能实现批量的生产，属于手工作业模式 “工厂模式”
+        // 把实现同一件事情的相同的代码放到同一个函数中，以后如果在想实现这个功能，不需要重新的编写这些代码来了，只需要执行当前函数即可 ->函数的封装
+        // "低耦合高内聚"：减少页面的冗余代码，提高代码的重复利用率
+        function creteJsPerson(name,age) {
+            var obj = {}
+            obj.name = name
+            obj.age = age
+            obj.writeJs = function() {
+                console.log("my name is "+this.name+" ,i can wirte js 啦~~");
+            }
+            return obj
+        }
+        var p1 = creteJsPerson("11",10)
+        p1.writeJs()
+        var p2 = creteJsPerson("22",10)
+        p2.writeJs()
+        // js是一门轻量级的脚本“编程语言”，（html+css不属于编程语言，属于标记语言）
+        // .net c# php jsva c c++ vb vf object-c ...
+        // 所有的编程语言都是面向对象开发的->类的继承，封装，多态
+        // 继承:子类继承父类的属性和方法
+        // 多态：当前方法的多种形态->后台语言中：多态包含重载和重写
+        // public void sum(int num1,int num2) {
+
+        // }
+        // public void sum(String num1,int num2) {
+            
+        // }
+        // sum("1")
+        function sum (num1,num2) {
+
+        }
+        function sum (num1) {
+            
+        }
+        sum(1)
+        sum(1,2)
+        // js中不存在重载，方法名一样的话，后面的会把前面的覆盖掉，最后只保留一个
+        // js中有一个操作类似重载，我们可以根据传递参数的不一样，实现不同的功能
+        function sum(sum) {
+            if(typeof num  === "undefined"){
+                return 0
+            }
+            return num
+        }
+        sum(100)
+        sum()
+        // 重写：子类重写父类的方法
+
+    </script>
+</body>
+</html>
