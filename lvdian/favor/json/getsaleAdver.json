@@ -1,0 +1,27 @@
+{
+  "retCode": "000000",
+  "retDesc": "SUCCESS",
+  "rspBody": {
+    "adverList": [
+      {
+        "actionType": 1,
+        "actionUrl": "https://y.migu.cn/app/v3/p/redirect/utoken/cmcc11.html?url=https%3A%2F%2Fy.migu.cn%2Fapp%2Fgm%2Fv1%2Findex.html%3Fid%3D90312",
+        "adverLabel": 1,
+        "adverLocation": 1,
+        "goodsId": "0",
+        "imageUrl": "https://app.10086.cn/group1/M00/00/2C/ChoDA19xfJCASJAUAAD5ku7S5MY751.jpg",
+        "isPseMarket": 0,
+        "isShare": 0,
+        "isSso": 0,
+        "loginType": 0,
+        "markId": 13280,
+        "marktionType": "1",
+        "operationPositionId": "",
+        "parmas": "",
+        "ssoUrlAddr": "",
+        "subActivityId": "",
+        "verifyType": 0
+      }
+    ]
+  }
+}

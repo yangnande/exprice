@@ -1,0 +1,57 @@
+{
+  "retCode": "000000",
+  "retDesc": "SUCCESS",
+  "rspBody": {
+    "horizontalBannerDbList": [
+      {
+        "id": 13252,
+        "moduleId": 4,
+        "adverLocation": 1,
+        "busiTitle": "5G特惠包",
+        "jumpUrl": "https://dev.coc.10086.cn/coc2/web-kataobao/halfpriceflow/index.html?pageId=1309380064098234368&channelId=C00004006236",
+        "prodId": "0",
+        "imageUrl": "https://app.10086.cn/group2/M00/05/B3/ChoDJl9y056AN4hoAAAHTT43lfk889.png",
+        "actionType": 1,
+        "isShare": "0",
+        "marktionType": 1
+      },
+      {
+        "id": 13255,
+        "moduleId": 4,
+        "adverLocation": 2,
+        "busiTitle": "200G流量",
+        "jumpUrl": "https://dev.coc.10086.cn/coc/web/coc2020/contractsposter_jq_activiteNewspring/#/?pageId=&channelId=C10000033551",
+        "prodId": "0",
+        "imageUrl": "https://app.10086.cn/group1/M00/00/2D/ChoDBF9y1EOABjX5AAAFUY-GJMY819.png",
+        "actionType": 1,
+        "isShare": "0",
+        "marktionType": 1
+      },
+      {
+        "id": 13253,
+        "moduleId": 4,
+        "adverLocation": 3,
+        "busiTitle": "随心看",
+        "jumpUrl": "https://dev.coc.10086.cn/coc/web/coc2020/heartChoose/?channelId=C00004001219",
+        "prodId": "0",
+        "imageUrl": "https://app.10086.cn/group1/M00/00/1F/ChoDI19y0_qAfiSkAAAHIQ4dvCg643.png",
+        "actionType": 1,
+        "isShare": "0",
+        "marktionType": 1
+      },
+      {
+        "id": 13254,
+        "moduleId": 4,
+        "adverLocation": 4,
+        "busiTitle": "智享套餐",
+        "jumpUrl": "https://dev.coc.10086.cn/coc2/web-kataobao/discountpacket/index.html?channelId=C00004004097",
+        "prodId": "0",
+        "iconCode": "",
+        "imageUrl": "https://app.10086.cn/group1/M00/05/B7/ChoDJF9y1B-APYVDAAAEfHvSnfg466.png",
+        "actionType": 1,
+        "isShare": "0",
+        "marktionType": 1
+      }
+    ]
+  }
+}

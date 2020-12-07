@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html manifest="../../manifest/payflow/payflow.manifest">
+	<head>
+    <meta charset="utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>流量直充</title>
+	<script>
+		/**
+		* 浏览器更新离线资源完成的时候触发
+		*/
+		applicationCache.onupdateready = function(){
+			applicationCache.swapCache() //将原缓存换成新缓存
+			window.location.reload()
+		}
+    </script>
+	<script type="text/javascript" src="../../js/public/autoScale.js"></script>
+	<script type="text/javascript" src="../../js/public/webtrends.min.js"></script>
+	<link href="../../css/public/public.css" rel="stylesheet" />
+	<link href="../../css/flow/payFlow.css" rel="stylesheet" />
+	<!--  <link href="../../css/flow/payFlowf.css" rel="stylesheet" />  -->
+	</head>
+	<body>
+
+	</body>
+	<!-- 测试 -->
+	<!-- <script type="text/javascript" src="../../js/public/vconsole.min.js"></script> -->
+	<script type="text/javascript" src="../../js/plugin/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/public/fashion.js"></script>
+	<script type="text/javascript" src="../../js/public/publicClient.js"></script>
+	<script type="text/javascript" src="../../js/public/leadeon.js"></script>
+	<script type="text/javascript" src="../../js/flow/vueJs.js"></script>
+
+</html>

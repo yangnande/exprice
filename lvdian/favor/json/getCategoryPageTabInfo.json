@@ -1,0 +1,33 @@
+{
+  "retCode": "000000",
+  "retDesc": "SUCCESS",
+  "rspBody": {
+    "pageTabList": [
+      {
+        "tabName": "推荐",
+        "tabType": "0",
+        "tabelId": "4"
+      },
+      {
+        "tabName": "流量",
+        "tabType": "0",
+        "tabelId": "5"
+      },
+      {
+        "tabName": "号卡宽带",
+        "tabType": "0",
+        "tabelId": "6"
+      },
+      {
+        "tabName": "生活",
+        "tabType": "0",
+        "tabelId": "7"
+      },
+      {
+        "tabName": "更多",
+        "tabType": "1",
+        "tabelId": "8"
+      }
+    ]
+  }
+}
