@@ -19,6 +19,7 @@
   }
 </style>
 <body>
+  
   <!-- <img src="../image/2.jpg" alt=""> -->
   <!-- <ul id="myLink">
     <li id="aa"><span>aaa</span></li>
@@ -31,6 +32,7 @@
     </div>
   </div>
   <p>
+    
     https://github.com/rohan-paul/Awesome-JavaScript-Interviews
     https://github.com/nieyafei/front-end-interview-js
     前端面试interview的Js题目收集
@@ -56,8 +58,8 @@
     你要的Vue面试题都在这里
     https://juejin.im/post/5d153267e51d4510624f9809
     vue 220+个知识点（面试题）为你保驾护航
-    https://juejin.im/entry/5d06ce32e51d4510a50335bd)
-    [译] 送你 43 道 JavaScript 面试题
+    https://juejin.im/entry/5d06ce32e51d4510a50335bd
+    [译] 送你 43 道 JavaScript 面试题 (看完)
     https://juejin.im/post/5d1d52aff265da1bb2774de0
     面试官到底想看什么样的简历？
     https://juejin.im/post/5d23e750f265da1b855c7bbe
@@ -80,9 +82,11 @@
     前端大厂面经大全集
     https://q.shanyue.tech/base/
     计算机基础面试题小计
+    优化if else https://blog.csdn.net/qq_40259641/article/details/83866457
   </p> -->
   <!-- <img src="./mark.png" alt=""> -->
   <script>
+// freddie.colorChange("orange");
     //   var a1 = 1
     //   b = a1 
     //   a1 = 2
@@ -108,25 +112,25 @@
 //   return objClone;
 // } 
 
-function deepClone(obj) {
-    console.log(Array.isArray(obj))
-    let objClone = Array.isArray(obj) ? [] : {}
-    if(obj && typeof obj === 'object') {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key)) {
-                if(obj[key] && typeof obj[key] === 'object') {
-                    objClone[key] = deepClone(obj[key])
-                } else {
-                    objClone[key] = obj[key]
-                }
-            }
-        }
-    }
-    return objClone
-}
-let a={a:1,b:{a:1,b:2}},b=deepClone(a);
-a.b.a=2;
-console.log(a,b);
+// function deepClone(obj) {
+//     console.log(Array.isArray(obj))
+//     let objClone = Array.isArray(obj) ? [] : {}
+//     if(obj && typeof obj === 'object') {
+//         for(var key in obj) {
+//             if(obj.hasOwnProperty(key)) {
+//                 if(obj[key] && typeof obj[key] === 'object') {
+//                     objClone[key] = deepClone(obj[key])
+//                 } else {
+//                     objClone[key] = obj[key]
+//                 }
+//             }
+//         }
+//     }
+//     return objClone
+// }
+// let a={a:1,b:{a:1,b:2}},b=deepClone(a);
+// a.b.a=2;
+// console.log(a,b);
 
     // var a = {a:{a:1,b:2}}
     // console.log(JSON.stringify(a))
