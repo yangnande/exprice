@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .super {
+      width: 200px;
+      height: 100px;
+      background: skyblue;
+    }
+    .sub1 {
+      padding-left: 10px;
+  margin-left: 10px;  
+      background: #d0e4a9;
+    }
+    .sub2 {
+  width: 100%;
+  padding-left: 10px;
+  margin-left: 10px;
+  background: #c077af;
+}
+.sub3 {
+  width: auto;
+  padding-left: 10px;
+  margin-left: 10px;
+  background: #f8d29d;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="super">
+    <div class="sub1">
+      我是呆呆的第一个崽
+    </div>
+    <div class="sub2">
+      我是呆呆的第二个崽
+    </div>
+    <div class="sub3">
+      我是呆呆的第三个崽
+    </div>
+  </div>
+
+  1 publicClient.js getQueryString 不区分大小写有问题-不管是大写还是小写 都可以获取value,不够严谨，需注意额，而curParam目前没有问题<br/>
+  2 点击tab，数据切换 demo: https://app.10086.cn/leadeon-cmcc-static-test/v2.0/pages/favour/favourPage.html
+  <script>
+   const colors = new Set(['white', 'blue', 'red', 'white']);
+
+for (let [key,value] of colors) {
+  console.log(key,value,colors);
+}
+// 'white'
+// 'blue'
+// 'red'
+
+
+
+
+    // 'John Smith'
+    // 'Jane Doe'
+
+// 'oranges'
+// 'apples'
+
+    // console.log([...data.matchAll(reg)]);
+    /**
+     * 0: ["2", index: 0, input: "2020", groups: undefined]
+     * 1: ["0", index: 1, input: "2020", groups: undefined]
+     * 2: ["2", index: 2, input: "2020", groups: undefined]
+     * 3: ["0", index: 3, input: "2020", groups: undefined]
+     */
+
+    // 1 publicClient.js
+    // function getQueryString (key) {
+    //   const reg = new RegExp('(^|&)' + key + '=([^&]*)(&|$)', 'i')
+    //   const arr = window.location.search.substring(1).match(reg)
+    //   // console.log(arr)
+    //   if (arr === null) return null
+    //   return decodeURIComponent(arr[2])
+    // }
+    // var value1 = getQueryString('nickname')
+    // var value2 = getQueryString('nickName')
+    // console.log(value1,value2,'getQueryString') // hello hello getQueryString
+
+    // function curParam (url){
+    // 	//对url进行解码
+    // 	url = decodeURI(url);
+    // 	var obj = new Object();
+    // 	var paramStr =url.substring(url.indexOf("?")+1,url.length);
+    // 	var paramArr = paramStr.split("&");
+    // 	for(var i=0 ; i< paramArr.length ; i++){
+		// 	var objArr = paramArr[i].split("=")[0];
+		// 	var objArr2 = paramArr[i].substring(paramArr[i].indexOf("=")+1);
+    //       obj[objArr.trim()] = objArr2 ? objArr2 : "";
+    //   }
+    //     return obj;
+    // }
+    // var url = 'https://www.baidu.com/?id=111&nickname=hello'
+    // var value1 = curParam(url).nickname
+    // console.log(value1,'curParam')
+    // var actions = new Map([  ['guest_1', ()=>{console.log('guest_1')}],  ['guest_2', ()=>{console.log('guest_2')}],  ['guest_3', ()=>{console.log('-------------')}],  ['guest_4', ()=>{console.log('-------------')}],  ['guest_5', ()=>{console.log('-------------')}],  ['master_1', ()=>{console.log('-------------')}],  ['master_2', ()=>{console.log('-------------')}],  ['master_3', ()=>{console.log('-------------')}],  ['master_4', ()=>{console.log('-------------')}],  ['master_5', ()=>{console.log('-------------')}],  ['default', ()=>{console.log('default')}],])
+    // console.log(actions)
+    // var onButtonClick = (identity,status)=>{  
+    //   let action = actions.get(`${identity}_${status}`) || actions.get('default')  
+    //   var value = action()
+    // }
+    // onButtonClick('default') 
+  </script>
+</body>
+</html>

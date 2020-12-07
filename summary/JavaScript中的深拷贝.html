@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>https://juejin.im/post/6894409797987368967#heading-2</title>
+</head>
+<body>
+  <p>1 不得不说的数据类型</p>
+  <p>两种数据类型，一种是基本数据类型(7个)：String、Number、Boolean、Undefined、Null、Symbol和BigInt，而另一种就是复杂数据类型:Object。只需要记住这几个固定的基本数据类型即可，剩下的全是复杂数据类型。</p>
+  <p>2 区分真值（truthy）和假值(falsy)</p>
+  <p>假值（5个）情况就可以了：''、0、false、undefined、null，而剩下的全是真值。</p>
+  <p>3 typeof</p>
+  <p>在这几个基础数据类型中，null是一个特殊的存在。在除了null之外的其他基本数据类型都可以使用typeof操作符来获得其对应的正确数据类型，如typeof true的结果是'boolean'，而typeof null的结果却是'object'。</p>
+  <p>4 浅拷贝</p>
+  <p>针对基本数据类型的数据的复制行为就是浅拷贝</p>
+  <p>使用相同的方式浅拷贝一个复杂数据类型的值(修改其中一个数据的属性值的同时也会反应到另一个数据上，这就是我们不能使用浅拷贝、需要实现深拷贝的原因。)</p>
+  <p>5 基本数据类型和复杂数据类型有一个本质上的区别：</p> 
+  <p>基本数据类型的值是固定的、不变的、存储在栈中的。按值访问的，因为可以直接操作保存在变量中的实际值,b只是保存了a复制的一个副本。所以，b的改变，对a没有影响。</p>
+  <p>复杂数据类型的值是可变的、存储在堆中的（也叫引用型数据）。变量表示的是指向这个堆地址的指针，在对变量A进行赋值（值为复杂数据类型的变量B）时，只是单纯的把变量B也指向了变量A所指向的堆地址。</p>
+  <p>6 JSON.stringify()和JSON.parse() </p>
+  <p>undefined、任意的函数以及Symbol，出现在数组中时会被序列换为null，作为非数组的属性值时会被忽略，它们单独被转化时会转化为undefined</p>
+  <p>7 只需要一行代码：import { cloneDeep } from 'lodash'</p>
+  <p>cloneDeep是lodash.js中专门提供用于解决深拷贝的问题的，也是社区中实现最齐全、最完善的解决方案</p>
+  <script>
+    // 4 浅拷贝
+    // var A = 1;
+    // var B = A;
+    // console.log(B) // 1
+    // A = 3
+    // console.log(A,B) // 3,1
+    // B =2
+    // console.log(A,B) // 3,2
+    // var A = { color: 'red', weight: 300 };
+    // var B = A;
+    // console.log(B) // {color: 'red', weight: 300}
+    // B.color = 'yellow'
+    // console.log(A);
+    // 6 JSON.stringify()和JSON.parse() A中的age属性并没有出现在B中
+    // var A = { name: 'ZhangSan', sex: 'male', age: undefined };
+    // var B = JSON.parse(JSON.stringify(A))
+    // B.name = 'lele'
+    // console.log(JSON.stringify(A));
+    // console.log(B) // {name: "ZhangSan", sex: "male"}
+    // console.log(A) // {name: "ZhangSan", sex: "male", age: undefined}
+    // function cloneDeep(target) {
+    //     // 如果是null或函数或基础数据类型，则直接返回源数据
+    //     if (target === null || typeof target === 'function' || typeof target !== 'object') {
+    //         return target
+    //     }
+    //     let result
+    //     // 是数组
+    //     if (Array.isArray(target)) {
+    //         result = []
+    //     } else {
+    //         result = {}
+    //     }
+    //     // 遍历对象或数组的键，逐个赋值（值为经过深拷贝之后的返回值）
+    //     [...Object.keys(target)].forEach(key => {
+    //         result[key] = cloneDeep(target[key])
+    //     })
+    //     return result
+    // }
+    // var A = { name: 'LiLei' }
+    // var B = { name: 'HanMeiMei', love: A }
+    // A.love = B
+    // var C = cloneDeep(B)
+
+  </script>
+</body>
+</html>

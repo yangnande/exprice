@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../../../public/js/autoScale.js"></script>
+    <link rel="stylesheet" href="../../public/css/basic.css"/>
+    <link rel="stylesheet" href="../../public/css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../../public/css/swiper4.min.css" />
+    <link rel="stylesheet" href="./css/favourPage.debug.css">
+    <title>优惠</title>
+</head>
+<body>
+    <div class="favour-main">
+        <!-- 轮播区域 -->
+        <div class="favour-carousel hidden">
+            <div class="swiper-container favour-swiper">
+                <div class="swiper-wrapper">
+                    <script id="carousel-templete" type="text/template">
+                        {@each data as it}
+                        <div class="swiper-slide carouselItem" data-adverLocation="${it.adverLocation}" data-isShare="${it.isShare}" data-iconCode="${it.iconCode}" data-actionType="${it.actionType}" data-verifyType="${it.verifyType}" data-actionUrl="${it.actionUrl}" data-markId="${it.markId}" data-isSso="${it.isSso}" data-loginType="${it.loginType}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}">
+                            <img src="${it.imageUrl}" alt="">
+                            {@if !!it.adverLabel && it.adverLabel==1} <!--是否显示广告标识,1：是，0：否-->
+                                <i class="cormark"></i><!--广告角标-->
+                            {@/if}
+                        </div>
+                        {@/each}
+                    </script>
+                </div>
+                <div class="swiper-sign hidden"></div>
+              </div>
+        </div>
+
+        <!-- icon区域 -->
+        <div class="favour-icons hidden">
+            <ul class="icons-list">
+                <script id="icon-templete" type="text/template">
+                    {@each data as it}
+                    <li class="icons-item" data-adverLocation="${it.adverLocation}" data-isShare="${it.isShare}" data-iconCode="${it.iconCode}" data-actionType="${it.actionType}" data-actionUrl="${it.jumpUrl}" data-verifyType="${it.verifyType}" data-markId="${it.id}" data-isSso="${it.isSso}" data-loginType="${it.loginType}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}">
+                        <img class="icons-sign" src="${it.imageUrl}" alt="">
+                        <p class="icons-title color333">${it.busiTitle}</p>
+                    </li>
+                    {@/each}
+                </script>
+            </ul>
+        </div>
+
+        <!-- 登录查看积分区域 -->
+        <div class="favour-integral">
+            <div class="integral-back">
+                <div class="integral-desc">
+                    <p class="integral-main">登录查看积分</p>
+                    <p class="integral-info">可享专属优惠</p>
+                </div>
+                <div class="integral-btn">立即登录</div>
+            </div>
+        </div>
+
+        <!-- 营销区域 -->
+        <div class="favour-areaList">
+            <script id="areaList-templete" type="text/template">
+            {@each data as it}
+                {@if it.areaType == 0 || it.areaType == 1}
+                <!-- 积分兑换、终极爆款展示3个半可以左右滑动 -->
+                <div class="favour-scrollBox">
+                    {@if !!it.bgGroundUrlOne}
+                        <div class="scrollBox-container ${it.isShowArea == 1 ? '' : 'padding100'} height320" style="background-image: url('${it.bgGroundUrlOne}');">
+                    {@else}
+                        <div class="scrollBox-container">   
+                    {@/if}
+                            {@if it.isShowArea == 1}
+                            <div class="scrollBox-desc">
+                                <p class="scrollBox-title color333">${it.areaName}</p>
+                                {@if it.isShowMore == 1}
+                                <p class="scrollBox-more" data-actionType="${it.moreActionType}" data-actionUrl="${it.actionUrl}" data-areaId="${it.areaId}" data-isSso="${it.isSso}" data-loginType="${it.loginType}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}">
+                                    <span class="more color666">更多</span>
+                                    <span class="arrowRight"></span>
+                                </p>
+                                {@/if}
+                            </div>
+                            {@/if}
+                            <div class="scrollBox-main">
+                                <ul class="scrollBox-list">
+                                    {@each it.marketList as val}
+                                    <li class="scrollBox-item areaList-item" data-adverLocationCode="${val.showLocation}" data-isShare="${val.isShare}" data-iconCode="${val.iconCode}" data-actionType="${val.actionType}" data-actionUrl="${val.actionUrl}" data-markId="${val.markId}" data-isSso="${val.isSso}" data-loginType="${val.loginType}" data-ssoUrlAddr="${val.ssoUrlAddr}" data-paramList="${val.paramList|commonGetParamList}">
+                                        <img src="${val.imageUrlOne}" alt="">
+                                    </li>
+                                    {@/each}
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+                {@else if it.areaType == 2}
+                <!-- 618理想生活狂欢区域 支持展示1个、2个、4个 -->
+                <div class="change-template">
+                    {@if it.marketList.length < 4}
+                        {@if !!it.bgGroundUrlOne}
+                            {@if it.marketList.length == 1}
+                                <div class="change-container height320 ${it.isShowArea == 1 ? '' : 'padding100'}" style="background-image: url('${it.bgGroundUrlOne}');">
+                            {@else}
+                                <div class="change-container height320 ${it.isShowArea == 1 ? '' : 'padding110'}" style="background-image: url('${it.bgGroundUrlOne}');">
+                            {@/if}
+                        {@else}
+                            <div class="change-container">
+                        {@/if}
+                    {@else}
+                        {@if !!it.bgGroundUrlTwo}
+                            <div class="change-container ${it.isShowArea == 1 ? '' : 'padding110'}  height530" style="background-image: url('${it.bgGroundUrlTwo}');">
+                        {@else}
+                            <div class="change-container">
+                        {@/if}
+                    {@/if}
+                        {@if it.isShowArea == 1}
+                        <div class="change-title ${it.marketList.length == 1 ? 'height100' : 'height110'}">
+                            <p class="scrollBox-title color333">${it.areaName}</p>
+                            {@if it.isShowMore == 1}
+                            <p class="scrollBox-more" data-actionType="${it.moreActionType}" data-actionUrl="${it.actionUrl}" data-areaId="${it.areaId}" data-isSso="${it.isSso}" data-loginType="${it.loginType}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}">
+                                <span class="more color666">更多</span>
+                                <span class="arrowRight"></span>
+                            </p>
+                            {@/if}
+                        </div>
+                        {@/if}
+                        <ul class="change-list">
+                            {@each it.marketList as val}
+                            <li class="changeItem areaList-item ${it.marketList.length == 1 ? 'changeOne' : 'changeTwo'}" data-adverLocationCode="${val.showLocation}" data-isShare="${val.isShare}" data-iconCode="${val.iconCode}" data-actionType="${val.actionType}" data-actionUrl="${val.actionUrl}" data-markId="${val.markId}" data-isSso="${val.isSso}" data-loginType="${val.loginType}" data-ssoUrlAddr="${val.ssoUrlAddr}" data-paramList="${val.paramList|commonGetParamList}">
+                                <img src="${it.marketList.length == 1 ? val.imageUrlOne : val.imageUrlTwo}" alt="">
+                            </li>
+                            {@/each}
+                        </ul>
+                    </div>
+                </div>
+                {@/if}
+            {@/each}
+            </script>
+        </div>
+        <!-- 间隔区域 -->
+        <div class="favour-interval hidden"></div>
+
+        <!-- tab下的营销区域 -->
+        <div class="favour-market">
+            <div class="favour-tabBox hidden">
+                <ul class="favour-tabList">
+                    <script id="tabList-templete" type="text/template">
+                        {@each data as it}
+                        <li class="tabList-item" tabId="${it.tabelId}" tabType="${it.tabType}" tabName="${it.tabName}">
+                            <span class="category-name ">${it.tabName}</span>
+                        </li>
+                        {@/each}
+                    </script>
+                </ul>
+            </div>
+            <div class="favour-marketBox">
+                <script id="marketBoxList-templete" type="text/template">
+                    {@each data as it}
+                    <ul class="marketBox-list marketBox-list${it.tabelId}">
+                    </ul>
+                    {@/each}
+                </script>
+            </div>
+            <script id="marketBox-templete" type="text/template">
+                {@if type == 0}
+                    {@each data as it}
+                    <li class="marketBox-item market-item" style="height: ${it.height}rem;top: ${it.top}rem;" data-adverLocation="${it.adverLocation}" data-isShare="${it.isShare}" data-iconCode="${it.iconCode}" data-actionType="${it.actionType}" data-actionUrl="${it.actionUrl}"  data-markId="${it.markId}" data-isSso="${it.isSso}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}" data-loginType="${it.loginType}">
+                        <img src="${it.imageUrl}" alt="">
+                        <div class="marketBox-itemInfo">
+                            <p class="itemInfo-mainTitle elli-two color333">${it.markName}</p>
+                            {@if it.markSubtitle && it.markName.length <= 9}
+                            <p class="itemInfo-subTitle color999">${it.markSubtitle}</p>
+                            {@/if}
+                            {@if !!it.label1 || !!it.label2}
+                            <div class="itemInfo-sign">
+                                {@if !!it.label1}
+                                <div class="itemInfo-signBox">${it.label1}</div>
+                                {@/if}
+                                {@if !!it.label2}
+                                <div class="itemInfo-signBox">${it.label2}</div>
+                                {@/if}
+                            </div>
+                            {@/if}
+                        </div>
+                    </li>
+                    {@/each}
+                {@else}    
+                    {@each data as it}
+                    <li class="marketSmallBox-item market-item" data-adverLocation="${it.adverLocation}" data-isShare="${it.isShare}" data-iconCode="${it.iconCode}" data-actionType="${it.actionType}" data-actionUrl="${it.actionUrl}" data-markId="${it.markId}" data-isSso="${it.isSso}" data-loginType="${it.loginType}" data-ssoUrlAddr="${it.ssoUrlAddr}" data-paramList="${it.paramList|commonGetParamList}">
+                        <img src="${it.imageUrl}" alt="">
+                        <div class="marketSmallBox-itemInfo">
+                            <div class="itemInfo-title">
+                                <p class="itemInfo-mainTitle elli-two color333">${it.markName}</p>
+                                {@if it.markSubtitle && it.markName.length <= 9}
+                                <p class="itemInfo-subTitle color999">${it.markSubtitle}</p>
+                                {@/if}
+                            </div>
+                            {@if !!it.label1 || !!it.label2}
+                            <div class="itemInfo-sign">
+                                {@if !!it.label1}
+                                <div class="itemInfo-signBox">${it.label1}</div>
+                                {@/if}
+                                {@if !!it.label2}
+                                <div class="itemInfo-signBox">${it.label2}</div>
+                                {@/if}
+                            </div>
+                            {@/if}
+                        </div>
+                    </li>
+                    {@/each}
+                {@/if}
+            </script>
+        </div>
+    </div>
+    
+<!-- 调试 -->
+<!-- <script src="../../js/public/vconsole.min.js"></script> -->
+<script src="../../public/js/jquery.min.js"></script>
+<script src="../../public/js/publicClient.js"></script>
+<script src="../../public/js/juicer-min.js"></script>
+<script src="../../public/js/swiper4.js"></script>
+<script src="../../public/js/onepx.js"></script>
+<script src="./js/favourPage.js"></script>
+<script>
+$(function(){
+    // -----------------------正式代码----------------
+	publicClient.showLoadPlug();//弹出进度条
+	favourPage.userStatus();
+
+    // -----------------------测试代码----------------
+    // favourPage.getFavourBannerData() // 轮播图数据接口
+    // favourPage.getFavourIconData() // icon区域数据接口
+    // favourPage.getAreaList() // 积分兑换、热门活动数据接口
+    // favourPage.getTabListData() // tab列表数据接口
+    // favourPage.integralClick()
+})
+</script>
+</body>
+</html>

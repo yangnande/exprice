@@ -1,0 +1,613 @@
+body {
+  background: #f6f6f6;
+}
+
+.favour-main {
+  background: #ffffff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.favour-main .favour-carousel {
+  padding: 0.213333rem 0 0;
+}
+
+.favour-main .favour-carousel .swiper-container {
+  width: 100%;
+  height: 5.546667rem;
+}
+
+.favour-main .favour-carousel .swiper-container .swiper-slide {
+  padding: 0 0.64rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+
+.favour-main .favour-carousel .swiper-container .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.213333rem;
+}
+
+.favour-main .favour-carousel .swiper-container .swiper-sign {
+  width: 1.365333rem;
+  height: 0.64rem;
+  text-align: center;
+  line-height: 0.64rem;
+  color: #fff;
+  font-size: 0.384rem;
+  border-radius: 0.085333rem;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 0.810667rem;
+  bottom: 0.170667rem;
+  z-index: 1;
+}
+
+.favour-main .favour-icons {
+  padding: 1.066667rem 0.426667rem 0.213333rem;
+}
+
+.favour-main .favour-icons .icons-list {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.favour-main .favour-icons .icons-list .icons-item {
+  width: 25%;
+  text-align: center;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+
+.favour-main .favour-icons .icons-list .icons-item img {
+  width: 1.706667rem;
+  height: 1.706667rem;
+}
+
+.favour-main .favour-icons .icons-list .icons-item .icons-title {
+  font-size: 0.554667rem;
+  margin-top: 0.277333rem;
+}
+
+.favour-main .favour-integral {
+  margin-top: 0.64rem;
+  padding: 0 0.64rem;
+  margin-bottom: 0.853333rem;
+}
+
+.favour-main .favour-integral .integral-back {
+  width: 100%;
+  height: 2.133333rem;
+  background: url("../image/integral-back.png") no-repeat center center/100% 100%;
+  padding-left: 2.389333rem;
+  padding-top: 0.426667rem;
+  position: relative;
+}
+
+.favour-main .favour-integral .integral-back .integral-desc {
+  color: #1892f3;
+}
+
+.favour-main .favour-integral .integral-back .integral-desc .integral-main {
+  font-size: 0.64rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.favour-main .favour-integral .integral-back .integral-desc .integral-color {
+  color: #fa4c41;
+}
+
+.favour-main .favour-integral .integral-back .integral-desc .integral-blackColor {
+  color: #000;
+}
+
+.favour-main .favour-integral .integral-back .integral-desc .integral-info {
+  font-size: 0.512rem;
+}
+
+.favour-main .favour-integral .integral-back .integral-btn {
+  width: 4.053333rem;
+  height: 1.962667rem;
+  text-align: center;
+  color: #1892f3;
+  font-size: 0.554667rem;
+  background: url("../../images/favour/integral-btn.png") no-repeat center center/100% 100%;
+  position: absolute;
+  right: 0.512rem;
+  bottom: -0.085333rem;
+  font-weight: 700;
+  padding-top: 0.405333rem;
+}
+
+.favour-main .favour-scrollBox {
+  padding: 0 0.64rem;
+  margin-top: 0.64rem;
+}
+
+.favour-main .favour-scrollBox:nth-child(1) {
+  margin-top: 0;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container {
+  width: 100%;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-desc {
+  height: 2.133333rem;
+  padding: 0.576rem 0.469333rem 0 0.512rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-desc .scrollBox-title {
+  font-size: 0.768rem;
+  font-weight: 700;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-desc .scrollBox-more {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 0.32rem;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-desc .scrollBox-more .more {
+  font-size: 0.512rem;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-desc .scrollBox-more .arrowRight {
+  width: 0.170667rem;
+  height: 0.32rem;
+  background: url("../../images/favour/arrowRight.png") no-repeat center center/100% 100%;
+  margin-left: 0.256rem;
+  margin-top: 0.213333rem;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main {
+  height: 4.266667rem;
+  overflow: hidden;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list {
+  padding-left: 0.426667rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 4.693333rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list::-webkit-scrollbar {
+  display: none;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list .scrollBox-item {
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  width: 4.053333rem;
+  height: 4.266667rem;
+  margin-right: 0.426667rem;
+  border-radius: 0.213333rem;
+  overflow: hidden;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list .scrollBox-item img {
+  width: 100%;
+  height: 100%;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list .scrollBox-item:last-child {
+  width: 4.48rem;
+  padding-right: 0.426667rem;
+}
+
+.favour-main .favour-scrollBox .scrollBox-container .scrollBox-main .scrollBox-list .scrollBox-item:last-child img {
+  border-radius: 0.213333rem;
+}
+
+.favour-main .height530 {
+  height: 11.306667rem;
+}
+
+.favour-main .height320 {
+  height: 6.826667rem;
+}
+
+.favour-main .height100 {
+  height: 2.133333rem;
+}
+
+.favour-main .height110 {
+  height: 2.346667rem;
+}
+
+.favour-main .padding100 {
+  padding-top: 2.133333rem;
+}
+
+.favour-main .padding110 {
+  padding-top: 2.346667rem;
+}
+
+.favour-main .change-template {
+  margin-top: 0.64rem;
+  padding: 0 0.64rem;
+}
+
+.favour-main .change-template .change-container {
+  width: 100%;
+  padding-left: 0.426667rem;
+  padding-right: 0.426667rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.favour-main .change-template .change-container .change-title {
+  font-size: 0.768rem;
+  padding: 0.384rem 0.042667rem 0 0;
+  font-weight: 700;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+
+.favour-main .change-template .change-container .change-title .scrollBox-title {
+  font-size: 0.768rem;
+  font-weight: 700;
+}
+
+.favour-main .change-template .change-container .change-title .scrollBox-more {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 0.32rem;
+}
+
+.favour-main .change-template .change-container .change-title .scrollBox-more .more {
+  font-size: 0.512rem;
+}
+
+.favour-main .change-template .change-container .change-title .scrollBox-more .arrowRight {
+  width: 0.170667rem;
+  height: 0.32rem;
+  background: url("../../images/favour/arrowRight.png") no-repeat center center/100% 100%;
+  margin-left: 0.256rem;
+  margin-top: 0.213333rem;
+}
+
+.favour-main .change-template .change-container .change-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.favour-main .change-template .change-container .change-list .changeItem {
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  margin-top: 0.341333rem;
+  border-radius: 0.213333rem;
+  overflow: hidden;
+}
+
+.favour-main .change-template .change-container .change-list .changeItem img {
+  width: 100%;
+  height: 100%;
+}
+
+.favour-main .change-template .change-container .change-list .changeOne {
+  width: 100%;
+  height: 4.266667rem;
+}
+
+.favour-main .change-template .change-container .change-list .changeTwo {
+  width: 6.762667rem;
+  height: 4.053333rem;
+}
+
+.favour-main .change-template .change-container .change-list .changeItem:nth-child(1),
+.favour-main .change-template .change-container .change-list .changeItem:nth-child(2) {
+  margin-top: 0;
+}
+
+.favour-main .favour-interval {
+  width: 100%;
+  height: 0.853333rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f6f6f6));
+  background: -webkit-linear-gradient(top, #ffffff, #f6f6f6);
+  background: linear-gradient(to bottom, #ffffff, #f6f6f6);
+}
+
+.favour-main .favour-market .favour-tabBox {
+  height: 2.56rem;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList {
+  height: 2.986667rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 0.64rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f1f1f1));
+  background: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+  background: linear-gradient(to bottom, #ffffff, #f1f1f1);
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList::-webkit-scrollbar {
+  display: none;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList .tabList-item {
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  width: -webkit-max-content;
+  width: max-content;
+  font-size: 0.64rem;
+  margin-right: 1.706667rem;
+  color: #333;
+  font-weight: 700;
+  line-height: 2.346667rem;
+  position: relative;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList .tabList-item:last-child {
+  padding-right: 0.64rem;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList .tabList-itemActive {
+  font-size: 0.768rem;
+  color: #1892f3;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList .tabList-itemActive::after {
+  display: block;
+  content: '';
+  width: 0.810667rem;
+  height: 0.128rem;
+  border-radius: 0.064rem;
+  background-color: #1892f3;
+  position: relative;
+  bottom: 0.426667rem;
+  left: 50%;
+  margin-left: -0.405333rem;
+}
+
+.favour-main .favour-market .favour-tabBox .favour-tabList.around {
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+
+.favour-main .favour-market .favour-tabBox .tabList-item.marginZero {
+  margin-right: 0;
+}
+
+.favour-main .favour-market .favour-tabBoxSticky {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+.favour-main .favour-market .favour-tabBoxFixed {
+  position: fixed;
+}
+
+.favour-main .favour-market .padding120 {
+  padding-top: 2.56rem;
+}
+
+.favour-main .favour-market .favour-marketBox {
+  width: 16rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: #f6f6f6;
+  padding: 0 0.64rem;
+  display: none;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item {
+  width: 7.189333rem;
+  border-radius: 0.213333rem;
+  overflow: hidden;
+  position: absolute;
+  background: #fff;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item img {
+  width: 7.189333rem;
+  height: 4.053333rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo {
+  padding: 0.298667rem 0 0 0.426667rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo .itemInfo-mainTitle {
+  font-size: 0.64rem;
+  font-weight: 700;
+  padding-right: 0.426667rem;
+  line-height: 0.896rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo .itemInfo-subTitle {
+  font-size: 0.554667rem;
+  line-height: 1;
+  margin-top: 0.042667rem;
+  line-height: 0.810667rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo .itemInfo-sign {
+  margin-top: 0.384rem;
+  height: 0.682667rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo .itemInfo-sign .itemInfo-signBox {
+  height: 100%;
+  border-radius: 0.085333rem;
+  border: 0.0256rem solid #1892f3;
+  font-size: 0.469333rem;
+  color: #1892f3;
+  padding: 0.106667rem 0.213333rem 0;
+  width: -webkit-max-content;
+  width: max-content;
+  margin-left: 0.341333rem;
+  line-height: 1;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item .marketBox-itemInfo .itemInfo-sign .itemInfo-signBox:nth-child(1) {
+  margin-left: 0;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item:nth-child(odd) {
+  left: 0.64rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketBox-item:nth-child(even) {
+  right: 0.64rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item {
+  height: 4.053333rem;
+  background: #fff;
+  border-radius: 0.213333rem;
+  margin-bottom: 0.426667rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0.213333rem 0.426667rem 0.213333rem 0.213333rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item img {
+  width: 6.4rem;
+  height: 3.626667rem;
+  border-radius: 0.170667rem;
+  margin-right: 0.853333rem;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo {
+  padding: 0.298667rem 0 0.384rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo .itemInfo-mainTitle {
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 0.896rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo .itemInfo-subTitle {
+  font-size: 0.554667rem;
+  line-height: 1;
+  margin-top: 0.042667rem;
+  line-height: 0.810667rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo .itemInfo-sign {
+  margin-top: 0.384rem;
+  height: 0.682667rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo .itemInfo-sign .itemInfo-signBox {
+  height: 100%;
+  border-radius: 0.085333rem;
+  border: 1PX solid #1892f3;
+  font-size: 0.469333rem;
+  color: #1892f3;
+  padding: 0 0.213333rem;
+  width: -webkit-max-content;
+  width: max-content;
+  margin-left: 0.341333rem;
+  line-height: 0.682667rem;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item .marketSmallBox-itemInfo .itemInfo-sign .itemInfo-signBox:nth-child(1) {
+  margin-left: 0;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-list .marketSmallBox-item:nth-last-of-type(1) {
+  margin: 0;
+}
+
+.favour-main .favour-market .favour-marketBox .marketBox-listActive {
+  display: block;
+}
+
+.favour-main .favour-market .favour-marketBox .noMore {
+  text-align: center;
+  padding: 0.426667rem 0;
+  color: #333;
+  font-size: 0.64rem;
+  width: 100%;
+}
+
+.cormark {
+  display: block;
+  width: 0.981333rem;
+  height: 0.512rem;
+  background: url("../../images/favour/cormark.png") no-repeat center center;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
+  position: absolute;
+  left: 0.64rem;
+  bottom: 0;
+  border-bottom-left-radius: 0.170667rem;
+}
