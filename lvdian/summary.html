@@ -81,6 +81,7 @@ for (let [key,value] of colors) {
     //   if (arr === null) return null
     //   return decodeURIComponent(arr[2])
     // }
+
     // var value1 = getQueryString('nickname')
     // var value2 = getQueryString('nickName')
     // console.log(value1,value2,'getQueryString') // hello hello getQueryString
@@ -107,7 +108,13 @@ for (let [key,value] of colors) {
     //   let action = actions.get(`${identity}_${status}`) || actions.get('default')  
     //   var value = action()
     // }
-    // onButtonClick('default') 
+    // onButtonClick('default')
+    var obj = {
+      a: []
+    }
+  
+    c = obj.a || obj.b
+    console.log(c);
   </script>
 </body>
 </html>
