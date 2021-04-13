@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<style type="text/css">
-			#box{
-				width: 200px;
-				height: 200px;
-				background-color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="box" style="height:30px;width:200px;background-color:pink;"onclick = "this.innerHTML+= event.type;"></div>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		div {
+			background-color: red;
+			height: 5000px;
+			overflow-y: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="red">
 
-
-    
-    <script type="text/javascript">
-			console.log(typeof 1) // 'number'
-			console.log(typeof 'asdf') // 'string'
-			console.log(typeof undefined) // 'undefined'
-			console.log(typeof true) // 'boolean'
-			console.log(typeof Symbol()) // 'symbol'
-			console.log(typeof null) // 'object'
-			console.log(typeof BigInt(1))
-
-		
+	</div>
+	<script>
+	window.onscroll = function() {
+  //为了保证兼容性，这里取两个值，哪个有值取哪一个
+  //scrollTop就是触发滚轮事件时滚轮的高度
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  console.log("滚动距离" + scrollTop);
+}
+let dom = document.querySelector('.red');
+      console.log(dom, 'dom');
+      dom.addEventListener("scroll", function() {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  			console.log("滚动距离" + scrollTop);
+      })
 		</script>
-	</body>
+</body>
 </html>
-
