@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3子类继承父类方法</title>
+</head>
+<body>
+    <script>
+        // 父类有加法方法
+        class Father {
+          constructor(x, y) {
+            this.x = x
+            this.y = y
+          }
+          sum() {
+            console.log(this.x + this.y);
+          }
+        }
+        // 子类继承父类的加法方法，同时拓展减法方法
+        class Son extends Father {
+            constructor(x, y) {
+              super(x,y) // 子类在调用父类中使用super,必须放到this前面（必须先调用父类的构造方法，在调用子类的构造方法）
+              this.x = x
+              this.y = y
+              // super(x,y) // 使用super调用父类中的构造函数 放至this后面，报Uncaught ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+            }
+            subtract() {
+              console.log(this.x - this.y);
+            }
+        }
+        var son = new Son(5,6)
+        son.sum()
+        son.subtract()
+    </script>
+</body>
+</html>

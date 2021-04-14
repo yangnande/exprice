@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5类的三个注意点</title>
+</head>
+<body>
+  <button>点击(第10集)</button>
+    <script>
+      // 创建一个实例-利用类创建一个对象
+      // var ldh = new Star('刘德华') // 初始化之前不能访问：Uncaught ReferenceError: Cannot access 'Star' before initialization
+      // ldh.sing('冰雨')
+      // 1 类中没有变量提示，必须先定义类，在实例对象
+      // 2 类里边的共有属性和方法必须加this才能使用
+      // 3 类里边的this指向问题
+      // 4 constructor里的this指向实例对象，方法里边的this执行
+      class Star {
+          constructor(uname) {
+              // constructor里边的this指向创建的实例对象
+              console.log(this,'this');
+              this.uname = uname
+              // sing() // 必须加this Uncaught ReferenceError: sing is not defined
+              this.sing()
+              this.btn = document.querySelector('button')
+              this.btn.onclick = this.sing
+          }
+          sing() {
+              // console.log(uname + '唱歌'); // 必须加this Uncaught ReferenceError: uname is not defined
+              console.log(this.uname + '唱歌');
+          }
+      }
+      // 创建一个实例-利用类创建一个对象
+      var ldh = new Star('刘德华')
+    </script>
+</body>
+</html>

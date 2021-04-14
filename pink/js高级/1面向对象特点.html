@@ -18,8 +18,28 @@
         // 语法：class neme {}
         // 创建实例： var xx = new name()
         // 注意：类必须使用new实例化对象
-           //    
-
+           //  demo
+           // 创建类 class 创建一个明星的类   
+            class Star {
+                constructor(uname) {
+                    this.uname = uname
+                }
+                sing(song) {
+                    console.log(this.uname+song);
+                }
+            }
+            // 创建一个实例-利用类创建一个对象
+            let ldh = new Star('刘德华')
+            let zxy = new Star('张学友')
+            ldh.sing('冰雨')
+            zxy.sing('情人')
+            console.log(ldh,zxy);
+            // 1) 通过class关键字创建类，类名我们还是习惯性首字母大写
+            // 2）类里边有个constructor函数，可以接受传递过来的参数，同时返回实例对象
+            // 3）constructor函数只要new生成实例时，就会自动调用这个函数，如果我们不写这个函数，类也会自动生成这个函数
+            // 4）生成实例new不能省略
+            // 5）最后注意语法规范，创建类，类名后面不加小括号；生成实例，类名后面加小括号，构造函数不需要加function
+            // 6)多个函数方法直接不需要添加逗号分隔；
     </script>
 </body>
 </html>
