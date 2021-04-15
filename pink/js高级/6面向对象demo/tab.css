@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+input{  
+	background:none;  
+	outline:none; 
+  border:1px solid #ccc; 
+}
+ul li {
+  list-style: none;
+}
+h4 {
+  text-align: center;
+}
+.tabsbox {
+  margin: 30px auto;
+  width: 600px;
+  border: 1px solid #ddd;
+  height: 240px;
+}
+.firstnav {
+  position: relative;
+}
+.firstnav ul {
+  display: flex;
+}
+.firstnav ul li {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.liactive input {
+  width: 70px;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.tabscon input {
+  width: 150px;
+  height: 150px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.iconfont {
+  position: relative;
+  top: -15px;
+  right: -24px;
+  cursor: pointer;
+}
+.tabadd {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.tabadd span {
+  font-size: 28px;
+}
+section {
+  height: 200px;
+  position: relative;
+  top: -1px;
+  padding-top: 10px;
+  display: none;
+}
+ul li.liactive {
+  box-sizing: border-box;
+  border: 1px solid red;
+  color:red;
+  border-bottom: 1px solid #fff;
+}
+.conactive {
+  display: block;
+}
