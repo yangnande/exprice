@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9构造函数（29集）</title>
+</head>
+<body>
+    <script>
+        // constructor构造函数 对象原型（__proto__）和构造函数（prototype）原型对象里面都有一个constructor属性
+        function Star(uname,age) {
+            this.uname = uname
+            this.age = age
+        }
+        // 很多情况下，我们需要手动的使用constructor这个属性指回原来的构造函数(不手动，this的指向就成Object的构造函数了)
+        // Star.prototype.sing = function() {
+        //     console.log('我会唱歌');
+        // }
+        // Star.prototype.movie = function() {
+        //     console.log('我会演戏');
+        // }
+        Star.prototype = {
+            // 如果我们修改了原来的原型对象，给原型对象赋值的是一个对象，则必须手动赋值constructor
+            constructor: Star,
+            sing: function() {
+                console.log('我会唱歌');
+            },
+            movie:function() {
+                console.log('我会演戏');
+            }
+        }
+        var ldh = new Star('刘德华',40)
+        var zxy = new Star('张学友',40)
+        console.log(Star.prototype.constructor); // Star
+        console.log(Star.prototype.constructor === ldh.__proto__.constructor); // true
+    </script>
+</body>
+</html>

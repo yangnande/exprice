@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7构造函数和原型</title>
+</head>
+<body>
+    <script>
+        // 每个构造函数都有一个prototype属性，我们可以把一些共有的方法定义在上面，这样所有的对象的实例就可以共享这些方法。
+        // 1构造函数的问题
+        function Star(uname,age) {
+            this.uname = uname
+            this.age = age
+            // this.sing = function() {
+            //     console.log('我会唱歌');
+            // } // 构造函数虽然好用，但是存在浪费内存问题
+        }
+        Star.prototype.sing = function() {
+            console.log('我会唱歌');
+        }
+        var ldh = new Star('刘德华',40)
+        var zxy = new Star('张学友',40)
+        console.log(ldh.sing == zxy.sing); // 使用构造函数的方法：false;使用原型对象上的方法：true
+        ldh.sing()
+        zxy.sing()
+        console.log(ldh); // 对象都会有一个属性__proto__，对象身上系统自己添加一个__proto__指向我们构造函数的原型对象
+        // 2一般情况下，我们的共有属性定义到构造函数里面，公共的方法放到原型对象身上prototype
+        console.log(ldh.__proto__ === Star.prototype); // true
+        // 方法的查找规则：首先先看ldh对象身上是否有sing方法，如果有就执行这个对象的sing
+        // 如果没有sing这个方法，因为有__proto__的存在，就去构造函数原型对象prototype身上去查找sing这个方法
+    
+    </script>
+</body>
+</html>
