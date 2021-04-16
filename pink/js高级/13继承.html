@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13继承</title>
+</head>
+<body>
+    <script>
+        // 1构造函数+原型对象模拟实现继承，称为组合继承
+          // 1.1call()调用这个函数，并且修改函数运行时的this指向
+          // fun.call(thisArg,arg1,arg2)
+            // thisArg:当前调用函数this的指向对象
+            // arg1,arg2：传递的其他参数
+            function fn(x,y) {
+              console.log(this,'-------');
+              console.log(x+y);
+            }
+            var o = {
+              name: 'lele'
+            }
+            // fn()
+            // 1.1.1call()可以调用函数
+            // fn.call()
+            // 1.1.2call()可以改变这个函数的this指向，此时这个函数的this就指向了o这个对象
+            fn.call(o,1,2)
+          // 2借用构造函数继承父类型属性
+            // 核心原理：通过call()把父类型的this指向了子类型的this,这样就可以实现子类型继承父类型的属性
+              function Father(uname,age) {
+                // this指向父构造函数的对象实例
+                this.uname = uname
+                this.age = age
+              }
+              Father.prototype.money = function() {
+                console.log(1000);
+              }
+              function Son(uname,age,score) {
+                // this指向子构造函数的对象实例
+                Father.call(this,uname,age)
+                this.score = score
+              }
+              // Son.prototype = Father.prototype //这样直接赋值会有问题，如果修改了原型对象，父原型对象也跟着一起变化
+              Son.prototype = new Father()
+              // 如果利用对象的形式修改了原型对象，别忘了利用constructor指向原来的constructor
+              Son.prototype.constructor = Son
+              Son.prototype.exam = function() {
+                console.log('孩子要考试');
+              }
+              var son = new Son('刘德华',18,100)
+              console.log(son,Father.prototype);
+              console.log(Son.prototype.constructor);
+            // 借用原型对象继承父类型方法
+              
+    </script>
+</body>
+</html>

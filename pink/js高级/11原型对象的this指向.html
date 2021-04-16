@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11原型对象的this指向</title>
+</head>
+<body>
+    <script>
+        function Star(uname,age) {
+            this.uname = uname
+            this.age = age
+        }
+        Star.prototype.sing = function() {
+          console.log(this);
+            // console.log('我会唱歌');
+        }
+        var ldh = new Star('刘德华',40)
+        // 1在构造函数中，里边this指向的是对象实例ldh
+        console.log(ldh.sing());
+        // 2原型对象函数里边的this指向的是对象实例ldh
+    </script>
+</body>
+</html>
