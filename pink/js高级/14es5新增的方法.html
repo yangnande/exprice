@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>14es5新增的方法</title>
+    <title>14es5新增的方法(39)</title>
 </head>
 <body>
     <script>
@@ -14,16 +14,23 @@
           // currentValue:数组当前项的值
           // index 数组当前项的索引
           // arr:数组对象本身
-          // forEach 迭代（遍历）数组
-          var arr = [1,2,3]
-          var sum = 0
-          arr.forEach(function(value,index,arr) {
-            console.log('每个数组元素'+value);
-            console.log('每个数组元素的索引号'+index);
-            console.log('数字本身'+arr);
-            sum += value
-          })
-          console.log(sum);
+          // forEach 迭代（遍历）数组,不改变原数组
+            var arr = [1,2,3]
+            var sum = 0
+            arr.forEach(function(value,index,arr) {
+              // console.log('每个数组元素'+value);
+              // console.log('每个数组元素的索引号'+index);
+              // console.log('数字本身'+arr);
+              sum += value
+            })
+            console.log(sum);
+          // filter 过滤，返回一个新数组,不改变原数组
+          // array.filter(function(currentValue,index,arr) {})
+          // currentValue:数组当前项的值
+          // index 数组当前项的索引
+          // arr:数组对象本身
+          var newArr = arr.filter(v => v > 2)
+          console.log(newArr,'newArr');
     </script>
 </body>
 </html>
