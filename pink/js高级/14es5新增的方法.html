@@ -16,21 +16,50 @@
           // arr:数组对象本身
           // forEach 迭代（遍历）数组,不改变原数组
             var arr = [1,2,3]
-            var sum = 0
-            arr.forEach(function(value,index,arr) {
+            // var sum = 0
+            // arr.forEach(function(value,index,arr) {
               // console.log('每个数组元素'+value);
               // console.log('每个数组元素的索引号'+index);
               // console.log('数字本身'+arr);
-              sum += value
-            })
-            console.log(sum);
+            //   sum += value
+            // })
+            // console.log(sum);
           // filter 过滤，返回一个新数组,不改变原数组
           // array.filter(function(currentValue,index,arr) {})
           // currentValue:数组当前项的值
           // index 数组当前项的索引
           // arr:数组对象本身
-          var newArr = arr.filter(v => v > 2)
-          console.log(newArr,'newArr');
+          // var newArr = arr.filter(v => v > 2)
+          // console.log(newArr,'newArr');
+          // some 过滤，返回一个布尔值,查找数组中是否有满足添加的元素，有，返回true,找到一个，就终止循环，没有返回false
+          // array.some(function(currentValue,index,arr) {})
+          // currentValue:数组当前项的值
+          // index 数组当前项的索引
+          // arr:数组对象本身
+          // console.log(arr.some(v => v>3))
+          // forEach，some，filter对比总结
+          // var arr = ['red','green','yellow']
+          // arr.forEach(v => {
+          //   if(v == 'green') {
+          //     console.log('找到对应的颜色了');
+          //     return true // 在forEach里面终止不了循环
+          //   }
+          //   console.log(111);
+          // })
+          // arr.some(v => {
+          //   if(v == 'green') {
+          //     console.log('找到对应的颜色了');
+          //     return true // 在some里面可以终止循环，查找效率更高
+          //   }
+          //   console.log(111);
+          // })
+          // arr.filter(v => {
+          //   if(v == 'green') {
+          //     console.log('找到对应的颜色了');
+          //     return true // 在filter里面终止不了循环
+          //   }
+          //   console.log(111);
+          // })
     </script>
 </body>
 </html>

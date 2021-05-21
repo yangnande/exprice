@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15查询商品demo</title>
+  <style>
+    .box {
+      width: 1000px;
+      margin: 0 auto;
+    }
+    .pro-table {
+      /* margin: 20px auto 0; */
+      border-collapse: collapse;
+    }
+    td,th {
+      border: 1px solid #cbcbcb;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="search">
+      按照价格查询：<input type="text" class="start">-<input type="text" class="end">
+      <button class="search-price">搜索</button>
+      按照商品名称查询：<input type="text" class="product">
+      <button class="search-pro">查询</button>
+    </div>
+    <table class="pro-table" width="600">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>产品名称</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // 利用新增数组方法操作数据
+    var data = [
+      {
+        id: 1,
+        pname: '小米',
+        price: 1000
+      },{
+        id: 2,
+        pname: '华为',
+        price: 1500
+      },{
+        id: 3,
+        pname: '小米',
+        price: 1600
+      },{
+        id: 4,
+        pname: 'oppo',
+        price: 2000
+      }
+    ]
+    // 1获取相关元素
+    var tbody = document.querySelector('tbody'),
+        search_price = document.querySelector('.search-price'),
+        start = document.querySelector('.start'),
+        end = document.querySelector('.end'),
+        search_pro = document.querySelector('.search-pro'),
+        product = document.querySelector('.product');
+    // 2把数据渲染到页面上
+    setData(data)
+    function setData(myData) {
+      tbody.innerHTML = ''
+      myData.forEach(v => {
+        var tr = document.createElement('tr')
+        tr.innerHTML = `<td>${v.id}</td><td>${v.pname}</td><td>${v.price}</td>`;
+        tbody.appendChild(tr)
+      })
+    }
+    // 3根据价格筛选数据
+    search_price.addEventListener('click', function() {
+      var newData = data.filter(v => {
+        return v.price >= start.value && v.price <= end.value
+      })
+      setData(newData)
+    })
+    // 4根据商品名称查询数据 
+    search_pro.addEventListener('click', function() {
+      var arr = []
+      data.some(v => {
+        if(v.pname == product.value) {
+          arr.push(v)
+          return true // some找到满足条件的数据，就终止循环 找到满足的第一个条件要终止必须加return true
+        }
+      })
+      setData(arr)
+    })
+  </script>
+</body>
+</html>
