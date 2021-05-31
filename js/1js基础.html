@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1 js的适用场景
+            // 浏览器网页端开发
+            // 作为服务端后台语言使用的node.js
+            // 移动端手机APP开发，如Facebook的React Native,uniapp,phoneGap,ionic
+            // 跨平台的桌面应用程序，如使用electronjs
+        // 2 避免页面加载延迟优化
+            // 避免页面加载延迟，把script放到body里，不要放在头部
+        // 3 let const 临时性死区
+            // 不允许定义之前调用，必须先声明在使用
+        // 4 Object.freeze冻结变量
+            // const host = {
+            //     url: 'http://www.baidu.com',
+            //     port: 443
+            // }
+            // // Object.freeze(host) 冻结host，不能让其属性值改变
+            // host.port = 80
+            // console.log(host.port) // 443
+        // 5 利用短路赋值
+            // let a = 0 || 5 
+            // console.log(a,'a'); // 5 a会拿到一个真值
+        // 6 switch写表达式
+            // function s1(age) {
+            //     switch (true) {
+            //         case age>60:
+            //             console.log('老年');
+            //             break;
+            //         case age>40:
+            //         case age>20:
+            //             console.log('中青年');
+            //             break;
+            //         default:
+            //             console.log('少年');
+            //             break;
+            //     }
+            // }
+            // s1(30)
+        // 7 while实例
+            // 做三角形
+            // function star(row) {
+            //     let start = 0
+            //     while(start++ < row) {
+            //         let n = 0
+            //         while(n++ < start) {
+            //             document.write('*')
+            //         }
+            //         document.write('<br/>')
+            //     }
+            // }
+            // star(5)
+        // 8 dowhile循环实例
+            //   做三角形
+            // function start(row) {
+            //     let start = 0
+            //     do {
+            //         let n = 0
+            //         do {
+            //             document.write("*")
+            //         }while(++n <= start)
+            //         document.write('<br/>')
+            //     }while(++start < row)
+            // }
+            // start(6)
+        // 9 用for循环打印杨辉三角
+            // function hd(row) {
+            //     for(let i = 1;i < row;i++) {
+            //         for(let n = row - i;n > 0; n--) {
+            //             document.write('^')
+            //         }
+            //         for(let m = i * 2 - 1;m > 0 ; m--) {
+            //             document.write('*')
+            //         }
+            //         document.write('<br/>')
+            //     }
+            // }
+            // hd(6)
+        // 10 循环中的break,continue
+            // break,终止整个循环
+            // continue，跳出当前循环，继续下次循环
+        // 11 for...in 遍历对象的键 for...of 遍历对象的值 
+            // let hd = [
+            //     {title: '第一章',lesson: 1},
+            //     {title: '第二章',lesson: 2}
+            // ]
+            // for(var key in hd) {
+            //     console.log(key); // key为下标
+            // }
+            // for(var key of hd) {
+            //     console.log(key); // key为值
+            // }
+        // 12 类型判断
+            // typeof() 判断基本类型
+            //  {} [] 通过typeof判定返回object
+            // instanceof 
+                // console.log({} instanceof Object); // true
+                // console.log([] instanceof Array); // true
+                // 标准说法对象的prototype是否在原型链上
+                // 现在可以理解为对象是不是由构造函数创建的
+    </script>
+</body>
+</html>
