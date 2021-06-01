@@ -319,8 +319,10 @@
                 for(var i = 0;i<this.list.length;i++) {
                   // itemWidth的宽度*applyList的数量 > ulsWidth 说明超出要加展开图片
                   if(itemWidth * this.list[i].applyList.length > ulsWidth) {
+                    // if (!this.productList[i].hasOwnProperty('beyond')) {
+                      this.$set(this.list[i],isBeyond,true)
+                    // }
                     this.$set(this.list[i],isFlag,true)
-                    this.$set(this.list[i],isBeyond,true)
                     beyondFlag = true
                   } else {
                     this.$set(this.list[i],isFlag,false)
@@ -329,12 +331,12 @@
                   }
                 }
                 if (beyondFlag) {
-                  for (var i = 0; i < itemList.length; i ++) {
-                    itemList[i].style.width = itemWidth
+                  for (var i = 0; i < lis.length; i ++) {
+                    lis[i].style.width = itemWidth
                   }
                 } else {
-                  for (var i = 0; i < itemList.length; i ++) {
-                    itemList[i].style.width = this.minWidth + 'px'
+                  for (var i = 0; i < lis.length; i ++) {
+                    lis[i].style.width = this.minWidth + 'px'
                   }
                 }
                 console.log(ulsWidth,'ulsWidth');
