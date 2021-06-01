@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css基础</title>
+</head>
+<body>
+  <script>
+    // 1 CSS盒子模型 
+      // 四个属性 内容(content)，也就是元素的 width、height 内边距(padding) 边框(border) 外边距(margin)
+      // 作用 针对页面布局的时候来使用 布局标准是由外向内进行布局。盒子模型由外向内：margin(外边距)—>border(边框)---->padding(内边距)---->content(元素)
+      // 盒模型分为W3C盒子模型(标准盒模型)和IE盒子模型(怪异盒模型)，大多数浏览器都采用标准盒模型
+        // 标准模式：盒子总宽度/高度 = 内容区宽度 /高度+padding+border + margin。
+        // 在怪异模式下，一个块的总宽度 = 内容的width + margin(左右)（这里的width包含了padding(左右)和border(左右)的值）
+      // 两种模式的转换（通过box-sizing）
+        // 当设置box-sizing:content-box时，采用标准模式进行计算，默认就是这种模式；
+        // 当设置box-sizing:border-box时，采用怪异模式进行计算；
+      // 建议不要给元素添加具有指定宽度的内边距，而是尝试将内边距或外边距添加到元素的父元素和子元素。
+  </script>
+</body>
+</html>

@@ -9,23 +9,42 @@
     div {
       width: 100px;
       padding: 10px;
+      margin: 10px;
+      border: 1px solid red;
       /* box-sizing: border-box; */
       background-color: pink;
     }
   </style>
 </head>
 <body>
-  https://blog.csdn.net/Son_Jing/article/details/108228586
-  https://www.cnblogs.com/chiangyibo/p/7026873.html
-  https://blog.csdn.net/tinfengyee/article/details/104176129
   <div style="height:100px;"></div>
   <script>
-    // 1获取元素的宽和高
-    var divs = document.querySelector('div');
-    var dWidth = divs.style.width
-    var dHeight = divs.style.height
-    console.log(dWidth,'dWidth');
-    console.log(dHeight,'dHeight');
+    // 获取元素的宽和高
+      var divs = document.querySelector('div');
+    // 1、Element.style.width/height 只能获取内联样式
+      // var dWidth = divs.style.width
+      // var dHeight = divs.style.height
+      // console.log(dWidth,'dWidth'); // ''
+      // console.log(dHeight,'dHeight'); // 100px
+    // 2、getComputedStyle 可获取实时的style
+      // var dWidth = window.getComputedStyle(divs).width
+      // var dHeight = window.getComputedStyle(divs).height
+      // var dPadding = window.getComputedStyle(divs).padding
+      // console.log(dWidth,'dWidth'); // 100px
+      // console.log(dHeight,'dHeight'); // 100px
+      // console.log(dPadding,'dPadding'); // 10px
+    // 3、Element.currentStyle.width/height 功能与第二点相同，只存在于旧版本IE中(IE9以下)，除了做旧版IE兼容，就不要用它了。
+      // var dWidth = divs.currentStyle.width //  Uncaught TypeError: Cannot read property 'width' of undefined
+      // var dHeight = divs.currentStyle.height
+      // var dPadding =  divs.currentStyle.padding
+    // 4、Element.getBoundingClientRect().width/height 除了能够获取宽高，还能获取元素位置等信息
+      // left: 元素左边距离视口左边的距离 right: 元素右边距离视口左边的距离 top: 元素上边距离视口上边的距离 bottom: 元素下边距离视口上边的距离
+      // var dWidth = divs.getBoundingClientRect().width
+      // var dHeight = divs.getBoundingClientRect().height
+      // var dPadding = divs.getBoundingClientRect().padding
+      // console.log(dWidth,'dWidth'); // 122(包含padding，border)
+      // console.log(dHeight,'dHeight'); // 122(包含padding，border)
+      // console.log(dPadding,'dPadding'); // undefined 不能获取padding
   </script>
 </body>
 </html>

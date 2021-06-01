@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3展开收起功能</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      width: 80%;
+      margin: 20px auto 0;
+      list-style: none;
+      border: 1px solid #000;
+    }
+    .def {
+      height: 60px;
+      overflow: hidden;
+    }
+    li {
+      width: 100px;
+      height: 60px;
+      text-align: center;
+      border: 1px solid red;
+      box-sizing: border-box;
+    }
+    p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-for="v in list">
+      <ul  class="def">
+        <li v-for="val in v.applyList">{{val.applyName}}</li>
+      </ul>
+      <p>v</p>
+    </div>
+  </div>
+  <script src="../public/js/vue.js"></script>
+  <script>
+     new Vue({
+            el:'#app',
+            data:{
+                liWidth: 100,
+                list:[
+                  {
+                      "productId": 32,
+                      "productName": "前端开发测试产品",
+                      "creatorId": 288,
+                      "applyList": [
+                          {
+                              "applyId": 49,
+                              "applyName": "前端测试安卓应用",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 63,
+                              "applyName": "ios11",
+                              "platType": 2,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 65,
+                              "applyName": "ios22",
+                              "platType": 2,
+                              "adminId": 312
+                          },
+                          {
+                              "applyId": 66,
+                              "applyName": "测试ios11",
+                              "platType": 2,
+                              "adminId": 321
+                          },
+                          {
+                              "applyId": 67,
+                              "applyName": "测试ios333",
+                              "platType": 2,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 68,
+                              "applyName": "安卓测试111",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 87,
+                              "applyName": "应用1",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 106,
+                              "applyName": "android_test",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 168,
+                              "applyName": "123123",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 170,
+                              "applyName": "ce1",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 174,
+                              "applyName": "ceshi123",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 175,
+                              "applyName": "123123312",
+                              "platType": 2,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 228,
+                              "applyName": "中国移动Android",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 231,
+                              "applyName": "22",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 232,
+                              "applyName": "22",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 298,
+                              "applyName": "1",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 342,
+                              "applyName": "33",
+                              "platType": 1,
+                              "adminId": 303
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 50,
+                      "productName": "iOS12",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 84,
+                              "applyName": "ios测试",
+                              "platType": 2,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 241,
+                              "applyName": "213",
+                              "platType": 1,
+                              "adminId": 288
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 55,
+                      "productName": "adroid-app",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 93,
+                              "applyName": "app1",
+                              "platType": 1,
+                              "adminId": 303
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 88,
+                      "productName": "测试产品",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 197,
+                              "applyName": "测试ios",
+                              "platType": 2,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 268,
+                              "applyName": "1",
+                              "platType": 2,
+                              "adminId": 303
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 109,
+                      "productName": "iOS中移手厅APP",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 227,
+                              "applyName": "1",
+                              "platType": 2,
+                              "adminId": 303
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 114,
+                      "productName": "中国移动",
+                      "creatorId": 288,
+                      "applyList": [
+                          {
+                              "applyId": 229,
+                              "applyName": "Android手厅",
+                              "platType": 1,
+                              "adminId": 288
+                          },
+                          {
+                              "applyId": 236,
+                              "applyName": "中国移动iOS",
+                              "platType": 2,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 237,
+                              "applyName": "52345",
+                              "platType": 1,
+                              "adminId": 288
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 116,
+                      "productName": "中国移动70",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 234,
+                              "applyName": "中国移动Android",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 235,
+                              "applyName": "中国移动Android",
+                              "platType": 1,
+                              "adminId": 303
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 118,
+                      "productName": "43534",
+                      "creatorId": 288,
+                      "applyList": [
+                          {
+                              "applyId": 238,
+                              "applyName": "523452",
+                              "platType": 1,
+                              "adminId": 288
+                          }
+                      ]
+                  },
+                  {
+                      "productId": 140,
+                      "productName": "测22",
+                      "creatorId": 303,
+                      "applyList": [
+                          {
+                              "applyId": 312,
+                              "applyName": "1",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 313,
+                              "applyName": "1",
+                              "platType": 1,
+                              "adminId": 303
+                          },
+                          {
+                              "applyId": 389,
+                              "applyName": "1",
+                              "platType": 2,
+                              "adminId": 303
+                          }
+                      ]
+                  }
+              ]
+            },
+            mounted() {
+              var uls = document.querySelectorAll('ul')
+              var lis = document.querySelectorAll('li')
+              if(uls.length > 0) {
+                // 获取ul的宽度
+                var ulsWidth = uls[0].getBoundingClientRect().width;
+                // 获取每个元素的宽度
+                var itemWidth = (100 / (Math.floor((ulsWidth) / Number(this.liWidth)))).toFixed(6) + '%'
+                var beyondFlag = false
+                for(var i = 0;i<this.list.length;i++) {
+                  // itemWidth的宽度*applyList的数量 > ulsWidth 说明超出要加展开图片
+                  if(itemWidth * this.list[i].applyList.length > ulsWidth) {
+                    this.$set(this.list[i],isFlag,true)
+                    this.$set(this.list[i],isBeyond,true)
+                    beyondFlag = true
+                  } else {
+                    this.$set(this.list[i],isFlag,false)
+                    this.$set(this.list[i],isBeyond,false)
+                    beyondFlag = false
+                  }
+                }
+                if (beyondFlag) {
+                  for (var i = 0; i < itemList.length; i ++) {
+                    itemList[i].style.width = itemWidth
+                  }
+                } else {
+                  for (var i = 0; i < itemList.length; i ++) {
+                    itemList[i].style.width = this.minWidth + 'px'
+                  }
+                }
+                console.log(ulsWidth,'ulsWidth');
+                console.log(itemWidth,'itemWidth');
+              }
+            },
+            methods:{
+               
+            }
+        });
+  </script>
+</body>
+</html>
