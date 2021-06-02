@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // 不懂
         // 1 基础知识
             // 适用场景
                 // 浏览器网页端开发
@@ -1999,19 +2000,19 @@
                         // let arr = [1, 2, 3, 4, 5];
                         // function find(array, callback) {
                         //     for (const value of array) {
-                        //         if (callback(value) === true) return value;
+                        //         if (callback(value)) return value;
                         //     }
                         //     return undefined;
                         // }
                         // let res = find(arr, function(item) {
                         //     return item == 23;
                         // });
-                        // console.log(res);
+                        // console.log(res); // 找不到时时undefined,找到则返回值
                     // 下面添加原型方法实现
 
                         // Array.prototype.findValue = function(callback) {
                         //     for (const value of this) {
-                        //         if (callback(value) === true) return value;
+                        //         if (callback(value)) return value;
                         //     }
                         //     return undefined;
                         // };
@@ -2053,24 +2054,27 @@
 
                         // let sortLessons = lessons.sort((v1, v2) => v2.click - v1.click);
                         // console.log(sortLessons);
-                // 排序原理
-                    // let arr = [1, 5, 3, 9, 7];
-                    // function sort(array, callback) {
-                    //     for (const n in array) {
-                    //         for (const m in array) {
-                    //         if (callback(array[n], array[m]) < 0) {
-                    //             let temp = array[n];
-                    //             array[n] = array[m];
-                    //             array[m] = temp;
-                    //         }
-                    //         }
-                    //     }
-                    //     return array;
-                    // }
+                // 排序原理(不懂)
+                    let arr = [1, 5, 3, 9, 7];
+                    function sort(array, callback) {
+                        for (const n in array) {
+                            // console.log(n,'n------');
+                            for (const m in array) {
+                                // console.log(m,'m');
+                                if (array[n] > array[m]) {
+                                    let temp = array[n];
+                                    array[n] = array[m];
+                                    array[m] = temp;
+                                }
+                            }
+                        }
+                        return array;
+                    }
                     // arr = sort(arr, function(a, b) {
                     //     return a - b;
                     // });
-                    // console.table(arr);
+                    arr = sort(arr);
+                    console.table(arr);
     </script>
 </body>
 </html>
