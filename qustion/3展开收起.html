@@ -32,19 +32,25 @@
     p {
       text-align: center;
     }
+    .arrowUp {
+      transform: rotate(180deg);
+    }
   </style>
 </head>
 <body>
   <div id="app">
     <div v-for="v in list">
-      <ul  class="def">
+      <ul :class="[v.isBeyond && 'def']">
         <li v-for="val in v.applyList">{{val.applyName}}</li>
       </ul>
-      <p>v</p>
+      <p v-if="v.isFlag" @click="openContent(v)" :class="[!v.isBeyond && 'arrowUp']">v</p>
     </div>
   </div>
   <script src="../public/js/vue.js"></script>
   <script>
+    // 问题：
+    // resize使用resize的好处
+    // if (!this.productList[i].hasOwnProperty('beyond'))加这个的好处
      new Vue({
             el:'#app',
             data:{
@@ -308,43 +314,51 @@
               ]
             },
             mounted() {
-              var uls = document.querySelectorAll('ul')
-              var lis = document.querySelectorAll('li')
-              if(uls.length > 0) {
-                // 获取ul的宽度
-                var ulsWidth = uls[0].getBoundingClientRect().width;
-                // 获取每个元素的宽度
-                var itemWidth = (100 / (Math.floor((ulsWidth) / Number(this.liWidth)))).toFixed(6) + '%'
-                var beyondFlag = false
-                for(var i = 0;i<this.list.length;i++) {
-                  // itemWidth的宽度*applyList的数量 > ulsWidth 说明超出要加展开图片
-                  if(itemWidth * this.list[i].applyList.length > ulsWidth) {
-                    // if (!this.productList[i].hasOwnProperty('beyond')) {
-                      this.$set(this.list[i],isBeyond,true)
-                    // }
-                    this.$set(this.list[i],isFlag,true)
-                    beyondFlag = true
-                  } else {
-                    this.$set(this.list[i],isFlag,false)
-                    this.$set(this.list[i],isBeyond,false)
-                    beyondFlag = false
-                  }
-                }
-                if (beyondFlag) {
-                  for (var i = 0; i < lis.length; i ++) {
-                    lis[i].style.width = itemWidth
-                  }
-                } else {
-                  for (var i = 0; i < lis.length; i ++) {
-                    lis[i].style.width = this.minWidth + 'px'
-                  }
-                }
-                console.log(ulsWidth,'ulsWidth');
-                console.log(itemWidth,'itemWidth');
-              }
+              this.isOpen()
+              window.addEventListener('resize',this.isOpen)
             },
             methods:{
-               
+              isOpen() {
+                var uls = document.querySelectorAll('ul')
+                var lis = document.querySelectorAll('li')
+                if(uls.length > 0) {
+                  // 获取ul的宽度
+                  var ulsWidth = uls[0].getBoundingClientRect().width;
+                  // 平均分配的每个元素的宽度
+                  var itemWidth = (100 / (Math.floor((ulsWidth) / Number(this.liWidth)))).toFixed(6) + '%'
+                  console.log(itemWidth);
+                  // 控制每个元素是固定宽度，还是均分宽度，如果有展开收起，就是均分宽度
+                  var beyondFlag = false
+                  for(var i = 0;i<this.list.length;i++) {
+                    // 固定宽度*applyList的数量 > ulsWidth 说明超出要加展开图片
+                    if(Number(this.liWidth) * this.list[i].applyList.length > ulsWidth) {
+                      // if (!this.productList[i].hasOwnProperty('beyond')) { //加这个判断的用途
+                        this.$set(this.list[i],'isBeyond',true)
+                      // }
+                      this.$set(this.list[i],'isFlag',true)
+                      beyondFlag = true
+                    } else {
+                      this.$set(this.list[i],'isFlag',false)
+                      this.$set(this.list[i],'isBeyond',false)
+                    }
+                  }
+                  
+                  if (beyondFlag) {
+                    for (var i = 0; i < lis.length; i ++) {
+                      lis[i].style.width = itemWidth
+                    }
+                  } else {
+                    for (var i = 0; i < lis.length; i ++) {
+                      lis[i].style.width = this.liWidth + 'px'
+                    }
+                  }
+                  // console.log(ulsWidth,'ulsWidth');
+                  // console.log(itemWidth,'itemWidth');
+                }
+              },
+              openContent(item) {
+                this.$set(item,'isBeyond',!item.isBeyond)
+              } 
             }
         });
   </script>

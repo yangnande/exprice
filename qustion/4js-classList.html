@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js-classList</title>
+  <style>
+    .bg {
+      background-color: pink;
+    }
+    </style>
+</head>
+<body>
+    <div class="bg">hdcms</div>
+    <div>houdunren</div>
+    <script>
+      // 定义及用法
+        // classList 属性返回元素类名.
+        // 该属性用于在元素中添加, 移除及切换 CSS 类.
+        // classList 是只读属性.
+        // 方法
+          // 1. 为元素添加类:
+            // element.classList.add(class1, class2, …);
+
+            // add(class1, class2, ...)
+            //     * 在元素中添加一个或多个类名.
+            //     * 若指定类名已存在, 则不添加.
+          // 2. 查看元素是否存在类:
+            // element.classList.contains(class);
+
+            // contains(class)
+            //     * 判断类名是否存在.
+            //     * 返回布尔值: true/false.
+          // 3. 获取元素的第 index 个类名（索引为 index ）:
+            // element.classList.item(index);
+
+            // item(index)
+            //   * 返回类名在元素中的索引值, 索引从 0 开始.
+            //   * 如果不在索引区间内, 返回 null.
+          // 4. 移除类
+            // element.classList.remove(“mystyle”); // 单个移除
+            // element.classList.remove(“mystyle”, “anotherClass”, “thirdClass”); // 多个移除
+
+            // remove(class1, class2, ...)
+              // * 在元素中删除一个或多个类名.
+              // * 若指定类名不存在, 不会报错.
+       
+          // 5. 为元素切换类:
+            // element.classList.toggle(“newClassName”);
+
+              // toggle(class, true|false)
+              //     * 在元素中切换类名.
+              //     * 第一个在参数为在元素中移除的类名, 并返回 false.
+              //     * 如果该类名不存在, 则会在元素中添加类名, 并返回 true.
+              //     * 第二参数可选, 是布尔值, 用于设置元素是否强制添加或移除类, 不管该类是否存在.
+              //     * 注意： Internet Explorer 或 Opera 12 及其更早版本不支持第二个参数。
+          // var divs = document.querySelectorAll('div');
+          // [...divs].map(v => {
+          //   v.addEventListener('click', function() {
+          //     // this.classList.add('bg')
+          //     // console.log(this.classList.contains('bg'));
+          //     // console.log(this.classList.item(0));
+          //     // this.classList.remove('bg')
+          //     this.classList.toggle('bg')
+          //   })
+          // })
+    </script>
+</body>
+</html>
