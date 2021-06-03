@@ -2202,6 +2202,37 @@
                             // while (({ value, done } = values.keys()) && done === false) {
                             //     console.log(value);
                             // }
+                // values
+                    // 通过迭代对象获取值
+
+                        // const hd = ["houdunren", "hdcms"];
+                        // const values = hd.values();
+                        // console.log(values.next()); // {value: houdunren, done: false}
+                        // console.log(values.next()); // {value: hdcms, done: false}
+                        // console.log(values.next()); // {value: undefined, done: true}
+                    // 获取数组的所有值
+
+                        // "use strict";
+                        // const arr = ["a", "b", "c", "后盾人"];
+
+                        // for (const value of arr.values()) {
+                        //     console.log(value); // a b c 后盾人
+                        // }
+                    // entries
+                        // 返回数组所有键值对，下面使用解构语法循环
+
+                            // const arr = ["a", "b", "c", "后盾人"];
+                            // for (const [key, value] of arr.entries()) {
+                            //     console.log(key, value); // 0,a 1,b 2,c 3,后盾人
+                            // }
+                        // 解构获取内容（对象章节会详细讲解）
+
+                            // const hd = ["houdunren", "hdcms"];
+                            // const iterator = hd.entries();
+
+                            // let {done,value: [k, v]} = iterator.next();
+
+                            // console.log(v); // houdunren
     </script>
 </body>
 </html>
