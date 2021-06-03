@@ -2075,25 +2075,133 @@
 
                         // let sortLessons = lessons.sort((v1, v2) => v2.click - v1.click);
                         // console.log(sortLessons);
-                // 排序原理
-                    let arr = [1, 5, 3, 9, 7];
-                    function sort(array, callback) {
-                        for (const n in array) {
-                            for (const m in array) {
-                            if (callback(array[n], array[m]) < 0) {
-                                let temp = array[n];
-                                array[n] = array[m];
-                                array[m] = temp;
-                            }
-                            }
-                        }
-                        return array;
-                    }
-                    arr = sort(arr, function(a, b) {
-                        return a - b;
-                    });
-                    console.table(arr);
+                // 排序原理 不懂
+                    // let arr = [1, 5, 3, 9, 7];
+                    // function sort(array, callback) {
+                    //     for (const n in array) {
+                    //         for (const m in array) {
+                    //         if (callback(array[n], array[m]) < 0) {
+                    //             let temp = array[n];
+                    //             array[n] = array[m];
+                    //             array[m] = temp;
+                    //         }
+                    //         }
+                    //     }
+                    //     return array;
+                    // }
+                    // arr = sort(arr, function(a, b) {
+                    //     return a - b;
+                    // });
+                    // console.table(arr);
                     // a-b < 0 升序  b-a <0 降序
+            // 循环遍历
+                // for
+                    // 根据数组长度结合for 循环来遍历数组
+
+                        // let lessons = [
+                        //     {title: '媒体查询响应式布局',category: 'css'},
+                        //     {title: 'FLEX 弹性盒模型',category: 'css'},
+                        //     {title: 'MYSQL多表查询随意操作',category: 'mysql'}
+                        // ];
+
+                        // for (let i = 0; i < lessons.length; i++) {
+                        //     lessons[i] = `后盾人: ${lessons[i].title}`;
+                        // }
+                        // console.log(lessons); // ["后盾人: 媒体查询响应式布局", "后盾人: FLEX 弹性盒模型", "后盾人: MYSQL多表查询随意操作"]
+                // forEach
+                    // forEach使函数作用在每个数组元素上，但是没有返回值。
+
+                    // 下面例子是截取标签的五个字符。
+
+                        // let lessons = [
+                        //     {title: '媒体查询响应式布局',category: 'css'},
+                        //     {title: 'FLEX 弹性盒模型',category: 'css'},
+                        //     {title: 'MYSQL多表查询随意操作',category: 'mysql'}
+                        // ];
+
+                        // lessons.forEach((item, index, array) => {
+                        //     item.title = item.title.substr(0, 5);
+                        // });
+                        // console.log(lessons);
+                // for/in
+                    // 遍历时的 key 值为数组的索引
+
+                        // let lessons = [
+                        //     {title: '媒体查询响应式布局',category: 'css'},
+                        //     {title: 'FLEX 弹性盒模型',category: 'css'},
+                        //     {title: 'MYSQL多表查询随意操作',category: 'mysql'}
+                        // ];
+
+                        // for (const key in lessons) {
+                        //     console.log(`标题: ${lessons[key].title}`);
+                        // }
+                // for/of
+                    // 与 for/in 不同的是 for/of 每次循环取其中的值而不是索引。
+
+                        // let lessons = [
+                        //     {title: '媒体查询响应式布局',category: 'css'},
+                        //     {title: 'FLEX 弹性盒模型',category: 'css'},
+                        //     {title: 'MYSQL多表查询随意操作',category: 'mysql'}
+                        // ];
+
+                        // for (const item of lessons) {
+                        //     console.log(`
+                        //         标题: ${item.title}
+                        //         栏目: ${item.category == "css" ? "前端" : "数据库"}
+                        //     `);
+                        // }
+                    // 使用数组的迭代对象遍历获取索引与值（有关迭代器知识后面章节会讲到）
+
+                        // const hd = ['houdunren', 'hdcms'];
+                        // const iterator = hd.entries();
+                        // console.log(iterator); // 可迭代对象
+                        // console.log(iterator.next()); //{value: [0, "houdunren"], done: false}
+                        // console.log(iterator.next()); //{value: [1, "hdcms"], done: false}
+                    // 这样就可以使用解构特性与 for/of 遍历并获取索引与值了
+
+                        // const hd = ["hdcms", "houdunren"];
+
+                        // for (const [key, value] of hd.entries()) {
+                        //     console.log(key, value); //这样就可以遍历了0,houdunren 1,hdcms
+                        // }
+                        // for (const key of hd.entries()) {
+                        //     console.log(key); //[0, "houdunren"]  [1, "hdcms"]
+                        // }
+                    // 取数组中的最大值
+
+                        // function arrayMax(array) {
+                        //     let max = array[0];
+                        //     for (const elem of array) {
+                        //         max = max > elem ? max : elem;
+                        //     }
+                        //     return max;
+                        // }
+
+                        // console.log(arrayMax([1, 3, 2, 9]));
+                // 迭代器方法
+                    // 数组中可以使用多种迭代器方法，迭代器后面章节会详解。
+
+                    // keys
+                        // 通过迭代对象获取索引
+
+                            // const hd = ["houdunren", "hdcms"];
+                            // const keys = hd.keys();
+                            // console.log(keys.next());
+                            // console.log(keys.next());
+                        // 获取数组所有键
+
+                            // "use strict";
+                            // const arr = ["a", "b", "c", "后盾人"];
+
+                            // for (const key of arr.keys()) {
+                            //     console.log(key);
+                            // }
+                        // 使用while遍历
+
+                            // let arr = ["hdcms", "houdunren"];
+                            // while (({ value, done } = values.keys()) && done === false) {
+                            //     console.log(value);
+                            // }
     </script>
 </body>
 </html>
