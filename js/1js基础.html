@@ -1606,14 +1606,26 @@
                         // let str = '后盾人';
                         // console.log(Array.from(str)); //["后", "盾", "人"]
                     // 为对象设置length属性后也可以转换为数组，但要下标为数值或数值字符串
-
-                        // let user = {
+                        // let user1 = {
                         //     0: '后盾人',
                         //     '1': 18,
                         //     length: 2
                         // };
-                        // console.log(Array.from(user)); //["后盾人", 18]
-                    // DOM元素转换为数组后来使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理。
+                        // console.log(Array.from(user1)); //["后盾人", 18]
+                    // 如果下标不为数值或数值字符串
+                        // let user2 = {
+                        //     'a': '后盾人',
+                        //     'b': 18,
+                        //     length: 2
+                        // };
+                        // console.log(Array.from(user2)) // [undefined, undefined]
+                    // 如果对象没有设置length属性
+                        // let user3 = {
+                        //     0: '后盾人',
+                        //     '1': 18
+                        // };
+                        // console.log(Array.from(user3)); //[]
+                    // DOM元素转换为数组后,来使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理。
 
                         // <button message="后盾人">button</button>
                         // <button message="hdcms">button</button>
@@ -1625,7 +1637,6 @@
                         // });
                 // 展开语法
                     // 使用展开语法将 NodeList 转换为数组操作
-
                         // <style>
                         //     .hide {
                         //     display: none;
@@ -1638,12 +1649,12 @@
                         // let divs = document.querySelectorAll("div");
                         // [...divs].map(function(div) {
                         //     div.addEventListener("click", function() {
-                        //     this.classList.toggle("hide");
+                        //       this.classList.toggle("hide");
                         //     });
                         // });
             // 展开语法
                 // 数组合并
-                    // 使用展开语法来合并数组相比 concat 要更简单，使用... 可将数组展开为多个值。
+                    // 使用展开语法来合并数组项比 concat 要更简单，使用... 可将数组展开为多个值。
                         // let a = [1, 2, 3];
                         // let b = ['a', '后盾人', ...a];
                         // console.log(b); //["a", "后盾人", 1, 2, 3]
@@ -1725,7 +1736,7 @@
                         // "use strict";
 
                         // [web, url] = ["hdcms.com", "houdunren.com"];
-                        // console.log(web);
+                        // console.log(web); // 1js基础.html:1738 Uncaught ReferenceError: web is not defined
                 // 简洁定义
                     // 只赋值部分变量
 
@@ -1776,7 +1787,7 @@
                         //     }
                         //     return array;
                         // }
-                        // console.log(rangeArray(1, 6));
+                        // console.log(rangeArray(1, 6)); // [1, 2, 3, 4, 5, 6]
                 // pop
                     // 从末尾弹出元素，直接改变元数组，返回值为弹出的元素
 
@@ -1807,6 +1818,13 @@
 
                         // console.log([1, 2, 3, 4].fill("后盾人", 0, 2)); //["后盾人", "后盾人", 3, 4]
                 // slice
+                    // arrayObject.slice(start,end)
+                        // start	必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。
+                        // end	可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。
+                        // 返回值
+                        // 返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+                        // 说明
+                        // 请注意，该方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。
                     // 使用 slice 方法从数组中截取部分元素组合成新数组（并不会改变原数组），不传第二个参数时截取到数组的最后元素。
 
                         // let arr = [0, 1, 2, 3, 4, 5, 6];
@@ -1868,8 +1886,10 @@
                     // 将数组length设置为0也可以清空数组
 
                         // let user = [{ name: "hdcms" }, { name: "后盾人" }];
+                        // let cms = user;
                         // user.length = 0;
-                        // console.log(user);
+                        // console.log(user); // []
+                        // console.log(cms); // []
                     // 使用splice方法删除所有数组元素
 
                         // let user = [{ name: "hdcms" }, { name: "后盾人" }];
@@ -1878,6 +1898,7 @@
                     // 使用pop/shift删除所有元素，来清空数组
 
                         // let user = [{ name: "hdcms" }, { name: "后盾人" }];
+                        // console.log(user.pop()); // { name: "后盾人" }
                         // while (user.pop()) { // user.pop()没有东西删的时候 返回 undefined
                         //     console.log(user.pop());
                         // }
@@ -1914,7 +1935,7 @@
                         // 参数	描述
                         // target	必需。复制到指定目标索引位置。
                         // start	可选。元素复制的起始位置。
-                        // end	可选。停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数。
+                        // end	可选。停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数。end如果超过target就位target-1，如果没超过包含end
                         // const arr = [1, 2, 3, 4];
                         // console.log(arr.copyWithin(2, 0, 2)); //[1, 2, 1, 2]
             // 查找元素
@@ -1943,7 +1964,7 @@
 
                         // let arr = [7, 3, 2, 8, 2, 6];
                     //从第五个元素向前查找
-                        // console.log(arr.lastIndexOf(2, 5)); // 4
+                        // console.log(arr.lastIndexOf(2, 3)); // 4
 
                     //从最后一个字符向前查找
                         // console.log(arr.lastIndexOf(2, -2)); // 4
@@ -1978,7 +1999,7 @@
 
                         // const user = [{ name: "李四" }, { name: "张三" }, { name: "后盾人" }];
                         // const find = user.includes({ name: "后盾人" });
-                        // console.log(find);
+                        // console.log(find); // false
                     // find 可以方便的查找引用类型
 
                         // const user = [{ name: "李四" }, { name: "张三" }, { name: "后盾人" }];
@@ -2054,23 +2075,24 @@
                         // let sortLessons = lessons.sort((v1, v2) => v2.click - v1.click);
                         // console.log(sortLessons);
                 // 排序原理
-                    // let arr = [1, 5, 3, 9, 7];
-                    // function sort(array, callback) {
-                    //     for (const n in array) {
-                    //         for (const m in array) {
-                    //         if (callback(array[n], array[m]) < 0) {
-                    //             let temp = array[n];
-                    //             array[n] = array[m];
-                    //             array[m] = temp;
-                    //         }
-                    //         }
-                    //     }
-                    //     return array;
-                    // }
-                    // arr = sort(arr, function(a, b) {
-                    //     return a - b;
-                    // });
-                    // console.table(arr);
+                    let arr = [1, 5, 3, 9, 7];
+                    function sort(array, callback) {
+                        for (const n in array) {
+                            for (const m in array) {
+                            if (callback(array[n], array[m]) < 0) {
+                                let temp = array[n];
+                                array[n] = array[m];
+                                array[m] = temp;
+                            }
+                            }
+                        }
+                        return array;
+                    }
+                    arr = sort(arr, function(a, b) {
+                        return a - b;
+                    });
+                    console.table(arr);
+                    // a-b < 0 升序  b-a <0 降序
     </script>
 </body>
 </html>
