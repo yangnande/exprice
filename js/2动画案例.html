@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2动画案例</title>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #2c3e50;
+    }
+  
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    div {
+      color: #9b59b6;
+      font-size: 5em;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    div > span {
+      position: relative;
+      display: inline-block;
+    }
+    .changeColor {
+      animation-name: changeColor;
+      animation-duration: 1s;
+      animation-direction: alternate;
+      animation-iteration-count: 2;
+      animation-timing-function: linear;
+    }
+    @keyframes changeColor {
+      50% {
+        color: #f1c40f;
+        transform: scale(1.5);
+      }
+      to {
+        color: #9b59b6;
+        transform: scale(0.5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>houdunren.com</div>
+  <script>
+    let div = document.querySelector("div");
+    console.log(div.textContent);
+    [...div.textContent].reduce((pre, cur, index) => {
+      console.log(pre,cur,index,div.innerHTML);
+      pre == index && (div.innerHTML = "");
+      let span = document.createElement("span");
+      span.textContent = cur;
+      div.appendChild(span);
+      span.addEventListener("mouseover", function() {
+        this.classList.add("changeColor");
+      });
+      span.addEventListener("animationend", function() {
+        this.classList.remove("changeColor");
+      });
+    }, 0);
+  </script>
+</body>
+</html>
