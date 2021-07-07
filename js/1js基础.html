@@ -3738,98 +3738,2780 @@
                     //     }
                     // };
                     // Dom.bind();
-        // apply/call/bind
-            // 改变this指针，也可以理解为对象借用方法，就现像生活中向邻居借东西一样的事情。
+            // apply/call/bind
+                // 改变this指针，也可以理解为对象借用方法，就现像生活中向邻居借东西一样的事情。
 
-            // 原理分析
-                // 构造函数中的this默认是一个空对象，然后构造函数处理后把这个空对象变得有值。
+                // 原理分析
+                    // 构造函数中的this默认是一个空对象，然后构造函数处理后把这个空对象变得有值。
 
-                    // function User(name) {
-                    //     this.name = name;
+                        // function User(name) {
+                        //     this.name = name;
+                        // }
+                        // let hd = new User("后盾人");
+                    // 可以改变构造函数中的空对象，即让构造函数this指向到另一个对象。
+
+                        // function User(name) {
+                        //     this.name = name;
+                        // }
+
+                        // let hdcms = {};
+                        // User.call(hdcms, "HDCMS");
+                        // console.log(hdcms.name); //HDCMS
+                // apply/call
+                    // call与apply 用于显示的设置函数的上下文，两个方法作用一样都是将对象绑定到this，只是在传递参数上有所不同。
+
+                    // apply 用数组传参
+                    // call 需要分别传参
+                    // 与 bind 不同 call/apply 会立即执行函数
+                    // 语法使用介绍
+
+                        // function show(title) {
+                        //     alert(`${title+this.name}`);
+                        // }
+                        // let lisi = {
+                        //     name: '李四'
+                        // };
+                        // let wangwu = {
+                        //     name: '王五'
+                        // };
+                        // show.call(lisi, '后盾人');
+                        // show.apply(wangwu, ['HDCMS']);
+                    // 使用 call 设置函数上下文
+
+                        // <button message="后盾人">button</button>
+                        // <button message="hdcms">button</button>
+                        // function show() {
+                        //     alert(this.getAttribute('message'));
+                        // }
+                        // let bts = document.getElementsByTagName('button');
+                        // for (let i = 0; i < bts.length; i++) {
+                        //     bts[i].addEventListener('click', () => show.call(bts[i]));
+                        // }
+                    // 找数组中的数值最大值
+
+                        // let arr = [1, 3, 2, 8];
+                        // console.log(Math.max(arr)); //NaN
+                        // console.log(Math.max.apply(Math, arr)); //8
+                        // console.log(Math.max(...arr)); //8
+                    // 实现构造函数属性继承
+
+                        // "use strict";
+                        // function Request() {
+                        //     this.get = function(params = {}) {
+                        //         //组合请求参数
+                        //         let option = Object.keys(params)
+                        //         .map(i => i + "=" + params[i])
+                        //         .join("&");
+
+                        //         return `获取数据 API:${this.url}?${option}`;
+                        //     };
+                        // }
+                    //文章控制器
+                        // function Article() {
+                        //     this.url = "article/index";
+                        //     Request.apply(this, []);
+                        //     }
+                        //     let hd = new Article();
+                        //     console.log(
+                        //     hd.get({
+                        //         row: 10,
+                        //         start: 3
+                        //     })
+                        // );
+                    //课程控制器
+                        // function Lesson() {
+                        //     this.url = "lesson/index";
+                        //     Request.call(this);
+                        //     }
+                        //     let js = new Lesson();
+                        //     console.log(
+                        //     js.get({
+                        //         row: 20
+                        //     })
+                        // );
+                    // 制作显示隐藏面板
+
+                        // * {
+                        //     padding: 0;
+                        //     margin: 0;
+                        // }
+
+                        // body {
+                        //     display: flex;
+                        //     justify-content: center;
+                        //     align-items: center;
+                        //     width: 100vw;
+                        //     height: 100vh;
+                        // }
+
+                        // dl {
+                        //     width: 400px;
+                        //     display: flex;
+                        //     flex-direction: column;
+                        // }
+
+                        // dt {
+                        //     background: #e67e22;
+                        //     border-bottom: solid 2px #333;
+                        //     height: 50px;
+                        //     display: flex;
+                        //     justify-content: center;
+                        //     align-items: center;
+                        //     cursor: pointer;
+                        // }
+
+                        // dd {
+                        //     height: 200px;
+                        //     background: #bdc3c7;
+                        //     font-size: 5em;
+                        //     text-align: center;
+                        //     line-height: 200px;
+                        // }
+
+                        // <dl>
+                        //     <dt>后盾人</dt>
+                        //     <dd>1</dd>
+                        //     <dt>hdcms</dt>
+                        //     <dd hidden="hidden">2</dd>
+                        // </dl>
+                        // function panel(i) {
+                        //     let dds = document.querySelectorAll("dd");
+                        //     dds.forEach(item => item.setAttribute("hidden", "hidden"));
+                        //     dds[i].removeAttribute("hidden");
+                        // }
+                        // document.querySelectorAll("dt").forEach((dt, i) => {
+                        //     dt.addEventListener("click", () => panel.call(null, i));
+                        // });
+                // bind
+                    // bind()是将函数绑定到某个对象，比如 a.bind(hd) 可以理解为将a函数绑定到hd对象上即 hd.a()。
+
+                    // 与 call/apply 不同bind不会立即执行
+                    // bind 是复制函数形为会返回新函数
+                    // bind是复制函数行为
+
+                        // let a = function() {};
+                        // let b = a;
+                        // console.log(a === b); //true
+                        // //bind是新复制函数
+                        // let c = a.bind();
+                        // console.log(a == c); //false
+                    // 绑定参数注意事项
+
+                        // function hd(a, b) {
+                        //     return this.f + a + b;
+                        // }
+
+                        // //使用bind会生成新函数
+                        // let newFunc = hd.bind({ f: 1 }, 3);
+
+                        // //1+3+2 参数2赋值给b即 a=3,b=2
+                        // console.log(newFunc(2));
+                    // 在事件中使用bind
+
+                        // <button>后盾人</button>
+                        // document.querySelector("button").addEventListener(
+                        //     "click",
+                        //     function(event) {
+                        //     console.log(event.target.innerHTML + this.url);
+                        //     }.bind({ url: "houdunren.com" })
+                        // );
+                    // 动态改变元素背景颜色，当然下面的例子也可以使用箭头函数处理
+
+                        // * {
+                        //     padding: 0;
+                        //     margin: 0;
+                        // }
+
+                        // body {
+                        //     width: 100vw;
+                        //     height: 100vh;
+                        //     font-size: 3em;
+                        //     padding: 30px;
+                        //     transition: 2s;
+                        //     display: flex;
+                        //     justify-content: center;
+                        //     align-items: center;
+                        //     background: #34495e;
+                        //     color: #34495e;
+                        // }
+                        // function Color(elem) {
+                        //     this.elem = elem;
+                        //     this.colors = ["#74b9ff", "#ffeaa7", "#fab1a0", "#fd79a8"];
+                        //     this.run = function() {
+                        //     setInterval(
+                        //         function() {
+                        //         let pos = Math.floor(Math.random() * this.colors.length);
+                        //         this.elem.style.background = this.colors[pos];
+                        //         }.bind(this),
+                        //         1000
+                        //     );
+                        //     };
+                        // }
+                        // let obj = new Color(document.body);
+                        // obj.run();、
+                            
+        // 八 作用域和闭包
+            // 全局作用域只有一个，每个函数又都有作用域（环境）。
+
+            // 编译器运行时会将变量定义在所在作用域
+            // 使用变量时会从当前作用域开始向上查找变量
+            // 作用域就像攀亲亲一样，晚辈总是可以向上辈要些东西
+            // 使用规范
+                // 作用域链只向上查找，找到全局window即终止，应该尽量不要在全局作用域中添加变量。
+
+                // 函数被执行后其环境变量将从内存中删除。下面函数在每次执行后将删除函数内部的total变量。
+
+                    // function count() {
+                    //     let total = 0;
                     // }
-                    // let hd = new User("后盾人");
-                // 可以改变构造函数中的空对象，即让构造函数this指向到另一个对象。
+                    // count();
+                // 函数每次调用都会创建一个新作用域
 
-                    // function User(name) {
-                    //     this.name = name;
+                    // let site = '后盾人';
+
+                    // function a() {
+                    //     let hd = 'houdunren.com';
+
+                    //     function b() {
+                    //         let cms = 'hdcms.com';
+                    //         console.log(hd);
+                    //         console.log(site);
+                    //     }
+                    //     b();
                     // }
+                    // a();
+                // 如果子函数被使用时父级环境将被保留
 
-                    // let hdcms = {};
-                    // User.call(hdcms, "HDCMS");
-                    // console.log(hdcms.name); //HDCMS
-            // apply/call
-                // call与apply 用于显示的设置函数的上下文，两个方法作用一样都是将对象绑定到this，只是在传递参数上有所不同。
-
-                // apply 用数组传参
-                // call 需要分别传参
-                // 与 bind 不同 call/apply 会立即执行函数
-                // 语法使用介绍
-
-                    // function show(title) {
-                    //     alert(`${title+this.name}`);
+                    // function hd() {
+                    //     let n = 1;
+                    //     return function() {
+                    //         let b = 1;
+                    //         return function() {
+                    //           console.log(++n);
+                    //           console.log(++b);
+                    //         };
+                    //     };
                     // }
-                    // let lisi = {
-                    //     name: '李四'
-                    // };
-                    // let wangwu = {
-                    //     name: '王五'
-                    // };
-                    // show.call(lisi, '后盾人');
-                    // show.apply(wangwu, ['HDCMS']);
-                // 使用 call 设置函数上下文
+                    // let a = hd()();
+                    // a(); //2,2
+                    // a(); //3,3
+                // 构造函数也是很好的环境例子，子函数被外部使用父级环境将被保留
+
+                    // function User() {
+                    //     let a = 1;
+                    //     this.show = function() {
+                    //         console.log(a++);
+                    //     };
+                    // }
+                    // let a = new User();
+                    // a.show(); //1
+                    // a.show(); //2
+                    // let b = new User();
+                    // b.show(); //1
+            // let/const
+                // 使用 let/const 可以将变量声明在块作用域中（放在新的环境中，而不是全局中）
+
+                    // {
+                    //     let a = 9;
+                    // }
+                    // console.log(a); //ReferenceError: a is not defined
+                    // if (true) {
+                    //     var i = 1;
+                    // }
+                    // console.log(i);//1
+                // 也可以通过下面的定时器函数来体验
+
+                    // for (let i = 0; i < 10; i++) {
+                    //     setTimeout(() => {
+                    //         console.log(i); //0-9
+                    //     }, 500);
+                    // }
+                // 在 for 循环中使用let/const 会在每一次迭代中重新生成不同的变量
+
+                    // let arr = [];
+                    // for (let i = 0; i < 10; i++) {
+                    //     arr.push((() => i));
+                    // }
+                    // console.log(arr[3]()); //3 如果使用var声明将是10
+                // 在没有let/const 的历史中使用以下方式产生作用域
+
+                //自行构建闭包
+                    // var arr = [];
+                    // for (var i = 0; i < 10; i++) {
+                    //     (function (a) {
+                    //         arr.push(()=>a);
+                    //     })(i);
+                    // }
+                    // console.log(arr[3]()); //3
+        // 闭包使用
+            // 闭包指子函数可以访问外部作用域变量的函数特性，即使在子函数作用域外也可以访问。如果没有闭包那么在处理事件绑定，异步请求时都会变得困难。
+
+            // JS中的所有函数都是闭包
+            // 闭包一般在子函数本身作用域以外执行，即延伸作用域
+            // 基本示例
+                // 前面在讲作用域时已经在使用闭包特性了，下面再次重温一下闭包。
+
+                    // function hd() {
+                    //     let name = '后盾人';
+                    //     return function () {
+                    //         return name;
+                    //     }
+                    // }
+                    // let hdcms = hd();
+                    // console.log(hdcms()); //后盾人
+                // 使用闭包返回数组区间元素
+
+                    // let arr = [3, 2, 4, 1, 5, 6];
+                    // function between(a, b) {
+                    //     return function(v) {
+                    //         return v >= a && v <= b;
+                    //     };
+                    // }
+                    // console.log(arr.filter(between(3, 5)));
+                // 下面是在回调函数中使用闭包，当点击按钮时显示当前点击的是第几个按钮。
 
                     // <button message="后盾人">button</button>
                     // <button message="hdcms">button</button>
-                    // function show() {
-                    //     alert(this.getAttribute('message'));
+                    // var btns = document.querySelectorAll("button");
+                    // for (let i = 0; i < btns.length; i++) {
+                    //     btns[i].onclick = (function(i) {
+                    //         return function() {
+                    //           alert(`点击了第${i + 1}个按钮`);
+                    //         };
+                    //     })(i);
                     // }
-                    // let bts = document.getElementsByTagName('button');
-                    // for (let i = 0; i < bts.length; i++) {
-                    //     bts[i].addEventListener('click', () => show.call(bts[i]));
-                    // }
-                // 找数组中的数值最大值
+            // 移动动画
+                // 计时器中使用闭包来获取独有变量
 
-                    // let arr = [1, 3, 2, 8];
-                    // console.log(Math.max(arr)); //NaN
-                    // console.log(Math.max.apply(Math, arr)); //8
-                    // console.log(Math.max(...arr)); //8
-                // 实现构造函数属性继承
+                    // <style>
+                    //     button {
+                    //     position: absolute;
+                    //     }
+                    // </style>
+                    // <button message="后盾人">houdunren</button>
+                    // <!-- <button message="hdcms">hdcms</button> -->
+                    // let btns = document.querySelectorAll("button");
+                    // btns.forEach(function(item) {
+                    //     let bind = false;
+                    //     item.addEventListener("click", function() {
+                    //     if (!bind) {
+                    //         let left = 1;
+                    //         bind = setInterval(function() {
+                    //         item.style.left = left++ + "px";
+                    //         }, 100);
+                    //     }
+                    //     });
+                    // });
+            // 闭包排序
+                // 下例使用闭包按指定字段排序
+
+                    // let lessons = [
+                    //     {
+                    //         title: "媒体查询响应式布局",
+                    //         click: 89,
+                    //         price: 12
+                    //     },
+                    //     {
+                    //         title: "FLEX 弹性盒模型",
+                    //         click: 45,
+                    //         price: 120
+                    //     },
+                    //     {
+                    //         title: "GRID 栅格系统",
+                    //         click: 19,
+                    //         price: 67
+                    //     },
+                    //     {
+                    //         title: "盒子模型详解",
+                    //         click: 29,
+                    //         price: 300
+                    //     }
+                    // ];
+                    // function order(field) {
+                    //     return (a, b) => (a[field] > b[field] ? 1 : -1);
+                    // }
+                    // console.table(lessons.sort(order("price")));
+            // 闭包问题
+                // 内存泄漏
+
+                // 闭包特性中上级作用域会为函数保存数据，从而造成的如下所示的内存泄漏问题
+
+                    // <div desc="houdunren">在线学习</div>
+                    // <div desc="hdcms">开源产品</div>
+                    // let divs = document.querySelectorAll("div");
+                    // divs.forEach(function(item) {
+                    //     item.addEventListener("click", function() {
+                    //     console.log(item.getAttribute("desc"));
+                    //     });
+                    // });
+                // 下面通过清除不需要的数据解决内存泄漏问题
+
+                    // let divs = document.querySelectorAll("div");
+                    // divs.forEach(function(item) {
+                    //     let desc = item.getAttribute("desc");
+                    //     item.addEventListener("click", function() {
+                    //         console.log(desc);
+                    //     });
+                    //     item = null;
+                    // });
+                // this指向
+
+                    // this 总是指向调用该函数的对象，即函数在搜索this时只会搜索到当前活动对象。
+
+                    // 下面是函数因为是在全局环境下调用的，所以this指向window，这不是我们想要的。
+
+                        // let hd = {
+                        //     user: "后盾人",
+                        //     get: function() {
+                        //         return function() {
+                        //         return this.user;
+                        //         };
+                        //     }
+                        // };
+                        // console.log(hd.get()()); //undefined
+                // 使用箭头函数解决这个问题
+
+                    // let hd = {
+                    //     user: "后盾人",
+                    //     get: function() {
+                    //         return () => this.user;
+                    //     }
+                    // };
+                    // console.log(hd.get()()); //后盾人
+        // 九 对象
+            // 基础知识
+                // 对象是包括属性与方法的数据类型，JS中大部分类型都是对象如 String/Number/Math/RegExp/Date 等等。
+
+                // 传统的函数编程会有错中复杂的依赖很容易创造意大利式面条代码。
+
+                // 面向过程编程
+
+                    // let name = "向军";
+                    // let grade = [
+                    //     { lesson: "js", score: 99 },
+                    //     { lesson: "mysql", score: 85 }
+                    // ];
+                    // function average(grade, name) {
+                    //     const total = grade.reduce((t, a) => t + a.score, 0);
+                    //     return name + ":" + total / grade.length + "分";
+                    // }
+                    // console.log(average(grade, name));
+                // 面向对象编程
+
+                // 下面使用对象编程的代码结构清晰，也减少了函数的参数传递，也不用担心函数名的覆盖
+
+                    // let user = {
+                    //     name: "后盾人",
+                    //     grade: [
+                    //         { lesson: "js", score: 99 },
+                    //         { lesson: "mysql", score: 85 }
+                    //     ],
+                    //     average() {
+                    //         const total = this.grade.reduce((t, a) => t + a.score, 0);
+                    //         return this.name + ":" + total / grade.length + "分";
+                    //     }
+                    // };
+                    // console.log(user.average());
+            // OOP
+                // 对象是属性和方法的集合即封装
+                // 将复杂功能隐藏在内部，只开放给外部少量方法，更改对象内部的复杂逻辑不会对外部调用造成影响即抽象
+                // 继承是通过代码复用减少冗余代码
+                // 根据不同形态的对象产生不同结果即多态
+            // 基本声明
+                // 使用字面量形式声明对象是最简单的方式
+                    // let obj = {
+                    //     name: '后盾人',
+                    //     get:function() {
+                    //         return this.name;
+                    //     }
+                    // }
+                    // console.log(obj.get()); //后盾人
+                // 属性与方法简写
+
+                    // let name = "后盾人";
+                    // let obj = {
+                    //     name,
+                    //     get() {
+                    //         return this.name;
+                    //     }
+                    // };
+                    // console.log(obj.get()); //后盾人
+                // 其实字面量形式在系统内部也是使用构造函数 new Object创建的，后面会详细介绍构造函数。
+
+                    // let hd = {};
+                    // let houdunren = new Object();
+                    // console.log(hd, houdunren);
+                    // console.log(hd.constructor);
+                    // console.log(houdunren.constructor);
+            // 操作属性
+                // 使用点语法获取
+
+                    // let user = {
+                    //     name: "向军"
+                    // };
+                    // console.log(user.name);
+                // 使用[] 获取
+
+                    // console.log(user["name"]);
+                // 可以看出使用.操作属性更简洁，[]主要用于通过变量定义属性的场景
+
+                    // let user = {
+                    //     name: "向军"
+                    // };
+                    // let property = "name";
+                    // console.log(user[property]);
+                // 如果属性名不是合法变量名就必须使用扩号的形式了
+
+                    // let user = {};
+                    // user["my-age"] = 28;
+                    // console.log(user["my-age"]);
+                // 对象和方法的属性可以动态的添加或删除。
+
+                    // const hd = {
+                    //     name: "后盾人"
+                    // };
+                    // hd.age = "10";
+                    // hd.show = function() {
+                    //     return `${this.name}已经${this.age}岁了`;
+                    // };
+                    // console.log(hd.show());
+                    // console.log(hd);
+
+                    // delete hd.show;
+                    // delete hd.age;
+
+                    // console.log(hd);
+                    // console.log(hd.age); //undefined
+            // 对象方法
+                // 定义在对象中的函数我们称为方法，下面定义了学生对象，并提供了计算平均成绩的方法
+
+                    // let lisi = {
+                    //     name: "李四",
+                    //     age: 22,
+                    //     grade: {
+                    //         math: 99,
+                    //         english: 67
+                    //     },
+                    //     //平均成绩
+                    //     avgGrade: function() {
+                    //         let total = 0;
+                    //         for (const key in this.grade) {
+                    //           total += this.grade[key];
+                    //         }
+                    //         return total / this.propertyCount("grade");
+                    //     },
+                    //     //获取属性数量
+                    //     propertyCount: function(property) {
+                    //         let count = 0;
+                    //         for (const key in this[property]) count++;
+                    //         return count;
+                    //     }
+                    // };
+                    // console.log(lisi.avgGrade());
+                // 一个学生需要手动创建一个对象，这显然不实际的，下面的构造函数就可以解决这个问题
+
+            // 引用特性
+                // 对象和函数、数组一样是引用类型，即复制只会复制引用地址。
+
+                    // let hd = { name: "后盾人" };
+                    // let cms = hd;
+                    // cms.name = "hdcms";
+                    // console.log(hd.name); //hdcms
+                // 对象做为函数参数使用时也不会产生完全赋值，内外共用一个对象
+
+                    // let user = { age: 22 };
+                    // function hd(user) {
+                    //     user.age += 10;
+                    // }
+                    // hd(user);
+                    // console.log(user.age); //32
+                // 对多的比较是对内存地址的比较所以使用 == 或 === 一样
+
+                    // let hd = {};
+                    // let xj = hd;
+                    // let cms = {};
+                    // console.log(hd == xj); //true
+                    // console.log(hd === xj); //true
+                    // console.log(hd === cms); //false
+            // this
+                // this 指当前对象的引用，始终建议在代码内部使用this 而不要使用对象名，不同对象的this只指向当前对象。
+
+                // 下例是不使用 this 时发生的错误场景
+
+                // 删除了xj 变量，但在函数体内还在使用xj变量造成错误
+                // 使用 this 后始终指向到引用地址，就不会有这个问题
+                    // let xj = {
+                    //     name: "向军",
+                    //     show() {
+                    //         return xj.name;
+                    //     }
+                    // };
+                    // let hd = xj;
+                    // xj = null;
+                    // console.log(hd.show()); //TypeError: Cannot read property 'name' of null
+                // 改用this 后一切正常
+
+                    // let xj = {
+                    //     name: "向军",
+                    //     show() {
+                    //         return this.name;
+                    //     }
+                    // };
+                    // let hd = xj;
+                    // xj = null;
+                    // console.log(hd.show()); //向军
+            // 展开语法
+                // 使用...可以展示对象的结构，下面是实现对象合并的示例
+
+                    // let hd = { name: "后盾人", web: "houdurnen.com" };
+                    // let info = { ...hd, site: "hdcms" };
+                    // console.log(info);
+                // 下面是函数参数合并的示例
+
+                    // function upload(params) {
+                    //     let config = {
+                    //         type: "*.jpeg,*.png",
+                    //         size: 10000
+                    //     };
+                    //     params = { ...config, ...params };
+                    //     console.log(params);
+                    // }
+                    // upload({ size: 999 });
+        // 对象转换
+            // 基础知识
+                // 对象直接参与计算时，系统会根据计算的场景在 string/number/default 间转换。
+
+                // 如果声明需要字符串类型，调用顺序为 toString > valueOf
+                // 如果场景需要数值类型，调用顺序为 valueOf > toString
+                // 声明不确定时使用 default ，大部分对象的 default 会当数值使用
+                // 下面的数值对象会在数学运算时转换为 number
+
+                    // let houdunren = new Number(1);
+                    // console.log(houdunren + 3); //4
+                // 如果参数字符串运长时会转换为 string
+
+                    // let houdunren = new Number(1);
+                    // console.log(houdunren + "3"); //13
+                // 下面当不确定转换声明时使用 default ，大部分default转换使用 number 转换。
+
+                    // let houdunren = new Number(1);
+                    // console.log(houdunren == "1"); //true
+            // Symbol.toPrimitive
+                // 内部自定义Symbol.toPrimitive方法用来处理所有的转换场景
+
+                    // let hd = {
+                    //     num: 1,
+                    //     [Symbol.toPrimitive]: function() {
+                    //         return this.num;
+                    //     }
+                    // };
+                    // console.log(hd + 3); //4
+            // valueOf/toString
+                // 可以自定义valueOf 与 toString 方法用来转换，转换并不限制返回类型。
+
+                    // let hd = {
+                    //     name: "后盾人",
+                    //     num: 1,
+                    //     valueOf: function() {
+                    //         console.log("valueOf");
+                    //         return this.num;
+                    //     },
+                    //     toString: function() {
+                    //         console.log("toString");
+                    //         return this.name;
+                    //     }
+                    // };
+                    // console.log(hd + 3); //valueOf 4
+                    // console.log(`${hd}向军`); //toString 后盾人向军
+        // 解构赋值
+            // 解构是一种更简洁的赋值特性，可以理解为分解一个数据的结构，在数组章节已经介绍过。
+
+            // 建设使用 var/let/const 声明
+            // 基本使用
+                // 下面是基本使用语法
+
+                //对象使用
+                    // let info = {name:'后盾人',url:'houdunren.com'};
+                    // let {name:n,url:u} = info
+                    // console.log(n); // 后盾人
+
+                //如果属性名与变量相同可以省略属性定义
+                    // let {name,url} = {name:'后盾人',url:'houdunren.com'};
+                    // console.log(name); // 后盾人
+                // 函数返回值直接解构到变量
+
+                    // function hd() {
+                    //     return {
+                    //         name: '后盾人',
+                    //         url: 'houdunren.com'
+                    //     };
+                    // }
+                    // let {name: n,url: u} = hd();
+                    // console.log(n);
+                // 函数传参
 
                     // "use strict";
-                    // function Request() {
-                    //     this.get = function(params = {}) {
-                    //         //组合请求参数
-                    //         let option = Object.keys(params)
-                    //         .map(i => i + "=" + params[i])
-                    //         .join("&");
+                    // function hd({ name, age }) {
+                    //     console.log(name, age); //向军大叔 18
+                    // }
+                    // hd({ name: "向军", age: 18 });
+                // 系统函数解构练习，这没有什么意义只是加深解构印象
 
-                    //         return `获取数据 API:${this.url}?${option}`;
+                    // const {random} =Math;
+                    // console.log(random());
+            // 严格模式
+                // 非严格模式可以不使用声明指令，严格模式下必须使用声明。所以建议使用 let 等声明。
+
+                    // "use strict";
+                    // ({name,url} = {name:'后盾人',url:'houdunren.com'});
+                    // console.log(name, url); // Uncaught ReferenceError: url is not defined
+                    // 还是建议使用let等赋值声明
+
+                    // "use strict";
+                    // let { name, url } = { name: "后盾人", url: "houdunren.com" };
+                    // console.log(name, url);
+            // 简洁定义
+                // 如果属性名与赋值的变量名相同可以更简洁
+
+                    // let web = { name: "后盾人",url: "houdunren.com" };
+                    // let { name, url } = web;
+                    // console.log(name); //后盾人
+                // 只赋值部分变量
+
+                    // let [,url]=['后盾人','houdunren.com'];
+                    // console.log(url);//houdunren.com
+
+                    // let {name}= {name:'后盾人',url:'houdunren.com'};
+                    // console.log(name); //后盾人
+                // 可以直接使用变量赋值对象属性
+
+                    // let name = "后盾人",url = "houdunren.com";
+                    // 标准写法如下
+                    // let hd = { name: name, url: url };
+                    // console.log(hd);  //{name: "后盾人", url: "houdunren.com"}
+
+                    // 如果属性和值变量同名可以写成以下简写形式
+                    // let opt = { name, url };
+                    // console.log(opt); //{name: "后盾人", url: "houdunren.com"}
+            // 嵌套解构
+                // 可以操作多层复杂数据结构
+
+                    // const hd = {
+                    //     name:'后盾人',
+                    //     lessons:{
+                    //         title:'JS'
+                    //     }
+                    // }
+                    // const {name,lessons:{title}}  = hd;
+                    // console.log(name,title); //后盾人 JS
+            // 默认值
+                // 为变量设置默认值
+
+                    // let [name, site = 'hdcms'] = ['后盾人'];
+                    // console.log(site); //hdcms
+
+                    // let {name,url,user='向军大叔'}= {name:'后盾人',url:'houdunren.com'};
+                    // console.log(name,user);//向军大叔
+                // 使用默认值特性可以方便的对参数预设
+
+                    // function createElement(options) {
+                    // let {
+                    //     width = '200px',
+                    //     height = '100px',
+                    //     backgroundColor = 'red'
+                    // } = options;
+                    
+                    // const h2 = document.createElement('h2');
+                    // h2.style.width = width;
+                    // h2.style.height = height;
+                    // h2.style.backgroundColor = backgroundColor;
+                    // document.body.appendChild(h2);
+                    // }
+                    // createElement({
+                    //     backgroundColor: 'green'
+                    // });
+            // 函数参数
+                // 数组参数的使用
+
+                    // function hd([a, b]) {
+                    //     console.log(a, b);
+                    // }
+                    // hd(['后盾人', 'hdcms']);
+                // 对象参数使用方法
+
+                    // function hd({name,url,user='向军大叔'}) {
+                    //     console.log(name,url,user);
+                    // }
+                    // hd({name:'后盾人','url':'houdunren.com'}); //后盾人 houdunren.com 向军大叔
+                // 对象解构传参
+
+                    // function user(name, { sex, age } = {}) {
+                    //     console.log(name, sex, age); //向军大叔 男 18
+                    // }
+                    // user("向军大叔", { sex: "男", age: 18 });
+        // 属性管理
+            // 添加属性
+                // 可以为对象添加属性
+
+                // let obj = {name: "后盾人"};
+                // obj.site = "houdunren.com";
+                // console.log(obj);
+            // 删除属性
+                // 使用delete 可以删除属性（后面介绍的属性特性章节可以保护属性不被删除）
+
+                    // let obj = { name: "后盾人" };
+                    // delete obj.name;
+                    // console.log(obj.name); //undefined
+            // 检测属性
+                // hasOwnProperty检测对象自身是否包含指定的属性，不检测原型链上继承的属性。
+
+                    // let obj = { name: '后盾人'};
+                    // console.log(obj.hasOwnProperty('name')); //true
+                // 下面通过数组查看
+
+                    // let arr = ["后盾人"];
+                    // console.log(arr);
+                    // console.log(arr.hasOwnProperty("length")); //true
+                    // console.log(arr.hasOwnProperty("concat")); //false
+                    // console.log("concat" in arr); //true
+                // 使用 in 可以在原型对象上检测
+
+                    // let obj = {name: "后盾人"};
+                    // let hd = {
+                    //     web: "houdunren.com"
+                    // };
+
+                    // 设置hd为obj的新原型
+                    // Object.setPrototypeOf(obj, hd);
+                    // console.log(obj);
+
+                    // console.log("web" in obj); //true
+                    // console.log(obj.hasOwnProperty("web")); //false
+            // 获取属性名
+                // 使用 Object.getOwnPropertyNames 可以获取对象的属性名集合
+
+                    // let hd = { name: '后盾人', year: 2010 }
+                    // const names = Object.getOwnPropertyNames(hd)
+                    // console.log(names)
+                    // ["name", "year"]
+            // assign
+                // 以往我们使用类似jQuery.extend 等方法设置属性，现在可以使用 Object.assign 静态方法
+
+                // 从一个或多个对象复制属性
+
+                    // "use strict";
+                    // let hd = { a: 1, b: 2 };
+                    // hd = Object.assign(hd, { f: 1 }, { m: 9 });
+                    // console.log(hd); //{a: 1, b: 2, f: 1, m: 9}
+            // 计算属性
+                // 对象属性可以通过表达式计算定义，这在动态设置属性或执行属性方法时很好用。
+
+                    // let id = 0;
+                    // const user = {
+                    //     [`id-${id++}`]: id,
+                    //     [`id-${id++}`]: id,
+                    //     [`id-${id++}`]: id
+                    // };
+                    // console.log(user);
+                // 使用计算属性为文章定义键名
+
+                    // const lessons = [
+                    //     {
+                    //         title: "媒体查询响应式布局",
+                    //         category: "css"
+                    //     },
+                    //     {
+                    //         title: "FLEX 弹性盒模型",
+                    //         category: "css"
+                    //     },
+                    //     {
+                    //         title: "MYSQL多表查询随意操作",
+                    //         category: "mysql"
+                    //     }
+                    // ];
+                    // let lessonObj = lessons.reduce((obj, cur, index) => {
+                    //     obj[`${cur["category"]}-${index}`] = cur;
+                    //     return obj;
+                    // }, {});
+                    // console.log(lessonObj); //{css-0: {…}, css-1: {…}, mysql-2: {…}}
+                    // console.log(lessonObj["css-0"]); //{title: "媒体查询响应式布局", category: "css"}
+            // 传值操作
+                // 对象是引用类型赋值是传址操作，后面会介绍对象的深、浅拷贝操作
+
+                    // let user = {
+                    //     name: '后盾人'
+                    // };
+                    // let hd = {
+                    //     stu: user
+                    // };
+                    // hd.stu.name = 'hdcms';
+                    // console.log(user.name);//hdcms
+        // 遍历对象
+            // 获取内容
+                // 使用系统提供的API可以方便获取对象属性与值
+
+                    // const hd = {
+                    //     name: "后盾人",
+                    //     age: 10
+                    // };
+                    // console.log(Object.keys(hd)); //["name", "age"]
+                    // console.log(Object.values(hd)); //["后盾人", 10]
+                    // console.table(Object.entries(hd)); //[["name","后盾人"],["age",10]]
+            // for/in
+                // 使用for/in遍历对象属性
+
+                    // const hd = {
+                    //     name: "后盾人",
+                    //     age: 10
+                    // };
+                    // for (let key in hd) {
+                    //     console.log(key, hd[key]);
+                    // }
+            // for/of
+                // for/of用于遍历迭代对象，不能直接操作对象。但Object对象的keys/方法返回的是迭代对象。
+
+                    // const hd = {
+                    //     name: "后盾人",
+                    //     age: 10
+                    // };
+                    // for (const key of Object.keys(hd)) {
+                    //     console.log(key); // name age
+                    // }
+                // 获取所有对象属性
+
+                    // const hd = {
+                    //     name: "后盾人",
+                    //     age: 10
+                    // };
+                    // for (const key of Object.values(hd)) {
+                    //     console.log(key); // 后盾人 10
+                    // }
+                // 同时获取属性名与值
+
+                    // for (const array of Object.entries(hd)) {
+                    //     console.log(array); // ["name", "后盾人"] ["age", 10]
+                    // }
+                // 使用扩展语法同时获取属性名与值
+
+                    // for (const [key, value] of Object.entries(hd)) {
+                    //     console.log(key, value); "name", "后盾人" "age", 10
+                    // }
+                // 添加元素DOM练习
+
+                    // let lessons = [
+                    //     { name: "js", click: 23 },
+                    //     { name: "node", click: 192 }
+                    // ];
+                    // let ul = document.createElement("ul");
+                    // for (const val of lessons) {
+                    //     let li = document.createElement("li");
+                    //     li.innerHTML = `课程:${val.name},点击数:${val.click}`;
+                    //     ul.appendChild(li);
+                    // }
+                    // document.body.appendChild(ul);
+        // 对象拷贝
+            // 对象赋值时复制的内存地址，所以一个对象的改变直接影响另一个
+
+                // let obj = {
+                //     name: '后盾人',
+                //     user: {
+                //         name: 'hdcms'
+                //     }
+                // }
+                // let a = obj;
+                // let b = obj;
+                // a.name = 'lisi';
+                // console.log(b.name); //lisi
+            // 浅拷贝
+                // 使用for/in执行对象拷贝
+
+                    // let obj = {name: "后盾人"};
+
+                    // let hd = {};
+                    // for (const key in obj) {
+                    //     hd[key] = obj[key];
+                    // }
+
+                    // hd.name = "hdcms";
+                    // console.log(hd); // {name: "hdcms"}
+                    // console.log(obj); // {name: "后盾人"}
+                // Object.assign 函数可简单的实现浅拷贝，它是将两个对象的属性叠加后面对象属性会覆盖前面对象同名属性。
+
+                    // let user = {
+                    //     name: '后盾人'
+                    // };
+                    // let hd = {
+                    //     stu: Object.assign({}, user)
+                    // };
+                    // hd.stu.name = 'hdcms';
+                    // console.log(user.name);//后盾人
+                // 使用展示语法也可以实现浅拷贝
+
+                    // let obj = {
+                    //     name: "后盾人"
+                    // };
+                    // let hd = { ...obj };
+                    // hd.name = "hdcms";
+                    // console.log(hd); // { name: "hdcms"}
+                    // console.log(obj); // { name: "后盾人"}
+            // 深拷贝
+                // 浅拷贝不会将深层的数据复制
+
+                    // let obj = {
+                    //     name: '后盾人',
+                    //     user: {
+                    //         name: 'hdcms'
+                    //     }
+                    // }
+                    // let a = obj;
+                    // let b = obj;
+
+                    // function copy(object) {
+                    //     let obj = {}
+                    //     for (const key in object) {
+                    //         obj[key] = object[key];
+                    //     }
+                    //     return obj;
+                    // }
+                    // let newObj = copy(obj);
+                    // newObj.name = 'hdcms';
+                    // newObj.user.name = 'houdunren.com';
+                    // console.log(newObj); // { name: "hdcms",user:{name:houdunren.com}}
+                    // console.log(obj); // { name: "后盾人",user:{name:houdunren.com}}
+                // 是完全的复制一个对象，两个对象是完全独立的对象
+
+                    // let obj = {
+                    //     name: "后盾人",
+                    //     user: {
+                    //         name: "hdcms"
+                    //     },
+                    //     data: []
+                    // };
+
+                    // function copy(object) {
+                    //     let obj = object instanceof Array ? [] : {};
+                    //     for (const [k, v] of Object.entries(object)) {
+                    //         obj[k] = typeof v == "object" ? copy(v) : v;
+                    //     }
+                    //     return obj;
+                    // }
+
+                    // let hd = copy(obj);
+                    // hd.data.push("向军");
+                    // console.log(JSON.stringify(hd, null, 2));
+                    // console.log(JSON.stringify(obj, null, 2));
+        // 构建函数
+            // 对象可以通过内置或自定义的构造函数创建。
+
+            // 工厂函数
+                // 在函数中返回对象的函数称为工厂函数，工厂函数有以下优点
+
+                // 减少重复创建相同类型对象的代码
+                // 修改工厂函数的方法影响所有同类对象
+                // 使用字面量创建对象需要复制属性与方法结构
+
+                    // const xj = {
+                    //     name: "向军",
+                    //     show() {
+                    //         console.log(this.name);
+                    //     }
+                    // };
+                    // const hd = {
+                    //     name: "后盾人",
+                    //     show() {
+                    //         console.log(this.name);
+                    //     }
+                    // };
+                // 使用工厂函数可以简化这个过程
+
+                    // function stu(name) {
+                    //     return {
+                    //         name,
+                    //         show() {
+                    //         console.log(this.name);
+                    //         }
                     //     };
                     // }
-                //文章控制器
-                    // function Article() {
-                    //     this.url = "article/index";
-                    //     Request.apply(this, []);
+                    // const lisi = stu("李四");
+                    // lisi.show();
+                    // const xj = stu("向军");
+                    // xj.show();
+            // 构造函数
+                // 和工厂函数相似构造函数也用于创建对象，它的上下文为新的对象实例。
+
+                // 构造函数名每个单词首字母大写即Pascal 命名规范
+                // this指当前创建的对象
+                // 不需要返回this系统会自动完成
+                // 需要使用new关键词生成对象
+                    // function Student(name) {
+                    //     this.name = name;
+                    //     this.show = function() {
+                    //         console.log(this.name);
+                    //     };
+                    //     //不需要返回，系统会自动返回
+                    //     // return this;
+                    // }
+                    // const lisi = new Student("李四");
+                    // lisi.show();
+                    // const xj = new Student("向军");
+                    // xj.show();
+                // 如果构造函数返回对象，实例化后的对象将是此对象
+
+                    // function ArrayObject(...values) {
+                    //     const arr = new Array();
+                    //     arr.push.apply(arr, values);
+                    //     arr.string = function(sym = "|") {
+                    //         return this.join(sym);
+                    //     };
+                    //     return arr;
+                    // }
+                    // const array = new ArrayObject(1, 2, 3);
+                    // console.log(array); //  [1, 2, 3, string: ƒ]
+                    // console.log(array.string("-")); // 1-2-3
+            // 严格模式
+                // 在严格模式下方法中的this值为undefined，这是为了防止无意的修改window对象
+
+                    // "use strict";
+                    // function User() {
+                    //     this.show = function() {
+                    //         console.log(this);
+                    //     };
+                    // }
+                    // let hd = new User();
+                    // hd.show(); //User
+
+                    // let xj = hd.show;
+                    // xj(); // 严格模式下是undefined，非严格模式下是window
+            // 内置构造
+                // JS中大部分数据类型都是通过构造函数创建的。
+
+                    // const num = new Number(99);
+                    // console.log(num.valueOf()); // 99
+
+                    // const string = new String("后盾人");
+                    // console.log(string.valueOf()); // 后盾人
+
+                    // const boolean = new Boolean(true);
+                    // console.log(boolean.valueOf()); // true
+
+                    // const date = new Date();
+                    // console.log(date.valueOf() * 1); 
+
+                    // const regexp = new RegExp("\\d+");
+                    // console.log(regexp.test(99));
+
+                    // let hd = new Object();
+                    // hd.name = "后盾人";
+                    // console.log(hd);
+                // 字面量创建的对象，内部也是调用了Object构造函数
+
+                    // const hd = {
+                    //     name: "后盾人"
+                    // };
+                    // console.log(hd.constructor); //ƒ Object() { [native code] }
+
+                // 下面是使用构造函数创建对象
+                    // const hdcms = new Object();
+                    // hdcms.title = "开源内容管理系统";
+                    // console.log(hdcms);
+            // 对象函数
+                // 在JS中函数也是一个对象
+
+                    // function hd(name) {}
+
+                    // console.log(hd.toString());
+                    // console.log(hd.length);
+                // 函数是由系统内置的 Function 构造函数创建的
+
+                    // function hd(name) {}
+
+                    // console.log(hd.constructor);
+                // 下面是使用内置构造函数创建的函数
+
+                    // const User = new Function(`name`,`
+                    //     this.name = name;
+                    //     this.show = function() {
+                    //         return this.name;
+                    //     };
+                    //     `
+                    // );
+
+                    // const lisi = new User("李四");
+                    // console.log(lisi.show());
+        // 抽象特性
+            // 将复杂功能隐藏在内部，只开放给外部少量方法，更改对象内部的复杂逻辑不会对外部调用造成影响即抽象。
+
+            // 下面的手机就是抽象的好例子，只开放几个按钮给用户，复杂的工作封装在手机内部，程序也应该如此。
+
+            // 问题分析
+                // 下例将对象属性封装到构造函数内部
+
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    //     this.info = function() {
+                    //         return this.age > 50 ? "中年人" : "年轻人";
+                    //     };
+                    //     this.about = function() {
+                    //         return `${this.name}是${this.info()}`;
+                    //     };
+                    // }
+                    // let lisi = new User("李四", 22);
+                    // console.log(lisi.about()); // 李四是年轻人
+            // 抽象封装
+                // 上例中的方法和属性仍然可以在外部访问到，比如 info方法只是在内部使用，不需要被外部访问到这会破坏程序的内部逻辑。
+
+                // 下面使用闭包特性将对象进行抽象处理
+
+                    // function User(name, age) {
+                    //     let data = { name, age };
+                    //     let info = function() {
+                    //         return data.age > 50 ? "中年人" : "年轻人";
+                    //     };
+                    //     this.message = function() {
+                    //         return `${data.name}是${info()}`;
+                    //     };
+                    // }
+                    // let lisi = new User("后盾人", 22);
+                    // console.log(lisi.message());
+        // 属性特征
+            // JS中可以对属性的访问特性进行控制。
+
+            // 查看特征
+                // 使用 Object.getOwnPropertyDescriptor查看对象属性的描述。
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军",
+                    //     age: 18
+                    // };
+                    // let desc = Object.getOwnPropertyDescriptor(user, "name");
+                    // console.log(JSON.stringify(desc, null, 2));
+                // 使用 Object.getOwnPropertyDescriptors查看对象所有属性的描述
+
+                    // "use strict";
+                    // const user = {
+                    // name: "向军",
+                    // age: 18
+                    // };
+                    // let desc = Object.getOwnPropertyDescriptors(user);
+                    // console.log(JSON.stringify(desc, null, 2));
+                // 属性包括以下四种特性
+
+                // 特性	说明	默认值
+                // configurable	能否使用delete、能否需改属性特性、或能否修改访问器属性	true
+                // enumerable	对象属性是否可通过for-in循环，或Object.keys() 读取	true
+                // writable	对象属性是否可修改	true
+                // value	对象属性的默认值	undefined
+            // 设置特征
+                // 使用Object.defineProperty 方法修改属性特性，通过下面的设置属性name将不能被遍历、删除、修改。
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.defineProperty(user, "name", {
+                    //     value: "后盾人",
+                    //     writable: false,
+                    //     enumerable: false,
+                    //     configurable: false
+                    // });
+                // 通过执行以下代码对上面配置进行测试，请分别打开注释进行测试
+
+                    // 不允许修改
+                        // user.name = "向军"; //TypeError:
+
+                    // 不能遍历
+                        // console.log(Object.keys(user)); // []
+
+                    //不允许删除
+                        // delete user.name;
+                        // console.log(user);
+
+                    //不允许配置
+                        // Object.defineProperty(user, "name", {
+                        //   value: "后盾人",
+                        //   writable: true,
+                        //   enumerable: false,
+                        //   configurable: false
+                        // }); // TypeError
+                // 使用 Object.defineProperties 可以一次设置多个属性，具体参数和上面介绍的一样。
+
+                    // "use strict";
+                    // let user = {};
+                    // Object.defineProperties(user, {
+                    //     name: { value: "向军", writable: false },
+                    //     age: { value: 18 }
+                    // });
+                    // console.log(user);
+                    // user.name = "后盾人"; //TypeError
+            // 禁止添加
+                // Object.preventExtensions 禁止向对象添加属性
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.preventExtensions(user);
+                    // user.age = 18; //SyntaxError
+                // Object.isExtensible 判断是否能向对象中添加属性
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.preventExtensions(user);
+                    // console.log(Object.isExtensible(user)); //false
+            // 封闭对象
+                // Object.seal()方法封闭一个对象，阻止添加新属性并将所有现有属性标记为 configurable: false
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "后盾人",
+                    //     age: 18
+                    // };
+
+                    // Object.seal(user);
+                    // console.log(
+                    // JSON.stringify(Object.getOwnPropertyDescriptors(user), null, 2)
+                    // );
+                    // user.name = '111'
+                    // console.log(user); // {name: "111", age: 18}
+                    // Object.seal(user);
+                    // console.log(Object.isSealed(user)); // true
+                    // delete user.name; // TypeError
+                // Object.isSealed 如果对象是密封的则返回 true，属性都具有 configurable: false。
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.seal(user);
+                    // console.log(Object.isSealed(user)); //true
+            // 冻结对象
+                // Object.freeze 冻结对象后不允许添加、删除、修改属性，writable、configurable都标记为false
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.freeze(user);
+                    // console.log(
+                    // JSON.stringify(Object.getOwnPropertyDescriptors(user), null, 2)
+                    // );
+                    // user.name = "后盾人"; //TypeError
+                // Object.isFrozen()方法判断一个对象是否被冻结
+
+                    // "use strict";
+                    // const user = {
+                    //     name: "向军"
+                    // };
+                    // Object.freeze(user);
+                    // console.log(Object.isFrozen(user));//true
+        // 属性访问器
+            // getter方法用于获得属性值，setter方法用于设置属性，这是JS提供的存取器特性即使用函数来管理属性。
+
+            // 用于避免错误的赋值
+            // 需要动态监测值的改变
+            // 属性只能在访问器和普通属性任选其一，不能共同存在
+            // getter/setter
+                // 向对是地用户的年龄数据使用访问器监控控制
+
+                    // "use strict";
+                    // const user = {
+                    //     data: { name: '后盾人', age: null },
+                    //     set age(value) {
+                    //         if (typeof value != "number" || value > 100 || value < 10) {
+                    //         throw new Error("年龄格式错误");
+                    //         }
+                    //         this.data.age = value;
+                    //     },
+                    //     get age() {
+                    //         return `年龄是: ${this.data.age}`;
                     //     }
-                    //     let hd = new Article();
-                    //     console.log(
-                    //     hd.get({
-                    //         row: 10,
-                    //         start: 3
+                    // };
+                    // user.age = 99;
+                    // console.log(user.age);
+                // 下面使用getter设置只读的课程总价
+
+                    // let Lesson = {
+                    //     lists: [
+                    //         { name: "js", price: 100 },
+                    //         { name: "mysql", price: 212 },
+                    //         { name: "vue.js", price: 98 }
+                    //     ],
+                    //     get total() {
+                    //         return this.lists.reduce((t, b) => t + b.price, 0);
+                    //     }
+                    // };
+                    // console.log(Lesson.total); //410
+                    // Lesson.total = 30; //无效
+                    // console.log(Lesson.total); //410
+                // 下面通过设置站网站名称与网址体验getter/setter批量设置属性的使用
+
+                    // const web = {
+                    //     name: "后盾人",
+                    //     url: "houdunren.com",
+                    //     get site() {
+                    //         return `${this.name} ${this.url}`;
+                    //     },
+                    //     set site(value) {
+                    //         [this.name, this.url] = value.split(",");
+                    //     }
+                    // };
+                    // web.site = "后盾人,hdcms.com";
+                    // console.log(web.site); // 后盾人 hdcms.com
+                // 下面是设置token储取的示例，将业务逻辑使用getter/setter处理更方便，也方便其他业务的复用。
+
+                    // let Request = {
+                    //     get token() {
+                    //         let con = localStorage.getItem('token');
+                    //         if (!con) {
+                    //             alert('请登录后获取token')
+                    //         } else {
+                    //             return con;
+                    //         }
+                    //     },
+                    //     set token(con) {
+                    //         localStorage.setItem('token', con);
+                    //     }
+                    // };
+                    // // Request.token = 'houdunren'
+                    // console.log(Request.token);
+                // 定义内部私有属性
+
+                    // "use strict";
+                    // const user = {
+                    //     get name() {
+                    //         return this._name;
+                    //     },
+                    //     set name(value) {
+                    //         if (value.length <= 3) {
+                    //         throw new Error("用户名不能小于三位");
+                    //         }
+                    //         this._name = value;
+                    //     }
+                    // };
+                    // user.name = "后盾人教程";
+                    // console.log(user.name);
+            // 访问器描述符
+                // 使用 defineProperty 可以模拟定义私有属性，从而使用面向对象的抽象特性。
+
+                    // function User(name, age) {
+                    //     let data = { name, age };
+                    //     Object.defineProperties(this, {
+                    //         name: {
+                    //             get() {
+                    //                 return data.name;
+                    //             },
+                    //             set(value) {
+                    //                 if (value.trim() == "") throw new Error("无效的用户名");
+                    //                 data.name = value;
+                    //             }
+                    //         },
+                    //         age: {
+                    //             get() {
+                    //                 return data.name;
+                    //             },
+                    //             set(value) {
+                    //                 if (value.trim() == "") throw new Error("无效的用户名");
+                    //                 data.name = value;
+                    //             }
+                    //         }
+                    //     });
+                    // }
+                    // let hd = new User("后盾人", 33);
+                    // console.log(hd.name); // 后盾人
+                    // hd.name = "向军1";
+                    // console.log(hd.name); // 向军1
+                // 上面的代码也可以使用语法糖 class定义
+
+                    // "use strict";
+                    // const DATA = Symbol();
+                    // class User {
+                    //     constructor(name, age) {
+                    //         this[DATA] = { name, age };
+                    //     }
+                    //     get name() {
+                    //         return this[DATA].name;
+                    //     }
+                    //     set name(value) {
+                    //         if (value.trim() == "") throw new Error("无效的用户名");
+                    //         this[DATA].name = value;
+                    //     }
+                    //     get age() {
+                    //         return this[DATA].age;
+                    //     }
+                    //     set age(value) {
+                    //         if (value.trim() == "") throw new Error("无效的用户名");
+                    //         this[DATA].age = value;
+                    //     }
+                    // }
+                    // let hd = new User("后盾人", 33);
+                    // console.log(hd.name); // 后盾人
+                    // hd.name = "向军1";
+                    // console.log(hd.name); // 向军1
+                    // console.log(hd);  // User {Symbol(): {name: "向军1", age: 33},age: 33,name: "向军1"}
+            // 闭包访问器
+                // 下面结合闭包特性对属性进行访问控制
+
+                // 下例中访问器定义在函数中，并接收参数v
+                // 在get() 中通过闭包返回 v
+                // 在set() 中修改了v，这会影响get()访问的闭包数据v
+                    // let data = {
+                    //     name: 'houdunren.com',
+                    // }
+                    // for (const [key, value] of Object.entries(data)) {
+                    //     observer(data, key, value)
+                    // }
+
+                    // function observer(data, key, v) {
+                    //     Object.defineProperty(data, key, {
+                    //         get() {
+                    //             return v
+                    //         },
+                    //         set(newValue) {
+                    //             v = newValue
+                    //         },
+                    //     })
+                    // }
+                    // data.name = '后盾人'
+                    // console.dir(data.name) //后盾人
+        // 代理拦截
+            // 代理（拦截器）是对象的访问控制，setter/getter 是对单个对象属性的控制，而代理是对整个对象的控制。
+
+            // 读写属性时代码更简洁
+            // 对象的多个属性控制统一交给代理完成
+            // 严格模式下 set 必须返回布尔值
+            // 使用方法
+                // "use strict";
+                // const hd = { name: "后盾人" };
+                // const proxy = new Proxy(hd, {
+                //     get(obj, property) {
+                //         console.log('get');
+                //         return obj[property];
+                //     },
+                //     set(obj, property, value) {
+                //         console.log('set');
+                //         obj[property] = value;
+                //         return true;
+                //     }
+                // });
+                // proxy.age = 10;
+                // console.log(hd); // {name: "后盾人", age: 10}
+            // 代理函数
+                // 如果代理以函数方式执行时，会执行代理中定义 apply 方法。
+
+                // 参数说明：函数，上下文对象，参数
+                // 下面使用 apply 计算函数执行时间
+
+                    // function factorial(num) {
+                    //     return num == 1 ? 1 : num * factorial(num - 1);
+                    // }
+                    // let proxy = new Proxy(factorial, {
+                    //     apply(func, obj, args) {
+                    //         // obj 上下文 window
+                    //         // args 参数 [1, 2, 3]
+                    //         console.log(func,obj,args);
+                    //         console.time("run");
+                    //         func.apply(obj, args);
+                    //         console.timeEnd("run");
+                    //     }
+                    // });
+                    // proxy.apply(this, [1, 2, 3]);
+            // 截取字符
+                // 下例中对数组进行代理，用于截取标题操作
+
+                    // const stringDot = {
+                    //     get(target, key) {
+                    //         const title = target[key].title;
+                    //         const len = 5;
+                    //         return title.length > len
+                    //         ? title.substr(0, len) + ".".repeat(3)
+                    //         : title;
+                    //     }
+                    // };
+                    // const lessons = [
+                    //     {
+                    //         title: "媒体查询响应式布局",
+                    //         category: "css"
+                    //     },
+                    //     {
+                    //         title: "FLEX 弹性盒模型",
+                    //         category: "css"
+                    //     },
+                    //     {
+                    //         title: "MYSQL多表查询随意操作",
+                    //         category: "mysql"
+                    //     }
+                    // ];
+                    // const stringDotProxy = new Proxy(lessons, stringDot);
+                    // console.log(stringDotProxy[0]);
+            // 双向绑定
+                // 下面通过代理实现vue 等前端框架的数据绑定特性特性。
+
+                    // <input type="text" v-model="title" />
+                    // <input type="text" v-model="title" />
+                    // <div v-bind="title"></div>
+                    // function View() {
+                    //     //设置代理拦截
+                    // let proxy = new Proxy(
+                    //     {},
+                    //     {
+                    //     get(obj, property) {},
+                    //     set(obj, property, value) {
+                    //         obj[property] = value;
+                    //         document
+                    //         .querySelectorAll(
+                    //             `[v-model="${property}"],[v-bind="${property}"]`
+                    //         )
+                    //         .forEach(el => {
+                    //             el.innerHTML = value;
+                    //             el.value = value;
+                    //         });
+                    //     }
+                    //     }
+                    // );
+                    // //初始化绑定元素事件
+                    // this.run = function() {
+                    //     const els = document.querySelectorAll("[v-model]");
+                    //     els.forEach(item => {
+                    //     item.addEventListener("keyup", function() {
+                    //         proxy[this.getAttribute("v-model")] = this.value;
+                    //     });
+                    //     });
+                    // };
+                    // }
+                    // let view = new View().run();
+            // 表单验证
+                // body {
+                //     padding: 50px;
+                //     background: #34495e;
+                // }
+                // input {
+                //     border: solid 10px #ddd;
+                //     height: 30px;
+                // }
+                // .error {
+                //     border: solid 10px red;
+                // }
+                // <input type="text" validate rule="max:12,min:3" />
+                // <input type="text" validate rule="max:3,isNumber" />
+                // "use strict";
+                // //验证处理类
+                // class Validate {
+                //     max(value, len) {
+                //     return value.length <= len;
+                //     }
+                //     min(value, len) {
+                //     return value.length >= len;
+                //     }
+                //     isNumber(value) {
+                //     return /^\d+$/.test(value);
+                //     }
+                // }
+
+                // //代理工厂
+                // function makeProxy(target) {
+                //     return new Proxy(target, {
+                //     get(target, key) {
+                //         return target[key];
+                //     },
+                //     set(target, key, el) {
+                //         const rule = el.getAttribute("rule");
+                //         const validate = new Validate();
+                //         let state = rule.split(",").every(rule => {
+                //         const info = rule.split(":");
+                //         return validate[info[0]](el.value, info[1]);
+                //         });
+                //         el.classList[state ? "remove":"add"]("error");
+                //         return true;
+                //     }
+                //     });
+                // }
+
+                // const nodes = makeProxy(document.querySelectorAll("[validate]"));
+                // nodes.forEach((item, i) => {
+                //     item.addEventListener("keyup", function() {
+                //     nodes[i] = this;
+                //     });
+                // });
+        // JSON
+            // json 是一种轻量级的数据交换格式，易于人阅读和编写。
+            // 使用json 数据格式是替换 xml 的最佳方式，主流语言都很好的支持json 格式。所以 json 也是前后台传输数据的主要格式。
+            // json 标准中要求使用双引号包裹属性，虽然有些语言不强制，但使用双引号可避免多程序间传输发生错误语言错误的发生。
+            // 声明定义
+                // 基本结构
+
+                    // let hd = {
+                    //     "title": "后盾人",
+                    //     "url": "houdunren.com",
+                    //     "teacher": {
+                    //         "name": "向军大叔",
+                    //     }
+                    // }
+                    // console.log(hd.teacher.name); // 向军大叔
+                // 数组结构
+
+                    // let lessons = [
+                    //     {
+                    //         "title": '媒体查询响应式布局',
+                    //         "category": 'css',
+                    //         "click": 199
+                    //     },
+                    //     {
+                    //         "title": 'FLEX 弹性盒模型',
+                    //         "category": 'css',
+                    //         "click": 12
+                    //     },
+                    //     {
+                    //         "title": 'MYSQL多表查询随意操作',
+                    //         "category": 'mysql',
+                    //         "click": 89
+                    //     }
+                    // ];
+
+                    // console.log(lessons[0].title); // 媒体查询响应式布局
+            // 序列化
+                // 序列化是将 json 转换为字符串，一般用来向其他语言传输使用。
+
+                    // let hd = {
+                    //     "title": "后盾人",
+                    //     "url": "houdunren.com",
+                    //     "teacher": {
+                    //         "name": "向军大叔",
+                    //     }
+                    // }
+                    // console.log(JSON.stringify(hd)); 
+                    //{"title":"后盾人","url":"houdunren.com","teacher":{"name":"向军大叔"}}
+                // 根据第二个参数指定保存的属性
+
+                    // console.log(JSON.stringify(hd, ['title', 'url']));
+                    //{"title":"后盾人","url":"houdunren.com"}
+                // 第三个是参数用来控制TAB数量，如果字符串则为前导字符。
+
+                    // let hd = {
+                    //     "title": "后盾人",
+                    //     "url": "houdunren.com",
+                    //     "teacher": {
+                    //         "name": "向军大叔",
+                    //     }
+                    // }
+                    // console.log(JSON.stringify(hd, null, 4));
+                // 为数据添加 toJSON 方法来自定义返回格式
+
+                    // let hd = {
+                    //     "title": "后盾人",
+                    //     "url": "houdunren.com",
+                    //     "teacher": {
+                    //         "name": "向军大叔",
+                    //     },
+                    //     "toJSON": function () {
+                    //         return {
+                    //             "title": this.url,
+                    //             "name": this.teacher.name
+                    //         };
+                    //     }
+                    // }
+                    // console.log(JSON.stringify(hd)); //{"title":"houdunren.com","name":"向军大叔"}
+            // 反序列化
+                // 使用 JSON.parse 将字符串 json 解析成对象
+
+                    // let hd = {
+                    //     "title": "后盾人",
+                    //     "url": "houdunren.com",
+                    //     "teacher": {
+                    //         "name": "向军大叔",
+                    //     }
+                    // }
+                    // let jsonStr = JSON.stringify(hd);
+                    // console.log(JSON.parse(jsonStr));
+                // 使用第二个参数函数来对返回的数据二次处理
+
+                    // let hd = {
+                    //     title: "后盾人",
+                    //     url: "houdunren.com",
+                    //     teacher: {
+                    //         name: "向军大叔"
+                    //     }
+                    // };
+                    // let jsonStr = JSON.stringify(hd);
+                    // console.log(
+                    //     JSON.parse(jsonStr, (key, value) => {
+                    //         if (key == "title") {
+                    //             return `[推荐] ${value}`;
+                    //         }
+                    //         return value;
                     //     })
                     // );
-                //课程控制器
-                    // function Lesson() {
-                    //     this.url = "lesson/index";
-                    //     Request.call(this);
+            // Reflect
+                // Reflect 是一个内置的对象，它提供拦截 JavaScript 操作的方法
+
+                // Reflect并非一个构造函数，所以不能通过new运算符对其进行调用
+        // 十 原型与继承
+            // 原型基础
+                // 原型对象
+                    // 每个对象都有一个原型prototype对象，通过函数创建的对象也将拥有这个原型对象。原型是一个指向对象的指针。
+
+                    // 可以将原型理解为对象的父亲，对象从原型对象继承来属性
+                    // 原型就是对象除了是某个对象的父母外没有什么特别之处
+                    // 所有函数的原型默认是 Object的实例，所以可以使用toString/toValues/isPrototypeOf 等方法的原因
+                    // 使用原型对象为多个对象共享属性或方法
+                    // 如果对象本身不存在属性或方法将到原型上查找
+                    // 使用原型可以解决，通过构建函数创建对象时复制多个函数造成的内存占用问题
+                    // 原型包含 constructor 属性，指向构造函数
+                    // 对象包含 __proto__ 指向他的原型对象
+                    // 下例使用的就是数组原型对象的 concat 方法完成的连接操作
+
+                        // let hd = ["a"];
+                        // console.log(hd.concat("b"));
+                        // console.log(hd);
+                    // 默认情况下创建的对象都有原型
+                        // let hd = { name: "后盾人" };
+                        // console.log(hd);
+                    // 以下x、y的原型都为元对象Object，即JS中的根对象
+
+                        // let x = {};
+                        // let y = {};
+                        // console.log(Object.getPrototypeOf(x) == Object.getPrototypeOf(y)); //true
+                    // 我们也可以创建一个极简对象（纯数据字典对象）没有原型（原型为null)，不可以使用对象上的方法
+
+                        // let hd = { name: 3 };
+                        // console.log(hd.hasOwnProperty("name"));
+
+                        // let xj = Object.create(null, {
+                        //     name: {
+                        //         value: "向军"
+                        //     }
+                        // });
+                        // console.log(xj.hasOwnProperty("name")); // TypeError:xj.hasOwnProperty is not a function
+
+                        //Object.keys是静态方法，不是原型方法所以是可以使用的
+                        // console.log(Object.keys(xj));
+                    // 函数拥有多个原型，prototype 用于实例对象使用，__proto__用于函数对象使用
+
+                        // function User() {}
+                        // User.__proto__.view = function() {
+                        //     console.log("User function view method");
+                        // };
+                        // User.view();
+                        // console.dir(User);
+                        // User.prototype.show = function() {
+                        //     console.log("后盾人");
+                        // };
+                        // let hd = new User();
+                        // console.dir(hd);
+                        // hd.show();
+                        // console.log(User.prototype == hd.__proto__); // true
+                    // 下面是原型关系分析，与方法继承的示例
+
+                        // let hd = new Object();
+                        // hd.name = "后盾人";
+                        // Object.prototype.show = function() {
+                        //     console.log("hodunren.com");
+                        // };
+                        // hd.show(); // hodunren.com
+
+                        // function User() {}
+                        // let xj = new User();
+                        // xj.show(); // hodunren.com
+                        // User.show(); // hodunren.com
+                    // 下面是使用构造函数创建对象的原型体现
+
+                    // 构造函数拥有原型
+                    // 创建对象时构造函数把原型赋予对象
+
+                        // function User() {}
+                        // let xj = new User();
+                        // console.log(xj.__proto__ == User.prototype); // true
+                    // 下面使用数组会产生多级继承即原型链
+
+                        // let hd = [];
+                        // console.log(hd); // []
+                        // console.log(hd.__proto__ == Array.prototype); // true
+
+                        // let str = "";
+                        // console.log(str.__proto__ == String.prototype);// true
+                    // 下面使用 setPrototypeOf 与 getPrototypeOf 获取与设置原型
+
+                        // let hd = {};
+                        // let parent = { name: "parent" };
+                        // Object.setPrototypeOf(hd, parent);
+                        // console.dir(hd);
+                        // console.log(Object.getPrototypeOf(hd));
+                    // 使用自定义构造函数创建的对象的原型体现
+
+                        // function User() {}
+                        // let hd = new User();
+                        // console.log(hd);
+                    // constructor存在于prototype原型中，用于指向构建函数的引用。
+
+                        // function hd() {
+                        //     this.show = function() {
+                        //         return "show method";
+                        //     };
+                        // }
+                        // const obj = new hd(); 
+                        // console.dir(obj)
+                        // console.log(obj instanceof hd); //true
+
+                        // const obj2 = new obj.constructor();
+                        // console.log(obj2,'obj2');
+                        // console.dir(obj2.show()); //show method
+                    // 使用对象的 constructor 创建对象
+
+                        // function User(name, age) {
+                        //     this.name = name;
+                        //     this.age = age;
+                        // }
+
+                        // function createByObject(obj, ...args) {
+                        //     const constructor = Object.getPrototypeOf(obj).constructor;
+                        //     return new constructor(...args);
+                        // }
+
+                        // let hd = new User("后盾人"); // {name:'后盾人',age：undefined}
+                        // let xj = createByObject(hd, "向军", 12);
+                        // console.log(xj); //{name:'向军',12}
+                // 原型链
+                    // 通过引用类型的原型，继承另一个引用类型的属性与方法，这就是实现继承的步骤。
+
+                    // 使用Object.setPrototypeOf 可设置对象的原型，下面的示例中继承关系为 obj>hd>cms。
+
+                    // Object.getPrototypeOf 用于获取一个对象的原型。
+
+                        // let obj = {
+                        //     name: "后盾人"
+                        // };
+                        // let hd = {
+                        //     web: "houdunren"
+                        // };
+                        // let cms = {
+                        //     soft: "hdcms"
+                        // };
+                        // //让obj继承hd，即设置obj的原型为hd
+                        // Object.setPrototypeOf(obj, hd);
+                        // Object.setPrototypeOf(hd, cms);
+                        // console.log(obj.web);
+                        // console.log(Object.getPrototypeOf(hd) == cms); //true
+                // 原型检测
+                    // instanceof 检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上
+
+                        // function A() {}
+                        // function B() {}
+                        // function C() {}
+
+                        // const c = new C();
+                        // B.prototype = c;
+                        // const b = new B();
+                        // A.prototype = b;
+                        // const a = new A();
+
+                        // console.dir(a instanceof A); //true
+                        // console.dir(a instanceof B); //true
+                        // console.dir(a instanceof C); //true
+                        // console.dir(b instanceof C); //true
+                        // console.dir(c instanceof B); //false
+                    // 使用isPrototypeOf检测一个对象是否是另一个对象的原型链中
+
+                        // const a = {};
+                        // const b = {};
+                        // const c = {};
+
+                        // Object.setPrototypeOf(a, b);
+                        // Object.setPrototypeOf(b, c);
+
+                        // console.log(b.isPrototypeOf(a)); //true
+                        // console.log(c.isPrototypeOf(a)); //true
+                        // console.log(c.isPrototypeOf(b)); //true
+                // 属性遍历
+                    // 使用in 检测原型链上是否存在属性，使用 hasOwnProperty 只检测当前对象
+
+                        // let a = { url: "houdunren" };
+                        // let b = { name: "后盾人" };
+                        // Object.setPrototypeOf(a, b);
+                        // console.log("name" in a); // true
+                        // console.log(a.hasOwnProperty("name")); // false
+                        // console.log(a.hasOwnProperty("url")); // true
+                    // 使用 for/in 遍历时同时会遍历原型上的属性如下例
+
+                        // let hd = { name: "后盾人" };
+                        // let xj = Object.create(hd, { // 设置xj对象的__proto__是hd
+                        //     url: {
+                        //         value: "houdunren.com",
+                        //         enumerable: true
+                        //     }
+                        // });
+                        // console.dir(xj); // {url: "houdunren.com"}
+                        // for (const key in xj) {
+                        //     console.log(key); // url name
+                        // }
+                    // hasOwnProperty 方法判断对象是否存在属性，而不会查找原型。所以如果只想遍历对象属性使用以下代码
+
+                        // let hd = { name: "后盾人" };
+                        // let xj = Object.create(hd, {
+                        //     url: {
+                        //         value: "houdunren.com",
+                        //         enumerable: true
+                        //     }
+                        // });
+                        // for (const key in xj) {
+                        //     if (xj.hasOwnProperty(key)) {
+                        //         console.log(key); // url 
+                        //     }
+                        // }
+                // 借用原型
+                    // 使用 call 或 apply 可以借用其他原型方法完成功能。
+
+                    // 下面的xj对象不能使用max方法，但可以借用 hd 对象的原型方法
+
+                        // let hd = {
+                        //     data: [1, 2, 3, 4, 5]
+                        // };
+                        // Object.setPrototypeOf(hd, {
+                        //     max: function() {
+                        //         return this.data.sort((a, b) => b - a)[0];
+                        //     }
+                        // });
+                        // console.log(hd.max());
+
+                        // let xj = {
+                        //     lessons: { js: 100, php: 78, node: 78, linux: 125 },
+                        //     get data() {
+                        //         return Object.values(this.lessons);
+                        //     }
+                        // };
+                        // console.log(hd.__proto__.max.apply(xj));
+                    // 上例中如果方法可以传参，那就可以不在 xj 对象中定义 getter 方法了
+
+                        // let hd = {
+                        //     data: [1, 2, 3, 4, 5]
+                        // };
+                        // Object.setPrototypeOf(hd, {
+                        //     max: function(data) {
+                        //         return data.sort((a, b) => b - a)[0];
+                        //     }
+                        // });
+                        // console.log(hd.max(hd.data));
+
+                        // let xj = {
+                        //     lessons: { js: 100, php: 78, node: 78, linux: 125 }
+                        // };
+                        // console.log(hd.__proto__.max.call(xj, Object.values(xj.lessons)));
+                    // 因为 Math.max 就是获取最大值的方法，所以代码可以再次优化
+
+                        // let hd = {
+                        //     data: [1, 2, 3, 4, 5]
+                        // };
+                        // console.log(Math.max.apply(null, hd.data));
+
+                        // let xj = {
+                        //     lessons: { js: 100, php: 78, node: 78, linux: 125 }
+                        // };
+                        // console.log(Math.max.apply(xj, Object.values(xj.lessons)));
+                    // 下面是获取设置了 class 属性的按钮，但DOM节点不能直接使用数组的filter 等方法，但借用数组的原型方法就可以操作了。
+
+                        // <button message="后盾人" class="red">后盾人</button>
+                        // <button message="hdcms">hdcms</button>
+                        // let btns = document.querySelectorAll("button");
+                        // btns = Array.prototype.filter.call(btns, item => {
+                        //     return item.hasAttribute("class");
+                        // });
+                // this
+                    // this 不受原型继承影响，this 指向调用属性时使用的对象。
+
+                        // let hd = {
+                        //     name: "后盾人"
+                        // };
+                        // let houdunren = {
+                        //     name: "向军",
+                        //     show() {
+                        //         return this.name;
+                        //     }
+                        // };
+                        // hd.__proto__ = houdunren;
+                        // console.log(hd.show()); //后盾人
+            // 原型总结
+                // prototype
+                // 函数也是对象也有原型，函数有 prototype 属性指向他的原型
+
+                // 为构造函数设置的原型值，当使用构造函数创建对象时把这个原型赋予给这个对象
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // User.prototype = {
+                    //     show() {
+                    //         return this.name;
                     //     }
-                    //     let js = new Lesson();
-                    //     console.log(
-                    //     js.get({
-                    //         row: 20
-                    //     })
-                    // );
-                // 制作显示隐藏面板
+                    // };
+                    // let xj = new User("向军");
+                    // console.log(xj.show()); // 向军
+                // 函数默认prototype 指包含一个属性 constructor 的对象，constructor 指向当前构造函数
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // let xj = new User("向军");
+                    // console.log(xj);
+                    // console.log(User.prototype.constructor == User); //true
+                    // console.log(xj.__proto__ == User.prototype); //true
+
+                    // let lisi = new xj.constructor("李四");
+                    // console.log(lisi.__proto__ == xj.__proto__); //true
+                // 原型中保存引用类型会造成对象共享属性，所以一般只会在原型中定义方法。
+
+                    // function User() {}
+                    // User.prototype = {
+                    //     lessons: ["JS", "VUE"]
+                    // };
+                    // const lisi = new User();
+                    // const wangwu = new User();
+
+                    // lisi.lessons.push("CSS");
+
+                    // console.log(lisi.lessons); //["JS", "VUE", "CSS"]
+                    // console.log(wangwu.lessons); //["JS", "VUE", "CSS"]
+                // 为Object原型对象添加方法，将影响所有函数
+
+                    // <button onclick="this.hide()">后盾人</button>
+                    // Object.prototype.hide = function() {
+                    //     this.style.display = "none";
+                    // };
+                // 了解了原型后可以为系统对象添加方法，比如为字符串添加了一截断函数。
+
+                // 不能将系统对象的原型直接赋值
+                    // String.prototype.truncate = function (len = 5) {
+                    //     return this.length <= len ? this : this.substr(0, len) + '...';
+                    // }
+                    // console.log('后盾人每天不断视频教程'.truncate(3)); //后盾人...
+            // Object.create
+                // 使用Object.create创建一个新对象时使用现有对象做为新对象的原型对象
+
+                // 使用Object.create 设置对象原型
+
+                    // let user = {
+                    //     show() {
+                    //         return this.name;
+                    //     }
+                    // };
+
+                    // let hd = Object.create(user);
+                    // console.dir(hd)
+                    // hd.name = "向军";
+                    // console.log(hd.show()); // 向军
+                // 在设置时使用第二个参数设置新对象的属性
+
+                    // let user = {
+                    //     show() {
+                    //         return this.name;
+                    //     }
+                    // };
+                    // let hd = Object.create(user, {
+                    // name: {
+                    //     value: "后盾人"
+                    // }
+                    // });
+                    // console.log(hd); // {name: "后盾人"}
+            // __proto__
+                // 在实例化对象上存在 __proto__ 记录了原型，所以可以通过对象访问到原型的属性或方法。
+
+                // __proto__ 不是对象属性，理解为prototype 的 getter/setter 实现，他是一个非标准定义
+                // __proto__ 内部使用getter/setter 控制值，所以只允许对象或null
+                // 建议使用 Object.setPrototypeOf 与Object.getProttoeypOf 替代 __proto__
+                // 下面修改对象的 __proto__ 是不会成功的，因为_proto__ 内部使用getter/setter 控制值，所以只允许对象或null
+
+                    // let xj = {};
+                    // xj.__proto__ = "向军";
+                    // console.dir(xj); // {}
+                // 下面定义的__proto__ 就会成功，因为这是一个极简对象，没有原型对象所以不会影响__proto__赋值。
+
+                    // let hd = Object.create(null);
+                    // hd.__proto__ = "向军";
+                    // console.log(hd); //{__proto__: "向军"}
+                // 下面通过改变对象的 __proto__ 原型对象来实现继承，继承可以实现多层,
+
+                    // let hd = {
+                    //     name: "后盾人"
+                    // };
+                    // let houdunren = {
+                    //     show() {
+                    //         return this.name;
+                    //     }
+                    // };
+                    // let xj = {
+                    //     handle() {
+                    //         return `用户: ${this.name}`;
+                    //     }
+                    // };
+                    // houdunren.__proto__ = xj;
+                    // hd.__proto__ = houdunren;
+                    // console.log(hd.show()); // 后盾人
+                    // console.log(hd.handle()); // 用户:后盾人
+                    // console.log(hd); // {name: "后盾人"}
+                // 构造函数中的 __proto__ 使用
+
+                    // function User(name, age) {
+                    //     is.name = name;
+                    //     this.age = age;
+                    // }
+                    // User.prototype.show = function () {
+                    //     return `姓名:${this.name}，年龄:${this.age}`;
+                    // };
+                    // let lisi = new User('李四', 12);
+                    // let xiaoming = new User('小明', 32);
+                    // console.log(lisi.__proto__ == User.prototype); //true
+                // 可以使用 __proto__ 或 Object.setPrototypeOf 设置对象的原型，使用Object.getProttoeypOf 获取对象原型。
+
+                    // function Person() {
+                    //     this.getName = function() {
+                    //         return this.name;
+                    //     };
+                    // }
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // let lisi = new User("李四", 12);
+                    // Object.setPrototypeOf(lisi, new Person());
+                    // console.dir(lisi)
+                    // console.log(lisi.getName()); //李四
+                // 对象设置属性，只是修改对象属性并不会修改原型属性，使用hasOwnProperty 判断对象本身是否含有属性并不会检测原型。
+
+                    // function User() {}
+                    // const lisi = new User();
+                    // const wangwu = new User();
+
+                    // lisi.name = "小明";
+                    // console.log(lisi.name); // 小明
+                    // console.log(lisi.hasOwnProperty("name")); // true
+
+                    // // 修改原型属性后
+                    // lisi.__proto__.name = "张三";
+                    // console.log(wangwu.name); // 张三
+
+                    // //删除对象属性后
+                    // delete lisi.name;
+                    // console.log(lisi.hasOwnProperty("name")); // false
+                    // console.log(lisi.name); // 张三
+                // 使用 in 会检测原型与对象，而 hasOwnProperty 只检测对象，所以结合后可判断属性是否在原型中
+
+                    // function User() {
+                    // }
+                    // User.prototype.name = "后盾人";
+                    // const lisi = new User();
+                    // //in会在原型中检测
+                    // console.log("name" in lisi); // true
+                    // //hasOwnProperty 检测对象属性
+                    // console.log(lisi.hasOwnProperty("name")); // false
+            // 使用建议
+                // 通过前介绍我们知道可以使用多种方式设置原型，下面是按时间顺序的排列
+
+                // prototype 构造函数的原型属性
+                // Object.create 创建对象时指定原型
+                // __proto__ 声明自定义的非标准属性设置原型，解决之前通过 Object.create 定义原型，而没提供获取方法
+                // Object.setPrototypeOf 设置对象原型
+                // 这几种方式都可以管理原型，一般以我个人情况来讲使用 prototype 更改构造函数原型，使用 Object.setPrototypeOf 与 Object.getPrototypeOf 获取或设置原型。
+
+        // 构造函数
+            // 原型属性
+                // 构造函数在被new 时把构造函数的原型（prototype）赋值给新对象。如果对象中存在属性将使用对象属性，不再原型上查找方法。
+
+                // 构造函数只会产生一个原型对象
+                    // function hd() {
+                    //     this.show = function() {
+                    //         return "show in object";
+                    //     };
+                    // }
+                    // hd.prototype.show = function() {
+                    //     return "show in prototype";
+                    // };
+                    // const obj = new hd();
+                    // console.log(obj.show()); // show in object
+                // 对象的原型引用构造函数的原型对象，是在创建对象时确定的，当构造函数原型对象改变时会影响后面的实例对象。
+
+                    // function hd() {}
+                    // hd.prototype.name = "hdcms";
+                    // const obj1 = new hd();
+                    // console.log(obj1.name); //hdcms
+
+                    // hd.prototype = {
+                    //     name: "后盾人"
+                    // };
+                    // const obj2 = new hd();
+                    // console.dir(obj2.name); //后盾人
+                // constructor
+                    // 构造函数的原型中包含属性 constructor 指向该构造函数，以下代码说明了这一点
+
+                        // function User(name) {
+                        //     this.name = name;
+                        // }
+                        // let hd = new User("后盾人");
+                        // let xj = new hd.constructor("向军");
+                        // console.log(xj); // User {name: "向军"}
+                // 以下代码直接设置了构造函数的原型将造成 constructor 丢失
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // User.prototype = {
+                    //     show: function() {}
+                    // };
+
+                    // let hd = new User("后盾人");
+                    // console.dir(hd.constructor);
+                    // let xj = new hd.constructor("向军");
+                    // console.dir(xj); //String {"向军"}
+                // 正确的做法是要保证原型中的 constructor指向构造函数
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // User.prototype = {
+                    //     constructor: User,
+                    //     show: function() {}
+                    // };
+
+                    // let hd = new User("后盾人");
+                    // let xj = new hd.constructor("向军");
+                    // console.log(xj); //User{name:'向军'}
+            // 使用优化
+                // 使用构造函数会产生函数复制造成内存占用，及函数不能共享的问题。
+
+                    // function User(name) {
+                    //     this.name = name;
+                    //     this.get = function() {
+                    //         return this.name;
+                    //     };
+                    // }
+                    // let lisi = new User("小明");
+                    // let wangwu = new User("王五");
+                    // console.log(lisi.get == wangwu.get); //false
+                // 体验通过原型定义方法不会产生函数复制
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // User.prototype.get = function() {
+                    //     return "后盾人" + this.name;
+                    // };
+                    // let lisi = new User("小明");
+
+                    // let wangwu = new User("王五");
+                    // console.log(lisi.get == wangwu.get); //true
+                    // //通过修改原型方法会影响所有对象调用，因为方法是共用的
+                    // lisi.__proto__.get = function() {
+                    //     return "后盾人" + this.name;
+                    // };
+                    // console.log(lisi.get());
+                    // console.log(wangwu.get());
+                // 下面演示使用原型为多个实例共享属性
+
+                    // function User(name, age) {
+                    // this.name = name;
+                    // this.age = age;
+                    // this.show = () => {
+                    //     return `你在${this.site}的姓名:${this.name}，年龄:${this.age}`;
+                    // }
+                    // }
+                    // User.prototype.site = '后盾人';
+                    // let lisi = new User('李四', 12); 
+                    // let xiaoming = new User('小明', 32);
+
+                    // console.log(lisi.show()); //你在后盾人的姓名:李四，年龄:12
+                    // console.log(xiaoming.show()); //你在后盾人的姓名:小明，年龄:32
+                // 将方法定义在原型上为对象共享，解决通过构造函数创建对象函数复制的内存占用问题
+
+                    // function User(name) {
+                    //     this.name = name;
+                    // }
+                    // User.prototype.get = function () {
+                    //     return '后盾人' + this.name;
+                    // }
+                    // let lisi = new User('小明');
+
+                    // let wangwu = new User('王五');
+                    // console.log(lisi.get == wangwu.get); //true
+                    // //通过修改原型方法会影响所有对象调用，因为方法是共用的
+                    // lisi.__proto__.get = function () {
+                    //     return '后盾人' + this.name;
+                    // }
+                    // console.log(lisi.get()); // 后盾人小明
+                    // console.log(wangwu.get());// 后盾人王五
+                // 使用Object.assign一次设置原型方法来复用，后面会使用这个功能实现Mixin模式
+
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // Object.assign(User.prototype, {
+                    //     getName() {
+                    //         return this.name;
+                    //     },
+                    //     getAge() {
+                    //         return this.age;
+                    //     }
+                    // });
+                    // let lisi = new User('李四', 12);
+                    // let xiaoming = new User('小明', 32);
+                    // console.log(lisi.getName()); //李四
+                    // console.dir(lisi) // User.prototype
+            // 体验继承
+                // 下面为 Stu 更改了原型为User 的实例对象，lisi是通过构造函数Stu创建的实例对象
+
+                // lisi在执行getName 方法时会从自身并向上查找原型，这就是原型链特性
+                // 当然如果把 getName 添加到对象上，就不继续追溯原型链了
+                    // "use strict";
+                    // function User() {}
+                    // User.prototype.getName = function() {
+                    //     return this.name;
+                    // };
+
+                    // function Stu(name) {
+                    //     this.name = name;
+                    // }
+                    // Stu.prototype = new User();
+                    // const lisi = new Stu("李四");
+
+                    // console.log(lisi.__proto__); // User {}
+                    // console.log(lisi.getName()); // 李四
+            // 继承与多态
+                // 当对象中没使用的属性时，JS会从原型上获取这就是继承在JavaScript中的实现。
+
+            // 继承实现
+                // 下面使用Object.create 创建对象，做为Admin、Member的原型对象来实现继承。
+
+                    // function User() {}
+                    // User.prototype.getUserName = function() {};
+
+                    // function Admin() {}
+                    // Admin.prototype = Object.create(User.prototype);
+                    // Admin.prototype.role = function() {};
+
+                    // function Member() {}
+                    // Member.prototype = Object.create(User.prototype);
+                    // Member.prototype.email = function() {};
+                    // console.log(new Admin());
+                    // console.log(new Member());
+                // 不能使用以下方式操作，因为这样会改变User的原型方法，这不是继承，这是改变原型
+
+                    // function User() {}
+                    // User.prototype.getUserName = function() {};
+
+                    // function Admin() {}
+                    // Admin.prototype = User.prototype;
+                    // Admin.prototype.role = function() {};
+                    // console.log(new Admin());
+            // 构造函数
+                // 有多种方式通过构造函数创建对象
+
+                    // function Admin() {}
+                    // console.log(Admin == Admin.prototype.constructor); //true
+
+                    // let hd = new Admin.prototype.constructor();
+                    // console.log(hd); // Admin {}
+
+                    // let xj = new Admin();
+                    // console.log(xj); // Admin {}
+                // 因为有时根据得到的对象获取构造函数，然后再创建新对象所以需要保证构造函数存在，但如果直接设置了 Admin.prototype 属性会造成constructor丢失，所以需要再次设置constructor值。
+
+                    // function User() {}
+                    // function Admin() {}
+
+                    // Admin.prototype = Object.create(User.prototype);
+                    // Admin.prototype.role = function() {};
+
+                    // let xj = new Admin();
+                    // console.log(xj.constructor); //constructor丢失，返回User构造函数
+
+                    // Admin.prototype.constructor = Admin;
+
+                    // let hd = new Admin();
+                    // console.log(hd.constructor); //正确返回Admin构造函数
+
+                    // //现在可以通过对象获取构造函数来创建新对象了
+                    // console.log(new hd.constructor()); // Admin {}
+                // 使用Object.defineProperty定义来禁止遍历constructor属性
+
+                    // function User() {}
+                    // function Admin(name) {
+                    //     this.name = name;
+                    // }
+
+                    // Admin.prototype = Object.create(User.prototype);
+                    // Admin.prototype.constructor = Admin;
+                    // Object.defineProperty(Admin.prototype, "constructor", {
+                    //     value: Admin,
+                    //     enumerable: false //禁止遍历
+                    // });
+
+                    // let hd = new Admin("后盾人");
+                    // for (const key in hd) {
+                    //     console.log(key); // name
+                    // }
+                // 完全重写构建函数原型，只对后面应用对象有效
+
+                    // function User() {}
+                    // const lisi = new User();
+                    // User.prototype = {
+                    //     show() {
+                    //         return "prototype show";
+                    //     }
+                    // };
+                    // const wangwu = new User();
+                    // console.log(wangwu.show()); // prototype show
+
+                    // console.log(lisi.show()); // lisi.show is not a function
+            // 方法重写
+                // 下而展示的是子类需要重写父类方法的技巧。
+
+                    // function Person() {}
+                    // Person.prototype.getName = function() {
+                    //     console.log("parent method");
+                    // };
+
+                    // function User(name) {}
+                    // User.prototype = Object.create(Person.prototype);
+                    // User.prototype.constructor = User;
+
+                    // User.prototype.getName = function() {
+                    //   //调用父级同名方法
+                    //   Person.prototype.getName.call(this);
+                    //   console.log("child method");
+                    // };
+                    // let hd = new User();
+                    // hd.getName(); // parent method child method
+            // 多态
+                // 根据多种不同的形态产生不同的结果，下而会根据不同形态的对象得到了不同的结果。
+
+                    // function User() {}
+                    //  User.prototype.show = function() {
+                    //     console.log(this.description());
+                    // };
+
+                    // function Admin() {}
+                    // Admin.prototype = Object.create(User.prototype);
+                    // Admin.prototype.description = function() {
+                    //     return "管理员在此";
+                    // };
+
+                    // function Member() {}
+                    // Member.prototype = Object.create(User.prototype);
+                    // Member.prototype.description = function() {
+                    //     return "我是会员";
+                    // };
+
+                    // function Enterprise() {}
+                    // Enterprise.prototype = Object.create(User.prototype);
+                    // Enterprise.prototype.description = function() {
+                    //     return "企业帐户";
+                    // };
+
+                    // for (const obj of [new Admin(), new Member(), new Enterprise()]) {
+                    //     console.log(obj); // Admin{} Member {} Enterprise{}
+                    //     obj.show();
+                    // }
+            // 深挖继承
+                // 继承是为了复用代码，继承的本质是将原型指向到另一个对象。
+
+            // 构造函数
+                // 我们希望调用父类构造函数完成对象的属性初始化，但像下面这样使用是不会成功的。因为此时 this 指向了window，无法为当前对象声明属性。
+
+                    // function User(name) {
+                    //     this.name = name;
+                    //     console.log(this);// Window
+                    // }
+                    // User.prototype.getUserName = function() {
+                    //     return this.name;
+                    // };
+
+                    // function Admin(name) {
+                    //     User(name);
+                    // }
+                    // Admin.prototype = Object.create(User.prototype);
+                    // Admin.prototype.role = function() {};
+
+                    // let xj = new Admin("向军大叔");
+                    // console.log(xj.getUserName()); //undefined
+                // 解决上面的问题是使用 call/apply 为每个生成的对象设置属性
+
+                    // function User(name) {
+                    //     this.name = name;
+                    //     console.log(this); // Admin
+                    // }
+                    // User.prototype.getUserName = function() {
+                    //     return this.name;
+                    // };
+
+                    // function Admin(name) {
+                    //     User.call(this, name);
+                    // }
+                    // Admin.prototype = Object.create(User.prototype);
+
+                    // let xj = new Admin("向军大叔");
+                    // console.log(xj.getUserName()); //向军大叔
+            // 原型工厂
+                // 原型工厂是将继承的过程封装，使用继承业务简单化。
+
+                    // function extend(sub, sup) {
+                    //     sub.prototype = Object.create(sup.prototype);
+                    //     sub.prototype.constructor = sub;
+                    // }
+
+                    // function Access() {}
+                    // function User() {}
+                    // function Admin() {}
+                    // function Member() {}
+
+                    // extend(User, Access); //User继承Access
+                    // extend(Admin, User); //Admin继承User
+                    // extend(Member, Access); //Member继承Access
+
+                    // Access.prototype.rules = function() {};
+                    // User.prototype.getName = function() {};
+
+                    // console.dir(new Admin()); // 继承关系: Admin>User>Access>Object
+                    // console.dir(new Member()); //继承关系：Member>Access>Object
+            // 对象工厂
+                // 在原型继承基础上，将对象的生成使用函数完成，并在函数内部为对象添加属性或方法。
+
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // User.prototype.show = function() {
+                    //     console.log(this.name, this.age);
+                    // };
+
+                    // function Admin(name, age) {
+                    //     let instance = Object.create(User.prototype);
+                    //     User.call(instance, name, age);
+                    //     instance.role=function(){
+                    //         console.log('admin.role');
+                    //     }
+                    //     return instance;
+                    // }
+                    // let hd = Admin("后盾人", 19);
+                    // hd.show(); // 后盾人 19
+
+                    // function member(name, age) {
+                    //     let instance = Object.create(User.prototype);
+                    //     User.call(instance, name, age);
+                    //     return instance;
+                    // }
+                    // let lisi = member("李四", 28);
+                    // lisi.show();  // 李四 28
+            // Mixin模式
+                // JS不能实现多继承，如果要使用多个类的方法时可以使用mixin混合模式来完成。
+
+                // mixin 类是一个包含许多供其它类使用的方法的类
+                // mixin 类不用来继承做为其它类的父类
+                // 其他语言也有类似的操作比如php 语言中可以使用 trait 完成类似操作。
+
+                // 下面是示例中 Admin需要使用 Request.prototype 与 Credit 的功能，因为JS 是单继承，我们不得不将无关的类连接在一下，显然下面的代码实现并不佳
+
+                    // function extend(sub, sup) {
+                    //     sub.prototype = Object.create(sup.prototype);
+                    //     sub.prototype.constructor = sub;
+                    // }
+                    // function Credit() {}
+                    // function Request() {}
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // extend(Request, Credit);
+                    // extend(User, Request);
+                    // Credit.prototype.total = function() {
+                    //     console.log("统计积分");
+                    // };
+                    // Request.prototype.ajax = function() {
+                    //     console.log("请求后台");
+                    // };
+                    // User.prototype.show = function() {
+                    //     console.log(this.name, this.age);
+                    // };
+                    // function Admin(...args) {
+                    //     User.apply(this, args);
+                    // }
+                    // extend(Admin, User);
+                    // let hd = new Admin("向军", 19);
+                    // console.log(hd);
+                    // hd.show(); // 向军 19
+                    // hd.total(); //统计积分
+                    // hd.ajax(); //请求后台
+                // 下面分拆功能使用Mixin实现多继承，使用代码结构更清晰。只让 Admin 继承 User 原型
+
+                    // function extend(sub, sup) {
+                    //     sub.prototype = Object.create(sup.prototype);
+                    //     sub.prototype.constructor = sub;
+                    // }
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // User.prototype.show = function() {
+                    //     console.log(this.name, this.age);
+                    // };
+                    // const Credit = {
+                    //     total() {
+                    //         console.log("统计积分");
+                    //     }
+                    //     };
+                    // const Request = {
+                    //     ajax() {
+                    //         console.log("请求后台");
+                    //     }
+                    // };
+
+                    // function Admin(...args) {
+                    //     User.apply(this, args);
+                    // }
+                    // extend(Admin, User);
+                    // Object.assign(Admin.prototype, Request, Credit);
+                    // let hd = new Admin("向军", 19);
+                    // console.dir(hd) // {name:向军,age:19}
+                    // hd.show(); // 向军 19
+                    // hd.total(); //统计积分
+                    // hd.ajax(); //请求后台
+                // mixin 类也可以继承其他类，比如下面的 Create 类获取积分要请求后台，就需要继承 Request 来完成。
+
+                // super 是在 mixin 类的原型中查找，而不是在 User 原型中
+                    // function extend(sub, sup) {
+                    //     sub.prototype = Object.create(sup.prototype);
+                    //     sub.prototype.constructor = sub;
+                    // }
+                    // function User(name, age) {
+                    //     this.name = name;
+                    //     this.age = age;
+                    // }
+                    // User.prototype.show = function() {
+                    //     console.log(this.name, this.age);
+                    // };
+                    // const Request = {
+                    //     ajax() {
+                    //         return "请求后台";
+                    //     }
+                    // };
+                    // const Credit = {
+                    //     __proto__: Request,
+                    //     total() {
+                    //         // super == this.__proto__
+                    //         console.log(super.ajax() + ",统计积分");
+                    //     }
+                    // };
+
+                    // function Admin(...args) {
+                    //     User.apply(this, args);
+                    // }
+                    // extend(Admin, User);
+                    // Object.assign(Admin.prototype, Request, Credit);
+                    // let hd = new Admin("向军", 19);
+                    // hd.show(); // 向军 19
+                    // hd.total(); //请求后台 统计积分
+                    // hd.ajax(); //请求后台
+            // 实例操作
+                // 使用 call/apply 制作选项卡
 
                     // * {
                     //     padding: 0;
@@ -3844,112 +6526,1681 @@
                     //     height: 100vh;
                     // }
 
-                    // dl {
+                    // main {
                     //     width: 400px;
+                    //     flex-direction: column;
+                    //     position: relative;
+                    //     margin-right: 20px;
+                    // }
+
+                    // main nav {
+                    //     display: flex;
+                    //     height: 50px;
+                    //     align-items: center;
+                    // }
+
+                    // main nav a {
+                    //     background: #95a5a6;
+                    //     margin-right: px;
+                    //     padding: 10px 20px;
+                    //     border: solid 1px #333;
+                    //     color: #fff;
+                    //     text-decoration: none;
+                    // }
+
+                    // main nav a:first-of-type {
+                    //     background: #e67e22;
+                    // }
+
+                    // section {
+                    //     height: 200px;
+                    //     width: 100%;
+                    //     background: #f1c40f;
+                    //     position: absolute;
+                    //     font-size: 5em;
+                    //     display: none;
+                    // }
+
+                    // .hd-tab section:first-of-type {
+                    //     display: block;
+                    // }
+
+                    // section:nth-child(even) {
+                    //     background: #27ae60;
+                    // }
+
+                    // <main class="tab1">
+                    //     <nav>
+                    //     <a href="javascript:;">后盾人</a>
+                    //     <a href="javascript:;">hdcms</a>
+                    //     </nav>
+                    //     <section>1</section>
+                    //     <section>2</section>
+                    // </main>
+                    // <main class="tab2">
+                    //     <nav>
+                    //     <a href="javascript:;">后盾人</a>
+                    //     <a href="javascript:;">hdcms</a>
+                    //     </nav>
+                    //     <section>1</section>
+                    //     <section>2</section>
+                    // </main>
+
+                    // //继承工厂
+                    // function extend(sub, sup) {
+                    //     sub.prototype = Object.create(sup.prototype);
+                    //     sub.prototype.constructor = sub;
+                    // }
+                    
+                    // //动作类
+                    // function Animation() {}
+                    // Animation.prototype.show = function() {
+                    //     this.style.display = "block";
+                    // };
+                    // //隐藏所有元素
+                    // Animation.prototype.hide = function() {
+                    //     this.style.display = "none";
+                    // };
+                    // //必变元素集合背景
+                    // Animation.prototype.background = function(color) {
+                    //     this.style.background = color;
+                    // };
+                        
+                    //  //选项卡类
+                    // function Tab(tab) {
+                    //     this.tab = tab;
+                    //     this.links = null;
+                    //     this.sections = null;
+                    // }
+                    // extend(Tab, Animation);
+                    // Tab.prototype.run = function() {
+                    //     this.links = this.tab.querySelectorAll("a");
+                    //     this.sections = this.tab.querySelectorAll("section");
+                    //     this.bindEvent();
+                    //     this.action(0);
+                    // };
+                    // //绑定事件
+                    // Tab.prototype.bindEvent = function() {
+                    //     this.links.forEach((el, i) => {
+                    //     el.addEventListener("click", () => {
+                    //         this.reset();
+                    //         this.action(i);
+                    //     });
+                    //     });
+                    // };
+                    // //点击后触发动作
+                    // Tab.prototype.action = function(i) {
+                    //     this.background.call(this.links[i], "#e67e22");
+                    //     this.show.call(this.sections[i]);
+                    // };
+                    // //重置link与section
+                    // Tab.prototype.reset = function() {
+                    //     this.links.forEach((el, i) => {
+                    //       this.background.call(el, "#95a5a6");
+                    //       this.hide.call(this.sections[i]);
+                    //     });
+                    // };
+                    
+                    // new Tab(document.querySelector(".tab1")).run();
+                    // new Tab(document.querySelector(".tab2")).run();
+        // 十一 类
+            // 基础知识
+                // 为了和其他语言继承形态一致，JS提供了class 关键词用于模拟传统的class ，但底层实现机制依然是原型继承。
+
+                // class 只是语法糖为了让类的声明与继承更加简洁清晰。
+
+                // 声明定义
+                    // 可以使用类声明和赋值表达式定义类，推荐使用类声明来定义类
+
+                    //类声明
+                        // class User {
+                        // }
+                        // console.log(new Article()); // ReferenceError: Cannot access 'Article' before initialization
+                        // let Article = class {
+                        // };
+                        // console.log(new User());
+                        // 类方法间不需要逗号
+
+                        // class User {
+                        //     show() {}
+                        //     get() {
+                        //         console.log("get method");
+                        //     }
+                        // }
+                        // const hd = new User();
+                        // hd.get(); // get method
+                // 构造函数
+                    // 使用 constructor 构造函数传递参数，下例中show为构造函数方法，getName为原型方法
+
+                    // constructor 会在 new 时自动执行
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //         this.show = function() {};
+                        //     }
+                        //     getName() {
+                        //         return this.name;
+                        //     }
+                        // }
+                        // const xj = new User("向军大叔");
+                        // console.log(xj);
+                    // 构造函数用于传递对象的初始参数，但不是必须定义的，如果不设置系统会设置如下类型
+
+                    // 子构造器中调用完super 后才可以使用 this
+                    // 至于 super 的概念会在后面讲到
+                        // constructor(...args) {
+                        //     super(...args);
+                        // }
+                // 原理分析
+                    // 类其实是函数
+
+                        // class User {
+                        // }
+                        // console.log(typeof User); //function
+                        // constructor 用于定义函数代码，下面是与普通函数的对比，结构是一致的
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {}
+                        // }
+                        // console.dir(User);
+                        // console.log(User == User.prototype.constructor); //true
+
+                    //下面是对比的普通函数
+                        // function Hd(name) {
+                        //     this.name = name;
+                        // }
+                        // console.dir(Hd);
+                        // console.log(Hd == Hd.prototype.constructor); //true
+                    // 在类中定义的方法也保存在函数原型中
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {}
+                        // }
+                        // console.dir(User);
+                        // console.log(Object.getOwnPropertyNames(User.prototype)); //["constructor", "show"]
+                    // 所以下面定义的类
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         console.log(this.name);
+                        //     }
+                        // }
+                    // 与下面使用函数的定义是一致的
+
+                        // function User(name) {
+                        //     this.name = name;
+                        // }
+                        // Hd.prototype.show = function() {
+                        //     console.log(this.name);
+                        // };
+                // 属性定义
+                    // 在 class 中定义的属性为每个new 出的对象独立创建，下面定义了 site 与 name 两个对象属性
+
+                        // class User {
+                        //     site = "后盾人";
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         console.log(this.site + ":" + this.name);
+                        //     }
+                        // }
+                        // let hd = new User("向军");
+                        // console.dir(hd)
+                        // hd.show();
+                // 函数差异
+                    // class 是使用函数声明类的语法糖，但也有些区别
+
+                    // class 中定义的方法不能枚举
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         console.log(this.name);
+                        //     }
+                        //  }
+                        //  let xj = new User("向军");
+                        //  //不会枚举出show属性
+                        //   for (const key in xj) {
+                        //     console.log(key); // name
+                        //   }
+
+                        //     function Hd(name) {
+                        //       this.name = name;
+                        //     }
+                        //     Hd.prototype.show = function() {
+                        //       console.log(this.name);
+                        //     };
+                        //     let obj = new Hd("后盾人");
+                        //     for (const key in obj) {
+                        //       console.log(key);  // name show
+                        //      }
+                // 严格模式
+                    // class 默认使用strict 严格模式执行
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         function test() {
+                        //             //严格模式下输出 undefined
+                        //             console.log(this);
+                        //         }
+                        //         test();
+                        //     }
+                        // }
+                        // let xj = new User("向军");
+                        // xj.show();
+
+                        // function Hd(name) {
+                        //     this.name = name;
+                        // }
+                        // Hd.prototype.show = function() {
+                        //     function test() {
+                        //         //非严格模式输出 Window
+                        //         console.log(this);
+                        //     }
+                        //     test();
+                        // };
+                        // let obj = new Hd("后盾人");
+                        // obj.show();
+            // 静态访问
+                // 静态属性
+                    // 静态属性即为类设置属性，而不是为生成的对象设置，下面是原理实现
+
+                        // function User() {}
+                        // User.site = "后盾人";
+                        // console.dir(User);
+
+                        // const hd = new User();
+                        // console.log(hd.site); //undefiend
+                        // console.log(User.site); //后盾人 
+                    // 在 class 中为属性添加 static 关键字即声明为静态属性
+
+                    // 可以把为所有对象使用的值定义为静态属性
+                        // class Request {
+                        //   static HOST = "https://www.houdunren.com";
+                        
+                        //   query(api) {
+                        //       return Request.HOST + "/" + api;
+                        //   }
+                        // }
+                        // let request = new Request();
+                        // console.dir(request);
+                // 静态方法
+                    // 指通过类访问不能使用对象访问的方法，比如系统的Math.round()就是静态方法
+
+                    // 一般来讲方法不需要对象属性参与计算就可以定义为静态方法
+                    // 下面是静态方法实现原理
+
+                        // function User() {
+                        //     this.show = function() { // 定义到构造函数上
+                        //         return "this is a object function";
+                        //     };
+                        // }
+                        // User.show = function() {
+                        //     return "welcome to houdunren";
+                        // };
+                        // const xj = new User();
+                        // console.dir(xj)
+                        // console.dir(xj.show()); // this is a object function
+                        // console.dir(User.show()); //welcome to houdunren
+                    // 在 class 内声明的方法前使用 static 定义的方法即是静态方法
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     static create(name) {
+                        //         return new User(name);
+                        //     }
+                        // }
+                        // const xj = User.create("向军大叔");
+                        // console.log(xj);
+                    // 下面使用静态方法在课程类中的使用
+
+                        // const data = [
+                        //     { name: "js", price: 100 },
+                        //     { name: "mysql", price: 212 },
+                        //     { name: "vue.js", price: 98 }
+                        // ];
+                        // class Lesson {
+                        //     constructor(data) {
+                        //         this.model = data;
+                        //     }
+                        //     get price() {
+                        //         return this.model.price;
+                        //     }
+                        //     get name() {
+                        //         return this.model.name;
+                        //     }
+                        //     //批量生成对象
+                        //     static createBatch(data) {
+                        //         return data.map(item => new Lesson(item));
+                        //     }
+                        //     //最贵的课程
+                        //     static MaxPrice(collection) {
+                        //         return collection.sort((a, b) => b.price - a.price)[0];
+                        //     }
+                        // }
+                        // const lessons = Lesson.createBatch(data);
+                        // console.log(lessons);
+                        // console.log(Lesson.MaxPrice(lessons).name);
+                // 访问器
+                    // 使用访问器可以对对象的属性进行访问控制，下面是使用访问器对私有属性进行管理。
+
+                // 语法介绍
+                    // 使用访问器可以管控属性，有效的防止属性随意修改
+                    // 访问器就是在函数前加上 get/set修饰，操作属性时不需要加函数的扩号，直接用函数名
+                        // class User {
+                        //     constructor(name) {
+                        //         this.data = { name };
+                        //     }
+                        //     get name() {
+                        //         return this.data.name;
+                        //     }
+                        //     set name(value) {
+                        //         if (value.trim() == "") throw new Error("invalid params");
+                        //         this.data.name = value;
+                        //     }
+                        // }
+                        // let hd = new User("向军大叔");
+                        // hd.name = "后盾人";
+                        // console.log(hd.name);
+            // 访问控制
+                // 设置对象的私有属性有多种方式，包括后面章节介绍的模块封装。
+
+                // public
+                    // public 指不受保护的属性，在类的内部与外部都可以访问到
+
+                        // class User {
+                        //     url = "houdunren.com";
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        // }
+                        // let hd = new User("后盾人");
+                        // console.log(hd.name, hd.url); // 后盾人 houdunren.com
+                // protected
+                    // protected是受保护的属性修释，不允许外部直接操作，但可以继承后在类内部访问，有以下几种方式定义
+
+                // 命名保护
+                    // 将属性定义为以 _ 开始，来告诉使用者这是一个私有属性，请不要在外部使用。
+
+                    // 外部修改私有属性时可以使用访问器 setter 操作
+                    // 但这只是提示，就像吸烟时烟盒上的吸烟有害健康，但还是可以抽的
+                        // class Article {
+                        //     _host = "https://houdunren.com";
+
+                        //     set host(url) {
+                        //         if (!/^https:\/\//i.test(url)) {
+                        //         throw new Error("网址错误");
+                        //         }
+                        //         this._host = url;
+                        //     }
+                            
+                        //     lists() {
+                        //         return `${this._host}/article`;
+                        //     }
+                        // }
+                        // let article = new Article();
+                        // console.log(article.lists()); //https://houdunren.com/article
+                        // article.host = "https://hdcms.com";
+                        // console.log(article.lists()); //https://hdcms.com/article
+                    // 继承时是可以使用的
+
+                        // class Common {
+                        //     _host = "https://houdunren.com";
+                        //     set host(url) {
+                        //         if (!/^https:\/\//i.test(url)) {
+                        //         throw new Error("网址错误");
+                        //         }
+                        //         this._host = url;
+                        //     }
+                        // }
+                        // class Article extends Common {
+                        //     lists() {
+                        //         return `${this._host}/article`;
+                        //     }
+                        // }
+                        // let article = new Article();
+                        // console.log(article.lists()); //https://houdunren.com/article
+                        // article.host = "https://hdcms.com";
+                        // console.log(article.lists()); //https://hdcms.com/article
+                // Symbol
+                    // 下面使用 Symbol定义私有访问属性，即在外部通过查看对象结构无法获取的属性
+
+                        // const protecteds = Symbol();
+                        // class Common {
+                        //     constructor() {
+                        //         this[protecteds] = {};
+                        //         this[protecteds].host = "https://houdunren.com";
+                        //     }
+                        //     set host(url) {
+                        //         if (!/^https?:/i.test(url)) {
+                        //         throw new Error("非常网址");
+                        //         }
+                        //         this[protecteds].host = url;
+                        //     }
+                        //     get host() {
+                        //         return this[protecteds].host;
+                        //     }
+                        // }
+                        // class User extends Common {
+                        //     constructor(name) {
+                        //         super();
+                        //         this[protecteds].name = name;
+                        //     }
+                        //     get name() {
+                        //         return this[protecteds].name;
+                        //     }
+                        // }
+                        // let hd = new User("后盾人");
+                        // console.dir(hd)
+                        // hd.host = "https://www.hdcms.com";
+                        // console.log(hd[Symbol()]); // undefined
+                        // console.log(hd.host); // https://www.hdcms.com
+                        // console.log(hd.name); // 后盾人
+                // WeakMap
+                    // WeakMap 是一组键/值对的集，下面利用WeakMap类型特性定义私有属性
+
+                        // const _host = new WeakMap();
+                        // class Common {
+                        //     constructor() {
+                        //         _host.set(this, "https://houdunren.com");
+                        //         console.log(_host,'_host'); // WeakMap {Article => "https://houdunren.com"} 
+                        //     }
+                        //     set host(url) {
+                        //         if (!/^https:\/\//i.test(url)) {
+                        //         throw new Error("网址错误");
+                        //         }
+                        //         _host.set(this, url);
+                        //     }
+                        // }
+                        // class Article extends Common {
+                        //     constructor() {
+                        //         super();
+                        //     }
+                        //     lists() {
+                        //         return `${_host.get(this)}/article`;
+                        //     }
+                        // }
+                        // let article = new Article();
+                        // console.log(article.lists()); //https://houdunren.com/article
+                        // article.host = "https://hdcms.com";
+                        // console.log(article.lists()); //https://hdcms.com/article
+                    // 也可以统一定义私有属性
+
+                        // const protecteds = new WeakMap();
+                        // class Common {
+                        //     constructor() {
+                        //         protecteds.set(this, {
+                        //             host: "https://houdunren.com",
+                        //             port: "80"
+                        //         });
+                        //     }
+                        //     set host(url) {
+                        //         if (!/^https:\/\//i.test(url)) {
+                        //         throw new Error("网址错误");
+                        //         }
+                        //         protecteds.set(this, { ...protecteds.get(this), host: url });
+                        //     }
+                        // }
+                        // class Article extends Common {
+                        //     constructor() {
+                        //         super();
+                        //     }
+                        //     lists() {
+                        //         return `${protecteds.get(this).host}/article`;
+                        //     }
+                        // }
+                        // let article = new Article();
+                        // console.log(article.lists()); //https://houdunren.com/article
+                        // article.host = "https://hdcms.com";
+                        // console.log(article.lists()); //https://hdcms.com/article
+                // private
+                    // private 指私有属性，只在当前类可以访问到，并且不允许继承使用
+
+                    // 为属性或方法名前加 # 为声明为私有属性
+                    // 私有属性只能在声明的类中使用
+                    // 下面声明私有属性 #host 与私有方法 check 用于检测用户名
+
+                        // class User {
+                        //     //private
+                        //     #host = "https://houdunren.com";
+                        //     constructor(name) {
+                        //         this.name = name ;
+                        //         this.#check(name);
+                        //     }
+                        //     set host(url) {
+                        //         if (!/^https?:/i.test(url)) {
+                        //             throw new Error("非常网址");
+                        //         }
+                        //         this.#host = url;
+                        //     }
+                        //     get host() {
+                        //         return this.#host;
+                        //     }
+                        //     #check = () => {
+                        //         if (this.name.length <= 5) {
+                        //             throw new Error("用户名长度不能小于五位");
+                        //         }
+                        //         return true;
+                        //     };
+                        // }
+                        // let hd = new User("后盾人在线教程");
+                        // console.dir(hd) // 
+                        // hd.host = "https://www.hdcms.com";
+                        // console.log(hd.host); // https://www.hdcms.com
+                // 属性保护
+                    // 保护属性并使用访问器控制
+
+                        // const protecteds = Symbol("protected");
+                        // class User {
+                        //     constructor(name) {
+                        //         this[protecteds] = { name };
+                        //     }
+                        //     get name() {
+                        //         return this[protecteds].name;
+                        //     }
+                        //     set name(value) {
+                        //         if (value.trim() == "") throw new Error("invalid params");
+                        //         this[protecteds].name = value;
+                        //     }
+                        // }
+                        // let hd = new User("向军大叔");
+                        // hd.name = "后盾人";
+                        // console.dir(hd)
+                        // console.log(hd.name);
+                        // console.log(Object.keys(hd));
+            // 详解继承
+                // 属性继承
+                    // 属性继承的原型如下
+
+                        // function User(name) {
+                        //     this.name = name;
+                        // }
+                        // function Admin(name) {
+                        //     User.call(this, name); 
+                        // }
+                        // let hd = new Admin("后盾人");
+                        // console.log(hd);
+                    // 这就解释了为什么在子类构造函数中要先执行super
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        // }
+                        // class Admin extends User {
+                        //     constructor(name) {
+                        //         super(name);
+                        //     }
+                        // }
+                        // let hd = new Admin("后盾人");
+                        // console.log(hd);
+                // 继承原理
+                    // class 继承内部使用原型继承
+
+                        // class User {
+                        //     show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // class Admin extends User {
+                        //     info() {
+                        //         this.show();
+                        //     }
+                        // }
+                        // let hd = new Admin();
+                        // console.dir(hd);
+                // 方法继承
+                    // 原生的继承主要是操作原型链，实现起来比较麻烦，使用 class 就要简单的多了。
+
+                    // 继承时必须在子类构造函数中调用 super() 执行父类构造函数
+                    // super.show() 执行父类方法
+                    // 下面是子类继承了父类的方法show
+
+                        // class Person {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         return `后盾人会员: ${this.name}`;
+                        //     }
+                        // }
+                        // class User extends Person {
+                        //     constructor(name) {
+                        //         super(name);
+                        //     }
+                        //     run() {
+                        //         return super.show();
+                        //     }
+                        // }
+                        // const xj = new User("向军");
+                        // console.log(xj.run());
+                    // 可以使用 extends 继承表达式返回的类
+
+                        // function controller() {
+                        //     return class {
+                        //         show() {
+                        //           console.log("user.show");
+                        //         }
+                        //     };
+                        // }
+                        // class Admin extends controller() {
+                        //     info() {
+                        //         this.show();
+                        //     }
+                        // }
+                        // let hd = new Admin();
+                        // hd.info(); // user.show
+                // super
+                    // 表示从当前原型中执行方法，
+
+                    // super 一直指向当前对象
+                    // 下面是使用 this 模拟super，会有以下问题
+
+                    // 但this指向当前对象，结果并不是 admin的name值
+                        // let user = {
+                        //     name: "user",
+                        //     show() {
+                        //         return this.name;
+                        //     }
+                        // };
+                        // let admin = {
+                        //     __proto__: user,
+                        //     name: "admin",
+                        //     show() {
+                        //         return this.__proto__.show();
+                        //     }
+                        // };
+                        // console.log(admin.show()); // user
+                    // 为了解决以上问题，需要调用父类方法时传递this
+
+                        // let user = {
+                        //     name: "user",
+                        //     show() {
+                        //         return this.name;
+                        //     }
+                        // };
+                        // let admin = {
+                        //     __proto__: user,
+                        //     name: "admin",
+                        //     show() {
+                        //         return this.__proto__.show.call(this);
+                        //     }
+                        // };
+                        // console.log(admin.show()); // admin
+                    // 上面看似结果正常，但如果是多层继承时，会出现新的问题
+
+                    // 因为始终传递的是当前对象this ，造成从 this 原型循环调用
+                        // let common = {
+                        //     show() {
+                        //         console.log("common.init");
+                        //     }
+                        // };
+                        // let user = {
+                        //     __proto__: common,
+                        //         name: "user",
+                        //         show() {
+                        //             return this.__proto__.show.call(this);
+                        //         }
+                        //     };
+                        // let admin = {
+                        //     __proto__: user,
+                        //     name: "admin",
+                        //     get() {
+                        //         return this.__proto__.show.call(this);
+                        //     }
+                        // };
+                        // console.log(admin.get());
+                    // 为了解决以上问题 js 提供了 super 关键字
+
+                    // 使用 super 调用时，在所有继承中 this 始终为调用对象
+                    // super 是用来查找当前对象的原型，而不像上面使用 this 查找原型造成死循环
+                    // 也就是说把查询原型方法的事情交给了 super，this 只是单纯的调用对象在各个继承中使用
+                        // let common = {
+                        //     show() {
+                        //         return this.name;
+                        //     }
+                        // };
+                        // let user = {
+                        //     __proto__: common,
+                        //     name: "user",
+                        //     show() {
+                        //         return super.show();
+                        //     }
+                        // };
+                        // let admin = {
+                        //     __proto__: user,
+                        //     name: "admin",
+                        //     get() {
+                        //         return super.show();
+                        //     }
+                        // };
+                        // console.log(admin.get()); // admin
+                        // console.log(user.show()); // user
+                    // super 只能在类或对象的方法中使用，而不能在函数中使用，下面将产生错误
+
+                        // let user = {
+                        //     name: "user",
+                        //     show() {
+                        //         return this.name;
+                        //     }
+                        // };
+                        // let admin = {
+                        //     __proto__: user,
+                        //     name: "admin",
+                        //     get: function() {
+                        //         return super.show();
+                        //     }
+                        // };
+                        // console.log(admin.get()); //Uncaught SyntaxError: 'super' keyword unexpected here
+                // constructor
+                    // super 指调父类引用，在构造函数constructor 中必须先调用super()
+
+                    // super() 指调用父类的构造函数
+                    // 必须在 constructor 函数里的this 调用前执行 super()
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     show() {
+                        //         console.log(this.name);
+                        //     }
+                        // }
+                        // class Admin extends User {
+                        //     constructor(name) {
+                        //         super(name);
+                        //     }
+                        // }
+                        // let hd = new Admin("后盾人");
+                        // console.dir(hd)
+                        // hd.show(); // 后盾人
+                    // constructor 中先调用 super 方法的原理如下
+
+                        // function Parent(name) {
+                        //     this.name = name;
+                        // }
+                        // function User(...args) {
+                        //     Parent.apply(this, args);
+                        // }
+                        // User.prototype = Object.create(Parent.prototype)
+                        // User.prototype.constructor = User;
+                        // const hd = new User("后盾人");
+                        // console.log(hd.name); // 后盾人
+                // 父类方法
+                    // 使用super 可以执行父类方法
+
+                    // 不添加方法名是执调用父类构造函数
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     getName() {
+                        //         return this.name;
+                        //     }
+                        // }
+                        // class Admin extends User {
+                        //     constructor(name) {
+                        //         super(name);
+                        //     }
+                        // }
+                        // const hd = new Admin("后盾人");
+                        // console.log(hd.getName());
+                    // 下面是通过父类方法获取课程总价
+
+                        // class Controller {
+                        //     sum() {
+                        //         return this.data.reduce((t, c) => t + c.price, 0);
+                        //     }
+                        // } 
+                        // class Lesson extends Controller {
+                        //     constructor(lessons) {
+                        //         super();
+                        //         this.data = lessons;
+                        //     }
+                        //     info() {
+                        //         return {
+                        //             totalPrice: super.sum(),
+                        //             data: this.data
+                        //         };
+                        //     }
+                        // }
+                        // let data = [
+                        //     { name: "js", price: 100 },
+                        //     { name: "mysql", price: 212 },
+                        //     { name: "vue.js", price: 98 }
+                        // ];
+                        // const hd = new Lesson(data);
+                        // console.log(hd.info());
+                // 方法覆盖
+                    // 子类存在父类同名方法时使用子类方法
+
+                        // class User {
+                        //     constructor(name) {
+                        //         this.name = name;
+                        //     }
+                        //     say() {
+                        //         return this.name;
+                        //     }
+                        // }
+                        // class Admin extends User {
+                        //     constructor(name) {
+                        //         super(name);
+                        //     }
+                        //     say() {
+                        //         return "后盾人：" + super.say();
+                        //     }
+                        // }
+                        // const xj = new Admin("向军");
+                        // console.log(xj.say()); // 后盾人：向军
+                    // 下面是覆盖父类方法，只获取课程名称
+
+                        // class Controller {
+                        //     say() {
+                        //         return this.name;
+                        //     }
+                        //     total() {
+                        //         return this.data.reduce((t, c) => t + c.price, 0);
+                        //     }
+                        //     getByKey(key) {
+                        //         return this.data.filter(item => item.name.includes(key));
+                        //     }
+                        // }
+                        // class Lesson extends Controller {
+                        //     constructor(lessons) {
+                        //         super();
+                        //         this.data = lessons;
+                        //     }
+                        //     getByKey(key) {
+                        //         return super.getByKey(key).map(item => item.name);
+                        //     }
+                        // }
+                        // let data = [
+                        //     { name: "js", price: 100 },
+                        //     { name: "mysql", price: 212 },
+                        //     { name: "vue.js", price: 98 }
+                        // ];
+                        // const hd = new Lesson(data);
+                        // console.log(hd.getByKey("js")); // ["js", "vue.js"]
+                // 静态继承
+                    // 静态的属性和方法也是可以被继承使用的，下面是原理分析
+
+                        // function User() {}
+                        // User.site = "后盾人";
+                        // User.url = function() {
+                        //     return "houdunren.com";
+                        // };
+                        // function Admin() {}
+                        // Admin.__proto__ = User;
+                        // console.dir(Admin);
+                        // console.log(Admin.url()); // houdunren.com
+                    // 下面使用 class 来演示静态继承
+
+                        // class User {
+                        //     static site = "后盾人";
+                        //     static host() {
+                        //         return "houdunren.com";
+                        //     }
+                        // }
+                        // class Admin extends User {}
+                        // console.dir(Admin);
+                // 对象检测
+                // instanceof
+                    // 使用 instanceof 用于检测，下面是在原型中的分析（已经在原型与继承中讲过）
+
+                        // function User() {}
+                        // function Admin() {}
+                        // Admin.prototype = Object.create(User.prototype);
+                        // let hd = new Admin();
+                        // console.log(hd instanceof Admin); //true
+                        // console.log(hd instanceof User); //true
+
+                        // console.log(hd.__proto__ == Admin.prototype); //true
+                        // console.log(hd.__proto__.__proto__ == User.prototype); //true
+                    // 下面是递归检测原型的代码，帮助你分析 instanceof 的原理
+
+                        // function checkPrototype(obj, constructor) {
+                        //     if (!obj.__proto__) return false;
+                        //     if (obj.__proto__ == constructor.prototype) return true;
+                        //     return checkPrototype(obj.__proto__, constructor);
+                        // }
+                    // class 内部实现就是基于原型，所以使用instanceof 判断和上面原型是一样的
+
+                        // class User {}
+                        // class Admin extends User {}
+                        // let hd = new Admin();
+                        // console.log(hd instanceof Admin);//true
+                        // console.log(hd instanceof User);//true
+                // isPrototypeOf
+                    // 使用 isPrototypeOf 判断一个对象是否在另一个对象的原型链中，下面是原理分析
+
+                        // const a = {};
+                        // const b = {
+                        //     __proto__: a
+                        // };
+                        // const c = {
+                        //     __proto__: b
+                        // };
+                        // console.log(a.isPrototypeOf(b)); //true
+                        // console.log(a.isPrototypeOf(c)); //true
+                    // 下面在使用 class 语法中使用
+
+                        // class User {}
+                        // class Admin extends User {}
+                        // let hd = new Admin();
+                        // console.log(Admin.prototype.isPrototypeOf(hd)); //true
+                        // console.log(User.prototype.isPrototypeOf(hd)); //true
+                // 继承内置类
+                    // 使用原型扩展内置类
+
+                        // function Arr(...args) {
+                        //     args.forEach(item => this.push(item));
+                        //     this.first = function() {
+                        //         return this[0];
+                        //     };
+                        //     this.max = function() {
+                        //         return this.sort((a, b) => b - a)[0];
+                        //     };
+                        // }
+                        // let a = [1, 23];
+                        // Arr.prototype = Object.create(Array.prototype);
+                        // let arr = new Arr(1, 2, 3);
+                        // console.log(arr.first()); // 1
+                        // console.log(arr.max()); // 3
+                    // 使用 class扩展内置类
+
+                        // class NewArr extends Array {
+                        //     constructor(...args) {
+                        //         super(...args);
+                        //     }
+                        //     first() {
+                        //         return this[0];
+                        //     }
+                        //     add(value) {
+                        //         this.push(value);
+                        //     }
+                        //     remove(value) {
+                        //         let pos = this.findIndex(curValue => {
+                        //         return curValue == value;
+                        //         });
+                        //         this.splice(pos, 1);
+                        //     }
+                        // }
+                        // let hd = new NewArr(5, 3, 2, 1);
+                        // console.log(hd.length); //4
+                        // console.log(hd.first()); //5
+
+                        // hd.add("houdunren");
+                        // console.log(hd.join(",")); //5,3,2,1,houdunren
+
+                        // hd.remove("3");
+                        // console.log(hd.join(",")); //5,2,1,houdunren
+                // mixin
+                    // 关于mixin 的使用在原型章节已经讨论过，在class 使用也是相同的原理
+
+                    // JS不能实现多继承，如果要使用多个类的方法时可以使用mixin混合模式来完成。
+
+                    // mixin 类是一个包含许多供其它类使用的方法的类
+                    // mixin 类不用来继承做为其它类的父类
+                    // 其他语言也有类似的操作比如php 语言中可以使用 trait 完成类似操作
+
+                        // const Tool = {
+                        //     max(key) {
+                        //         return this.data.sort((a, b) => b[key] - a[key])[0];
+                        //     }
+                        // };
+
+                        // class Lesson {
+                        //     constructor(lessons) {
+                        //         this.lessons = lessons;
+                        //     }
+                        //     get data() {
+                        //         return this.lessons;
+                        //     }
+                        // }
+
+                        // Object.assign(Lesson.prototype, Tool);
+                        // const data = [
+                        //     { name: "js", price: 100 },
+                        //     { name: "mysql", price: 212 },
+                        //     { name: "vue.js", price: 98 }
+                        // ];
+                        // let hd = new Lesson(data);
+                        // console.log(hd.max("price")); // { name: "mysql", price: 212 }
+                // 实例操作
+                    // * {
+                    //     padding: 0;
+                    //     margin: 0;
+                    //     box-sizing: content-box;
+                    // }
+                    // body {
+                    //     padding: 30px;
+                    // }
+                    // .slide {
+                    //     width: 300px;
                     //     display: flex;
                     //     flex-direction: column;
+                    //     /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
                     // }
-
-                    // dt {
-                    //     background: #e67e22;
-                    //     border-bottom: solid 2px #333;
-                    //     height: 50px;
+                    // .slide dt {
+                    //     height: 30px;
+                    //     background: #34495e;
+                    //     color: white;
                     //     display: flex;
-                    //     justify-content: center;
                     //     align-items: center;
+                    //     padding-left: 10px;
                     //     cursor: pointer;
                     // }
-
-                    // dd {
-                    //     height: 200px;
-                    //     background: #bdc3c7;
-                    //     font-size: 5em;
-                    //     text-align: center;
-                    //     line-height: 200px;
+                    // .slide dt:first-of-type {
+                    //     border-top-left-radius: 10px;
+                    //     border-top-right-radius: 10px;
                     // }
-
-                    // <dl>
+                    // .slide dd {
+                    //     height: 100px;
+                    //     background: #f1c40f;
+                    //     overflow: hidden;
+                    // }
+                    // .slide dd div {
+                    //     padding: 10px;
+                    // }
+                    // .slide dd:last-of-type {
+                    //     border-bottom-left-radius: 10px;
+                    //     border-bottom-right-radius: 10px;
+                    // }
+                    // <div class="slide s1">
                     //     <dt>后盾人</dt>
-                    //     <dd>1</dd>
-                    //     <dt>hdcms</dt>
-                    //     <dd hidden="hidden">2</dd>
-                    // </dl>
-                    // function panel(i) {
-                    //     let dds = document.querySelectorAll("dd");
-                    //     dds.forEach(item => item.setAttribute("hidden", "hidden"));
-                    //     dds[i].removeAttribute("hidden");
+                    //     <dd>
+                    //     <div>houdunren.com</div>
+                    //     </dd>
+                    //     <dt>后盾人</dt>
+                    //     <dd>
+                    //     <div>hdcms.com</div>
+                    //     </dd>
+                    //     <dt>后盾人</dt>
+                    //     <dd>
+                    //     <div>hdcms.com</div>
+                    //     </dd>
+                    // </div>
+
+                    // class Animation {
+                    //     constructor(el) {
+                    //     this.el = el;
+                    //     this.timeout = 5;
+                    //     this.isShow = true;
+                    //     this.defaultHeight = this.height;
+                    //     }
+                    //     hide(callback) {
+                    //     this.isShow = false;
+                    //     let id = setInterval(() => {
+                    //         if (this.height <= 0) {
+                    //         clearInterval(id);
+                    //         callback && callback();
+                    //         return;
+                    //         }
+                    //         this.height = this.height - 1;
+                    //     }, this.timeout);
+                    //     }
+                    //     show(callback) {
+                    //     this.isShow = false;
+                    //     let id = setInterval(() => {
+                    //         if (this.height >= this.defaultHeight) {
+                    //         clearInterval(id);
+                    //         callback && callback();
+                    //         return;
+                    //         }
+                    //         this.height = this.height + 1;
+                    //     }, this.timeout);
+                    //     }
+                    //     get height() {
+                    //     return window.getComputedStyle(this.el).height.slice(0, -2) * 1;
+                    //     }
+                    //     set height(height) {
+                    //     this.el.style.height = height + "px";
+                    //     }
                     // }
-                    // document.querySelectorAll("dt").forEach((dt, i) => {
-                    //     dt.addEventListener("click", () => panel.call(null, i));
-                    // });
-            // bind
-                // bind()是将函数绑定到某个对象，比如 a.bind(hd) 可以理解为将a函数绑定到hd对象上即 hd.a()。
-
-                // 与 call/apply 不同bind不会立即执行
-                // bind 是复制函数形为会返回新函数
-                // bind是复制函数行为
-
-                    // let a = function() {};
-                    // let b = a;
-                    // console.log(a === b); //true
-                    // //bind是新复制函数
-                    // let c = a.bind();
-                    // console.log(a == c); //false
-                // 绑定参数注意事项
-
-                    // function hd(a, b) {
-                    //     return this.f + a + b;
-                    // }
-
-                    // //使用bind会生成新函数
-                    // let newFunc = hd.bind({ f: 1 }, 3);
-
-                    // //1+3+2 参数2赋值给b即 a=3,b=2
-                    // console.log(newFunc(2));
-                // 在事件中使用bind
-
-                    // <button>后盾人</button>
-                    // document.querySelector("button").addEventListener(
-                    //     "click",
-                    //     function(event) {
-                    //     console.log(event.target.innerHTML + this.url);
-                    //     }.bind({ url: "houdunren.com" })
-                    // );
-                // 动态改变元素背景颜色，当然下面的例子也可以使用箭头函数处理
-
-                    // * {
-                    //     padding: 0;
-                    //     margin: 0;
-                    // }
-
-                    // body {
-                    //     width: 100vw;
-                    //     height: 100vh;
-                    //     font-size: 3em;
-                    //     padding: 30px;
-                    //     transition: 2s;
-                    //     display: flex;
-                    //     justify-content: center;
-                    //     align-items: center;
-                    //     background: #34495e;
-                    //     color: #34495e;
-                    // }
-                    // function Color(elem) {
-                    //     this.elem = elem;
-                    //     this.colors = ["#74b9ff", "#ffeaa7", "#fab1a0", "#fd79a8"];
-                    //     this.run = function() {
-                    //     setInterval(
-                    //         function() {
-                    //         let pos = Math.floor(Math.random() * this.colors.length);
-                    //         this.elem.style.background = this.colors[pos];
-                    //         }.bind(this),
-                    //         1000
+                    // class Slide {
+                    //     constructor(el) {
+                    //     this.el = document.querySelector(el);
+                    //     this.links = this.el.querySelectorAll("dt");
+                    //     this.panels = [...this.el.querySelectorAll("dd")].map(
+                    //         item => new Panel(item)
                     //     );
-                    //     };
+                    //     this.bind();
+                    //     }
+                    //     bind() {
+                    //     this.links.forEach((item, i) => {
+                    //         item.addEventListener("click", () => {
+                    //         this.action(i);
+                    //         });
+                    //     });
+                    //     }
+                    //     action(i) {
+                    //     Panel.hideAll(Panel.filter(this.panels, i), () => {
+                    //         this.panels[i].show();
+                    //     });
+                    //     }
                     // }
-                    // let obj = new Color(document.body);
-                    // obj.run();
+                    // class Panel extends Animation {
+                    //     static num = 0;
+                    //     static hideAll(items, callback) {
+                    //     if (Panel.num > 0) return;
+                    //     items.forEach(item => {
+                    //         Panel.num++;
+                    //         item.hide(() => {
+                    //         Panel.num--;
+                    //         });
+                    //     });
+                    //     callback && callback();
+                    //     }
+                    //     static filter(items, i) {
+                    //     return items.filter((item, index) => index != i);
+                    //     }
+                    // }
+                    // let hd = new Slide(".s1");
+        // 十二 模块设计
+            // 模块设计
+                // 使用分析
+                    // 项目变大时需要把不同的业务分割成多个文件，这就是模块的思想。模块是比对象与函数更大的单元，使用模块组织程序便于维护与扩展。
 
+                    // 生产环境中一般使用打包工具如 webpack 构建，他提供更多的功能。但学习完本章节后会再学习打包工具会变得简单。
+
+                    // 模块就是一个独立的文件，里面是函数或者类库
+                    // 虽然JS没有命名空间的概念，使用模块可以解决全局变量冲突
+                    // 模块需要隐藏内部实现，只对外开发接口
+                    // 模块可以避免滥用全局变量，造成代码不可控
+                    // 模块可以被不同的应用使用，提高编码效率
+                // 实现原理
+                    // 在过去JS不支持模块时我们使用AMD/CMD（浏览器端使用）、CommonJS（Node.js使用）、UMD(两者都支持)等形式定义模块。
+
+                    // AMD代表性的是 require.js，CMD 代表是淘宝的 seaJS 框架。
+
+                    // 下面通过定义一个类似 require.js 的 AMD 模块管理引擎，来体验模块的工作原理。
+
+                    // 向军大叔写的hdjs 使用的是 AMD 规范构建
+
+                        // let module = (function() {
+                        //     //模块列表集合
+                        //     const moduleLists = {};
+                        //     function define(name, modules, action) {
+                        //         modules.map((m, i) => {
+                        //             modules[i] = moduleLists[m];
+                        //         });
+                        //         //执行并保存模块
+                        //         moduleLists[name] = action.apply(null, modules);
+                        //     }
+
+                        //     return { define };
+                        // })();
+
+                        // //声明模块不依赖其它模块
+                        // module.define("hd", [], function() {
+                        //     return {
+                        //         show() {
+                        //             console.log("hd module show");
+                        //         }
+                        //     };
+                        // });
+
+                        // //声明模块时依赖其它模块
+                        // module.define("xj", ["hd"], function(hd) {
+                        //     hd.show();
+                        // });
+            // 基础知识
+                // 标签使用
+                    // 在浏览器中使用以下语法靠之脚本做为模块使用，这样就可以在里面使用模块的代码了。
+
+                    // 在html文件中导入模块，需要定义属性 type="module"
+
+                // 模块路径
+                    // 在浏览器中引用模块必须添加路径如./ ，但在打包工具如webpack中则不需要，因为他们有自己的存放方式。
+
+                    // 测试的 hd.js 的模块内容如下
+
+                        // export let hd = {
+                        //     name: "后盾人"
+                        // };
+                    // 下面没有指定路径将发生错误
+
+                        // script type="module"
+                        // import { hd } from "hd.js";
+                        // script
+                        // 正确使用需要添加上路径
+
+                        // script type="module"
+                        // import { hd } from "./hd.js";
+                        // script
+                // 延迟解析
+                    // 模块总是会在所有html解析后才执行，下面的模块代码可以看到后加载的 button 按钮元素。
+
+                    // 建议为用户提供加载动画提示，当模块运行时再去掉动画
+                        // script type="module"
+                        //     console.log(document.querySelector("button")); //Button
+                        // script
+                        // script
+                        //     console.log(document.querySelector("button")); //undefined
+                        // script
+                        // button后盾人button
+                // 严格模式
+                    // 模块默认运行在严格模式，以下代码没有使用声明语句将报错
+
+                        // script type="module"
+                        //     hd = "houdunren"; // Error
+                        // script
+                        // 下面的 this 也会是 undefined
+
+                        // script
+                        // console.log(this); //Window
+                        // script
+                        // script type="module"
+                        // console.log(this); //undefiend
+                        // script
+                // 作用域
+                    // 模块都有独立的顶级作用域，下面的模块不能互相访问
+
+                        // script type="module"
+                        // let hd = "houdunren.com";
+                        // script
+
+                        // script type="module"
+                        // alert(hd); // Error
+                        // script
+                        // 单独文件作用域也是独立的，下面的模块 1.2.js 不能访问模块 1.1.js 中的数据
+
+                        // script type="module" src="1.1.js" script
+                        // script type="module" src="1.2.js" script
+
+                    // 文件内容如下
+                        // # 1.1.js
+                        // let hd = "houdunren";
+
+                        // # 1.2.js
+                        // console.log(hd)
+                // 预解析
+                    // 模块在导入时只执行一次解析，之后的导入不会再执行模块代码，而使用第一次解析结果，并共享数据。
+
+                    // 可以在首次导入时完成一些初始化工作
+                    // 如果模块内有后台请求，也只执行一次即可
+                    // 引入多入hd.js 脚本时只执行一次
+
+                        // script type="module" src="hd.js" script
+                        // script type="module" src="hd.js" script
+
+                        // #hd.js内容如下
+                        // console.log("houdunren.com");
+                        // 下面在导入多次 hd.js 时只解析一次
+
+                        // script type="module"
+                        // import "./hd.js";
+                        // import "./hd.js";
+                        // script
+
+                        // # hd.js内容如下
+                        // console.log("houdunren.com");
+            // 导入导出
+                // ES6使用基于文件的模块，即一个文件一个模块。
+
+                // 使用export 将开发的接口导出
+                // 使用import 导入模块接口
+                // 使用*可以导入全部模块接口
+                // 导出是以引用方式导出，无论是标量还是对象，即模块内部变量发生变化将影响已经导入的变量
+                // 有关于模块打包知识请在 后盾人搜索 webpack
+
+                // 导出模块
+                    // 下面定义模块 modules/houdunren.js ，使用 export 导出模块接口，没有导出的变量都是模块私有的。
+
+                    // 下面是对定义的 hd.js 模块，分别导出内容
+
+                        // export const site = "后盾人";
+                        // export const func = function() {
+                        //     return "is a module function";
+                        // };
+                        // export class User {
+                        //     show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                    // 下面定义了hd.js 模块，并使用指量导出
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     return "is a module function";
+                        // };
+                        // class User {
+                        //     show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // export { site, func, User };
+                // 具名导入
+                    // 下面导入上面定义的 hd.js 模块，分别导入模块导出的内容
+
+                        // script type="module"
+                        // import { User, site, func } from "./hd.js";
+                        // console.log(site);
+                        // console.log(User);
+                        // script
+                    // 像下面这样在 {} 中导入是错误的，模块默认是在顶层静态导入，这是为了分析使用的模块方便打包
+
+                        // if (true) {
+                        // import { site, func } from "./hd.js"; // Error
+                        // }
+                // 批量导入
+                    // 如果要导入的内容比较多，可以使用 * 来批量导入。
+
+                    // script type="module"
+                    // import * as api from "./hd.js";
+                    // console.log(api.site);
+                    // console.log(api.User);
+                    // script
+                // 导入建议
+                    // 因为以下几点，我们更建议使用明确导入方式
+
+                    // 使用webpack 构建工具时，没有导入的功能会删除节省文件大小
+                    // 可以更清晰知道都使用了其他模块的哪些功能
+            // 别名使用
+                // 导入别名
+                    // 可以为导入的模块重新命名，下面是为了测试定义的 hd.js 模块内容。
+
+                    // 有些导出的模块命名过长，起别名可以理简洁
+                    // 本模块与导入模块重名时，可以通过起别名防止错误
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     return "is a module function";
+                        // };
+                        // class User {
+                        //     show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // export { site, func, User };
+                    // 模块导入使用 as 对接口重命名，本模块中已经存在 func 变量，需要对导入的模块重命名防止重名错误。
+
+                        // script type="module"
+                        // import { User as user, func as action, site as name } from "./hd.js";
+                        // let func = "houdunren";
+                        // console.log(name);
+                        // console.log(user);
+                        // console.log(action);
+                        // script
+                // 导出别名
+                    // 模块可以对导出给外部的功能起别名，下面是hd.js 模块对导出给外部的模块功能起了别名
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     console.log("is a module function");
+                        // };
+                        // class User {
+                        //     show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // export { site, func as action, User as user };
+                    // 这时就要使用新的别名导入了
+
+                        // script type="module"
+                        // import { user, action } from "./hd.js";
+                        // action();
+                        // script
+                // 默认导出
+                    // 很多时候模块只是一个类，也就是说只需要导入一个内容，这地可以使用默认导入。
+
+                    // 使用default 定义默认导出的接口，导入时不需要使用 {}
+
+                    // 可以为默认导出自定义别名
+                    // 只能有一个默认导出
+                    // 默认导出可以没有命名
+                // 单一导出
+                    // 下面是hd.js 模块内容，默认只导出一个类。并且没有对类命名，这是可以的
+
+                        // export default class {
+                        //     static show() {
+                        //         console.log("User.method");
+                        //     }
+                        // }
+                    // 从程序来讲如果将一个导出命名为 default 也算默认导出
+
+                        // class User {
+                        //     static show() {
+                        //         console.log("User.method");
+                        //     }
+                        // }
+                        // export { User as default };
+                    // 导入时就不需要使用 {} 来导入了
+
+                        // <script type="module">
+                        // import User from "./hd.js";
+                        // User.show();
+                        // script
+                    // 默认导出的功能可以使用任意变量接收
+
+                        // script type="module"
+                        // import hd from "./hd.js";
+                        // hd.show();
+                        // script
+                // 混合导出
+                    // 模块可以存在默认导出与命名导出。
+
+                    // 使用export default 导出默认接口，使用 export {} 导入普通接口
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     console.log("is a module function");
+                        // };
+                        // export default class {
+                        //     static show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // export { site, func };
+                    // 也可以使用以下方式导出模块
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     console.log("is a module function");
+                        // };
+                        // class User {
+                        //     static show() {
+                        //         console.log("user.show");
+                        //     }
+                        // }
+                        // export { site, func, User as default };
+                    // 导入默认接口时不需要使用 {} ，普通接口还用 {} 导入
+
+                        // script type="module"
+                        //     //可以将 hd 替换为任何变量
+                        // import hd from "./hd.js";
+                        // import { site } from "./hd.js";
+                        // console.log(site);
+                        // hd.show();
+                        // script
+                    // 可以使用一条语句导入默认接口与常规接口
+
+                        // import show, { name } from "/modules/houdunren.js";
+                    // 也可以使用别名导入默认导出
+
+                        // import { site, default as hd } from "./hd.js";
+                        // console.log(site);
+                        // hd.show();
+                    // 如果是批量导入时，使用 default 获得默认导出
+
+                        // script type="module"
+                        // import * as api from "./hd.js";
+                        // console.log(api.site);
+                        // api.default.show();
+                        // script
+                // 使用建议
+                    // 对于默认导出和命名导出有以下建议
+
+                    // 不建议使用默认导出，会让开发者导入时随意命名
+
+                        // import hd from "./hd.js";
+                        // import xj from "./hd.js";
+                    // 如果使用默认导入最好以模块的文件名有关联，会使用代码更易阅读
+
+                        // import hd from "./hd.js";
+            // 导出合并
+                // 解决问题
+                    // 可以将导入的模块重新导出使用，比如项目模块比较多如下所示，这时可以将所有模块合并到一个入口文件中。
+
+                    // 这样只需要使用一个模块入口文件，而不用关注多个模块文件
+
+                        // |--hd.js
+                        // |--houdunren.js
+                        // ...
+                // 实际使用
+                    // 下面是 hd.js 模块内容
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     console.log("is a module function");
+                        // };
+                        // export { site, func };
+                    // 下面是 houdunren.js 模块内容
+
+                        // export default class {
+                        //     static get() {
+                        //         console.log("houdunren.js.get");
+                        //     }
+                        // }
+                    // 下面是 index.js 模块内容，使用 * 会将默认模块以 default 导出
+
+                        // export * as hd from "./hd.js";
+                        // // 默认模块需要单独导出
+                        // export { default as houdunren } from "./houdunren.js";
+                        // // 以下方式导出默认模块是错误的
+                        // // export houdunren from "./houdunren.js";
+                    // 使用方法如下
+
+                        // script type="module"
+                        // import * as api from "./index.js";
+                        // console.log(api);
+                        // api.houdunren.get();
+                        // console.log(api.hd.site);
+                        // script
+            // 动态加载
+                // 使用 import 必须在顶层静态导入模块，而使用import() 函数可以动态导入模块，它返回一个 promise 对象。
+
+                // 静态导入
+                    // 使用 import 顶层静态导入，像下面这样在 {} 中导入是错误的，这是为了分析使用的模块方便打包，所以系统禁止这种行为
+
+                        // if (true) {
+                        //     import { site, func } from "./hd.js"; // Error
+                        // }
+                // 动态使用
+                    // 测试用的 hd.js 模块内容如下
+
+                        // const site = "后盾人";
+                        // const func = function() {
+                        //     console.log("is a module function");
+                        // };
+                        // export { site, func };
+                        // 使用 import() 函数可以动态导入，实现按需加载
+
+                        // script
+                        // if (true) {
+                        //     let hd = import("./hd.js").then(module => {
+                        //     console.log(module.site);
+                        //     });
+                        // }
+                        // scrip
+                        // 下面是在点击事件发生后按需要加载模块
+
+                        // button>后盾人/button>
+                        // scrip
+                        // document.querySelector("button").addEventListener("click", () => {
+                        //     let hd = import("./hd.js").then(module => {
+                        //        console.log(module.site);
+                        //     });
+                        // });
+                        // script>
+                        // 因为是返回的对象可以使用解构语法
+
+                        // button后盾人/button
+                        // script
+                        // document.querySelector("button").addEventListener("click", () => {
+                        //     let hd = import("./hd.js").then(({ site, func }) => {
+                        //     console.log(site);
+                        //     });
+                        // });
+                        // script
+            // 指令总结
+                // 表达式	说明
+                // export function show(){}	导出函数
+                // export const name='后盾人'	导出变量
+                // export class User{}	导出类
+                // export default show	默认导出
+                // const name = '后盾人'
+                // export {name}	导出已经存在变量
+                // export {name as hd_name}	别名导出
+                // import defaultVar from 'houdunren.js'	导入默认导出
+                // import {name,show} from 'a.j'	导入命名导出
+                // Import {name as hdName,show} from 'houdunren.js'	别名导入
+                // Import * as api from 'houdunren.js'	导入全部接口
+            // 编译打包
+                // 编译指将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。
+
+                // 首先登录 https://nodejs.org/en/ 官网下载安装Node.js，我们将使用其他的npm命令，npm用来安装第三方类库。
+
+                // 在命令行输入 node -v 显示版本信息表示安装成功。
+
+                // 有关详细webpack视频教程，请登录后盾人网站检索
+
+                // 安装配置
+                    // 使用以下命令生成配置文件 package.json
+
+                        // npm init -y
+                    // 修改package.json添加打包命令
+
+                        // ...
+                        // "main": "index.js",
+                        // "scripts": {
+                        //     "dev": "webpack --mode development --watch"
+                        // },
+                        // ...
+                    // 安装webpack工具包，如果安装慢可以使用淘宝 cnpm (opens new window)命令
+
+                        // npm i webpack webpack-cli --save-dev
+                // 目录结构
+                    // index.html
+                    // --dist #压缩打包后的文件
+                    // --src
+                    // ----index.js  #入口
+                    // ----style.js //模块
+                    // index.html内容如下
+
+                
+                    // script src="dist/main.js" script                 
+                    // index.js内容如下
+
+                        // import style from "./style";
+                        // new style().init();
+                        // style.js
+
+                        // export default class User {
+                        // constructor() {}
+                        //     init() {
+                        //         document.body.style.backgroundColor = "green";
+                        //     }
+                        // }
+                // 执行打包
+                    // 运行以下命令将生成打包文件到 dist目录，因为在命令中添加了 --watch参数，所以源文件编辑后自动生成打包文件。
+
+                    // npm run dev
+        
     </script>
 </body>
 </html>

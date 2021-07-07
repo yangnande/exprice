@@ -6,30 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
-		div {
-			background-color: red;
-			height: 5000px;
-			overflow-y: auto;
-		}
+	
 	</style>
 </head>
 <body>
-	<div class="red">
 
-	</div>
 	<script>
-	window.onscroll = function() {
-  //为了保证兼容性，这里取两个值，哪个有值取哪一个
-  //scrollTop就是触发滚轮事件时滚轮的高度
-  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  console.log("滚动距离" + scrollTop);
-}
-let dom = document.querySelector('.red');
-      console.log(dom, 'dom');
-      dom.addEventListener("scroll", function() {
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  			console.log("滚动距离" + scrollTop);
-      })
-		</script>
+		let reg = /^[\u4E00-\u9FA5A-Za-z0-9]{1,30}$/
+		let str = '111zzzzzzzzzzzzzzzzzzzzzzzzzz你'
+		console.log(str.length);
+		console.log(reg.test(str));
+	</script>
 </body>
 </html>

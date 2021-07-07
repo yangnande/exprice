@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var obj = {}
+    var obj = new Object()
+    var num = 1
+    var num = new Number()
+    Object.prototype.aaa = function() {}
+    var obj = {name:"珠峰",age:7}
+    for(var key in obj){
+      // for in 循环在遍历的时候，默认的话可以把自己私有的和在它所属类原型上扩展的属性和方法都可以遍历到，但是一般情况下，我们遍历一个对象只需要遍历私有的即可，我们可以使用一下的判断进行处理
+      // if(obj.propertyIsEnumerable(key)) {
+      //   console.log(obj[key]);
+      // }
+      if(obj.hasOwnProperty(key)) {
+        console.log(obj[key]);
+      }
+    }
+    obj.aaa()
+    // ->Object.create()方法创建一个拥有指定原型和若干个指定属性的对象
+    // ->Object.create(proObj)创建一个新的对象，但是要把proObj作为这个对象的原型
+    var obj = {
+      getX:function(){}
+    }
+    var obj2 = Object.create(obj)
+    var obj = {
+      constructor: Fn,
+      getX:function(){}
+    } // obj-xxxfff000
+    var obj2 = {}
+    for(var key in obj){
+      if(obj,hasOwnProperty(key)) {
+        obj2[key] = obj[key]
+      }
+    }
+    function Fn() {}
+    Fn.prototype = obj // Fn.prototype->xxxfff000
+    Fn.prototype.sum = function() {}
+    var f = new Fn;
+
+  </script>
+</body>
+</html>
