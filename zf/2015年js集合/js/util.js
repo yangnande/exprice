@@ -9,5 +9,16 @@ var utils = {
       }
     }
     return ary
+  },
+  //->jsonParse:把JSON格式的字符串转换为JSON格式的对象
+  jsonParse: function(str) {
+    // var val = null
+    // try {
+    //   val = JSON.parse(str)
+    // } catch (error) {
+    //   val = eval("("+ str +")")
+    // }
+    // return val
+    return "JSON" in window ? JSON.parse(str) : eval("("+ str +")")
   }
 }

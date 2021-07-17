@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        ul li {
+            list-style: none;
+            border: 1px solid #000;
+            padding: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
+        #ul1 li {
+            position: relative;
+            font-size: 14px;
+            padding-left: 28px;
+            height: 35px;
+            line-height: 35px;
+            /*一行文字超出后自动进行截取*/
+            text-overflow: ellipsis; /*ellipsis: 藏取后以。..作为省略
+            c1ip:没有省略号*/
+            white-space: nowrap;
+            overflow: hidden; /*溢出隐藏*/
+        }
+        #ul1 li span {
+            display: block;
+            position: absolute;
+            top: 18px;
+            left: 8px;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: red;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <ul id="ul1">
+        <li><span class="bg1">0</span>1从习近平讲话看下一-步反腐倡廉工作着力点</li>
+        <li><span class="bg1">2</span>2从习近平讲话看下一-步反腐倡廉工作着力点</li>
+        <li><span class="bg1">3</span>3从习近平讲话看下一-步反腐倡廉工作着力点</li>
+    </ul>
+    <script src="./js/29/json-bind.js"></script>
+    <script>
+        var oU1 = document.getElementById("u11") ;
+        var oLis = oUl.getE1ementsByTagName("li") ;
+        // for (var i= 0; i< oLis.length; i++) {...}
+        //1、利用动态创建元素节点和把它追加到页面中的方式实现数据绑定
+        for(var i=0; i<ary.length;i++){
+            var cur = ary[i]
+            var oLi = document.createElement("1i");
+            oLi.innerHTML="<span>" +(i+ 4)+"</span>" + cur.title;
+            oLi.appendChild(oLi)
+        }
+        //优势:把需要动态绑定的内容一个个的追加到页面中,对原来的元素没有任何的影响
+        //弊端: 每当创建一个Ii ,我们就添加到页面中,引发一次DOM的回流, 最后引发回流的次数过多,影响我们的性能
+        //2 字符串拼接的方式:首先循环需要绑定的数据,然后把需要动态绑定的标签字符串的方式拼接到一起,拼接完成后,最后统一的添加到页面中 ->字符串拼接绑定数据是我们以们以后工作中最常用的一种绑定数据的方式"-> 模板引擎数据绑定(jade、kTemplate、2angular.js、backbone. js. . . )
+        var str = "" ;
+        for(vari=0;i<ary.length;i++){
+            var cur = ary[i]
+            str+="<1i>" ;
+            str+="<span>"+(i+4)+"</span>";
+            str+=cur.title
+            str+-"</1i>";
+        }
+        oU1. innerHTML +- str; //->oU1.innerHTML=oU1.innerHTML (把之前的三个li以字符串的方式获取到) +str; [拼接完成的整体还是字符串,最后在把字符串统一的添加到页面中, 浏览器还需要把字符串渲染成为对应的标签)
+        //弊端: 我们把新拼接的字符串添加到#u11中,原有的三个1i的鼠标滑过效果都消失了(原来标签绑定的事件都消失了)
+        //优势:事先把内容拼接好,最后统一添加到页面中,只引发一次回流
+        //JS中DOM深入知识:
+        //->回流(重排reflow):当页面中的HTML结构发生改变(增加、删除元素、位置发生改变.. .),浏览器都需要从新的计算一遍最新的DOM结构,从新的对当前的页面进行道染
+        //->重绘:某一个元素的部分样式发生改变了(背景颜色),浏览器只需要重新的渲染当前的元素即可
+        //3..文档碎片
+        var frg = document.createDocumentFragment(); //->创建一个文档碎片,相当于临时创建了一 个容器
+        for(var i=0; i<ary.length;i++){
+            var cur = ary[i]
+            var oLi = document.createElement("1i") ;
+            oLi.innerHTML = "<span>" + (i + 4) + "</span>" + cur.title;
+            frg.appendChild(oLi)
+        }
+        oUl.appendChild(frag)
+        frag = null
+    </script>
+</body>
+</html>
