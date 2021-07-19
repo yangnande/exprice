@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./31/tab.css">
+</head>
+<body>
+    <div class="box">
+        <table id="tab" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>武力</th>
+                    <th>性别</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr class="bg">
+                    <td>令狐冲</td>
+                    <td>25</td>
+                    <td>99</td>
+                    <td>男</td>
+                </tr>
+                <tr>
+                    <td>令狐冲</td>
+                    <td>25</td>
+                    <td>99</td>
+                    <td>男</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    <!--引入JS是有顺序限制的:根据JS之间的依赖关系,我们按照顺序依次引入,顺序一旦出现问题,就会发生错误 require.js-->
+    <script src="./js/util.js"></script>
+    <script src="./31/tab.js"></script>
+</body>
+</html>

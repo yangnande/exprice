@@ -1,0 +1,6 @@
+[
+    {"name":"令狐冲","age":24,"score":98,"sex":0},
+    {"name":"岳灵珊","age":21,"score":96,"sex":0},
+    {"name":"岳不群","age":23,"score":97,"sex":0},
+    {"name":"林平之","age":30,"score":100,"sex":1}
+]
