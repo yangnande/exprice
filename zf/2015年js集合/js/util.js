@@ -1,5 +1,5 @@
 var utils = {
-  lietToArray:function (likeAry){
+  listToArray:function (likeAry){
     var ary =[];
     try {
       ary = Array.prototype.slice.call(likeAry) 
