@@ -8,7 +8,79 @@
 </head>
 <body>
     <script>
+        //exec正则用来捕获的—个方法
+        //在正则捕获的时候,我们加修饰符"g",可以取消捕获时候的懒惰性,L、原理:正则中有一个lastIndex属性,它代表下一次正则捕获的开始索引,但是默认这个值永远是0,也就是不管执行几次exec都用从新从头开始捕获,所以获取的都是同一个结果,而加了修饰符"g",每次exec执行完成之后,我们的lastindex属性的值都等于当前捕获内容的后一个索引,下一次从这之后继续查找捕获,这样就可以一次次的执行,把想要的结果都捕获到了
+        var reg = /\d+?/g;
+        var str = "zhufeng2015peixun2014"
+        console.log(reg.lastIndex);
+        ary = reg.exec(str);
+        var ary = reg.exec(str);
+        consoie.log(ary);
         
+        console.log(reg.lastIndex);
+        ary = reg.exec(str),ary = [];
+        while(res){
+            ary.push(res[0])
+            res = reg.exec(str)
+        }
+        console.log(ary); // ["2","0","1","5","2","0","1","4"]
+
+        //match字符串用来匹配正则的一个方法
+        var reg = /\d+?/g;
+        var str ="zhufeng2015huiwang2014";
+        var ary = str.match(reg);
+        console.log(ary) ; //--> ["2","0",“i","5",“2","0", "1", "4"]
+        // match一次性把符合大正则都存放在一个数组中,如果也需要捕获小分组中的内容, match是捕获不到的
+        string.prototype.match = function(reg){
+            // this―->str我们想操作的那个字符串->原型上的方法,里面的this都是我们要操作的当前的实例
+            var ary = [];
+            var res = reg.exec(this);
+            while(res){
+                ary.push(res[0]);
+                res=res.exec(this);
+            }
+            return ary
+        }
+        str.match(reg);
+        // 分组捕获
+        //在正则捕获的时候,我们添加分组,不仅仅可以把大正则匹配的内容捕获,而且还可以把小分组代表的子正则匹配的内容一起捕获出来
+        var str = "my name is {0},my age is {1},i come from{2},i love {3}~~" ;
+        var ary = ["易文",28,"湖南","javascript"]; 
+        //{0}--> ary[0] "易文"
+        //{1}--> ary[2] 28
+        //...我们在捕获的时候,不仅要获取{0} ,而且还要获取里面的数字0,并且每一次exec执行捕获的时候,同时获取这两个
+        var reg =/{(d+)}/g;
+        str = str.replace (reg, function(larCon,smallCon,index,input) {
+            //larCon --> argumentsl0]  每 次执行replace大正则捕获的内容
+            //smal1Con --> arguments[1] 每-次执行replace小正则则捕获的内容
+            return ary[arguments[1]] ;
+        })
+        console.log(str)
+        console.log(reg.exec(str)); //-->["{0}","0"....]
+        // res[1]获取的是小正则捕获的内容 ary[res[1]]代表的是对应数组中的内容,我们用这个内容把大正则捕获的res[0] "0"替换掉即可
+        // replace字符串实现替换的一个方法,但是一般情况下,执行一次只替换一个,我们为了替换所有的符合的,斋要用正则来处理
+        var str = "zhufengpeixun zhufengketang"
+        // str=str.replace("zhufeng","珠峰");
+        str = str.replace(/zhufeng/g,"珠峰"); //在整个字符串中,把符合正则的都替换成"珠峰"
+        //如果你想替换的话,首先你先要把"zhufeng"获取到,然后在替换-->如果replace第一个参数是一个正则,那么涉及到了正则的捕获
+        // lastindex=0
+        // 首先捕获"zhufeng",捕获一次, replace就执行一次替换的操作
+        // lastindex=7
+        // 首先捕获"zhufeng",捕获一次, replace就执行一次替换的操作
+        // lastindex=21
+        // 捕获不到内容了,结果为null, replace就不在执行替换的操作了
+        //如上述所说的一样，我们当前replace执行两次，相当于第二个参数function也执行两次
+        //在每一次function执行的时候，在函数中return后面返回的是啥，就是把大正则捕获的内容替换成啥
+        str = str.replace(/zhufeng/g,function(content,input,index) {
+            // consoie.iog (arguments);
+            // arguments当前函数的参数集合,我们发现和正则exec每一次捕获的结果很相似,这个函数默认会有三个参教
+            // content:每一次捕获的内容
+            // index:每一次捕获的开始索引
+            // input:原始字符串
+            // return "珠峰";
+            return content.toUpperCase()
+        })
+        console.log(str)
     </script>
 </body>
 </html>
