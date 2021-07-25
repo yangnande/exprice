@@ -5,10 +5,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none ;
+        }
+        html,body {
+            width: 100%;
+            height: 1000%;
+            background: #11c900;
+            /* css背景渐变效果 */
+            background: -webkit-linear-gradient(top, #11c900, lightblue, lightcoral, lightcyan,lightgreen, lightpink, lightsalmon, lightseagreen);
+            background: linear-gradient(top, #11c900,lightblue, lightcoral, lightcyan,lightgreen, lightpink, lightsalmon, lightseagreen);
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+        a:hover, a:active, a:target, a:visited {
+            text-decoration: none;
+            color: #000;
+        }
+        #goLink {
+            display: none;
+            position: fixed;
+            bottom: 150px;
+            right: 50px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: red;
+            opacity: .2;
+            filter: alpha(opacity=20);
+            border-radius: 50%;
+        }
+        #goLink:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+        #target {
+            margin: 1000px auto;
+            height: 50px;
+            background: red;
+        }
+    </style>
 </head>
 <body>
+        <!--
+            A标签本身是跳转页面的,把跳转的地址写在href这个属性中,不写值的话是刷新本页面
+            1)不写值的话是刷新本页面
+            2)写的如果是#target,是锚点定位,定位到当前页面ID为target这个位置
+            3) "javascript:;",这样写是取消A标签默认跳转的行为
+        -->
+        <a href="javascript:;" id="goLink"></a>
+        <!-- <div id="target"></div> -->
     <script>
-        
+        var goLink = document.getElementById ("goLink") ;
+        //- >开始Go按钮是不显示的,只有当浏览器卷去的高度超过一屏幕的高度的时候在显示,反之隐藏- >只要浏览器的滚动条在滚动,我们就需要判断Go显示还是隐藏
+        //->浏览器的滚动条滚动:拖动滚动条、数遍滚轮、键盘上下键或者pageDown/pageUp键、点击滚动条的空白处或者箭头(自主操作的行为) ...我们还可以通过JS控制scro11Top的值实现滚动条的滚动
+        function computedDisplay() {
+            console.log(666);
+            var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var curHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            goLink.style.display = curTop > curHeight ? 'block':'none';
+
+        }
+        window.onscroll = computedDisplay;
+        //->回到顶部:
+        //总时间(duration) : 500ms
+        //频率(interval) :多长时间走一步10ms
+        //总距离(target) :当前的位置(当前的scrollTop值) -目标的位置(0)
+        //->步长(step) :每一次走的距离target/duration-> 每1ms走的距离*interval->每一次走的距离
+        var duration = 500
+        goLink.onclick = function (){
+            // 当点击的时候让当前的go消失
+            this.style.display = "none"
+            //->光这样还不行:我们往回走的时候又把window.onscroll行为触发了, 让GO又显示了->我们需要在点击后,把window.onscroll绑定的事件取消掉
+            window.onscroll=null
+            //->.当点击G0的时候,首先把每一步要走的步长计算出来
+            var duration = 500,interval = 10,target = document.documentElement.scrollTop || document.body.scrollTop;
+            var step = (target / duration) * interval;
+            //->计算完成步长后,让当前的页面每隔interval这么长的时间走一步:在 上一次的scrollTop的基础上 步长
+            var timer = window.setInterval(function () {
+                var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+                if (curTop === 0) {// - >已经到头了
+                    window.clearInterval(timer);
+                    window.onscroll = computedDisplay; //->当动画结束后还需要把对应的方法 重新绑定给window.onscroll
+                    return;
+                }
+                curTop -= step;
+                document.documentElement.scrollTop = curTop
+                document.body.scrollTop = curTop
+            },interval)
+        }
+        // 1、真对于回到顶部功能的扩展
+        // ->https://www.jd.com/左侧出现的楼层导航
+        // ->刚开始没有楼层导航,只有当一楼出现在视野中的时候,楼层导航才显示
+        // ->随着页面继续滚动,每一个楼层到达某个区域的时候,我们让楼层导航中的对应项跟着选中
+        // ->当我们点击楼层导航中的某一项的时候,可以实现一个简单的动画,实现定位到具体的楼层
     </script>
 </body>
-</html>
+</html> 

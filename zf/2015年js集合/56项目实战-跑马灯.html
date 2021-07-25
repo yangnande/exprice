@@ -5,9 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,sans-serif;
+            font-size: 14px;
+        }
+        #box {
+            margin: 50px auto; 
+            padding: 0 10px;
+            width: 1000px;
+            height: 35px;
+            line-height: 35px;
+            border: 1px dashed green;
+            background: lightgreen;
+        }
+        #wraper {
+            white-space: nowrap;
+            height: 35px;
+            overflow: hidden;
+        }
+        #wraper span {
+            color:red;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        #wraper  div {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
+    <div id="box">
+        <div id="wraper">
+            <div id="conBegin">
+                <span>通知:</span>我们是先学习再考试,考试通过了才交学费;珠峰有完善的 教学管理,考试和激励引导制度帮你不但学的会还要学的好!就业是我们的强项，平均就业工资超过12K。不但让你找到工作，还要能胜任工作。郑重承诺:工资低于9K退学费。
+            </div>
+            <div id="conEnd">
+                <span>通知:</span>我们是先学习再考试,考试通过了才交学费;珠峰有完善的 教学管理,考试和激励引导制度帮你不但学的会还要学的好!就业是我们的强项，平均就业工资超过12K。不但让你找到工作，还要能胜任工作。郑重承诺:工资低于9K退学费。
+            </div>
+        </div>
+    </div>
+    <script src="./js/util.js"></script>
     <script>
+        ~function() {
+            var box = document.getElementById ("box");
+            var wrap = document.getElementById ("wraper");
+            var conBegin = document.getElementById("conBegin");
+            var conBegin_width = utils.getCss(conBegin, "width") ; 
+            function move() {
+                wrap.scrollLeft++;
+                //->利用了scrollLeft是存在最大值的思想,在累加1之前获取-一个值, 在累加后在获取的一个值,如果两个值相等了,说明累加是没有作用的一>到头了
+                if (wrap.scrollLeft >= conBegin_width) {
+                    //window.clearInterval (timer) ;
+                    wrap.scrollLeft = 0;//->虽然从头开始了，但是有一个切换闪动的效果
+                }
+            }
+            var timer = window.setInterval(move,10)
+            box.onmouseover = function() {
+                window.clearInterval(timer)
+            }
+            box.onmouseout = function() {
+                timer = window.setInterval(move,10)
+            }
+        }()
         
     </script>
 </body>

@@ -5,10 +5,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #outer {
+            margin: 0 auto;
+            padding: 50px;
+            width: 180px;
+            height: 180px;
+            border: 10px solid #000;
+            background: orange;
+        }
+        #inner {
+            padding: 50px;
+            width: 80px;
+            height: 80px;
+            border: 10px solid #000;
+            background: green;
+        }
+        #center {
+            width: 50px;
+            height: 50px;
+            border: 10px solid #000;
+            background: red;
+        }
+    </style>
 </head>
 <body>
+    <div id="outer">
+        <div id="inner">
+            <div id="center">
+
+            </div>
+        </div>
+    </div>
     <script>
-        
+        var outer = document.getElementById("outer"),inner = document.getElementById("inner"),center= document.getElementById("center");
+        //1. parentNode:父亲节点HTML结构层级关系中的上一级元素
+        // center.parentNode //->inner
+        // inper.parentNode //->outer
+        // outer.parentNode //->body
+    //补充null和undefined的区别 
+        // null
+        // undefined
+        // null和undefined都代表没有,但是null是属性存在但是值不存在,undefined是连这个属性都不存在
+        // 例如
+        // document.parentNode (浏览器天生自带的一一个属性:父亲节点的属性)->null (因为一个页面中的document已经是最顶级元素了,它没有父亲)
+        // document.parentnode ->undefined (因为没有parentnode属性)
+        // document.body.offsetParent //->nul1
+        //->想要改变父级参照物需 要通过position定位来进行改变:absolute,relative,fixed任意一个值都可以把父级参照物进行修改
+        // position: absolute;
+        // position: relative;
+        // position: fixed;
+        // outer.style.position = "relative";
+        // console.log(center.offsetParent); //->outer
+        // console.log(inner.offsetParent); //->outer
+        // console.log(outer.offsetParent); //->body
+        // outer.style. position = "relative ";
+        // inner.style.position = "relative";
+        // console.log(center.offsetParent);//->inner
+        // console.log(inner.offsetParent);//->outer
+        // console.log(outer.offsetParent);//->body
+        //3、offsetTop/offsetLeft: 当前元素(外边框)距离其父级参照物(内边框)的偏移距离
+        outer.style.position = "relative";
+        inner.style.position = "relative" ;
+        //->offset:等同于jQuery中的offset方法,实现获取页面中任意一 个元素,距离body的偏移(包含左偏移和上偏移) ,不管当前元素的父级参照物是谁
+        //->获取的结果是-一个对象{left :距离BODY的左偏移,top:距离BODY的上偏移
+        //->在标准的IE8浏览器中,我们使用offsetLeft/offsetTop其实是把父级参照物的边框已经算在内了
+        function offset (curEle) {
+            var totalLeft = nul1, totalTop = null, par = curEle. offsetParent;
+            //->首先把自己本身的进行累加
+            totalLeft += curEle.offsetLeft;
+            totalTop += curEle.offsetTop;
+            //->只要没有找到body,我们就把父级参照物的边框和偏移也进行累加
+            while (par) {
+                if (navigator.userAgent.indexOf ("MSIE 8.0") === -1 ) {//->不是标准的IE8浏览器, 我们才进行累加边框
+                    //->累加父级参照物的边框
+                    totalLeft += par.clientLeft;
+                    totalTop += par.clientTop;
+                }
+                
+                //->累加父级参照物本身的偏移
+                totalLeft += par.offsetLeft;
+                totalTop += par.offsetTop;
+                par = par.offsetParent;
+            }
+            return {left: totalLeft, top: totalTop};
+        }
+        console.log(offset(center).left);
     </script>
 </body>
 </html>
