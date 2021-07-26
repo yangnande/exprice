@@ -199,5 +199,68 @@ var utils = {
       return;
     }
     oldEle.parentNode.appendChild(newEle);
-  }
+  },
+  hasClass:function (curEle, className) {
+    var reg = new RegExp("(^| +)" + className + "( +|$)");
+    return reg.test(curEle.className)
+  },
+  addClass:function (curEle,className) {
+    //->为了防止className传递进来的值包含多个样式类名,我们把传递进来的字符串按照一到多个空格拆分成数组中的每一项
+    var ary = className.split(/ +/g);
+    //->循环数组, 一项项的进行验证增加即可
+    for (var i = 0, len = ary.length; i < len; i++) {
+        var curName = ary[i];
+        if (!hasClass (curEle,curName) ) {
+            curEle.className +=" " + className;
+        }
+    }
+  },
+  removeClass: function (curEle,className) {
+    //->为了防止className传递进来的值包含多个样式类名,我们把传递进来的字符串按照一到多个空格拆分成数组中的每一项
+    var ary = className.split(/ +/g);
+    //->循环数组, 一项项的进行验证增加即可
+    for (var i = 0, len = ary.length; i < len; i++) {
+        var curName = ary[i];
+        if (hasClass(curEle,curName)) {
+            var reg = new RegExp("(^| +)" + curName + "( +|$)","g");
+            curEle.className = curEle.className.replace(reg," ")
+        }
+    }
+  },
+  //->getElementsByClass:通过元素的样式类名获取一组元素集合
+  //->className:要获取的样式类名(可能是一个也可能是多个)
+  //->context:获取元素的上下文->如果这个值不传递的话,默认document
+  getElementsByClass:function (className, context) {
+    context = context||document;
+    if(this.flag) {
+      return this.listToArray(context.getElementsByClassName(className))
+    }
+    //->把传递进来的样式类名的首尾空格先去掉,然后在按照中间的空格把它里面的每一项拆分成数组
+    var classNameAry = className.replace(/(^ +| +$)/g, "").split(/ +/g);
+    var ary = []
+    //->获取指定上下文中的所有的元素标签,循环这些标签,获取每一个标签的className样式类名的字符串
+    var nodeList = context.getElementsByTagName("*");//->获取指定上下文中的所有的元素标签
+    for (var i = 0,len = nodeList.length; i < len; i++){
+        var curNode = nodeList[i] ;
+        console.log(curNode.className);
+        //->> 判断curNode.className是否即包含"w3"也包含"w1",如果两个都包含的话, curNode就是我想要的，否则就不是我想要的
+        //->在循环["w3","w1"]
+        var isOk = true; //->我们假设curNode中包含了所有的样式
+        for (var k = 0; k < classNameAry.length; k++) {
+            var reg = new RegExp("(^| +)" + classNameAry[k] + "( +|$)") ;
+            //->都一次"w3"/(^| +)w3( +|$)/
+            //->都-次"w1" /(^| +)w1( +|S)/
+            if (!reg.test (curNode.className)) {
+                isOk = false;
+                break;
+            }
+            
+        }
+        if(isOk) 
+        {//->拿每一个标签分别和所有样式类名比较后,如果结果还是true的话，说明当前元素标签包含了所有的样式,也是我们想要的
+            ary.push(curNode)
+        }
+    }
+    return ary
+}
 }
