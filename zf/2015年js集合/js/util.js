@@ -171,5 +171,33 @@ var utils = {
   lastChild: function (curEle){
     var chs = this.children(curEle);
     return chs.length > 0 ? chs[chs.length-1] : null;
+  },
+  //->append: 向指定容器的末尾追加元素
+  append:function (newEle, container){
+    container.appendchild(newEle)
+  },
+  //->prepend:向指定容器的开头追加元素
+  //->把新的元素添加到容器中第一个子元素节点的前面
+  prepend: function (newEle, container) {
+    var fir = this.firstChild(container);
+    if(fir) {
+      container.insertBefore(newEle,fir);
+      return;
+    }
+    container.appendChild (newEle) ;
+  },
+  //->insertBefore:把新元素(newEle)追加到指定元素(oldEle)的前面
+  insertBefore: function (newEle, oldEle) {
+    oldEle.parentNode.insertBefore(newEle,oldEle);
+  },
+  // ->insertAfter:把新元素(newEle)追加到指定元素(oldEle)的后面
+  //->相当于追加到oldEle弟弟元素的前面,如果弟弟不存在，也就是当前元素已经是最后一个了，我们把新的元素放在最末尾即可
+  insertAfter: function (newEle, oldEle) {
+    var nex = this.next(oldEle);
+    if (nex) {
+      oldEle.parentNode.insertBefore(newEle, nex);
+      return;
+    }
+    oldEle.parentNode.appendChild(newEle);
   }
 }
