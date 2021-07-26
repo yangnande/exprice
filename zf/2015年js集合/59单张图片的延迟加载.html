@@ -5,10 +5,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,sans-serif;
+            font-size: 14px;
+        }
+        img {
+            display: none;/*在开始的时候IMG的SRC属性没有地址,这样的话在IE浏览器中容器中会显示一张碎图,不美观,所以我们让其默认是隐藏的，当真实的图片加载完成后在显示*/
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        .banner {
+            margin: 1000px auto;
+            width: 350px;
+            height: 200px;
+            border: 1px solid green;
+            background: url("./58/2.jpg") no-repeat center center;/*给当放的区域在加一个默认图占位，告诉用户此处的图片正在加载中*/
+        }
+    </style>
 </head>
 <body>
+    <div class="banner" id="banner">
+        <img src="" alt="" trueImg="./58/10.jpg">
+    </div>
+    <script src="./js/util.js"></script>
     <script>
-        
+        var banner = document.getElementById("banner"),imgFir =banner.getElementsByTagName( "img" )[0];
+        window.onscroll =function () {
+            if(banner.isLoad) { //已经加载过了
+                return 
+            }
+            var A = banner.offsetHeight + utils.offset(banner).top;
+            var B = utils.win("clientHeight") + utils.win ("scrollTop") ;
+            if (A<B) {
+                //->当条件成立,我们加载真实的图片，第一次加载完成后，我们在让页面继续滚动的过程中,A<B一直成立，又从新的执行了下面的操作，导致了重复给一个容器中的图片进行加载
+                console.log('ok');
+                var oImg = new Image;
+                oImg.src = imgFir.getAttribute ("trueImg") ;
+                oImg.onload =function () {
+                    imgFir.src = this.src
+                    imgFir.style.display = "block";
+                    oImg = null
+                    // banner.isLoad = true; //->设置一个自定义属性,告诉浏览器我已经把图片加载完了(图片加载错误的时候 也会一直加载)
+                }
+                banner.isLoad = true; //->设置一个自定义属性,告诉浏览器我已经把图片加载完了(不管是否正常的加载，只要处理过一次以后都不在处理了|
+            }
+            
+        }
+        // window.setTimeout (function () {
+        //     var oImg = new Image; //->创建一个临时的IMG标签
+        //     oImg.src = imgFir.getAttribute("trueImg");
+        //     oImg.onload = function () { //->当图片能够正常的加载
+        //         imgFir.src = this.src
+        //         imgFir.style.display = "block";
+        //         oImg = null
+        //         var nowTime = new Date;
+        //         console.log(nowTime - time);
+        //         // console.log('图片加载完成。。。');
+        //     } 
+        //     // console.log('图片正在加载中。。。');
+        //     var time = new Date;
+        // },500)
     </script>
 </body>
 </html>
