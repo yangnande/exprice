@@ -85,8 +85,9 @@ var utils = {
             curNode.nodeType === 1 ? ary[ary.length] = curNode : null
         }
         nodeList = null
-    }else {
-        //->标准浏览器中,我们直接使用children即可，但是这样获取的是一个元素集合(类数组),为了和IE6~8下保持一致,我们借用数组原型上的slice,实现把类数组转换为数组
+    } else {
+        //->标准浏览器中,我们直接使用children即可,但是这样获取的是一个元素集合(类数组),为了和IE6~8下保持一致,我们借用数组原型上的slice,实现把类数组转换为数组
+        // console.log(curEle.children);
         ary = this.listToArray(curEle.children)
     }
     // 二次筛选
@@ -103,7 +104,7 @@ var utils = {
     return ary
   },
   //->prev:获取上一个哥哥元素节点
-  //->首先获取当前元素的上一个哥哥节点,判断是否为元素节点，不是的话基于当前的继续找上面的哥哥节点...一直到找到哥哥元素节点为止,如果没有哥哥元素节点，返回null即可
+  //->首先获取当前元素的上一个哥哥节点,判断是否为元素节点,不是的话基于当前的继续找上面的哥哥节点...一直到找到哥哥元素节点为止,如果没有哥哥元素节点,返回null即可
   prev:function(curEle){
     if (this.flag){
       return curEle.previousElementSibling;
@@ -141,7 +142,7 @@ var utils = {
     var nex= this.next(curEle);
     while (nex) {
       ary.push(nex);
-      nex= this.next(pre);
+      nex= this.next(nex);
     }
     return ary;
   },
@@ -191,7 +192,7 @@ var utils = {
     oldEle.parentNode.insertBefore(newEle,oldEle);
   },
   // ->insertAfter:把新元素(newEle)追加到指定元素(oldEle)的后面
-  //->相当于追加到oldEle弟弟元素的前面,如果弟弟不存在，也就是当前元素已经是最后一个了，我们把新的元素放在最末尾即可
+  //->相当于追加到oldEle弟弟元素的前面,如果弟弟不存在,也就是当前元素已经是最后一个了,我们把新的元素放在最末尾即可
   insertAfter: function (newEle, oldEle) {
     var nex = this.next(oldEle);
     if (nex) {
@@ -210,7 +211,7 @@ var utils = {
     //->循环数组, 一项项的进行验证增加即可
     for (var i = 0, len = ary.length; i < len; i++) {
         var curName = ary[i];
-        if (!hasClass (curEle,curName) ) {
+        if (!this.hasClass (curEle,curName) ) {
             curEle.className +=" " + className;
         }
     }
@@ -221,7 +222,7 @@ var utils = {
     //->循环数组, 一项项的进行验证增加即可
     for (var i = 0, len = ary.length; i < len; i++) {
         var curName = ary[i];
-        if (hasClass(curEle,curName)) {
+        if (this.hasClass(curEle,curName)) {
             var reg = new RegExp("(^| +)" + curName + "( +|$)","g");
             curEle.className = curEle.className.replace(reg," ")
         }
@@ -243,7 +244,7 @@ var utils = {
     for (var i = 0,len = nodeList.length; i < len; i++){
         var curNode = nodeList[i] ;
         console.log(curNode.className);
-        //->> 判断curNode.className是否即包含"w3"也包含"w1",如果两个都包含的话, curNode就是我想要的，否则就不是我想要的
+        //->> 判断curNode.className是否即包含"w3"也包含"w1",如果两个都包含的话, curNode就是我想要的,否则就不是我想要的
         //->在循环["w3","w1"]
         var isOk = true; //->我们假设curNode中包含了所有的样式
         for (var k = 0; k < classNameAry.length; k++) {
@@ -257,10 +258,70 @@ var utils = {
             
         }
         if(isOk) 
-        {//->拿每一个标签分别和所有样式类名比较后,如果结果还是true的话，说明当前元素标签包含了所有的样式,也是我们想要的
+        {//->拿每一个标签分别和所有样式类名比较后,如果结果还是true的话,说明当前元素标签包含了所有的样式,也是我们想要的
             ary.push(curNode)
         }
     }
     return ary
-}
+  },
+  // ->setCss:给当前元素的某一个样式属性设置值(增加在行内样式上的)
+  setCss:function (curEle,attr, value){
+    //->在JS中设置float样式值的话也需要处理兼容
+    if (attr === "f1oat"){
+        curEle["style"]["cssFloat"] = value;
+        curEle["style"]["styleFloat"] = value;
+        return;
+    }
+
+    //->如果打算设置的是元素的透明度,我们需要设置两套样式来兼容所有的浏览器
+    if (attr === "opacity") {
+        curEle["style"]["opacity"] = value;
+        curEle["style"]["filter"]="alpha(opacity=" + value*100+")";
+        return 
+    }
+    //->对于某些样式属性,如果传递进来的值没有加单位,我们需要把单位默认的补充上,这样的话,这个方法就会人性化一些
+    var reg = /^(width|height|top|bottom|left|right|((margin|padding)(Top|Bottom|Left|Right)?))$/;
+    // console.log(reg.test(attr));
+    if(reg.test(attr)) {
+        if (!isNaN (value)) {//->在判断传递进来的value值是否是一个有效的数字,如果是有效数字的话,证明当前传递进来的值没有加单位,我们给补充单位
+            value += "px"
+        }
+    }
+    curEle["style"][attr] = value;
+  },
+  //->setGroupCss:给当前元素批量的设置样式属性值
+  setGroupCss:function (curEle,options){
+    console.log(options);
+    //->通过检测options的数据类型,如果不是一个对象,则不能进行批量的设置
+    options = options || 0 ;
+    if (options.toString() !== "[object Object]"){
+      return;
+    }
+    //->遍历对象中的每一项,调取setCss方法一个个的进行设置即可
+    for (var key in options) {
+      if(options.hasOwnProperty(key)) {
+        this.setCss(curEle,key, options[key]);
+      }
+    }
+  },
+  //->css:此方法实现了获取、单独设置、批量设置元素的样式值
+  css:function (curEle) {
+    var argTwo = arguments[1];
+    if (typeof argTwo === "string"){//->第个参数值是一个字符串,这样的话很有可能就是在获取样式;为什么说是很有可能呢?因为还需要判断是否存在第三个参数,如果第三个参数存在的话,不是获取了,而是在单独的设置样式属性值
+      var argThree = arguments[2];
+      if (!argThree) {//->第三个参数不存在
+        return this.getCss(curEle,argTwo);
+        // return this.getCss.apply(this, arguments) ;
+      }
+      //->第三个参数存在则为单独设置
+      this.setCss(curEle,argTwo,argThree);
+      // this.setCss.apply(this, arguments) ;
+    }
+    argTwo = argTwo || 0;
+    if (argTwo.toString()=== "[object Object]"){
+      //->批量设置样式属性值
+      this.setGroupCss(curEle,argTwo);
+      // this.setGroupCss.apply(this, arguments);
+    }
+  }
 }

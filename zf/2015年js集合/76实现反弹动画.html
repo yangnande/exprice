@@ -5,10 +5,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding:0;
+            margin:0;
+        }
+        #box {
+            position: absolute;
+            top: 0;
+            left:500px;
+            padding: 0;
+            width: 100px;
+            height: 100px;
+            background: lightskyblue;
+        }
+        .btn {
+            position: absolute;
+            top: 200px;
+            left: 100px;
+            height: 50px;
+        }
+        .btn input {
+            display: inline-block;
+            margin-left: 50px;
+            outline: none;
+            width: 100px;
+            height: 50px;
+            border: 1px solid green;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div id="box">
+
+    </div>
+    <div class="btn">
+        <input type="button" value="向左" id="btnLeft">
+        <input type="button" value="向右" id="btnRight">
+    </div>
+    <script src="./js/util.js"></script>
     <script>
-        
+        var oBox = document.getElementById("box");
+        var minLeft = 0,maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
+        console.log(maxLeft);
+        var timer = null
+        function move(target) { //->target:告诉我要运动的目标位置
+            window.clearTimeout(timer)
+            var curLeft = utils.css(oBox,"left");
+            // console.log(curLeft,'curLeft');
+            if (curLeft <target) { //->向右走
+                if(curLeft+5 >= target) {
+                    return
+                }
+                curLeft += 5
+                utils.css(oBox,"left", curLeft)
+            }else if(curLeft>target){ //向左走
+                if(curLeft+5 <= target) {
+                    return
+                }
+                curLeft -= 5
+                utils.css(oBox,"left", curLeft)
+            }else {
+                // 不需要运动
+                return
+            }
+            timer = window.setTimeout(function () {
+                move(target) ;
+            },10)
+        }
+        document.getElementById("btnLeft").onclick = function () {
+            move(minLeft) ;
+        }
+        document.getElementById("btnRight").onclick = function () {
+            move(maxLeft) ;
+        }
+        // var step = 5;
+        // var timer = window.setInterval(function (){
+        //     var curLeft =utils.css(oBox,"left");
+        //     if(curLeft + step >= maxLeft){//->边界判断加上步长计算
+        //         window.clearInterval(timer);
+        //         return;
+        //     }
+        //     curLeft += step;
+        //     utils.css(oBox,"left", curLeft)
+        // },10)
+        //->问题:当总距离/我们设定的步长=不是一个整数->我少走一步的话还差点在到目标位置，多走一步的话会超出目标的位置
+        //->在进行边界判断的时候加上步长来进行处理
     </script>
 </body>
 </html>

@@ -5,10 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding:0;
+            margin:0;
+        }
+        #box {
+            position: relative;
+            top: 0;
+            left:0;
+            padding: 0;
+            width: 100px;
+            height: 100px;
+            background: lightskyblue;
+        }
+    </style>
 </head>
 <body>
+    <div id="box">
+
+    </div>
+    <script src="./js/util.js"></script>
     <script>
-        
+        var oBox = document.getElementById("box");
+        var maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
+        var step = 5;
+        // 使用递归思想完成setTimeout的轮询动画每一次在执行动画之前首先把上一次设置的那个没有用的定时器清除掉,节约我们的内存空间
+        var timer = null
+        function move() {
+            window.clearTimeout(timer)
+            var curLeft =utils.css(oBox,"left");
+            if(curLeft + step >= maxLeft){//->边界判断加上步长计算
+                utils.css(oBox,"left", maxLeft)
+                return;
+            }
+            curLeft += step;
+            utils.css(oBox,"left", curLeft)
+            var timer = window.setTimeout(move,10)
+        }
+        move() 
+        //->问题:当总距离/我们设定的步长=不是一个整数->我少走一步的话还差点在到目标位置，多走一步的话会超出目标的位置
+        //->在进行边界判断的时候加上步长来进行处理
     </script>
 </body>
 </html>

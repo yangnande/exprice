@@ -5,10 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #box {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: lightskyblue;
+        }
+    </style>
 </head>
 <body>
+    <div id="box"></div>
+    <script src="./js/util.js"></script>
     <script>
-        
+        //->jQuery中提供了这样的一个方法: css ,这个方法既可以实现获取,也可以实现单独的设置,也可以实现批量的设置
+        // $("#box").css("width"); //->获取
+        // $("#box").css("width",200);
+        // //->单独设置
+        // $("#box").css({
+        //     width : 200,
+        //     height :200
+        // }); //->批量设置
+        var box = document.getElementById("box");
+        console.log(utils.css(box,'width','500'))
     </script>
 </body>
 </html>
