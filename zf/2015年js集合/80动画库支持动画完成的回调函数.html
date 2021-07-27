@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //-> 回调函数:把一个函数A当做一个值传递给另外一个函数B, 这样在B方法执行的时候,可以在任何位置执行一到多次A方法
+        function A() {
+            console.log('A');
+        }
+        function B(callback) {
+            console.log('B');
+            for(var i =0;i<5;i++){
+                callback()
+            }
+        }
+        B(A)
+        ary.sort(function(a,b){
+            return a - b
+        })
+        str.replace(/\d+/g,function(){
+
+        })
+        window.setTimeout(function(){},10)
+        function fn(callback){
+            // this=obj
+            console.log(1);
+            if(typeof callback === 'function'){
+                // callback()
+                callback.call(obj,100,200)
+            }
+        }
+        var obj = {fn:fn}
+        obj.fn(function(){
+            console.log(this,num1,num2);// window,100,200
+        })
+    </script>
+</body>
+</html>

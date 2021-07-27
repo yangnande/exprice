@@ -291,7 +291,7 @@ var utils = {
   },
   //->setGroupCss:给当前元素批量的设置样式属性值
   setGroupCss:function (curEle,options){
-    console.log(options);
+    // console.log(options);
     //->通过检测options的数据类型,如果不是一个对象,则不能进行批量的设置
     options = options || 0 ;
     if (options.toString() !== "[object Object]"){

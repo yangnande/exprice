@@ -49,30 +49,39 @@
         var oBox = document.getElementById("box");
         var minLeft = 0,maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
         console.log(maxLeft);
-        var timer = null
+        // var timer = null
+        //-> 为了让当前的元素在同一个时间只运行一个动画(下一个动画开始的时候首先把上一个动画的定时器清除掉) :保证当前元素所有动画接收定时器返回值的那个变量需要共享(把这个值放在当前元素的自定义属性上)
         function move(target) { //->target:告诉我要运动的目标位置
-            window.clearTimeout(timer)
-            var curLeft = utils.css(oBox,"left");
-            // console.log(curLeft,'curLeft');
-            if (curLeft <target) { //->向右走
-                if(curLeft+5 >= target) {
+            _move()
+            function _move() {
+                window.clearTimeout(oBox.timer)
+                var curLeft = utils.css(oBox,"left");
+                // console.log(curLeft,'curLeft');
+                if (curLeft <target) { //->向右走
+                    if(curLeft+5 >= target) {
+                        utils.css(oBox,"left", target)
+                        return
+                    }
+                    curLeft += 5
+                    utils.css(oBox,"left", curLeft)
+                }else if(curLeft>target){ //向左走
+                    if(curLeft-5 <= target) {
+                        utils.css(oBox,"left", target)
+                        return
+                    }
+                    curLeft -= 5
+                    utils.css(oBox,"left", curLeft)
+                }else {
+                    // 不需要运动
                     return
                 }
-                curLeft += 5
-                utils.css(oBox,"left", curLeft)
-            }else if(curLeft>target){ //向左走
-                if(curLeft+5 <= target) {
-                    return
+                    oBox.timer = window.setTimeout(_move,10)
                 }
-                curLeft -= 5
-                utils.css(oBox,"left", curLeft)
-            }else {
-                // 不需要运动
-                return
-            }
-            timer = window.setTimeout(function () {
-                move(target) ;
-            },10)
+                
+            //->这样写性能不好，因为每一次到达时间的时候，都需要先执行一次匿名函数(形成一个私有的作用域) ,在匿名函数中再执行move,但是move中需要用到的数据值在第一次执行的move方法中呢,需要把匿名函数形成的这个私有的作用域作为跳板找到之前的,这样就导致了匿名函数形成的这个私有的作用域不能销毁....
+            // timer = window.setTimeout(function () {
+            //     move(target) ;
+            // },10)
         }
         document.getElementById("btnLeft").onclick = function () {
             move(minLeft) ;
