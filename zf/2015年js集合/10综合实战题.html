@@ -15,7 +15,7 @@
         var spanNum = document.getElementById("spanNum")
         // 1利用全局作用域不销毁的原理，把需要累积的数字定义为全局的变量
             // var count = 0
-            // oBtn.onClick = function() {
+            // oBtn.onclick = function() {
             //     count++
             //     spanNum.innerHTML = count
             // }
@@ -23,12 +23,12 @@
         // 2 自己形成一个不销毁的私有的作用域来保存我们需要累加的数字
             // ~function() {
             //     var count = 0
-            //     oBtn.onClick = function() {
+            //     oBtn.onclick = function() {
             //         count++
             //         spanNum.innerHTML = count
             //     }
             // }()
-            // oBtn.onClick = (function() {
+            // oBtn.onclick = (function() {
             //     var count = 0
             //     return function() {
             //         count++
@@ -37,7 +37,7 @@
             // })()
         // 弊端:有一个不销毁的私有的作用域，所以占那么一丢丢的内存
         // 3 利用innerHTML的方式处理：每一次点击的时候都先到页面中获取最新的值，然后累加，最后把累加的结果重新放回去
-            // oBtn.onClick = function() {
+            // oBtn.onclick = function() {
             //     // spanNum.innerHTML获取页面中的内容返回的是一个字符串
             //     spanNum.innerHTML++
             // }
