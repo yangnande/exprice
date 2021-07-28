@@ -25,6 +25,25 @@
         fn() // 65 
         obj.fn() // 85
         console.log(window.num,obj.num) // 240 120
+
+        // var num = 20
+        // var obj = {
+        //     num: 30,
+        //     fn:(function(num) {
+        //         this.num *= 3
+        //         num += 15
+        //         var num = 45
+        //         return function() {
+        //             this.num *= 4
+        //             num += 20
+        //             console.log(num);
+        //         }
+        //     })(num) 
+        // }
+        // var fn = obj.fn
+        // fn() 
+        // obj.fn()
+        // console.log(window.num,obj.num)
     </script>
 </body>
 </html>
