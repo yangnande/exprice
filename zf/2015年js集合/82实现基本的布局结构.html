@@ -5,8 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none ;
+        }
+        ul,li {
+            list-style: none;
+        }
+        img {
+            display: block;
+            border: none;
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+        a:hover,a:active,a:visited,a:target {
+            display: block;
+            color: #000;
+            text-decoration: none;
+        }
+        .banner {
+            position: relative;
+            margin: 0 auto;
+            width: 1000px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .banner .inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4000px;
+            height: 300px;
+        }
+        .banner .inner img {
+            float: left;
+            width: 1000px;
+            height: 300px;
+        }
+        .banner .bannerTip {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            height: 18px;
+        }
+        .banner .bannerTip li {
+            float: left;
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: lightcyan;
+            cursor: pointer;
+        }
+        .banner .bannerTip li.bg {
+            background: red;
+        }
+        .banner a {
+            position: absolute;
+            
+            top: 50%;
+            margin-top: -22.5px;
+            width: 30px;
+            height: 45px;
+            line-height: 45px;
+            color: #fff;
+            font-size: 30px;
+            /* border: 1px solid #fff; */
+        }
+        .bannerLeft {
+            left: 10px;
+        }
+        .bannerRight {
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="banner">
+        <div class="inner">
+            <img src="./82/1.jpg" alt="" srcset="">
+            <img src="./82/2.jpg" alt="" srcset="">
+            <img src="./82/3.jpg" alt="" srcset="">
+            <img src="./82/4.jpg" alt="" srcset="">
+        </div>
+        <ul class="bannerTip">
+            <li class="bg"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a class="bannerLeft" href="javascript:;">左</a>
+        <a class="bannerRight" href="javascript:;">右</a>
+    </div>
     <script>
         
     </script>

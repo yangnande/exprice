@@ -7,18 +7,18 @@
 </head>
 <body>
     <script>
-        function CreateJsPerson(name,age) {
-            this.name = name
-            this.age = age
-            this.writeJs = function() {
-                console.log('my name is '+ this.name +',i can write js 啦！！');
-            }
-        }
-        var p1 = new CreateJsPerson('lele1',18)
-        var p2 = new CreateJsPerson('lele2',16)
-        console.log(p1.writeJs === p2.writeJs); // false
+        // function CreateJsPerson(name,age) {
+        //     this.name = name
+        //     this.age = age
+        //     this.writeJs = function() {
+        //         console.log('my name is '+ this.name +',i can write js 啦！！');
+        //     }
+        // }
+        // var p1 = new CreateJsPerson('lele1',18)
+        // var p2 = new CreateJsPerson('lele2',16)
+        // console.log(p1.writeJs === p2.writeJs); // false
         // 构造函数模式中拥有了类和实例的概念，并且实例和实例之间是相互独立开的 ->实例
-        // 基于构造函数模式的原型模式解决了 方法或者属性公用的问题 ->把实例之间相同的属性和方法提取成公有的属性和方法 ->想让谁公有就把它放在CreateJsPerson.prototype上即可
+        // 基于构造函数模式的原型模式解决了方法或者属性公用的问题 ->把实例之间相同的属性和方法提取成公有的属性和方法 ->想让谁公有就把它放在CreateJsPerson.prototype上即可
         // 1.每一个函数数据类型（普通函数，类）都有一个天生自带的属性：prototype(原型)，并且这个属性是一个对象数据类型的值
         // 2.并且在prototype上浏览器天生给它加了一个属性constructor（构造函数），属性值是当前函数（类）本身
         // 3.每一个对象数据类型（普通的对象，实例，prototype...）也天生自带一个属性__proto__，属性值是当前实例所属类的原型（prototype）
@@ -48,7 +48,7 @@
         console.log(f1.sum === f2.__proto__.sum); // false
         console.log(f1.sum ===  Fn.prototype.sum); // false
         // f1.hasOwnProperty ->f1.__proto__.__proto__hasOwnProperty
-        // 在IE浏览器中，我们原型模式也是同样的原理，但是ID浏览器怕你通过__proto__把公有的修改，禁止我们使用__proto__
+        // 在IE浏览器中，我们原型模式也是同样的原理，但是IE浏览器怕你通过__proto__把公有的修改，禁止我们使用__proto__
         f1.sum = function() {
             // 修改自己私有的sum
         }

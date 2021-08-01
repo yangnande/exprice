@@ -12,17 +12,17 @@
   <script>
     // ->div a document window
     // 一 图一
-      // function Fn() {
-      //   // -> 在类的函数体中写的this.xxx=xxx都是给当前类的实例增加的私有属性或者方法
-      //   var num = 10
-      //   this.x = 100
-      //   this.y = 200
-      //   // this.x = function() {
+      function Fn() {
+        // -> 在类的函数体中写的this.xxx=xxx都是给当前类的实例增加的私有属性或者方法
+        var num = 10
+        this.x = 100
+        this.y = 200
+        // this.x = function() {
 
-      //   // }
-      //   // return 1
-      //   // return {}
-      // }
+        // }
+        // return 1
+        // return {}
+      }
       // // -> 在类的原型上写的，都是给当前类的实例或者类，增加的公有属性或者方法
       // Fn.prototype.getX = function() {
       //   console.log(this.x);
@@ -66,48 +66,48 @@
       // // 2 把函数体中的this替换或分析的结果
       // // 3 按照原型链的查找模式找到对应的值即可
     // 三 图2
-      var ary = [1,2,3,2,3,2,31,2,3,4,2,3,4,1,23]
-      // 链式写法:执行完成某一个方法，不仅得到了想要的结果，而且返回的值还需要时当前这个类的实例，只有这样才能一直链下去
-      ary.sort(function(a,b){
-        return a-b
-      }).reverse().slice(0,5).pop().push() // .push is not a function 因为pop执行完成的返回结果是删除的那个元素不是数组了
-      console.log(ary);
-      // 基于内置类的原型扩展方法，我们需要注意的事项：我们自己编写的方法名最好加上特殊的前缀，防止把内置的方法覆盖掉
-      Array.prototype.myUnique = function() {
-        // this -> ary
-        var obj = {}
-        for(var i = 0;i<arr.legnth;i++){
-          var cur = this[i]
-          if(obj[cur] == cur) {
-            this[i] = this[this.length -1]
-            this.legnth--
-            i--
-            continue
-          }
-          obj[cur] = cur
-        }
-        obj = null
-        return this // 把去重后的数组返回，这样就可以实现链式写法了
-      }
-      ary.myUnique()  // this -> ary
-      Array.prototype.pop = function() {
-        // this -> ary
-        this.length--
-      }
-      ary.pop() // this->ary
-      ary.__proto__.pop(); // this -> ary.__proto__->Array.prototype
-      console.log(ary);
+      // var ary = [1,2,3,2,3,2,31,2,3,4,2,3,4,1,23]
+      // // 链式写法:执行完成某一个方法，不仅得到了想要的结果，而且返回的值还需要时当前这个类的实例，只有这样才能一直链下去
+      // ary.sort(function(a,b){
+      //   return a-b
+      // }).reverse().slice(0,5).pop().push() // .push is not a function 因为pop执行完成的返回结果是删除的那个元素不是数组了
+      // console.log(ary);
+      // // 基于内置类的原型扩展方法，我们需要注意的事项：我们自己编写的方法名最好加上特殊的前缀，防止把内置的方法覆盖掉
+      // Array.prototype.myUnique = function() {
+      //   // this -> ary
+      //   var obj = {}
+      //   for(var i = 0;i<arr.legnth;i++){
+      //     var cur = this[i]
+      //     if(obj[cur] == cur) {
+      //       this[i] = this[this.length -1]
+      //       this.legnth--
+      //       i--
+      //       continue
+      //     }
+      //     obj[cur] = cur
+      //   }
+      //   obj = null
+      //   return this // 把去重后的数组返回，这样就可以实现链式写法了
+      // }
+      // ary.myUnique()  // this -> ary
+      // Array.prototype.pop = function() {
+      //   // this -> ary
+      //   this.length--
+      // }
+      // ary.pop() // this->ary
+      // ary.__proto__.pop(); // this -> ary.__proto__->Array.prototype
+      // console.log(ary);
     // 3 思考题
       // 1 基于Number内置类扩展两个方法 plus,minus
       // (5).plus(10).minus(2) 5+10-2
-      Array.prototype.plus = function(num) {}
-      Array.prototype.minus = function(num) {}
+      // Array.prototype.plus = function(num) {}
+      // Array.prototype.minus = function(num) {}
       // 2 slice这个方法实现的非常强大，我们自己写一份mySlice实现和slice一模一样的功能（数组中现有的方法一个都不能用）
-      Array.prototype.mySlice = function() {}
+      // Array.prototype.mySlice = function() {}
       // 要考虑的情况
-      slice(n,m)
-      slice(n)
-      slice()
+      // slice(n,m)
+      // slice(n)
+      // slice()
       // slice(n) slice(0)
       // slice()
       // n m是负数
@@ -115,10 +115,10 @@
       // n和m超出整个数组的范围
       // 要求：不能使用数据内置的方法，比如添加不能使用push，而使用ary[ary.length-1]=xxx
     // 四 图三
-      function Fn() {
-        this.x = 100
-      }
-      var pro = Fn.prototype
+      // function Fn() {
+      //   this.x = 100
+      // }
+      // var pro = Fn.prototype
       // Fn.prototype.a = function() {
         
       // }
@@ -128,15 +128,15 @@
       // Fn.prototype.c = function() {
         
       // }
-      pro.a = function() {
+      // pro.a = function() {
         
-      }
+      // }
       // 如果之前原型上存在一些方法的话，我们现在新创建的这个对象会把之前写的那些方法给覆盖掉，所以浏览器内置类是禁止自己创建一个新对象来扩展原型上的方法的，防止我们Array.prototype={}把内置的方法都干没了
-      Array.prototype = {
-        constructor: Fn,
-        b: function() {}
-      }
-      var f = new Fn
+      // Array.prototype = {
+      //   constructor: Fn,
+      //   b: function() {}
+      // }
+      // var f = new Fn
     // 五 图四 练习题 
   </script>
 </body>
