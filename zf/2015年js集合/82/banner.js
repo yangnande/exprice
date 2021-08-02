@@ -1,8 +1,8 @@
 (function(){
-    var banner = document.getElementById("banner"),bannerInner=utils. firstChild(banner),bannerTip = utils.children(banner,'ul')[0];
+    var banner = document.getElementById("banner"),bannerInner=utils.firstChild(banner),bannerTip = utils.children(banner,'ul')[0];
     var imgList = bannerInner.getElementsByTagName('img'),
     oLis = bannerTip.getElementsByTagName('li')
-    var bannerLeft=utils.children(banner, "a")[0],bannerRight=utils. children(banner, "a")[1]
+    var bannerLeft=utils.children(banner, "a")[0],bannerRight=utils.children(banner, "a")[1]
     //1、Ajax请求数据
     var jsonData = null,count=null;
     ~function () {
