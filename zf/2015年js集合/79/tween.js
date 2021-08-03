@@ -41,7 +41,7 @@
             callBack = effect;
         }
         //->在每 -次执行方法之前,首先把当前元素之前正在运行的动画结束掉
-        window.clearInterval (curEle. zhufengTimer) ;
+        window.clearInterval (curEle.zhufengTimer);
         //->根据target获取每一一个方向的起 始值begin和总距离change
         var begin = {}, change = {};
         for (var key in target) {

@@ -1,4 +1,5 @@
-var banner = document.getElementById("banner"),bannerInner=utils.firstChild(banner),
+var banner = document.getElementById("banner"),
+bannerInner=utils.firstChild(banner),
 bannerTip = utils.children(banner,'ul')[0],
 bannerLink=utils.children(banner, "a")
 bannerLeft=bannerLink[0],
@@ -17,7 +18,7 @@ var jsonData = null;
             jsonData = utils.jsonParse(xhr.responseText);
         }
     }
-    xhr.send(null) ;
+    xhr.send(null);
 }();
 // 2数据绑定
 ~function () {
@@ -58,15 +59,56 @@ var jsonData = null;
 //4、实现自动轮播
 var interval = 3000,autoTimer = null,step=0;//记录当前展示图片的索引
     autoTimer = window.setInterval(autoMove, interval) ;
-// function autoMove() {
-//     if(step >= (count-1)){
-//         step = 0
-//         utils.css(bannerInner,"left",0)
-//         // window.clearInterval(auto Timer)
-//     }
-//     step++;
-//     zhufengAnimate(bannerInner,{left: -step*1000}, 500);
-//     changeTip()
-// }
-// //第一张 step=0 2000 step=1 运动到-1000
-// //第二张 step-1 2000 step=2 运动到-2000
+function autoMove() {
+    //->当我们已经把最后一张展示完成后(step等于最后一张的索引)，我们应该从新的展示第一张了,我们让step=-1,这样在经过一次累加, step=0,就可以展示第一张了
+    if( step ===(jsonData.length - 1)){
+        step = -1;
+    }
+    step++;
+    setBanner()
+}
+//->实现轮播图切换效果的代码
+// 让step索引对应的那个DIV的zIndex=1 ,让其余的DIV的zIndex=0
+// 让当前的透明度从零变为一,当动画结束,我们需要让其他的DIV的透明度的值直接的变为零
+// 实现焦点对齐
+function setBanner() {
+    for (var i = 0,len = divList.length; i < len; i++){
+        var curDiv = divList[i];
+        if (i === step) {
+            utils.css(curDiv,"zIndex",1);
+            zhufengAnimate(curDiv,{ opacity: 1},200,function () {
+                var curDivsib = utils.siblings(this) ;
+                for (var k= 0,len=curDivsib.length; k<len; k++){
+                    utils.css(curDivsib[k],"opacity",0) ;
+                }
+            })
+            continue;
+        }
+        utils.css(curDiv,"zIndex",0);
+    }
+    //->实现焦点对齐
+    for (i = 0,len = oLis.length; i < len; i++) {
+        var curLi = oLis[i];
+        i === step ? utils.addClass(curLi, "bg") : utils.removeClass(curLi,"bg");
+    }
+}
+// 实现鼠标悬停停止
+banner.onmouseover = function (){
+    window.clearInterval(autoTimer);
+    bannerLeft.style.display = bannerRight.style.display = "block";
+}
+banner.onmouseout = function () {
+    autoTimer = window.setInterval(autoMove, interval);
+    bannerLeft.style.display = bannerRight.style.display = "none";
+}
+// 控制焦点切换
+
+// 实现左右切换
+bannerRight.onclick = autoMove;
+bannerLeft.onclick = function () {
+    if (step <= 0) {
+        step=jsonData.length;
+    }
+    step--;
+    autoMove()
+}

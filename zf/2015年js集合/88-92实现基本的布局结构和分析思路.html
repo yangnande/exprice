@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./88/banner.css">
+</head>
+<body>
+    <div class="banner" id="banner">
+        <div class="bannerInner">
+            <div><img src="" trueImg="./82/1.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/2.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/3.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/4.jpg" alt="" srcset=""></div>
+        </div>
+        <ul class="bannerTip">
+            <li class="bg"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a class="bannerLeft" href="javascript:;">左</a>
+        <a class="bannerRight" href="javascript:;">右</a>
+    </div>
+    <div class="banner" id="banner2" style="margin-top: 100px;">
+        <div class="bannerInner">
+            <div><img src="" trueImg="./82/1.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/2.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/3.jpg" alt="" srcset=""></div>
+            <div><img src="" trueImg="./82/4.jpg" alt="" srcset=""></div>
+        </div>
+        <ul class="bannerTip">
+            <li class="bg"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a class="bannerLeft" href="javascript:;">左</a>
+        <a class="bannerRight" href="javascript:;">右</a>
+    </div>
+    <script src="./js/util.js"></script>
+    <script src="./79/tween.js"></script>
+    <!-- <script src="./88/banner.js"></script> -->
+    <script src="./88/autoBanner.js"></script>
+    <script>
+        var banner1 = new AutoBanner("banner","./82/banner.json?_ =" + Math.random(),1000);
+        var banner2 = new AutoBanner("banner2","./82/banner.json?_ =" + Math.random()+1,1000);
+        // console.dir(banner1)
+        // console.dir(banner2)
+    </script>
+</body>
+</html>
