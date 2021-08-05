@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      position: absolute;
+      top:50px;
+      left: 50%;
+      margin-left: -15px;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+    }
+    input {
+      display: block;
+      margin: 5px auto;
+      width: 200px;
+      height: 35px;
+      border: 1px solid green;
+      cursor: pointer;
+      outline: none;
+      opacity: 1;
+      filter: alpha(opacity=100);
+    }
+  </style>
+</head>
+<body>
+  <input type="button" value="操作">
+  <div id="box">
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script>
+    //->window.jQuery = window.$ = jQuery(jQuery就是闭包中的私有的函数)
+    //->selector:[string]选择器的类型[object]Js原生的对象(把原生的对象转换为jQuery对象)[function]回调函数（等价于我们的$(document).ready...)
+    // $()
+    // jQuery()
+    //->context: document (传递的是一个原生Js对象能够上下文,如果是一个jQuery对象,它默认会把其重构为选择器
+    var jQuery = function(selcctor, context) {
+      return new jQuery.fn.init(selcctor,context);
+      //我们可以把这个理解为返回的是一个jQuery类的实例
+    }
+    jQuery.fn = jQuery.prototype = {
+      constructor: jQuery
+    }
+    // $("", document)
+    // $(function() {
+      
+    // })
+    // jQuery.extend = jQuery.fn.extend=function () {
+      //jQuery.extend:把它当做一个普通的对象,在对象中增加了extend方法
+      //jQuery.fn.extend:在它的原型上也增加了一个extend方法
+    // }
+      
+    //->jQuery选择器:创建jQuery这个类的一个实例(jQuery对象)
+    //->在jQuery这个类的原型上定义了很多的属性和方法,而通过选择器获取的每一个实例都可以调用这些方法:属性、css、文档操作、筛选、动画、事件...
+    $("*").css()
+    // $();
+    // jQuery()
+    //->把jQuery当做一个普通的对象,在它自己的属性上增加了一些常用的方法:Ajax、工具..
+    // $.ajax();
+    //->extend :扩展,向jQuery这个类库中增加一些其他常用的方法
+    //1)向jQuery属性名上扩展(把它当做一个对象) ->完善类库,给类库增加核心的方法
+    jQuery.extend({
+      aa : function (){
+        console.log('aa');
+      }
+    })
+    $.aa()
+    //2)向jQuery原型上扩展(把它当做一个类)->编写一些基于jQuery插件
+    jQuery.fn.extend({
+      bb : function (){
+        console.log('bb');
+      }
+    })
+    $().bb()
+  </script>
+</body>
+</html>

@@ -12,10 +12,55 @@
 <body>
 
 	<script>
-		let reg = /^[\u4E00-\u9FA5A-Za-z0-9]{1,30}$/
-		let str = '111zzzzzzzzzzzzzzzzzzzzzzzzzz你'
-		console.log(str.length);
-		console.log(reg.test(str));
+		/**
+		 * 折扣三位数价格处理
+		 * a 折扣规则
+		 * b 价格
+		*/
+		// console.log(priceshow(2,12.3356))
+		function priceshow(a, b) {
+			if (a == "0") {
+				//四舍五入
+				b = b.toFixed(3);
+				b = Math.round((b * 100).toFixed(2)) / 100;
+				b = floating(b);
+			} else if (a == "1") {
+				//全舍
+				b = b.toFixed(3);
+				b = b.toString();
+				b = b.substring(0, b.lastIndexOf('.') + 3);
+				b = floating(b);
+			} else if (a == "2") {
+				//全入
+				b = b.toFixed(3);
+				b = Math.ceil((b * 100).toFixed(2)) / 100;
+				b = b.toFixed(2);
+				b = floating(b);
+			} else if (a == undefined || a == "undefined" || a == null) {
+				//无取舍字段
+				b = b.toFixed(2);
+				b = floating(b);
+			}
+			return b;
+		}
+		  /**
+	* 小数点后两位处理办法
+	* @param mon
+	* eg1：mon = 50 return 50.00；
+	* eg2 ：mon = 50.000 return 50.00
+	*/
+	// console.log(floating (10.5566));
+	function floating (mon) {
+			var mon = Math.floor(mon * 1000) / 1000; //10556/1000=10.555
+			var sMon = String(mon);//把数字类型转换成字符串类型
+			var demical = sMon.indexOf(".");//取得小数点号的位置 // 2
+			if (demical > 0) {
+					var subb = sMon.substring(0, demical + 3);//取开始位置到小数点后2位 //10.55
+					mon = (Number(subb));//转换成数字 //10.55
+			}
+			mon = mon.toFixed(2); //10.55
+			return mon;
+  }
 	</script>
 </body>
 </html>
