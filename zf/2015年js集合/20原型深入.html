@@ -16,8 +16,9 @@
     </div>
     <script>
         var oDiv = document.getElementById('div1')
-        // var list = oDiv.getElementByName('n1') // 报错
-        var list = document.getElementByName('n1')
+        // var list = oDiv.getElementsByName('n1') //  报错 TypeError: oDiv.getElementsByName is not a function
+        var list = document.getElementsByName('n1') // 原型上有getElementsByName方法
+        console.dir(oDiv) // 原型上没有getElementsByName方法
         console.log(list);
         // 回去后把window document div a 的原型链一级一级的结构画出来,画出来之后,每一级原型上都有哪些属性和方法,哪些兼容,哪些不兼容,这个方法是做什么用的?
     </script>

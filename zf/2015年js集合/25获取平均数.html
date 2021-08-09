@@ -16,13 +16,13 @@
       // var ary = [].slice.call(arguments);
       // var ary = [];
       // for (var i=0;i<arguments.length;i++){
-      //   ,[ary.length] = arguments[i];  
+      //   ary[ary.length] = arguments[i];  
       // }
       //->2、给数组帮序,去掉开头和结尾,剩下的是求平均数
       Array.prototype.sort.call(arguments,function (a,b) {
         return a - b
-      })
-      console.log(arguments);
+      });
+      // console.log(arguments);
       [].shift.call(arguments);
       [].pop.call(arguments);
       return (eval([].join.call(arguments,"+"))/ ary.length).toFixed(2)
@@ -33,9 +33,9 @@
       // ary.pop()
       // return (eval(ary.join("+"))) / ary.length.toFixed(2)
     }
-    avgFn(9.8,9.7,10,9.9,9.0,9.8,3.0);
-    var res = avgFn(9.8,9.7,10,9.9,9.0,9.8,3.0);
-    console.log(res);
+    // avgFn(9.8,9.7,10,9.9,9.0,9.8,3.0);
+    // var res = avgFn(9.8,9.7,10,9.9,9.0,9.8,3.0);
+    // console.log(res);
     Array.prototype.mySlice = function() {
       //this->当前要操作的这个教组
 
@@ -44,16 +44,16 @@
       for (var i =0; i < this.length; i++) {
         ary[ary.length] = this[i];
       }
-      // 我们自己写一份把arguments转换为数组的代码
-      var ary = [];
-      for (var i =0; i < arguments.length; i++) {
-        ary[ary.length] = arguments[i];
-      }
+      // // 我们自己写一份把arguments转换为数组的代码
+      // var ary = [];
+      // for (var i =0; i < arguments.length; i++) {
+      //   ary[ary.length] = arguments[i];
+      // }
       return ary
     }
-    var ary = [12,23,34];
-    var newAry = ary.mySlice()
-    console.log(newAry);
+    // var ary = [12,23,34];
+    // var newAry = ary.mySlice()
+    // console.log(newAry);
   </script>
 </body>
 </html>

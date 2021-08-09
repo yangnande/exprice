@@ -23,7 +23,7 @@
         // return 1
         // return {}
       }
-      // // -> 在类的原型上写的，都是给当前类的实例或者类，增加的公有属性或者方法
+      // // -> 在类的原型上写的,都是给当前类的实例或者类,增加的公有属性或者方法
       // Fn.prototype.getX = function() {
       //   console.log(this.x);
       // }
@@ -32,9 +32,9 @@
       // }
       // var f1 = new Fn;
       // var f2 = new Fn;
-      // 1 所有的函数数据类型（普通函数，类）都天生自带一个属性：prototype，它存储的值是一个对象数据类型的值，浏览器默认为其开辟一个堆内存
+      // 1 所有的函数数据类型（普通函数,类）都天生自带一个属性：prototype,它存储的值是一个对象数据类型的值,浏览器默认为其开辟一个堆内存
       // 2 在浏览器给prototype默认开辟的这个堆内存上有一个默认的属性：constructor,指向当前类本身
-      // 3 每一个对象数据类型（普通的对象，数组，正则，实例，prototype）都天生自带一个属性：__proto__，指向当前实例所属类的原型
+      // 3 每一个对象数据类型（普通的对象,数组,正则,实例,prototype）都天生自带一个属性：__proto__,指向当前实例所属类的原型
     // 二
       // function Fn() {
       //   var num = 10
@@ -44,9 +44,9 @@
       // Fn.prototype.getX = function() {
       //   console.log(this.x);
       // }
-      // // Fn.prototype.getY = function() {
-      // //   this.x = n
-      // // }
+      // Fn.prototype.getY = function() {
+      //   this.x = n
+      // }
       // Fn.prototype.setX = function(n) {
       //   this.x = n
       //   // console.log(this.y);
@@ -60,49 +60,52 @@
       // f1.__proto__.getX() // 300
       // f1.setX(500) // this->f1,f1.x=500把私有的修改为500
       // f1.y = 300 // 给f1本身增加一个私有的属性和f2没关系
-      // f1.__proto__.y = 1000 // 在原型上增加一个y=1000，f2也可以获取到这个y的值了
-
-      // // 1 看方法执行的时候，‘.’前面是谁，this就是谁
-      // // 2 把函数体中的this替换或分析的结果
-      // // 3 按照原型链的查找模式找到对应的值即可
+      // f1.__proto__.y = 1000 // 在原型上增加一个y=1000,f2也可以获取到这个y的值了
+      // console.dir(f1)
+      // console.dir(f2)
+      // 1 看方法执行的时候,‘.’前面是谁,this就是谁
+      // 2 把函数体中的this替换或分析的结果
+      // 3 按照原型链的查找模式找到对应的值即可
     // 三 图2
       // var ary = [1,2,3,2,3,2,31,2,3,4,2,3,4,1,23]
-      // // 链式写法:执行完成某一个方法，不仅得到了想要的结果，而且返回的值还需要时当前这个类的实例，只有这样才能一直链下去
+      // // 链式写法:执行完成某一个方法,不仅得到了想要的结果,而且返回的值还需要是当前这个类的实例,只有这样才能一直链下去
       // ary.sort(function(a,b){
       //   return a-b
-      // }).reverse().slice(0,5).pop().push() // .push is not a function 因为pop执行完成的返回结果是删除的那个元素不是数组了
+      // }).reverse().slice(0,5).pop().push() // TypeError: ary.sort(...).reverse(...).slice(...).pop(...).push is not a function
       // console.log(ary);
-      // // 基于内置类的原型扩展方法，我们需要注意的事项：我们自己编写的方法名最好加上特殊的前缀，防止把内置的方法覆盖掉
+      // // 基于内置类的原型扩展方法,我们需要注意的事项：我们自己编写的方法名最好加上特殊的前缀,防止把内置的方法覆盖掉
       // Array.prototype.myUnique = function() {
       //   // this -> ary
       //   var obj = {}
-      //   for(var i = 0;i<arr.legnth;i++){
+      //   for(var i = 0;i<this.length;i++){
       //     var cur = this[i]
       //     if(obj[cur] == cur) {
       //       this[i] = this[this.length -1]
-      //       this.legnth--
-      //       i--
-      //       continue
+      //       this.length--;
+      //       i--;
+      //       continue;
       //     }
       //     obj[cur] = cur
       //   }
       //   obj = null
-      //   return this // 把去重后的数组返回，这样就可以实现链式写法了
+      //   console.log(this,'this');
+      //   return this // 把去重后的数组返回,这样就可以实现链式写法了
       // }
-      // ary.myUnique()  // this -> ary
+      // console.log(ary.myUnique())  // this -> ary
       // Array.prototype.pop = function() {
       //   // this -> ary
       //   this.length--
       // }
       // ary.pop() // this->ary
-      // ary.__proto__.pop(); // this -> ary.__proto__->Array.prototype
+      // ary.__proto__.pop(); // this -> ary.__proto__->Array.prototype 报错：Uncaught RangeError: Invalid array length
       // console.log(ary);
+      // console.log(ary.pop());
     // 3 思考题
       // 1 基于Number内置类扩展两个方法 plus,minus
       // (5).plus(10).minus(2) 5+10-2
       // Array.prototype.plus = function(num) {}
       // Array.prototype.minus = function(num) {}
-      // 2 slice这个方法实现的非常强大，我们自己写一份mySlice实现和slice一模一样的功能（数组中现有的方法一个都不能用）
+      // 2 slice这个方法实现的非常强大,我们自己写一份mySlice实现和slice一模一样的功能（数组中现有的方法一个都不能用）
       // Array.prototype.mySlice = function() {}
       // 要考虑的情况
       // slice(n,m)
@@ -113,7 +116,7 @@
       // n m是负数
       // n>m是什么情况
       // n和m超出整个数组的范围
-      // 要求：不能使用数据内置的方法，比如添加不能使用push，而使用ary[ary.length-1]=xxx
+      // 要求：不能使用数据内置的方法,比如添加不能使用push,而使用ary[ary.length-1]=xxx
     // 四 图三
       // function Fn() {
       //   this.x = 100
@@ -131,13 +134,27 @@
       // pro.a = function() {
         
       // }
-      // 如果之前原型上存在一些方法的话，我们现在新创建的这个对象会把之前写的那些方法给覆盖掉，所以浏览器内置类是禁止自己创建一个新对象来扩展原型上的方法的，防止我们Array.prototype={}把内置的方法都干没了
+      // 如果之前原型上存在一些方法的话,我们现在新创建的这个对象会把之前写的那些方法给覆盖掉,所以浏览器内置类是禁止自己创建一个新对象来扩展原型上的方法的,防止我们Array.prototype={}把内置的方法都干没了
       // Array.prototype = {
       //   constructor: Fn,
       //   b: function() {}
       // }
       // var f = new Fn
-    // 五 图四 练习题 
+    // 五 图四 练习题
+    // function Fn(num) {
+    //   this.x = this.y = num
+    // }
+    // Fn.prototype = {
+    //   x: 20,
+    //   sum: function(){
+    //     console.log(this.x+this.y);
+    //   }
+    // }
+    // var f = new Fn(10)
+    // console.log(f.sum === Fn.prototype.sum); // true
+    // f.sum() // 10+10=20 私有属性
+    // Fn.prototype.sum() // 20 + undefined = NaN
+    // console.log(f.constructor); // OBJECT的实例ƒ Object() { [native code] }
   </script>
 </body>
 </html>

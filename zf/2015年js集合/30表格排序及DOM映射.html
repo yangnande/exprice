@@ -32,10 +32,11 @@
     </ul>
     <script src="./js/util.js"></script>
     <script>
-        var oUl = document.getElementById('ul1')
-        var oLis = oUl.getElementsByTagName('li')
-        // 1先把元素集合类数组转换为数组
-        // var ary = utils.lietToArray(oLis)
+        // var oUl = document.getElementById('ul1')
+        // var oLis = oUl.getElementsByTagName('li')
+        // // 1先把元素集合类数组转换为数组
+        // var ary = utils.listToArray(oLis)
+        // // console.log(ary);
         // // 2 给数组进行排序,按照每一个li中的内容大小进行排序
         // ary.sort(function(a,b){
         //     return parseFloat(a.innerHTML) - parseFloat(b.innerHTML)
@@ -47,12 +48,12 @@
         // }
         // oUl.appendChild(frag)
         // frag = null
-        // 原理
-        // DOM映射的机制:页面中的标签和JS中获取到的元素对象(元素集合)是紧紧的绑定的在一起的,页面中的HTML结构改变了, Js中不需要重新获取,集合里面的内容也会跟着自动改变
-        console.log(oLis.length);
-        var oli = document.createElement('li')
-        oUl.appendChild(oli)
-        console.log (oLis.length) ;//->6没有重新的获取,但是oLis这个集合中的长度和内容会自动跟著发生改变
+        // // 原理
+        // // DOM映射的机制:页面中的标签和JS中获取到的元素对象(元素集合)是紧紧的绑定的在一起的,页面中的HTML结构改变了, Js中不需要重新获取,集合里面的内容也会跟着自动改变
+        // console.log(oLis.length);
+        // var oli = document.createElement('li')
+        // oUl.appendChild(oli)
+        // console.log(oLis.length) ;//->6没有重新的获取,但是oLis这个集合中的长度和内容会自动跟著发生改变
     </script>
 </body>
 </html>

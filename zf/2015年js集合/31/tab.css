@@ -29,7 +29,7 @@
 .box thead th.cursor {
     cursor: pointer;
 }
-.box thead tr{
+.box tbody tr{
     height: 30px;
     text-align: center;
 }

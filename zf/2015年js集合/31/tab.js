@@ -4,7 +4,6 @@ var tHead = oTab.tHead
 var oThs = tHead.rows[0].cells;
 var tBody = oTab.tBodies[0]
 var oRows = tBody.rows
-
 var data = null
 //->1、首先获取后台(data.txt)中的数据-> "JSON格式的字符串"->Ajax (async javascript and xm1)
 //1)首先创建一个Ajax对象
@@ -14,7 +13,6 @@ xhr.open("get", "./31/data.txt", false) ;
 
 //3)监听请求的状态
 xhr.onreadystatechange = function () {
-    console.log(xhr.readyState);
     if(xhr.readyState === 4 && /^2\d{2}$/.test(xhr.status)) {
         var val = xhr.responseText;
         data = utils.jsonParse(val)
@@ -28,7 +26,7 @@ function bind() {
     var frg = document.createDocumentFragment()
     for(var i = 0;i<data.length;i++){
         var cur = data[i]
-        var oTr = document. createElement ("tr") ;//->每一次循环创建一个tr
+        var oTr = document.createElement("tr") ;//->每一次循环创建一个tr
         //每一个tr中还需要创建四个td,因为每一个对象中有四组键值对
         for(var key in cur){
             var oTd = document.createElement('td')
@@ -54,17 +52,17 @@ changeBg()
 // 4 编写表格排序的方法:实现按照年龄这一列进行排序
 function sort(n) {
     // this = window
-    // 汉子实现排序
+    // 汉字实现排序
     // 把存储所有行的类数组转换为数组
     var ary = utils.listToArray(oRows)
-    //- >点击当前列,需要让其他的列的flag存储的值回归到初始值- 1,这样在返回头点击其他的列，才是按照升序排列的
+    //->点击当前列,需要让其他的列的flag存储的值回归到初始值-1,这样在返回头点击其他的列，才是按照升序排列的
     for(var k = 0; k < oThs.length; k++) {
         if (oThs[k] !== this) {
             oThs[k].flag = -1
         }
     }
     // 给数组进行排序,按照每一行的第二列中的内容由小到大进行排序
-    this.flag*=-1; //->每一次执行sort,进来的第一步就是先让flag的值*-1 ->第一次flag=-1. *=1 flag=1 升序 第二次*=1 flag=-1 降序第三次 flag=1 升序
+    this.flag*=-1; //->每一次执行sort,进来的第一步就是先让flag的值*-1 ->第一次flag=-1. *=-1 flag=1 升序 第二次*=-1 flag=-1 降序第三次 flag=1 升序
     let _this = this
     ary.sort(function(a,b) {
         var curInn = a.cells[n].innerHTML

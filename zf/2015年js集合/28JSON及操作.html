@@ -16,8 +16,8 @@
         //1) JSON.parse ->把JSON格式的字符串转换为JSON格式的对象
         //2) JsoN.stringify ->把JSON格式的对象转换为JSON格式的字符串
         var jsonObj = { "name": "珠峰", "age": 7}
-        var jsonstr = JSON.stringify (jsonObj) // '{ "name": "珠峰", "age": 7}'
-        var str = '{ "name": "珠峰", "age": 7}'
+        var jsonstr = JSON.stringify (jsonObj) // '{"name": "珠峰", "age": 7}'
+        var str = '{"name": "珠峰", "age": 7}'
         console.log(JSON.parse(str));
         // 在IE6~ 7浏览器中,我们的window下没有JSON对象,刚才的parse和stringify都不存在了
         //->把JSON格式的字符串转换为JSON格式的对象
