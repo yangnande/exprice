@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body,div,span {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,sans-serif;
+            font-size: 14px;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #outer {
+            margin: 20px auto;
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+            background: green;
+        }
+        #inner {
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        #center {
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+        #box {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            margin-left: -50px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #2489ce;
+        }
+        #mark {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 300px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background: #ffe470;
+            border: 1px solid #2489ce;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="outer">
+        <div id="inner">
+            <div id="center">
+
+            </div>
+        </div>
+    </div> -->
+    <div id="box">
+        <span>购物车</span>
+        <div id="mark" style="display: none;">
+            查看购物车中的详细信息
+        </div>
+    </div>
+    <script>
+        // 1 什么是事件委托/时间代理
+        // //->利用事件的冒泡传播机制(触发当前元素的某个行为,它父级所有元素的相关行为都会被触发),如果一个容器中有很多元素都要绑定点击事件,我们没有必要一个个的绑定了,只需要给最外层容器绑定一个点击事件即可,在这个方法执行的时候,通过事件源的区分来进行不同的操作
+        // var outer = document.getElementById("outer"),inner = document.getElementById("inner"),center = document. getElementById("center");
+        // document.body.onclick = function(e){
+        //     e = e || window.event
+        //     console.log(e.target.id);
+        // }
+        var mark = document.getElementById('mark')
+        document.body.onclick = function(e){
+            e = e || window.event
+            e.target = e.target || e.srcElement
+            //->如果点击的是#box或者是#box下的span,我们判断nark是否显示,显示的话让其隐藏,反之隐藏的话让其显示
+            if (e.target.id === "box"|| (e.target.tagName.toLowerCase()=== "span" && e.target.parentNode.id === "box")) {
+            console.log(mark.style.display === 'none');
+
+                if(mark.style.display === 'none'){
+                    mark.style.display = 'block'
+                } else {
+                    mark.style.display = 'none'
+                }
+                return
+            }
+            if(e.target.id === 'mark'){
+                return
+            }
+            // 以上都不是的话,我们直接让#mark隐藏
+            mark.style.display = 'none'
+            
+        }
+    </script>
+</body>
+</html>
