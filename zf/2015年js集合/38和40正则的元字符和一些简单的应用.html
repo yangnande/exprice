@@ -9,35 +9,35 @@
 <body>
     <script>
         var reg = /\d/; // 包含一个0-9的数字
-        console.log(reg.test('zhufeng2015')); // true
+        // console.log(reg.test('zhufeng2015')); // true
         var reg = /^\d$/; // 只能是一个0-9之间的数字
-        console.log(reg.test('9')); // true
-        console.log(reg.test('912')); // false
+        // console.log(reg.test('9')); // true
+        // console.log(reg.test('912')); // false
        //元字符:
         //每一个正则表达式都是由元字符和修饰符组成的
         //[元字符]->在//之间具有意义的一些字符
         //1、具有特殊意义的元字符
         //\:转义字符,转译后面字符所代表的含义
-        //~:以某一个元字符开始
+        //^:以某一个元字符开始
         //$:以某—个元字符结尾
         // var reg = /^0.2$/; //->以0开头，以2结尾，中间可以是除了\n的任意字符
         // console.log(reg.test("0.2"));//->true
         // console.log(reg.test("0-2")) ; //->true
         // reg = /^0\.2$/;
         // console.log(reg.test("0.2"));//->true
-        // console.log(reg.test("0-2")) ; //->true
+        // console.log(reg.test("0-2")) ; //->false
         // ():分组->把一个大正则本身划分成几个小的正则
         // var reg = /^(\d+)zhufeng(\d+)$/;
         // x|y: x或者y中的一个
-        //[xyzj:x或者y或者z中的一个
+        //[xyz]:x或者y或者z中的一个
         //[^xyz]:除了三个以外的任何一个字符
         // [a-z]:a-z之间的任何一个字符
         // [^a-z]:除了a-z之间的任何一个字符
         // \d:—个0-9之间的数字 \D:除了0-9之间的数字以外的任何字符
         // \b:匹配一个边界符"w1 w2 w3"
-        // \w:数字、字母、下划线中的任意一个字符[0-9a-zA-2_]
-        // \s:匹配一个空白字符、空格、—个制表符、换页符。。
-        //2、代表出现次教的量词元字符//*:出现季到多次
+        // \w:数字、字母、下划线中的任意一个字符[0-9a-zA-Z_]
+        // \s:匹配一个空白字符、空格、一个制表符、换页符。。
+        //2、代表出现次教的量词元字符:出现0到多次
         // *:出现零到多次
         // +:出现一到多次
         // ?:出现零次或者一次
@@ -48,46 +48,68 @@
         // console.log(reg.test('2015')); // true
         // []
         //l、在中括号中出现的所有的字符都是代表本身意思的字符(没有特殊的含义)
-        //var reg =/^[.]$/;
-        // consoie.log(reg.test("!")); // false
-        // consoie.log(reg.test(".")); // true
+        // var reg =/^[.]$/;
+        // console.log(reg.test("!")); // false
+        // console.log(reg.test(".")); // true
        
         // 2 中括号不识别两位数
-        var reg = /^[12]$/;//->1或者2中的一个 
-        var reg = /^[12-68]$/;//->1 2-6中的一个、8三个中的一个
-        var reg = /^[\w-]$/;//->数字、字母、下划线、-中的一个
-        console. log (reg.test("-")) ; // true
+        // var reg = /^[12]$/;//->1或者2中的一个 
+        // var reg = /^[12-68]$/;//->1 2-6中的一个、8三个中的一个
+        // var reg = /^[\w-]$/;//->数字、字母、下划线、-中的一个
+        // console.log(reg.test("-")) ; // true
         // ()
-        // 1、分组的作用一:改变x | y的默认的优先级
-        // var reg = /^18|19$/
-        //18、i9、181、189、119、819、1819. - -
-        // var reg= /^(18|19)$/
-        // 18、i9
+        // 1、分组的作用一:改变x|y的默认的优先级
+        // var reg = /^18|19$/ 以1或者8开头，以1或者9结尾
+        // console.log(reg.test("18")); //true
+        // console.log(reg.test("19")); //true
+        // console.log(reg.test("181")); //true
+        // console.log(reg.test("189")); //true
+        // console.log(reg.test("819")); //true
+        // console.log(reg.test("1819")); //true
+        // 18、19、181、189、119、819、1819...
+        // var reg= /^(18|19)$/ // 以18或19开头或结尾
+        // // 18、19
+        // console.log(reg.test("18")); //true
+        // console.log(reg.test("19")); //true
+        // console.log(reg.test("181")); //false
+        // console.log(reg.test("189")); //false
+        // console.log(reg.test("819")); //false
+        // console.log(reg.test("1819")); //false
         // 1、 有效教字的正则，正数、负数、零、小数
-        // 1) "."可以出现也可以不出现，但是一旦出现，后面必须跟着一位或者多位数字
-        // 2)最开始可以有+/-也可以没有
-        // 3)整数部分，一位数可以是0-9之间的一个,多位数不能以0开头
-        // var reg = /^[+-]$/;
-        // var reg= /^\d|[1-9]\d+$/
-        // var reg = /^18|19$/
-        // console.log(reg.test('18'));
-        // var reg = /^[+-]?(\d|([1-9]\d+))(\.\d+)?$/;
+            // 1) "."可以出现也可以不出现，但是一旦出现，后面必须跟着一位或者多位数字
+            // 2) 最开始可以有+/-也可以没有
+            // 3) 整数部分，一位数可以是0-9之间的一个,多位数不能以0开头
+            // var reg = /^[+-]$/;
+            // var reg= /^\d|[1-9]\d+$/
+            // var reg = /^18|19$/
+            // console.log(reg.test('18'));
+            // var reg = /^[+-]?(\d|([1-9]\d+))(\.\d+)?$/;
+            // console.log(reg.test(0));//true
+            // console.log(reg.test(0.));//true
+            // console.log(reg.test(0.5));//true
+            // console.log(reg.test(-8.3));//true
         //2、年龄介于18~65之间18-19 20-59 60-65
-        var reg = /^(1[8-9]|[2-5]\d|6[0-5])$/;
-        console.log(reg.test ("18"))
+            // var reg = /^(1[8-9]|[2-5]\d|6[0-5])$/;
+            // console.log(reg.test("17"))//false
+            // console.log(reg.test("18"))//true
+            // console.log(reg.test("64"))//true
+            // console.log(reg.test("66"))//false
         //3、验证邮箱的正则
-        //左边:数字、字母、下划线、.、-
+        //左边:数字、字母、下划线、.、
         // 1144709265@qq.com
         // 1282347298@163.com.cn
         // zhufengpeixun@zhufeng.cn
         // zhou_xiao_tian@163.com
-        //var reg = /^[\w.-]+@[0-9a-zA-Z]+(\.[a-ZA-Z]{2,4}){1,2}$/;
+        // var reg = /^[\w-]+\@[0-9a-zA-Z]+(\.[a-zA-Z]{2,4}){1,2}$/;
+        // console.log(reg.test("1144709265@qq.com")) // true
         //4、中国标准真实姓名2-4位次字
-        //var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+        // var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+        // console.log(reg.test('乐乐')); // true
         //5、身份证号码
         //var reg = /^\d{17}(\d|X)$/;
         //13 0828 1990 12 04 06 1 7
-        var reg = /^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(\d{2}) (\d)(\d|X)S$/;
+        // var reg = /^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(\d{2})(\d)(\d|X)$/;
+        // console.log(reg.test('130828199012040617')); // true
     </script>
 </body>
 </html>

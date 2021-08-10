@@ -8,28 +8,28 @@
 </head>
 <body>
     <script>
-        var reg = /\d/; // 包含一个0-9的数字
-        console.log(reg.test('zhufeng2015')); // true
-        var reg = /^\d$/; // 只能是一个0-9之间的数字
-        console.log(reg.test('9')); // true
-        console.log(reg.test('912')); // false
+        // var reg = /\d/; // 包含一个0-9的数字
+        // console.log(reg.test('zhufeng2015')); // true
+        // var reg = /^\d$/; // 只能是一个0-9之间的数字
+        // console.log(reg.test('9')); // true
+        // console.log(reg.test('912')); // false
        //元字符:
         //每一个正则表达式都是由元字符和修饰符组成的
         //[元字符]->在//之间具有意义的一些字符
         //1、具有特殊意义的元字符
         //\:转义字符,转译后面字符所代表的含义
-        //~:以某一个元字符开始
+        //^:以某一个元字符开始
         //$:以某—个元字符结尾
         // var reg = /^0.2$/; //->以0开头，以2结尾，中间可以是除了\n的任意字符
         // console.log(reg.test("0.2"));//->true
         // console.log(reg.test("0-2")) ; //->true
         // reg = /^0\.2$/;
         // console.log(reg.test("0.2"));//->true
-        // console.log(reg.test("0-2")) ; //->true
+        // console.log(reg.test("0-2")) ; //->false
         // ():分组->把一个大正则本身划分成几个小的正则
         // var reg = /^(\d+)zhufeng(\d+)$/;
         // x|y: x或者y中的一个
-        //[xyzj:x或者y或者z中的一个
+        //[xyz}:x或者y或者z中的一个
         //[^xyz]:除了三个以外的任何一个字符
         // [a-z]:a-z之间的任何一个字符
         // [^a-z]:除了a-z之间的任何一个字符
@@ -48,19 +48,19 @@
         // console.log(reg.test('2015')); // true
         // []
         //l、在中括号中出现的所有的字符都是代表本身意思的字符(没有特殊的含义)
-        //var reg =/^[.]$/;
-        // consoie.log(reg.test("!")); // false
-        // consoie.log(reg.test(".")); // true
+        // var reg =/^[.]$/;
+        // console.log(reg.test("!")); // false
+        // console.log(reg.test(".")); // true
         // var reg = /^18|19$/
-        //18、i9、181、189、119、819、1819. - -
+        // 18、19、181、189、119、819、1819...
         // var reg= /^(18|19)$/
-        // 18、i9
+        // 18、19
         // ()
-        // //i、分组的作用一:改变x | y的默认的优先级/ /
+        // i、分组的作用一:改变x |y的默认的优先级
         //i、有效教字的正则，正数、负数、零、小数
         // 1) "."可以出现也可以不出现，但是一旦出现，后面必须跟着一位或者多位数字
         // 2)最开始可以有+/-也可以没有
-        //3)整数部分，一位数可以是0-9之间的一个,多位数不能以0开头
+        // 3)整数部分，一位数可以是0-9之间的一个,多位数不能以0开头
         // var reg = /^[+-]$/;
         // var reg= /^\d|[1-9]\d+$/
         // var reg = /^18|19$/
