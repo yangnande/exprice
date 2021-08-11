@@ -6,46 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body,div{
-            margin: 0;
+        * {
             padding: 0;
+            margin: 0;
+            font-family : "15FAE\8F6F\96c5\9ED1",Helvetica,sans-serif;
+            font-style: 14px;
         }
-        #box {
-            position: relative;
-            width: 100px;
-            height: 30px;
-            background: green;
-        }
-        #mark {
-            display: none;
-            position: absolute;
-            top: 30px;
-            left: 0;
-            width: 300px;
-            height: 100px;
-            background: lightblue;
-        }
+       ul,li {
+           list-style: none;
+       }
+       .box {
+           margin: 10px;
+           padding: 10px;
+           width: 300px;
+           border: 1px solid green;
+           /*渐进增强:首先设置一个纯色的背景, 对子不兼容css3的浏览器来说会使用纯色:对于兼容的浏览器来说,我们下面在额外的增加一些渐变色,这样的话会把纯色的覆盖掉*/
+           background: #ffe470;
+           background: -webkit-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: -moz-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: -o-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+       }
+       .box li {
+           position: relative;
+           line-height: 30px;
+       }
+       .box span {
+           display: block;
+           padding-left: 20px;
+       }
+       .box em {
+           position: absolute;
+           top: 6px;
+           left: 0;
+           width: 16px;
+           height: 16px;
+           /* border: 1px solid #000; */
+           background: #fff;
+           cursor: pointer;
+       }
+       .box em.open {
+           background: red;
+       }
+       .box .two {
+           margin-left: 20px;
+       }
+       .box .three {
+           margin-left: 40px;
+       }
+       .box .four {
+           margin-left: 60px;
+       }
+       .box .two, .box .three,.box .four {
+           display: none;
+       }
     </style>
 </head>
 <body>
-    <div id="box">
-        <div id="mark"></div>
+    <div class="box" id="box">
+        <ul>
+            <li>
+                <em></em><span>第一级第一个</span>
+                <ul class="two">
+                    <li><span>第二级第一个</span></li>
+                    <li>
+                        <em></em><span>第二级第二个</span>
+                        <ul class="three">
+                            <li><span>第三级第一个</span></li>
+                            <li><span>第三级第二个</span></li>
+                            <li>
+                                <em></em><span>第三级第三个</span>
+                                <ul  class="four">
+                                    <li><span>第四级第一个</span></li>
+                                    <li><span>第四级第二个</span></li>
+                                    <li><span>第四级第三个</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <em></em><span>第二级第三个</span>
+                        <ul class="three">
+                            <li><span>第三级第一个</span></li>
+                            <li><span>第三级第二个</span></li>
+                            <li><span>第三级第三个</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+    <script src="./js/util.js"></script>
     <script>
         var box = document.getElementById('box')
-        var mark = document.getElementById('mark')
-        box.onmouseenter = function(){
-            mark.style.display ="block"
+        //->把列表中的span (前面有em的span)设置一个cursor: pointer
+        var spanList = box.getElementsByTagName ("span") ;
+        for (var i = 0; i < spanList.length; i++) {
+            var curSpan = spanList[i] ;
+            var curPre = utils.prev(curSpan); //->获取当前span的上一个哥哥元素节点
+            if (curPre && curPre.tagName.toLowerCase() === "em"){
+                curSpan.style.cursor = "pointer";
+            }
         }
-        box.onmouseleave = function(){
-            mark.style.display ="none"
+        //->使用事件委托实现我们的操作
+        box.onclick = function (e) {
+            e= e || window.event;
+            var tar = e.target || e.srcElement;
+            //->只有点击的是em/span标签我们才进行展开收缩的操作
+           if(/^(em|span)$/i.test(tar.tagName)) {
+                var parent = tar.parentNode; //->获取父亲子集中的第一个
+                var oEm = utils.children(parent, "em")[0] ; //->获取
+                var firstUl = utils.children(parent, "ul")[0];//->获取父亲子集中的第一个ul标签
+                if(firstUl) {//->只有存在我们才进行相关的操作
+                    //->如果这个ul当前是隐藏我们让其显示,否则的话让其隐藏
+                    var isBlock = utils.getCss(firstUl, "display")=== "block" ? true : false;
+                    console.log(isBlock);
+                    if (isBlock) {//-> 当前是显示的
+                        firstUl.style.display = "none";
+                        oEm ? utils.removeClass(oEm,'open'):null;
+                        //->当外层的收起,里层所有的u1都要隐藏,并且所有的em都要移除open样式
+                        var allU1 = parent.getElementsByTagName("ul") ,allEm = parent.getElementsByTagName("em") ;
+                        for(var i=0;i<allU1.length;i++){
+                            allU1[i].style.display = "none"; 
+                            utils.removeClass(allEm[i],"open") ;
+                        }
+                    } else {//->当前是隐藏的,我们让其显示
+                        firstUl.style.display = "block";
+                        if(oEm){
+                            utils.addClass(oEm,'open')
+                        }
+                    }
+                }
+           }
         }
-        // box.onmouseover = function(){
-        //     mark.style.display ="block"
-        // }
-        // box.onmouseout = function(){
-        //     mark.style.display ="none"
-        // }
     </script>
 </body>
 </html>

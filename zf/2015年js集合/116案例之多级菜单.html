@@ -6,46 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body,div{
-            margin: 0;
+        * {
             padding: 0;
+            margin: 0;
+            font-family : "15FAE\8F6F\96c5\9ED1",Helvetica,sans-serif;
+            font-style: 14px;
         }
-        #box {
-            position: relative;
-            width: 100px;
-            height: 30px;
-            background: green;
-        }
-        #mark {
-            display: none;
-            position: absolute;
-            top: 30px;
-            left: 0;
-            width: 300px;
-            height: 100px;
-            background: lightblue;
-        }
+       ul,li {
+           list-style: none;
+       }
+       .box {
+           margin: 10px;
+           padding: 10px;
+           width: 300px;
+           border: 1px solid green;
+           /*渐进增强:首先设置一个纯色的背景, 对子不兼容css3的浏览器来说会使用纯色:对于兼容的浏览器来说,我们下面在额外的增加一些渐变色,这样的话会把纯色的覆盖掉*/
+           background: #ffe470;
+           background: -webkit-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: -moz-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: -o-linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+           background: linear-gradient(top left,#2b93d2,#fa5889,#cde074,#ffe470);
+       }
+       .box li {
+           position: relative;
+           line-height: 30px;
+       }
+       .box span {
+           display: block;
+           padding-left: 20px;
+       }
+       .box em {
+           position: absolute;
+           top: 6px;
+           left: 0;
+           width: 16px;
+           height: 16px;
+           /* border: 1px solid #000; */
+           background: #fff;
+           cursor: pointer;
+       }
+       .box em.open {
+           background: red;
+       }
+       .box .two {
+           margin-left: 20px;
+       }
+       .box .three {
+           margin-left: 40px;
+       }
+       .box .four {
+           margin-left: 60px;
+       }
+       .box .two, .box .three,.box .four {
+           display: none;
+       }
     </style>
 </head>
 <body>
-    <div id="box">
-        <div id="mark"></div>
+    <div class="box" id="box">
+        <ul>
+            <li>
+                <em></em><span>第一级第一个</span>
+                <ul class="two">
+                    <li><span>第二级第一个</span></li>
+                    <li>
+                        <em></em><span>第二级第二个</span>
+                        <ul class="three">
+                            <li><span>第三级第一个</span></li>
+                            <li><span>第三级第二个</span></li>
+                            <li>
+                                <em></em><span>第三级第三个</span>
+                                <ul  class="four">
+                                    <li><span>第四级第一个</span></li>
+                                    <li><span>第四级第二个</span></li>
+                                    <li><span>第四级第三个</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <em></em><span>第二级第三个</span>
+                        <ul class="three">
+                            <li><span>第三级第一个</span></li>
+                            <li><span>第三级第二个</span></li>
+                            <li><span>第三级第三个</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+    <script src="./js/jquery.min.js"></script>
     <script>
-        var box = document.getElementById('box')
-        var mark = document.getElementById('mark')
-        box.onmouseenter = function(){
-            mark.style.display ="block"
+        var $box = $('#box')
+        $box.find("span").each (function () {
+            //$(this)->每一次循环的时候,当前循环的这个元素
+            var $pre = $(this).prev() ;
+            if ($pre[0] && $pre[0].tagName.toLowerCase() === "em") {
+                $(this).css("cursor", "pointer") ;
+            }
+        })
+        //jQuery中除了bind、unbind. on、off、click、 mouseover.. .这些绑定事件的方式外,还提供了一种delegate (1.7版本以前用的是live)
+        function fn() {
+            var $par = $(this).parent();
+            var $ul = $($par.children("ul")[0]);
+            var $em = $($par.children("em")[0]);
+            console.log($par.children());
+            if ($ul.length > 0) {
+                // 进来的第一件事情获取当前是展开还是隐藏
+                var isBlock = $ul.css('display') === 'block'? true :false
+                //- >当前的如果是收缩的话,我们需要把子子孙孙中所有的u1/em都隐藏和移除open样式
+                
+                if (isBlock) {
+                    $ul.slideUp()
+                    $em.removeClass("open") ;
+                    $par.find("ul").css("display","none");
+                    $par.find("em").removeClass("open");
+                }else {
+                    $ul.slideDown()
+                    $em.addClass("open") ;
+                }
+            }
         }
-        box.onmouseleave = function(){
-            mark.style.display ="none"
-        }
-        // box.onmouseover = function(){
-        //     mark.style.display ="block"
-        // }
-        // box.onmouseout = function(){
-        //     mark.style.display ="none"
-        // }
+        $box.delegate("em","click", fn);//->给$box绑定点击事件, 如果当前的事件源是em的话,我们执行fn
+        $box.delegate("span", "click", fn) ;
     </script>
 </body>
 </html>
