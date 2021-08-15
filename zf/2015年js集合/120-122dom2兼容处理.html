@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            background: #ff6600;
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="box">
+    </div>
+    <script src="./120/event.js"></script>
+    <script>
+        var box = document.getElementById('box')
+        // addEventListener
+        // attachEvent
+        var n = 0
+        function fn1(){
+            n++;
+            if(n>=3){
+                unbind(box,'click',fn1)
+                return 
+            }
+            console.log(1);
+            // console.log(this === window);
+        }
+        function fn2(){
+            console.log(2);
+            console.log(this === window);
+        }
+        function fn3() {console.log(3)}
+        function fn4() {console.log(4)}
+        function fn5() {console.log(5)}
+        function fn6() {console.log(6)}
+        function fn7() {
+            n++;
+            if(n>=3){
+                off(box,'click',fn1)
+                off(box,'click',fn2)
+                off(box,'click',fn3)
+                return 
+            }
+            console.log(7)
+        }
+        function fn8() {console.log(8)}
+        function fn9() {console.log(9)}
+        function fn10() {console.log(10)}
+        // box('onclick',fn1.call(box)) //->在给box绑定事件的时候,首先执行fn1方法,让方法中的this变为box,然后把fn1执行的返回结果绑定给onclick
+        // box.onclick = fn1;
+        // box('onclick',function(){
+        //     fn1.call(box)
+        // })
+        //-. >这样虽然解决了this的问题,但是又抛出了一个新的问题,不知道该如何删除了(我们不知道匿名函数是谁)
+        bind(box,'click',fn1)
+        bind(box,'click',fn2)
+        // bind(box,'mouseover',fn1)
+        // var tempFn= function() {
+        //     fn1.call (box) ;
+        // }
+        // box.attachEvent ("onclick",tempFn);
+        // box.detachEvent ("onclick", tempFn) ;
+        box(box,"onclick",fn1);
+        box(box,'onclick',fn2)
+        box(box,'onclick',fn3)
+        box(box,'onclick',fn4)
+        box(box,'onclick',fn5)
+        box(box,'onclick',fn6)
+        box(box,'onclick',fn7)
+        box(box,'onclick',fn8)
+    </script>
+</body>
+</html>
