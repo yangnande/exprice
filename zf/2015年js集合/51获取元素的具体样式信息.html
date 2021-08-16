@@ -25,22 +25,22 @@
         站在台风口上,猪都能飞起来~~;要得到你必须要付出,要付出你还需要学会坚持,如果你真的觉得很难,那你就放弃,但是一但放弃就不要在抱怨,我觉得人生就是这样,世界真的是平衡的,每个人都是通过自己的努力,去决定自己生活的样子;
     </div>
     <script>
-        var box = document.getElementById ( "box");
+        var box = document.getElementById("box");
         //->获取元素的某一个具体的样式属性值
         //1、元素.style.属性名
         //->需要我们把元素的样式都写在行内样式上才可以(写在样式表中是不管用的)
-        console.log(box.style.height); // ""
-        console.log(box.style.width); // 200px
+        // console.log(box.style.height); // ""
+        // console.log(box.style.width); // 200px
         //->在真实项目中,这种方式不常用,因为我不能为了获取值而把所有的样式都写在行内(无法实现CSS和HTML的分离)
-        //2、使用window.getComputedstyle这个方法获取所有经过浏览器计算过的样式
+        //2、使用window.getComputedStyle这个方法获取所有经过浏览器计算过的样式
         //->所有经过浏览器计算过的样式:只要当前的元素标签可以在页面中呈现出来,那么它的所有的样式都是经过浏览器计算过的(渲染过的)->哪怕有些样式你没有写,我们也可以获取到
         // ->window.getComputedStyle(当前要操作的元素对象,当前元素的伪类[一般我们不用伪类写null)
         //->获取的结果是cssStyleDeclaration这个类的一个实例:包含了当前元素的所有样式
         // console.log(window.getComputedStyle); //->function getComputedstyle() { [native code] }
-        console.log(window.getComputedstyle(box,null));
-        // console.log(window.getComputedStyle(box,null)["height"]);
+        // console.log(window.getComputedStyle(box,null));
+        // console.log(window.getComputedStyle(box,null)["height"]); // 189
         //3、方法虽然好用,但是在IE6~8下是不兼容的:因为window下没有getComputedStyle这个属性->在IE6~8下执行这个方法会报错
-        // console.log(window.getComputedStyle); //->undefined
+        // console.log(window.getComputedStyle); //->ƒ getComputedStyle()
         //->在IE6~8下我们可以使用currentStyle来获取所有经过浏览器计算过的样式
         // console.log(box.currentStyle.height);
         // ->getCss:获取当前元素所有经过浏览器计算过的样式中的[attr]对应的值
@@ -48,47 +48,47 @@
         // attr: [string]我们要获取的样式属性的名称
         //1、使用try、catch来处理兼容（只有在不得己的情况下才使用它）
         //->前提:必须保证try中的代码在不兼容浏览器中执行的时候报错,这样的话我们才可以用catch捕获到异常的信息,进行其它的处理
-        //->不管当前是什么浏览器,都需要先把try中的代码执行一遍,如果当前是IE7, window .getComputedstyle本身是不兼容的,但是我也要先把它执行一遍,报错了,在把curEle.currentstyle执行一遍（消耗性能)
+        //->不管当前是什么浏览器,都需要先把try中的代码执行一遍,如果当前是IE7, window.getComputedStyle本身是不兼容的,但是我也要先把它执行一遍,报错了,在把curEle.currentstyle执行一遍（消耗性能)
         // function getCss(curEle, attr) {
         //     var val = null;
         //     try{
-        //       val = window.getComputedstyle(curEle,null)[attr];
+        //       val = window.getComputedStyle(curEle,null)[attr];
         //     } catch (e){
-        //         val = curEle.currentstyle[attr];
+        //         val = curEle.currentStyle[attr];
         //     }
         //     return val;
         // }
-        // console.log(getCss(box,"height"));
-        // window.getComputedstyle(box,nul1).height
+        // console.log(getCss(box,"height")); // 189px
+        // window.getComputedStyle(box,null).height
         // box.currentStyle.height
         //2、判断当前浏览器中是否存在这个属性或者方法,存在就兼容,不存在就不兼容
         // function getCss(curEle, attr) {
         //     var val = null;
-        //     if ("getcomputedstyle" in window){//->如果返回的是true,说明window下有getComputedstyle这个属性,代表兼蓉
+        //     if ("getComputedStyle" in window){//->如果返回的是true,说明window下有getComputedstyle这个属性,代表兼蓉
         //         val = window.getComputedStyle(curEle,null)[attr]
         //     } else {
-        //       val = curEle.currentstyle[attr];
+        //       val = curEle.currentStyle[attr];
         //     }
         //     return val;
         // }
-        // console.log(getCss(box,"height"));
+        // console.log(getCss(box,"height")); // 189px
     
         // function getCss(curEle, attr) {
         //     var val = null;
         //     if (typeof window.getComputedStyle === "function") {
-        //       val = window.getComputedstyle(curEle,null)[attr];
+        //       val = window.getComputedStyle(curEle,null)[attr];
         //     } else {
         //       val = curEle.currentstyle[attr];
         //     }
         //     return val;
         // }
-        // console.log(getCss(box,"height"));
+        // console.log(getCss(box,"height")); // 189px
         //3、通过检测浏览器版本和类型来处理兼容
         //->window.navigator.userAgent
         //谷歌: "Mozilla/5.0(Windows NT 6.1;WOW64) AppleWebKit/537.36(KHTML,like Gecko) Chrome/51.0.2679.0 safari/537.36"
-        //火狐:"Mozilla/5.0(Windows NT 6.l;WOW64; rv:45.0)Gecko/20100101 Firefox/45."
+        //火狐: "Mozilla/5.0(Windows NT 6.l;WOW64; rv:45.0)Gecko/20100101 Firefox/45."
         //IE10 : "Mozilla/5.0(compatible;MSIE 10.0; windows NT 6.1;wOw64; Trident/6.0) "
-        //IE7: "Nozilla/4.0 (compatible; MSTE 7.0; windows NT 6.l;2<WOW64; SLCC2; .NET CLR 2.0.50727; .NET TCLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0 ; .NET4.0C; .NET4.0E)”
+        //IE7: "Nozilla/4.0 (compatible; MSTE 7.0; windows NT 6.l;2<WOW64; SLCC2; .NET CLR 2.0.50727; .NET TCLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)”
         //->扩展题:自己回去百度也好还是自己写也好,写一个方法,可以检测当前是什么浏览器,也可以获取到浏览器的版本号...
         // console.log(window.navigator.userAgent);
         //->获取到当前的浏览器是IE6~8
@@ -101,36 +101,36 @@
         //     }
         //     return val;
         // }
-        // console.log(getCss(box,"height"));
+        // console.log(getCss(box,"height")); // 189px
 
         //第一次升级:把获取到的样式值"单位去掉"
-        function getCss(curEle, attr) {
-            var val = null;
-            if ("getcomputedstyle" in window){
-                val = window.getComputedStyle(curEle,null)[attr]
-            } else { // IE6~8
-                //->如果传递进来的结果是opacity,说明我想获取到的是透明度,但是在工E6~8下获取透明度需要使用filter
-                if (attr === " opacity"){
-                    val = curEle.currentstyle["filter"];
-                    //->"alpha(opacity=10)”把获取到的结果进行剖析,获取里面的数字,让数字乘以100才和标准的值,览器保持了一致
-                    reg = /^alpha\(opacity=(\d+(?:\.\d+)?)\)$/i;
-                    vai = reg.test(val) ? reg.exec(val)[1] / 100 : 1
+        // function getCss(curEle, attr) {
+        //     var val = null;
+        //     if ("getComputedStyle" in window){
+        //         val = window.getComputedStyle(curEle,null)[attr]
+        //     } else { // IE6~8
+        //         //->如果传递进来的结果是opacity,说明我想获取到的是透明度,但是在工E6~8下获取透明度需要使用filter
+        //         if (attr === "opacity"){
+        //             val = curEle.currentStyle["filter"];
+        //             //->"alpha(opacity=10)”把获取到的结果进行剖析,获取里面的数字,让数字乘以100才和标准的值,览器保持了一致
+        //             reg = /^alpha\(opacity=(\d+(?:\.\d+)?)\)$/i;
+        //             val = reg.test(val) ? reg.exec(val)[1] / 100 : 1
 
-                }else {
-                    val = curEle.currentstyle[attr];
-                }
-            }
-            reg = /^(-?\d+(\.\d+)?)(px|pt|rem|em)?$/;
-            return reg.test(val) ? parseFloat (val) :val;
-            // return val;
-            // return parseFloat(val);//->这样写肯定不行,对于某些样式属相的值是不能去单位的,例如:float、position.margin、padding、border这些复合值、background ..
-        }
-        console.log(getCss(box,"boder"));
-        console.log(getCss(box,"fontFamily"));
+        //         }else {
+        //             val = curEle.currentStyle[attr];
+        //         }
+        //     }
+        //     reg = /^(-?\d+(\.\d+)?)(px|pt|rem|em)?$/;
+        //     return reg.test(val) ? parseFloat(val) :val;
+        //     // return val;
+        //     // return parseFloat(val);//->这样写肯定不行,对于某些样式属相的值是不能去单位的,例如:float、position.margin、padding、border这些复合值、background ..
+        // }
+        // console.log(getCss(box,"border")); // 1px solid rgb(0, 128, 0)
+        // console.log(getCss(box,"fontFamily"));// "Microsoft YaHei"
         //->标准浏览器和IE浏览器获取的结果还是不一样的->对于部分样式属性,不同浏览器获取的结果不一样,主要是由于getComputedstyle和currentstyle在某些方面不一样
-        console.log(getCss(box,"marginTop"));
-        console.log(getCss(box,"width"));
-        console.log(getCss(box,"float"));
+        // console.log(getCss(box,"marginTop")); // 100
+        // console.log(getCss(box,"width")); // 200
+        // console.log(getCss(box,"float")); // none
 
     </script>
 </body>

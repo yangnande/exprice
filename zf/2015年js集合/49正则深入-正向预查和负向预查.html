@@ -16,58 +16,63 @@
       //珠峰培训正则表达式复习
       //在正则中,把?的用法和()的用法掌握好,一定掌握的不错了
       //正则中的断言 Assert 前提，前提条件
-      // (?=exp) Zero-width positive lookahead(本身不占宽度,肯定的,向前看)/\d(?=( \d{3])+$)/
-      // (?!exp) Zero-width negative lookahead
-      // (?<=exp) zero-width positive lookbehind
+      // (?=exp) Zero-width positive lookahead(本身不占宽度,肯定的,向前看)/^\d(?=(\d{3})+$)/ 零宽度正预测先行断言 匹配内容右侧必须为pattern
+      // (?!exp) Zero-width negative lookahead // 零宽度负预测先行断言 匹配右侧不是pattern内容
+      // (?<=exp) zero-width positive lookbehind 匹配这个位置之前为pattern的内容
       /((?<=\d)\d{3})+$/
-      //(?<!exp) Zero-width negative lookbehind
-      reg = /\d(?=abc)/
+      //(?<!exp) Zero-width negative lookbehind 匹配这个位置之前部位pattern的内容
+      // reg = /\d(?=abc)/
       //量词
-      var str="-83940.384";
-      var reg=/^(+|-)?\d+(\.\d+)?$/;
-      var reg=/^[+-]?\d(\.\d+)?$/;
-      //匹配不捕获:问号要放在括号里,并且后面加上冒号
-      var reg=/^(?:\+|-)?\d+(?:\.\d+)?$/;
+      // var str="-83940.384";
+      // var reg=/^(+|-)?\d+(\.\d+)?$/;
+      // var reg=/^[+-]?\d+(\.\d+)?$/;
+      //? 匹配不捕获:问号要放在括号里,并且后面加上冒号
+      // var reg=/^(?:\+|-)?\d+(?:\.\d+)?$/;
       //非贪婪匹配
       //正则的两个特点:懒惰、贪婪
-      var reg=/d+/;
-      var str="abc484995xyz4849050didks784885ddd";
-      var resultl=reg.exec(str); //返回值是数组,总正则捕获到的内容放在数组的第0项
-      var result2=str.match(reg);//在正则不加分组的情况下,这两个方法功能一样
-      var reg= /(\d+)/;
-      reg.test(str);
-      RegExp.$1;
+      // var reg=/\d+/;
+      // var str="abc484995xyz4849050didks784885ddd";
+      // var resultl=reg.exec(str); //返回值是数组,总正则捕获到的内容放在数组的第0项
+      // var result2=str.match(reg);//在正则不加分组的情况下,这两个方法功能一样
+      // console.log(resultl);
+      // console.log(result2);
+      // var reg= /(\d+)/;
+      // console.log(reg.test(str)); // true
+      // RegExp.$1;
       var reg= /(\d+)/g;
-      var str="abc484995xyz4849050didks784885ddd";
+      // var str="abc484995xyz4849050didks784885ddd";
       //当正则加了修正符g之后,每匹配一次,则修改一次reg.lastIndex属性。lastIndex属性是用来记录下一次匹配开始的索引位置的
-      reg.exec(str);
-      console.log(RegExp.$1);
-      console.log("当次运行的lastIndex的值: "+reg.lastIndex);
-      reg.test(str);
-      RegExp.$1;
-      console.log(RegExp.$1);
-      console.log("当次运行的lastIndex的值: "+reg.lastIndex) ;
-      reg.exec(str) ;
-      alert(reg.test(str)) ; //为什么是false呢?
-      alert(reg.test(str)); //为什么又是true了呢?
-      var str2="123abc";
-      alert(reg.test(str2)); //在做这次匹配的时候,从上一次lastIndex记录索引9开始的,所以就是false;
+      // reg.exec(str);
+      // console.log(RegExp.$1);
+      // console.log("当次运行的lastIndex的值: "+reg.lastIndex);
+      // reg.test(str);
+      // RegExp.$1;
+      // console.log(RegExp.$1);
+      // console.log("当次运行的lastIndex的值: "+reg.lastIndex) ;
+      // reg.exec(str) ;
+      // alert(reg.test(str)) ; //为什么是false呢?
+      // alert(reg.test(str)); //为什么又是true了呢?
+      // var str2="123abc";
+      // alert(reg.test(str2)); //在做这次匹配的时候,从上一次lastIndex记录索引9开始的,所以就是false;
       // reg.lastIndex=0; // 手动归0
-      str.match(reg);//一但加了g,exec和match这两个方法就不一样了:match不再去捕获子正则的内容
+      // str.match(reg);//一但加了g,exec和match这两个方法就不一样了:match不再去捕获子正则的内容
       //把?放在量词的后边,表示非贪婪匹配
-      var reg=/\d+?/g;//注意加g和不加g的结果
-      console.log(str.match(reg)) ;//把数字分解捕获
-      var reg=/\d+?/; //注意加g和不加g的结果。
-      console.log(str.match(reg)); //只把第一个数字捕获
+      // var reg=/\d+?/g;//注意加g和不加g的结果
+      // console.log(str.match(reg)) ;//把数字分解捕获
+      // var reg=/\d+?/; //注意加g和不加g的结果。
+      // console.log(str.match(reg)); //只把第一个数字捕获
       // dom例子
-      // document.body.innerHTML=document.body.innerHTML.replace(/<\!--[\S\s]*?-->/g, "");
+      document.body.innerHTML=document.body.innerHTML.replace(/<\!--[\S\s]*?-->/g, "");
       //写出如下常用正则
       // 1、非空验证，2、纯数字，3、去首尾空格/^ +| +$/g
-      /^\s*$/.test(str);
-      var reg=/d+/g
-      reg.test("123abc"); //结果是什么?原因是什么
-      reg.test("abc998"); //结果是什么?原因是什么
-      reg.test("74xyz"); //结果是什么?原因是什么
+      // /^\s*$/.test(str);
+      var reg=/\d+/g
+      console.log(reg.test("123abc")); // true 结果是什么?原因是什么
+      console.log(reg.lastIndex); // 3
+      console.log(reg.test("abc998")); //true 结果是什么?原因是什么
+      console.log(reg.lastIndex); // 6
+      console.log(reg.test("74xyz")); //false 结果是什么?原因是什么 正则变了
+      console.log(reg.lastIndex); // 0
 
     </script>
 </body>
