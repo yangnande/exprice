@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = null;
+        //->为了兼容IE6及更低的版本:如果第- -个不支持,则浏览器会报错,后面就不在执行了
+        function createXHR(){
+            var xhr = null
+            if(window.XMLHttpRequest){
+                xhr = new XMLHttpRequest;
+            }else{
+                try{
+                    xhr = new Activexobject("Microsoft.XYLHTTP");
+                }catch(e){
+                    try{
+                        xhr = new Activexobject ("Msxml2.XMLHTTP")
+                    }catch(e){
+                        try{
+                            xhr = new Activexobject ("Msxml3.XMLHTTP")
+                        }catch(e){
+
+                        }
+                    }
+                }
+            }
+            return xhr
+        }
+        var xhr = createXHR()
+        var xhr2 = createXHR()
+        // if (window.XMLHttpRequest) {
+        //     xhr = new XMLHttpRequest;
+        // } else if (new Activexobject("Microsoft.XMLHTTP")) {
+        //     xhr = new Activexobject("Microsoft.XYLHTTP");
+        // }else if (new Activexobject("Msxml2.XMLHTTP")) {
+        //     xhr = new Activexobject ("Msxml2.XMLHTTP")
+        // }else if (new Activexobject ("Msxml3.XMLHTTP")) {
+        //     xhr = new Activexobject ("Msxml3.XMLHTTP")
+        // }
+        // ->JS高阶编程技巧之”惰性思想”:能够执行一次就搞定的绝对不会执行多次
+        // var utils = (function () {
+        //     var flag = "getComputedStyle" in window; //->TRUE-标准浏览器 FALSE - IE6~8浏览器
+        //     function getCss() {
+        //         // if(window.getComputedStyle){
+
+        //         // }
+        //         if(flag){
+
+        //         }else{
+                    
+        //         }
+        //     }
+        //     return {
+        //         getCss:getCss 
+        //     }
+        // })()
+        // utils.getCss()
+        // utils.getCss()
+        // utils.getCss()
+    </script>
+</body>
+</html>

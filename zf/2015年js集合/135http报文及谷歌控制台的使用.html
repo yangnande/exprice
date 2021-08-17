@@ -7,6 +7,40 @@
     <title>Document</title>
 </head>
 <body>
-    <script></script>
+    <script>
+        // 2、如果大家连接的是同一个wifi,那么大家都在同一个局域网下,每个人的IP是不一样的 A同学的IP:192.168.1.13 他把自己的电脑当做服务器用刚才编写的代码创建了服务(80)其他的同学都可以通过192.168.1.13:80/index.html访问到A同学发布的项目了
+        // A同学需要把自己电脑的防火墙关上
+        // GET /index.html HTTP/1.1 ->请求起始行 HTTP METHOD (请求方式)、请求的地址、使用的HTTP传输协议的版本号
+        // ->请求首部:客户端会把一些信息放在请求首部中传递给服务器端,服务器端就可以在请求首部中获取到相关的内容
+
+        // Request Headers
+        // Host: 192.168.10.7
+        // Connection: keep-alive
+        // Cache-Control: max-age=0
+        // Upgrade-Insecure-Requests: 1
+        // User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36
+        // Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        // Accept-Encoding: gzip, deflate
+        // Accept-Language: zh-CN,zh;q=0.9
+
+        // Response Headers
+        // ->响应起始行: HTTP版本号、响应的状态码、状态码的说明
+         // HTTP/1.1 200 OK
+        // ->响应首部:服务器端传递给客户端的一些信息可以放在响应首部中,客户端可以在响应首部中获取到服务器的相关信息(服务器设置客户端获取)
+        // content-type: text/html;charset=utf-8; 响应内容的格式和编码
+        // Date: Tue, 17 Aug 2021 12:41:25 GMT 服务器当前本次响应的时间(服务器时间
+        // Connection: keep-alive
+        // Transfer-Encoding: chunked
+        // [Response]响应主体 服务器传递给客户端的数据内容都在响应主体中,客户端可以在响应的主体中获取到这些内容(服务器端设置 客户端获取)
+        // [RequestPayload]请求主体 客户端传递给服务器端的数据内容可以放在请求主体中传递给服务器,服务器可以在请求主体中获取到传递进来的内容
+
+        // 客户端传递给服务器端数据:
+        // ->请求URL后面问号传参的方式传递给服务器 /getList?name=zhufeng&age=7
+        // ->设置请求的首部(设置请求头信息)
+        // ->设置请求主体,把传递给服务器的内容放在请求主体中传递给服务器
+        // 服务器端传递给客户端数据:
+        // ->设置响应头信息
+        // ->设置响应主体内容
+    </script>
 </body>
 </html>
