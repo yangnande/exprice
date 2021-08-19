@@ -18,8 +18,8 @@
       <span class="w200">地址</span>
       <span class="w150">操作</span>
     </h2>
-    <ul class="list">
-      <li>
+    <ul class="list" id="list">
+      <!-- <li>
         <span class="w50">1</span>
         <span class="w150">1</span>
         <span class="w50">1</span>
@@ -29,8 +29,49 @@
           <a href="">修改</a>
           <a href="">删除</a>
         </span>
-      </li>
+      </li> -->
     </ul>
   </div>
+  <script src="./ajax.js"></script>
+  <script>
+    //-> 首先获取所有的客户信息，完成页面的数据绑定
+    var customModule = (function(){
+      var oList = document.getElementById('list')
+      //->SEND AJAX GET DATA
+      function bindHTML(data){
+        var str = ''
+        for(var i = 0;i<data.length;i++){
+          var curData = data[i]
+          str += '<li>';
+          str += '<span class="w50">' + curData["id"] + '</span>';
+          str += '<span class="w150">' + curData ["name"] +'</span>';
+          str += '<span class="w50">' + curData["age"] + '</span>';
+          str += '<span class="w200">' + curData ["phone"] + '</span>';
+          str += '<span class="w200">' + curData ["address"] + '</span>';
+          str += '<span class="w150 control">';
+          str += '<a href ="add.html?id='+curData["id"]+'>修改</a>';
+          str += '<a href="">删除</a>';
+          str += '</span>';
+          str += '</1i>';
+        }
+        oList.innerHTML = str
+      }
+      function init() {
+        ajax({
+          url: "/getList",
+          success: function(jsonData){
+            if(jsonData&&jsonData.code==0){
+              var data = jsonData['data']
+              bindHTML(data)
+            }
+          }
+        })
+      }
+      return {
+        init: init
+      }
+    })()
+    
+  </script>
 </body>
 </html>

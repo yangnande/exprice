@@ -196,7 +196,7 @@ var server1 = http.createServer(function (req,res) {
     return 
   }
   // 如果请求的地址不是上述任何一个，则提示不存在即可
-  res.writeHead (404, {'content-type' : 'text/plain;charset=utf-8;');
+  res.writeHead (404, {'content-type' : 'text/plain;charset=utf-8;'});
   res.end("请求的数据接口不存在!");
 })
 server1.listen(81,function (){

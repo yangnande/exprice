@@ -52,10 +52,11 @@
                 _default[key] = options[key];
             }
         }
+        console.log(_default.url);
         //->如果当前的请求方式是GET,我们需要在URL的末尾加随机数清除缓存
         if (_default.type === "get") {
             _default.url.indexOf("?")>= 0 ? _default.url += "&" : _default.url +="?";
-            _default.url += "_"+ Math.random();
+            _default.url += "_-"+ Math.random();
         }
         // send ajax
         var xhr = createXHR();
