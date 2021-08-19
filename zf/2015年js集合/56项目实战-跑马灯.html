@@ -56,7 +56,7 @@
             var conBegin_width = utils.getCss(conBegin, "width") ; 
             function move() {
                 wrap.scrollLeft++;
-                //->利用了scrollLeft是存在最大值的思想,在累加1之前获取-一个值, 在累加后在获取的一个值,如果两个值相等了,说明累加是没有作用的一>到头了
+                //->利用了scrollLeft是存在最大值的思想,在累加1之前获取一个值, 在累加后在获取的一个值,如果两个值相等了,说明累加是没有作用的一>到头了
                 if (wrap.scrollLeft >= conBegin_width) {
                     //window.clearInterval (timer) ;
                     wrap.scrollLeft = 0;//->虽然从头开始了，但是有一个切换闪动的效果

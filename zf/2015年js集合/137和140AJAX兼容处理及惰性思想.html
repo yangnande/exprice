@@ -7,32 +7,35 @@
     <title>Document</title>
 </head>
 <body>
+    <script src="./137/ajax.js"></script>
     <script>
-        var xhr = null;
-        //->为了兼容IE6及更低的版本:如果第- -个不支持,则浏览器会报错,后面就不在执行了
-        function createXHR(){
-            var xhr = null
-            if(window.XMLHttpRequest){
-                xhr = new XMLHttpRequest;
-            }else{
-                try{
-                    xhr = new Activexobject("Microsoft.XYLHTTP");
-                }catch(e){
-                    try{
-                        xhr = new Activexobject ("Msxml2.XMLHTTP")
-                    }catch(e){
-                        try{
-                            xhr = new Activexobject ("Msxml3.XMLHTTP")
-                        }catch(e){
-
-                        }
-                    }
-                }
-            }
-            return xhr
-        }
         var xhr = createXHR()
-        var xhr2 = createXHR()
+        console.log(xhr,'666');
+        // var xhr = null;
+        // //->为了兼容IE6及更低的版本:如果第- -个不支持,则浏览器会报错,后面就不在执行了
+        // function createXHR(){
+        //     var xhr = null
+        //     if(window.XMLHttpRequest){
+        //         xhr = new XMLHttpRequest;
+        //     }else{
+        //         try{
+        //             xhr = new Activexobject("Microsoft.XYLHTTP");
+        //         }catch(e){
+        //             try{
+        //                 xhr = new Activexobject ("Msxml2.XMLHTTP")
+        //             }catch(e){
+        //                 try{
+        //                     xhr = new Activexobject ("Msxml3.XMLHTTP")
+        //                 }catch(e){
+
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return xhr
+        // }
+        // var xhr = createXHR()
+        // var xhr2 = createXHR()
         // if (window.XMLHttpRequest) {
         //     xhr = new XMLHttpRequest;
         // } else if (new Activexobject("Microsoft.XMLHTTP")) {

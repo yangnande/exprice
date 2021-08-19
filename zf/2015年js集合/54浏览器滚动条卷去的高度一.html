@@ -64,11 +64,10 @@
         <a href="javascript:;" id="goLink"></a>
         <!-- <div id="target"></div> -->
     <script>
-        var goLink = document.getElementById ("goLink") ;
-        //- >开始Go按钮是不显示的,只有当浏览器卷去的高度超过一屏幕的高度的时候在显示,反之隐藏- >只要浏览器的滚动条在滚动,我们就需要判断Go显示还是隐藏
-        //->浏览器的滚动条滚动:拖动滚动条、数遍滚轮、键盘上下键或者pageDown/pageUp键、点击滚动条的空白处或者箭头(自主操作的行为) ...我们还可以通过JS控制scro11Top的值实现滚动条的滚动
+        var goLink = document.getElementById("goLink") ;
+        //->开始Go按钮是不显示的,只有当浏览器卷去的高度超过一屏幕的高度的时候在显示,反之隐藏->只要浏览器的滚动条在滚动,我们就需要判断Go显示还是隐藏
+        //->浏览器的滚动条滚动: 拖动滚动条、数遍滚轮、键盘上下键或者pageDown/pageUp键、点击滚动条的空白处或者箭头(自主操作的行为) ...我们还可以通过JS控制scro11Top的值实现滚动条的滚动
         function computedDisplay() {
-            console.log(666);
             var curTop = document.documentElement.scrollTop || document.body.scrollTop;
             var curHeight = document.documentElement.clientHeight || document.body.clientHeight;
             goLink.style.display = curTop > curHeight ? 'block':'none';
@@ -76,10 +75,10 @@
         }
         window.onscroll = computedDisplay;
         //->回到顶部:
-        //总时间(duration) : 500ms
-        //频率(interval) :多长时间走一步10ms
-        //总距离(target) :当前的位置(当前的scrollTop值) -目标的位置(0)
-        //->步长(step) :每一次走的距离target/duration-> 每1ms走的距离*interval->每一次走的距离
+        //总时间(duration): 500ms
+        //频率(interval): 多长时间走一步10ms
+        //总距离(target): 当前的位置(当前的scrollTop值) - 目标的位置(0)
+        //->步长(step): 每一次走的距离target/duration -> 每1ms走的距离*interval -> 每一次走的距离
         var duration = 500
         goLink.onclick = function (){
             // 当点击的时候让当前的go消失
@@ -89,9 +88,9 @@
             //->.当点击G0的时候,首先把每一步要走的步长计算出来
             var duration = 500,interval = 10,target = document.documentElement.scrollTop || document.body.scrollTop;
             var step = (target / duration) * interval;
-            //->计算完成步长后,让当前的页面每隔interval这么长的时间走一步:在 上一次的scrollTop的基础上 步长
+            //->计算完成步长后,让当前的页面每隔interval这么长的时间走一步:在上一次的scrollTop的基础上 步长
             var timer = window.setInterval(function () {
-                var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+                curTop = document.documentElement.scrollTop || document.body.scrollTop;
                 if (curTop === 0) {// - >已经到头了
                     window.clearInterval(timer);
                     window.onscroll = computedDisplay; //->当动画结束后还需要把对应的方法 重新绑定给window.onscroll
