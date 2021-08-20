@@ -159,7 +159,7 @@ var server1 = http.createServer(function (req,res) {
       // str='{"name": "", "age" : "", "phone" : "", "address" : ""}';
       if(str.length === 0){
         res.writeHead (200,{'content-type': 'application/json;charset=utf-8;'});
-        rea.end(JSON.stringify({
+        res.end(JSON.stringify({
           code: 1,
           msg: "修改失败,没有传递任何需要修改的信息"})); 
         return;
@@ -173,7 +173,7 @@ var server1 = http.createServer(function (req,res) {
           break
         }
       }
-      result.msg ="修改失败,需要修改的客户不存在";
+      // result.msg ="修改失败,需要修改的客户不存在";
       if(flag){
         fs.writeFileSync(customPath,JSON.stringify(con),'utf-8')
         result = {

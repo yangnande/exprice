@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="box">
-    <a class="link" href="add.html"></a>
+    <a class="link" href="add.html">增加新客户</a>
     <h2 class="head">
       <span class="w50">编号</span>
       <span class="w150">姓名</span>
@@ -37,6 +37,32 @@
     //-> 首先获取所有的客户信息，完成页面的数据绑定
     var customModule = (function(){
       var oList = document.getElementById('list')
+      // delete custom
+      function removeCustom(){
+        oList.onclick = function(e){
+          e = e || window.event
+          var tar = e.target || e.srcElement
+          var tarTag = tar.tagName.toUpperCase()
+          // 点击的是删除按钮
+          if(tarTag === 'A'&&tar.innerHTML === '删除'){
+            var customId = tar.getAttribute('customId')
+            var flag = window.confirm("确定要删除编号为["+customId+"]的客户吗？")
+            if(flag){
+              ajax({
+                url: '/removeInfo?id=' + customId,
+                success: function(jsonData){
+                  if(jsonData&&jsonData.code==0){
+                    // 成功后跳转回到首页 location.href = 'xx' js实现页面跳转的一种方式
+                    oList.removeChild(tar.parentNode.parentNode)
+                    return
+                  }
+                  alert(jsonData.msg)
+                }
+              })
+            }
+          }
+        }
+      }
       //->SEND AJAX GET DATA
       function bindHTML(data){
         var str = ''
@@ -49,8 +75,8 @@
           str += '<span class="w200">' + curData ["phone"] + '</span>';
           str += '<span class="w200">' + curData ["address"] + '</span>';
           str += '<span class="w150 control">';
-          str += '<a href ="add.html?id='+curData["id"]+'>修改</a>';
-          str += '<a href="">删除</a>';
+          str += '<a href =add.html?id='+curData["id"]+'>修改</a>';
+          str += '<a href="javascript:;" customId="'+curData["id"]+'">删除</a>';
           str += '</span>';
           str += '</1i>';
         }
@@ -62,7 +88,10 @@
           success: function(jsonData){
             if(jsonData&&jsonData.code==0){
               var data = jsonData['data']
+              // bind html
               bindHTML(data)
+              // remove custom
+              removeCustom()
             }
           }
         })
@@ -71,7 +100,7 @@
         init: init
       }
     })()
-    
+    customModule.init()
   </script>
 </body>
 </html>

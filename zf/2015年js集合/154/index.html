@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     // JSONP的原理:(JsONP请求一定需要对方的服务器做支持才可以):
+    // ->在SCRIPr的世界中,没有同源跨域这一说,只要你给我SRC属性中的地址是一个合法的地址, SCRIPT都可以把对应的内容请求回来
+    // ->JSONP就是利用了SCRIPT的这个原理
+    // 1)我们首先把需求请求数据的，那个跨域的API数据接口的地址，赋值给SCRIPT的SRC
+    // 2)把当前页面中的某一个函数名当做参数值，传递给腾讯的服务器(URL问号传参)
+    // 3)腾讯服务器接收到你的请求后，需要进行特殊的处理:把你传递进来的函数名和它需要给你的数据拼接成一个字符串 例如:我们传递进去的函数名是fn，它准备好的数据是fn([{"name" : "zhufeng"}])'->'我传递的函数名(需要给我们的数据)'
+    // 4)最后腾讯的服务器把准备的数据通过HTTP协议返回给我们客户端，客户端发现其实就是让我们的fn执行，而且还给fn传递了一堆的数据，那些数据就是我们想要的
+    function fn(data){
+      console.log(data); // data可以拿到
+    }
+    var a = 1
+    var b= 1
+    function yn(data){
+      console.log(arguments); // {a:1},100
+    }
+  </script>
+  <script charset="utf-8" type="text/javascript" src="http://192.168.4.10/getAll?callback=yn"></script>
+  <!-- <script charset="utf-8" type="text/javascript" src="http://matchweb.sports.qq.com/kbs/calendar?columnId=100000&callback=fn"></script> -->
+</body>
+</html>

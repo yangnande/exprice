@@ -25,7 +25,85 @@
       <span>地址：</span>
       <input type="text" id="userAddress">
     </div>
-    <div class="submit">提交</div>
+    <div class="submit" id="submit">提交</div>
   </div>
+  <script src="./ajax.js"></script>
+  <script>
+    String.prototype.queryURLParameter = function () {
+      var obj = {},
+          reg = /([^?=&#]+)=([^?=&#]+)/g;
+        this.replace(reg,function (){
+          var key = arguments[1]
+          var value = arguments[2]
+          obj[key] = value
+        })
+        return obj
+    }
+    var userName = document.getElementById('userName')
+    var userAge = document.getElementById('userAge')
+    var userPhone = document.getElementById('userPhone')
+    var userAddress = document.getElementById('userAddress')
+    var submit = document.getElementById('submit')
+    //->判断一下是修改还是增加:如果URL的后面传递了ID值就是修改，否则就是增加->这样的话我们加载页面的第一件事情就是获取URL后面传递进来的ID值
+    //->http://192.168.0.22:81/add.html?id=2&name=3 {id:2 , name:3} 
+    var urlObj = window.location.href.queryURLParameter()
+    var customId = urlObj['id']
+    console.log(customId);
+    var isFlag = typeof customId === 'undefined' ? false : true //->是否为修改操作TR0Ef代表修改FALSE代表增加
+    //->如果是修改的话,我们首先需要把对应客户的信息获取到,并且增加到对应的文本框中
+    if(isFlag){
+      ajax({
+        url: "/getInfo?id="+customId,
+        success: function (jsonData){
+          if(jsonData&&jsonData.code==0){
+            var data = jsonData['data']
+            userName.value = data['name']
+            userAge.value = data['age']
+            userPhone.value = data['phone']
+            userAddress.value = data['address']
+          }
+        }
+      })
+    }
+    //->点击提交按纽的时候不一定是增加了，还有可能是修改
+    submit.onclick = function(){
+      var obj = {
+        name: userName.value,
+        age: userAge.value,
+        phone: userPhone.value,
+        address: userAddress.value,
+      }
+      if(isFlag){
+        obj.id = customId
+        ajax({
+          url: '/updateInfo',
+          type: 'post',
+          data: JSON.stringify(obj),
+          success: function(jsonData){
+            if(jsonData&&jsonData.code==0){
+              // 成功后跳转回到首页 location.href = 'xx' js实现页面跳转的一种方式
+              location.href = 'index.html'
+              return
+            }
+            alert(jsonData.msg)
+          }
+        })
+        return
+      }
+      ajax({
+          url: "/addInfo",
+          type: 'post',
+          data: JSON.stringify(obj), // 请求主体中的内容是JSON格式的字符串
+          success: function(jsonData){
+            if(jsonData&&jsonData.code==0){
+              // 成功后跳转回到首页 location.href = 'xx' js实现页面跳转的一种方式
+              location.href = 'index.html'
+              return
+            }
+            alert(jsonData.msg)
+          }
+      })
+    }
+  </script>
 </body>
 </html>

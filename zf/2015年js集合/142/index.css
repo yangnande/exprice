@@ -56,11 +56,15 @@ input {
   float: left;
   text-align: center;
   font-size: 14px;
+  /* 禁止换行 */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .head span {
   color: #fff;
   font-weight: bold;
-}
+} 
 /*—-Css3中新增加的选择器: nth-child (even)获取所有的偶数--*/
 .list li:nth-child(even) {
   background: #eee;
