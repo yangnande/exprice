@@ -29,12 +29,11 @@ var utils = {
         val = window.getComputedStyle(curEle,null)[attr];
     } else { // IE6~8
         //->如果传递进来的结果是opacity,说明我想获取到的是透明度,但是在工E6~8下获取透明度需要使用filter
-        if (attr === " opacity"){
+        if (attr === "opacity"){
             val = curEle.currentstyle["filter"];
             //->"alpha(opacity=10)”把获取到的结果进行剖析,获取里面的数字,让数字乘以100才和标准的值,览器保持了一致
-            reg = /^alpha\(opacity=(\d+(?:\.\d+)?)\)$/i;
+            reg = /^alpha\(opacity=\(\d+\(?:\.\d+\)?\)\)$/i;
             val = reg.test(val) ? reg.exec(val)[1] / 100 : 1
-
         }else {
             val = curEle.currentstyle[attr];
         }
@@ -159,7 +158,7 @@ var utils = {
   siblings:function(curEle) {
     return this.prevAll(curEle).concat(this.nextAll(curEle))
   },
-  //->index:获取当前元素的索引
+  //->index:获取当前元素的索引 知道所有的上一个元素长度==当前元素的索引
   index: function (curEle){
     return this.prevAll(curEle).length;
   },

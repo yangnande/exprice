@@ -21,10 +21,11 @@
     </div>
     <script>
         var oDiv = document.getElementById("div1");
-        // console.log(oDiv.children.length);
+        console.log(oDiv.children.length); //6
         //->首先获取所有的子节点(childNodes),在所有的子节点中把元素节点过滤出来(nodeType===1 )
         //->如果多传递一个标签名的话,我们还在在获取的子元素集合中把对应标签名的进行二次筛选
         function children(curEle,tagName){
+            // console.log(navigator.userAgent,'navigator.userAgent');
             var ary = [];
             //->IE6~8下不能使用内置的children属性,我们自己写代码实现
             if (/MSIE(6|7|8)/i.test(navigator.userAgent)) {

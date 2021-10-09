@@ -25,14 +25,14 @@
     <div>
     <script>
         var box = document.getElementById("box") ;
-        //1.之前我们学习的JS盒子模型中:client系列/offset系列/scrollWidth/scrol1Height都是"只读"属性-> 只能通过属性获取值,不能通过属性修改元素的样式
+        //1.之前我们学习的JS盒子模型中:client系列/offset系列/scrollWidth/scrollHeight都是"只读"属性-> 只能通过属性获取值,不能通过属性修改元素的样式
         //2、scrollTop/scrollLeft:滚动条卷去的高度/宽度(这两个属性是唯一”可读写"属性)
-        //box.scro11Top = 0;//- >直接回到了容器的顶部
+        //box.scrollTop = 0;//- >直接回到了容器的顶部
         //-> 我们的scrollTop的值是存在边界值(最大和最小值的) ,我们设置的值比最小值小或者比最大值大都没用,起到效果的依然是边界的值
         //[最小值是零]
         // box.scrollTop = -1000;//->直接回到了容器的顶部,没有超出
         // console.log(box.scrollTop) //->0
-        //[最大值是-真实的高度-当前容器一屏幕的高度]
+        //[最大值是=真实的高度当前容器-屏幕的高度]
         // var maxTop = box.scrollHeight - box.clientHeight;
         // console.log(box.scrollHeight);// 780
         // console.log(box.clientHeight); // 260

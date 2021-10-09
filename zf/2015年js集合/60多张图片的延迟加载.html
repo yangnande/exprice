@@ -86,6 +86,7 @@
             var xhr = new XMLHttpRequest();
             //2) 打开我们需要请求数据的那个文件地址
             //URL地址后面加的随机数是清除每一次请求数据时候(GET请求) 产生的缓存
+            // false 同步
             xhr.open("get", "./60/1.json?_="+Math.random(), false) ;
 
             //3)监听请求的状态
@@ -105,8 +106,8 @@
             if (jsonData) {
                 for (var i = 0,len = jsonData.length; i<len; i++) {
                     var curData =jsonData[i];
-                    str += '<li> ';
-                    str += '<div><img src="" trueImg="' + curData [ "img"]+'"/></div>';
+                    str += '<li>';
+                    str += '<div><img src="" trueImg="' + curData ["img"]+'"/></div>';
                     str += '<div>';
                     str += '<h2>' + curData["title"]+ '</h2>';
                     str += '<p>' + curData["desc"] + '</p>';
@@ -155,7 +156,7 @@
                 //->只有A<B的时候在进行处理:当前图片是隐藏的,我们计算的A的值其实是计算它父亲(容器)的值
                 var curImgPar = curImg.parentNode;
                 var A = utils.offset(curImgPar).top + curImgPar.offsetHeight;
-                var B = utils.win( "clientHeight") + utils.win("scrollTop");
+                var B = utils.win("clientHeight") + utils.win("scrollTop");
                 // console.log(A<B);
                 if(A<B) {
                     lazyimg(curImg)
