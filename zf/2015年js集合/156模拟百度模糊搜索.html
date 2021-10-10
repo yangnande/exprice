@@ -5,10 +5,125 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    input {
+      display: block;
+      outline: none;
+    }
+    ul,li{
+      list-style: none;
+    }
+    html,body{
+      color: #000;
+      font-family : "15FAE\8F6F\96c5\9ED1",Helvetica,sans-serif;
+      font-style: 14px;
+    }
+    .box{
+      margin: 50px auto;
+      width: 300px;
+    }
+    .box input {
+      padding: 0 10px;
+      width: 278px;
+      height: 30px;
+      border: 1px solid green;
+    }
+    .box ul {
+      padding: 10px 0;
+      border: 1px solid green;
+      border-top: none;
+    }
+    .box ul li {
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      cursor: pointer;
+    }
+    .box ul li:hover {
+      background: #eee;
+    }
+  </style>
 </head>
 <body>
+  <div class="box">
+    <input type="text" id="searchInp">
+    <ul id="searchBox">
+      <!-- <li>珠峰培训</li>
+      <li>珠峰培训怎么样</li>
+      <li>珠峰培训在哪</li>
+      <li>珠峰培训就业怎么样</li> -->
+    </ul>
+  </div>
+  <script src="./js/jquery.min.js"></script>
   <script>
-    
+    var searcModule = (function(){
+      var $searchInp = $('#searchInp'),
+          $searchBox = $('#searchBox'),
+          interval = 100;
+      function bindHTML() {
+        var searchKey = $searchInp.val()
+        function callback(data){
+          data = data['s']
+          var str = ''
+          $.each(data,function(index,item){
+            if(index <= 3){
+              str+='<li>'+item+'</li>'
+            }
+          })
+          if(str.length === 0){
+            $searchBox.html(str)
+          }
+          $searchBox.html(str).stop().slideDown(300)
+        }
+        $.ajax({
+          url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF 6hhy/su?wd="+searchKey,
+          dataType: 'jsonp',
+          jsonp:'cb', //把传递函数名的那个形参callback变为cb
+          success:callback
+        })
+      }
+      function init(){
+        //- >给展示框中的I绑定方法,当点LI的时候，把当前LI中的内容放入到文本框中,并且隐藏展示框
+        //->加一个定时器延迟其实就是想让盒子的LI点击事件先触发，然后在触发文本框的失去焦点事件
+        // $searchBox.on ("click", function (e) {
+          //-> 事件委托处理:点击的是LI我们让LI中的内容显示在文本框中,展示框消失;点击的是文本框什么事情都不错;否则展示框消失;|
+        $(document).on ("click", function (e) {
+          var tar = e.target,
+              tarTag = tar.tagName.toUpperCase(),
+              $tar=$(tar);
+          if(tarTag === 'LI'&&tar.parentNode.id === 'searchBox'){
+            $searchInp.val($tar.html())
+            $searchBox.stop().slideUp(interval)
+            return
+          }
+          if(tar.id === 'searchInp'){
+            return
+          }
+          $searchBox.stop().slideUp(interval)
+        })
+        //->. 文本框获取焦点或者输入内容的时候判断当前文本框中是否有内容,有内容绑定数据,没有内容隐藏展示框
+        $searchInp.on('focus keyup',function(){
+          var val = $(this).val()
+          if(val.length>0){
+            bindHTML()
+            return
+          }
+          $searchBox.stop().slideUp(interval)
+        }).on('blur',function(){
+          //->当文本框失去焦点的时候，我们只需要收起展示框即可
+          window.setTimeout(function(){
+            $searchBox.stop().slideUp(interval)
+          },50)
+        })
+        
+      }
+      return {init:init}
+    })()
+    searcModule.init()
   </script>
 </body>
 </html>

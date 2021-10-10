@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //   1、获取每一页的数据
+    //   URL: "/getList"
+    //   参数:?n=1告诉服务器端我需要获取的是第一页的数据
+    //   返回:
+    // `
+    // {
+    //   "code":0,  成功0 失败1
+    //   "msg":"",
+    //   "total":10,
+    //   "data":[
+    //     {
+    //       "num":1,
+    //       "name":"xxx",
+    //       "sex":0, 0男 1女
+    //       "score": 90
+    //     },
+    //     ...
+    //   ]
+    // }
+    // `
+    //   2、获取制定学员的信息
+    //   URL: "/getInfo" get
+    //   参数:?id=xxx
+    //   返回:
+    // `
+    // {
+    //   "code":0,  成功0 失败1
+    //   "msg":"",
+    //   "data":
+    //     {
+    //       "num":1,
+    //       "name":"xxx",
+    //       "sex":0, 0男 1女
+    //       "score": 90
+    //     }
+    // }
+    // `
+    //  n=1 0-9
+    //  n=2 10-19
+    //  n=3 20-29
+    //  n=? (n-1)*10~n*10-1
+    //  n=10 90-99 一共才99调数据 最大索引才98 99这个索引没有内容
+  </script>
+</body>
+</html>

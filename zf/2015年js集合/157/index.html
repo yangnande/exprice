@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./public.css">
+</head>
+<body>
+  <div class="box">
+    <h2>
+      <span>编号</span>
+      <span>姓名</span>
+      <span>性别</span>
+      <span>分数</span>
+    </h2>
+    <ul class="con" id="content">
+      <!-- <li>
+        <span>1</span>
+        <span>xx</span>
+        <span>男</span>
+        <span>90</span>
+      </li>
+      <li>
+        <span>1</span>
+        <span>xx</span>
+        <span>男</span>
+        <span>90</span>
+      </li> -->
+    </ul>
+    <div class="page" id="page">
+      <span>FRIST</span>
+      <span>PREV</span>
+      <ul class="pageNum" id="pageNum">
+        <!-- <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li> -->
+      </ul>
+      <span>NEXT</span>
+      <span>LAST</span>
+      <input type="text" id="numInp" value="1">
+    </div>
+  </div>
+  <script src="../137/ajax.js"></script>
+  <script>
+      var pageModule =(function(){
+        // 获取需要操作的DOM元素
+        var content = document.getElementById('content'),
+            page = document.getElementById('page'),
+            pageNum = document.getElementById('pageNum'),
+            numInp = document.getElementById('numInp');
+        // 设定当前页和总页数以及本次请求回来的数据
+        var n = 1,total=0,data=null;
+        // 实现页面的数据绑定及其他数据的绑定
+        function bindHTML(){
+            // content bind
+            var str = ''
+            for(var i = 0;i<data.length;i++){
+                var curData = data[i]
+                str+='<li studentId="'+curData['id']+'">'
+                str+='<span>'+curData['id']+'</span>'
+                str+='<span>'+curData['name']+'</span>'
+                str+='<span>'+ (curData['sex']==1?'女':'男') +'</span>'
+                str+='<span>'+curData['score']+'</span>'
+                str+='</li>'
+               
+            }
+            content.innerHTML = str
+            // page bind && show current page
+            str = ''
+            for(i=1;i<=total;i++){
+                if(i===n){
+                    str+='<li class="bg">'+i+'</li>'
+                    continue
+                }
+                str+='<li>'+i+'</li>'
+            }
+            pageNum.innerHTML=str
+            // numInp bind
+            numInp.value = n
+        }
+        // bindEvent 事件委托实现分页区域的按钮操作&&给文本框的enter绑定事件
+        function bindEvent(){
+            page.onclick=function(e){
+                e = e||window.event
+                var tar = e.target||e.srcElement,
+                tarTag = tar.tagName.toUpperCase(),
+                tarInn = tar.innerHTML;
+                // FIRST PREV NEXT LAST
+                if(tarTag==='SPAN'){
+                    if(tarInn==='FRIST'){
+                        if(n===1){
+                            return
+                        }
+                        n=1
+                    }
+                    if(tarInn==='LAST'){
+                        if(n===total){
+                            return
+                        }
+                        n=total
+                    }
+                    if(tarInn==='PREV'){
+                        if(n===1){
+                            return
+                        }
+                        n--
+                    }
+                    if(tarInn==='NEXT'){
+                        if(n===total){
+                            return
+                        }
+                        n++
+                    }
+                }
+                if(tarTag==='LI'){
+                    if(n===parseFloat(tarInn)){
+                        return
+                    }
+                    n=parseFloat(tarInn)
+                }
+                if(tarTag==='INPUT'){
+                    return
+                }
+                //-> 目前不管点击的是谁我们都获取到了最新的N的值,重新发送请求,重新绑定即可
+                sendAjax()
+            }
+            numInp.onkeyup=function(e){
+                e=e||window.event
+                if(e.keyCode === 13){//ENTER
+                    var val = this.value.replace(/^ +| +$/,'')
+                    if(isNaN(val)){
+                        // 非有效数字
+                        this.value = n
+                        return
+                    }
+                    val = Math.round(val)
+                    if(val<1){
+                        n=1
+                    }else if(val>total){
+                        n=total
+                    }else{
+                        n=val
+                    }
+                    sendAjax()
+                }
+            }
+        }
+        // bindLink:content区域的LI跳转事件
+        function bindLink(){
+            var oLis = content.getElementsByTagName('li')
+            for(var i = 0;i<oLis.length;i++){
+                oLis[i].onclick = function(){
+                    // location.href = './detail.html'
+                    window.open('./detail.html?id='+this.getAttribute('studentId'))
+                }
+            }
+        }
+        function sendAjax(){
+            ajax({
+                url:'http://192.168.10.7:88/getList?n='+n,
+                success:function(jsonData){
+                    if(jsonData && jsonData.code == 0){
+                        total = jsonData["total"];
+                        data = jsonData["data"]
+                        bindHTML()
+                        bindLink()
+                    }
+                }
+            })
+        }
+        function init(){
+            sendAjax()
+            bindEvent()
+        }
+        return {init: init}
+      })()
+      pageModule.init()
+  </script>
+</body>
+</html>

@@ -7,8 +7,32 @@
   <title>Document</title>
 </head>
 <body>
+  <script src="./js/jquery.min.js"></script>
   <script>
-    
+    $.ajax({
+      url:'data.txt',
+      type:'get',
+      dataType: 'json',
+      data: null,
+      timeout:3000,
+      cache: false, //->设定GET请求的时候不走缓存数据,原理其实就是在URL末尾加随机数,默认是true
+      success:function(data){
+        console.log(data);
+      }
+    })
+    //->JSONP
+    //->JSONP都是GET 和异步请求的,不存在其他的请求方式和同步请求,而且jQuery默认就会给JSONP的请求清除缓存
+    // Request URL: http://matchweb.sports.qq.com/kbs/calendar? columnId=100000&cb=fn&_ =1470188587279
+    $.ajax({
+      url:"http://matchweb.sports.qq.com/kbs/calendar? columnId=100000",
+      type:'get',
+      dataType: 'jsonp',
+      jsonpCallback:'fn',//->自定义传递给服务器的函数名，而不是使用jQuery自动生成的
+      jsonp:'cb', //把传递函数名的那个形参callback变为cb
+      success:function(data){
+        console.log(data);
+      }
+    })
   </script>
 </body>
 </html>
