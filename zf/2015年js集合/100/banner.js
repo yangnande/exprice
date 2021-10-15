@@ -6,7 +6,6 @@
     //->通过jQuery选择器或者筛选的方法获取到的jQuery集合是不存在EDOM的映射机制珠塔训到的集合，之后在页面中HTML结构改变了,集合中的内容不会跟着自动发生变化(JS获取的元素集合有DOM映射的机制)
     function zhufengBanner(ajaxUrl,interval){
         // var $banner = $("#"+selector);
-        console.log( $(this));
         var $banner = $(this);
         var $bannerInner = $banner.children(".bannerInner")
         var $bannerTip = $banner.children(".bannerTip")
@@ -42,7 +41,9 @@
             //->绑定完成数据后获取我们需要的集合
             $divList = $bannerInner.children("div")
             $imgList= $bannerInner.find("img")
-            $oLis=$bannerTip.children("li");
+            $oLis = $bannerTip.children("li");
+            console.log($divList,' $divList');
+            console.log($divList.eq(0),' $divList');
         }
         // ->3延迟加载
         window.setTimeout(lazyImg,500)
@@ -86,12 +87,12 @@
         //5.控制左右按钮的显示隐藏和自动轮播的开始和暂停
         $banner.on("mouseover", function () {
             window.clearInterval(autoTimer) ;
-            $bannerLeft.css("display", "block") ;
-            $bannerRight.css("display", "block") ;
+            $bannerLeft.css("display", "block");
+            $bannerRight.css("display", "block");
         }).on("mouseout", function () {
             autoTimer = window.setInterval(autoMove, interval);
-            $bannerLeft.css("display", "none") ;
-            $bannerRight.css("display", "none") ;
+            $bannerLeft.css("display", "none");
+            $bannerRight.css("display", "none");
         })
         //6、实现焦点切换
         $oLis.on("click", function () {
@@ -105,7 +106,7 @@
                 step = jsonData.length; 
             }
             step--;
-            changeBanner ();
+            changeBanner();
         })
     }
 }(jQuery)   

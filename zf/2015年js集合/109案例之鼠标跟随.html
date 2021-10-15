@@ -25,6 +25,7 @@
             width: 100px;
             height: 75px;
             border: 1px solid #008000;
+            overflow: hidden;
         }
         #mark {
             display: none;
@@ -63,6 +64,8 @@
             $box.children("img").bind("mouseover", function (e) {
                 e = e || window.event;
                 e.target = e.target || e.srcElement;
+                console.log($boxOffset.left,$boxOffset.top,'$boxOffset.top');
+                console.log(e.clientX,e.clientY,'e.clientY');
                 var left = e.clientX - $boxOffset.left + 10;
                 var top = e.clientY - $boxOffset.top + 10;
                 $mark.show(500) ;//->hide、toggle、 slideDown、slideUp、slideToggle、fadeIn、 fadeOut、fadeToggle、animate...

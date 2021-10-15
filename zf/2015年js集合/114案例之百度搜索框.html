@@ -89,7 +89,7 @@
         //-> 不管是获取焦点onfocus,还是在里面编辑内容onkeyup,都是有内容显示,没内容隐藏
         searchInp.onfocus = searchInp.onkeyup = function () {
             var val = this.value.replace(/(^ +| +$)/g, "") ;//->获取文本框中的内容,并且去除它的首尾空格
-            searchList.style.display = val.length > 0 ? 'block':'none'
+            0 ? 'block':'none'searchList.style.display = val.length > 
         }
         document.body.onclick = function(e){
             e = e || window.event

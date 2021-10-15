@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Object.prototype.aaa=function(){}
+    // var obj = {name:'珠峰',age:7}
+    // for(var key in obj){
+    //   //->for in循环在遍历的时候，挪犬认的话可以把自己私有的和在它所属类原型上扩展的属性和方法都可以遍历到，但是一般情况下，我们遍历一个对象只需要遍历私有的即可，我们可以使用以下的判断进行处理
+    //   // if(obj.propertyIsEnumerable(key)){
+    //   //   console.log(key);
+    //   // }
+    //   if(obj.hasOwnProperty(key)){
+    //     console.log(key);
+    //   }
+    // }
+
+    // ->Object.create()方法创建一个拥有指定原型和若干个指定属性的对象。
+    // ->Object.create()创建一个新的对象，但是还要把proObj作为这个对象的原型在IE6-8不兼容
+    var obj = {
+      getX: function(){
+
+      }
+    } 
+    function object(o){
+      function Fn(){}
+      Fn.prototype = o
+      return new Fn
+    }
+    var newObj = object(obj)
+    
+    function Sum(){
+
+    }
+    Sum.prototype = object(obj)
+    Sum.prototype.constructor=Sum
+
+    // var obj = {
+    //   constructor:Fn,
+    //   getX: function(){
+
+    //   }
+    // } // obj=xxxfff000
+    var obj2 = Object.create(obj)
+    // obj2
+    // __proto__
+    // getX:function...
+    // __proto__:Object.prototype
+    obj2.getX()
+    obj2.getY=function(){
+      console.log(2);
+    }
+    obj2.getY()
+    // var obj2={}
+    // for(var key in obj2){
+    //   if(obj.hasOwnProperty(key)){
+    //     obj2[key]=obj[key]
+    //   }
+    // }
+    function Fn() {
+      
+    }
+    Fn.prototype = obj // Fn.prototype=xxxfff000
+    Fn.prototype.sum=function(){}
+    var f = new Fn
+
+    // ->#div1.__proto__->HTMLDivElement.prototype->HTMLElement.prototype->Element.prototype->Node.prototype->EventTarget.prototype->Object.prototype
+    function Object(){
+
+    }
+    Object.prototype={
+      constructor:Object,
+      hasOwnProperty:function(){}
+    }
+
+    function myEventTarget(){
+
+    }
+    myEventTarget.prototype=new Object()
+    myEventTarget.prototype.addEventListener=function(){}
+
+    function myNode(){}
+    myNode.prototype=new myEventTarget
+    myNode.prototype.createElement=function(){}
+
+    var n = new myNode;
+    function A(){
+      this.x = 100
+    }
+    A.prototype.getX=function(){
+      console.log(this.x);
+    }
+    function B(){
+      this.y=200
+    }
+    B.prototype = new A
+    //一>”原型继承"是我们Js中最常用的一种继承方式
+    //->子类B想要继承父类A中的所有的属性和方法(私有+公有),只需要让B.prototype=new A即可
+    //->原型继承的特点:它是把父类中私有的+公有的都继承到了子类原型上(子类公有的)
+    //->核心:原型继承并不是把父类中的属性和方法克隆一份一模一样的给B，而是让B和A之间增加了原型链的连接，以后B的实例n想要中A中的getX方法,需要一级级的向上查找来使用
+
+    //->call继承:把父类私有的属性和方法克隆一份一模一样的作为子类私有的属性
+    // function A(){
+    //   this.x = 100
+    // }
+    // A.prototype.getX=function(){
+    //   console.log(this.x);
+    // }
+    // function B(){
+    //   // this.x = 200
+    //   // this==n
+    //   A.call(this) //A.call(n) 把A执行让A中的this变成了n
+    // }
+    // var n = new B
+    // n.getX()
+    //->冒充对象继承:把父类私有的+公有的克隆一份一模一样的给子类私有的
+    function A(){
+      this.x = 100
+    }
+    A.prototype.getX=function(){
+      console.log(this.x);
+    }
+    function B(){
+      var temp = new A
+      for(var key in temp){
+        // this=n
+        // if(temp.propertyIsEnumerable(key)){
+        //   console.log(key);
+        // }
+        this[key]=temp[key]
+      }
+      temp=null
+    }
+    var n = new B
+    n.getX()
+
+    // 混合模式继承:原型继承+call继承
+    function A(){
+      this.x = 100
+    }
+    A.prototype.getX=function(){
+      console.log(this.x);
+    }
+    function B(){
+      A.call(this)  //n.x=100
+    }
+    B.prototype = new A // B.prototype:x=100 getX...
+    B.prototype.constructor=B
+    var n = new B
+    n.getX()
+
+    function A(){
+      this.x = 100
+    }
+    A.prototype.getX=function(){
+      console.log(this.x);
+    }
+    function B(){
+      A.call(this)  //n.x=100
+    }
+    B.prototype = objectCreate(A.prototype) 
+    B.prototype.constructor=B
+    var n = new B
+    n.getX()
+    function objectCreate(o){
+      function Fn(){}
+      Fn.prototype = o
+      return new Fn
+    }
+    //36分钟
+  </script>
+</body>
+</html>

@@ -111,7 +111,6 @@
             var $par = $(this).parent();
             var $ul = $($par.children("ul")[0]);
             var $em = $($par.children("em")[0]);
-            console.log($par.children());
             if ($ul.length > 0) {
                 // 进来的第一件事情获取当前是展开还是隐藏
                 var isBlock = $ul.css('display') === 'block'? true :false

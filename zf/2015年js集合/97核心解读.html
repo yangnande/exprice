@@ -43,8 +43,8 @@
     // $()
     // jQuery()
     //->context: document (传递的是一个原生Js对象能够上下文,如果是一个jQuery对象,它默认会把其重构为选择器
-    var jQuery = function(selcctor, context) {
-      return new jQuery.fn.init(selcctor,context);
+    var jQuery = function(selector, context) {
+      return new jQuery.fn.init(selector,context);
       //我们可以把这个理解为返回的是一个jQuery类的实例
     }
     jQuery.fn = jQuery.prototype = {

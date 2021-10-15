@@ -51,7 +51,7 @@
             
         }
         console.log(hasClass(box, "box"));// true
-        console.log(hasClass(box, "bg"));// false
+        console.log(hasClass(box, "bg"));// true
         console.log(hasClass(box, "position"));// false
         //->addClass:给元素增加样式类名
         function addClass (curEle,className) {
@@ -68,8 +68,8 @@
             //     curEle.className +=" " + className;
             // }
         }
-        addClass(box, "position");
-        addClass(box, "position bg"); // bg会重复
+        // addClass(box, "position");
+        // addClass(box, "position bg"); 
         //->removeClass:给元素移除样式类名
         function removeClass (curEle,className) {
             //->为了防止className传递进来的值包含多个样式类名,我们把传递进来的字符串按照一到多个空格拆分成数组中的每一项
@@ -83,7 +83,7 @@
                 }
             }
         }
-        removeClass(box,'bg')
+        // removeClass(box,'bg')
         // addClass(box, "position") 
         // addClass 增加样式类名
         // removeclass 删除样式类名

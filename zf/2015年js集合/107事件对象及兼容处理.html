@@ -58,21 +58,21 @@
         <li><a href="javascript:;">3</a></li>
         <li><a href="javascript:;">4</a></li>
     </ul>
-    <a href="http://www.zhufengpeixun.cn" target=" blank">珠峰培训</a>
+    <a href="http://www.zhufengpeixun.cn" target="blank">珠峰培训</a>
     <script>
-        var input1 = document.getElementById ("input1");
-        input1.onkeyup = function (e) {
-            e = e|| window.event;
-            //->KeyboardEvent
-            //->e.keyCode:当前键盘上每一个键对应的值
-            //空格键(space)->32
-            //回退键(Backspace) ->8
-            //回车键(Enter)->13
-            //删除键(De1)->46
-            //四个方向键->左37上38右39下40
-            // ...
-            console.log(e.keyCode);
-        }
+        // var input1 = document.getElementById ("input1");
+        // input1.onkeyup = function (e) {
+        //     e = e|| window.event;
+        //     //->KeyboardEvent
+        //     //->e.keyCode:当前键盘上每一个键对应的值
+        //     //空格键(space)->32
+        //     //回退键(Backspace) ->8
+        //     //回车键(Enter)->13
+        //     //删除键(De1)->46
+        //     //四个方向键->左37上38右39下40
+        //     // ...
+        //     console.log(e.keyCode);
+        // }
 
         var oDiv=document.getElementById ("div1");
         //->我们是把匿名函数定义的部分当做一个值赋值给oDiv的点击行为(函数表达式)
@@ -85,13 +85,13 @@
         //->1)事件对象本身的获取存在兼容问题:标准浏览器中是浏览器给方法传递的参数,我们只需要定义形参e就可以获取到;在IE6~8中浏览器不会给方法传递参数,我们如果需要的话,需要到wi ndow. event中获取查找;
         // e = e ||window.event;
         //->e.type:存储的是当前鼠标触发的行为类型"click"
-        //->e.clientx/e.clientY:当前鼠标触发点距离当前屏幕左上角的x/y轴的坐标值
+        //->e.clientX/e.clientY:当前鼠标触发点距离当前屏幕左上角的x/y轴的坐标值
         //->e.target:事件源,当前鼠标触发的是哪个元素,那么它存储的就是哪个元素,但是在IE6~8中不存在这个属性(e.target的值是undefined) ,我们使用e.srcElement来获取事件源
-        //->e.pagex/e.pageY:当前鼠标触发点距离body左上角(页面第一屏幕最做上端)的x/y轴的坐标,但是在IE6~8中没有这个属性,我们通过使用clientY+滚动条卷去的高度来获取也可以
-        // e.pageX = e.pageX  || (e.clientX + (document. documentElement.scrollLeft || document.body. scrollLeft) ) ;
-        // e.pagey = e.pageY || (e.clientY + (document.documentElement.scrol1Top || document.body.scrol1Top));
+        //->e.pageX/e.pageY:当前鼠标触发点距离body左上角(页面第一屏幕最上端)的x/y轴的坐标,但是在IE6~8中没有这个属性,我们通过使用clientY+滚动条卷去的高度来获取也可以
+        // e.pageX = e.pageX || (e.clientX + (document. documentElement.scrollLeft || document.body. scrollLeft) ) ;
+        // e.pageY = e.pageY || (e.clientY + (document.documentElement.scrollTop || document.body.scrollTop));
         //->e.preventDefault:阻止浏览器的默认行为,在IE6~8中没有这个方法,我们需要使用e.returnValue=false;来代替
-        // e.preventDefault? e.preventDefault() : e. returnvalue= false;
+        // e.preventDefault? e.preventDefault() : e. returnValue= false;
         //->e.stopPropagation:阻止事件的冒泡传播,在IE6~8中不兼容,使用e.cancelBubble=true来代替
         // e.stopPropagation ?e.stopPropagation():e.cancelBubble=true
         oDiv.onclick = function (e) {
@@ -109,12 +109,12 @@
             console.log(e.keyCode);
         }
         //a标签的默认行为就是跳转页面,但是我们有时候使用a标签,只是想应用它的特殊性,并不想点击的时候跳转
-        var IinkList = document.getElementsByTagName("a") ;
+        var linkList = document.getElementsByTagName("a") ;
         for (var i = 0; i < linkList.length; i++) {
             linkList[i].onclick = function (e) {
                 e=e || window.event;
                 // e.preventDefault ()
-                e.preventDefault? e.preventDefault() : e. returnvalue= false;
+                // e.preventDefault? e.preventDefault() : e. returnvalue= false;
                 return false;//->和上述的代码是一样的效果,都是在阻止默认的行为
             }
         }

@@ -29,7 +29,6 @@
             var nodeList = context.getElementsByTagName("*");//->获取指定上下文中的所有的元素标签
             for (var i = 0,len = nodeList.length; i < len; i++){
                 var curNode = nodeList[i] ;
-                console.log(curNode.className);
                 //->> 判断curNode.className是否即包含"w3"也包含"w1",如果两个都包含的话, curNode就是我想要的，否则就不是我想要的
                 //->在循环["w3","w1"]
                 var isOk = true; //->我们假设curNode中包含了所有的样式

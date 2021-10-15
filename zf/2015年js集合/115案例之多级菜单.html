@@ -125,9 +125,9 @@
                         firstUl.style.display = "none";
                         oEm ? utils.removeClass(oEm,'open'):null;
                         //->当外层的收起,里层所有的u1都要隐藏,并且所有的em都要移除open样式
-                        var allU1 = parent.getElementsByTagName("ul") ,allEm = parent.getElementsByTagName("em") ;
-                        for(var i=0;i<allU1.length;i++){
-                            allU1[i].style.display = "none"; 
+                        var allUl = parent.getElementsByTagName("ul") ,allEm = parent.getElementsByTagName("em") ;
+                        for(var i=0;i<allUl.length;i++){
+                            allUl[i].style.display = "none"; 
                             utils.removeClass(allEm[i],"open") ;
                         }
                     } else {//->当前是隐藏的,我们让其显示

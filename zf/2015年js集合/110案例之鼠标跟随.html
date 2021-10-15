@@ -32,7 +32,7 @@
     </div>
     <script>
         var box = document.getElementById("box");
-        //->以下代码会出现一一个问题:当鼠标移动过快的时候,鼠标会进入mark这个盒子,触发了它的mouseover行为, 由于事件的冒泡传播机制,导致box的mouseove会重新被触发导致红色盒子一直在不断的创建
+        //->以下代码会出现一个问题:当鼠标移动过快的时候,鼠标会进入mark这个盒子,触发了它的mouseover行为, 由于事件的冒泡传播机制,导致box的mouseove会重新被触发导致红色盒子一直在不断的创建
         // box.onmouseover = function (e) {
         //     e = e || window.event;
         //     var mark = document.createElement("div");

@@ -33,32 +33,32 @@
   </style>
 </head>
 <body>
-  <input type="button" value="操作">
+  <input type="button" value="操作" id="submit">
   <div id="box">
   </div>
   <script src="./js/jquery.min.js"></script>
   <script>
-    $(function() {
-      var $submit = $("#submit"),$box = $("#box");
-      $submit.on("click",function () {
-        //$box.stop().hide(500);
-        //$box.stop().hide("slow"); //->"fast"时间ms
-        $box.stop().slideUp(500);
-        $box.stop().fadeOut(500);
-        $box.finish().slideToggle(500);
-        //$box.stop().delay(1000).slideToggle(500);
-        $box.slideup(500).stop().hide(500) ; //->stop的意思是:结束上一个动画,下一个动画是紧接着当前位置开始运动的
-        $box.slideup(500).finish ().hide(500); //->finish的意思是:结束上一个动画,并且让元素快速的到达目标位置,在开始下一个动画
+    // $(function() {
+      // var $submit = $("#submit"),$box = $("#box");
+      // $submit.on("click",function () {
+        // $box.stop().hide(500);
+        // $box.stop().hide("slow"); //->"fast"时间ms
+        // $box.stop().slideUp(500); // 向上隐藏
+        // $box.stop().fadeOut(500); // 淡出隐藏
+        // $box.finish().slideToggle(500);// 向上隐藏/向下展开切换
+        // $box.stop().delay(1000).slideToggle(500);
+        // $box.slideUp(500).stop().hide(500) ; // ->stop的意思是:结束上一个动画,下一个动画是紧接着当前位置开始运动的
+        // $box.slideUp(500).finish().hide(500); // ->finish的意思是:结束上一个动画,并且让元素快速的到达目标位置,在开始下一个动画
         // $box.stop().animate({
         //   top:500
         // },1000,'swing')
-        $box.stop().animate({
-          top:500
-        },1000,function(){
-          $(this).css("background","#000")
-        })
-      })
-    })
+        // $box.stop().animate({
+        //   top:500
+        // },1000,function(){
+        //   $(this).css("background","#000")
+        // })
+    //   })
+    // })
     // $.ajax ({
     //   url:"json/test.txt?_="+ Math.random(),
     //   type: "get" ,
@@ -68,36 +68,36 @@
     //   }
     // })
     //->事件
-    var $box = $("#box");
-    $box.on("click",function (){
-      console.log(1); //->this:当前元素(JS原生对象)$(this)
-    })
-    $box.on("click",function (){
-      console.log(2);
-    })
-    $box.on("mouseover",function (){
-      console.log(3);
-    })
-    $box.on("mouseout",function (){
-      console.log(4);
-    })
+    // var $box = $("#box");
+    // $box.on("click",function (){
+    //   console.log(1); //->this:当前元素(JS原生对象)$(this)
+    // })
+    // $box.on("click",function (){
+    //   console.log(2);
+    // })
+    // $box.on("mouseover",function (){
+    //   console.log(3);
+    // })
+    // $box.on("mouseout",function (){
+    //   console.log(4);
+    // })
     //->工具
     //->jQuery.browser.version
     //->each:jQuery中有两个each
     //l)循环选择器获取的到的jQuery集合中的结果
-    $("div").each(function (index, item){
-      console.log(item);
-    })
+    // $("div").each(function (index, item){
+    //   console.log(item);
+    // })
     //2)箭环数组、类数组、对象中的每一项
-    $.each ([12,23,34],function (index,item){
-      console.log(item);
-    })
-    $.each(document.getElementsByTagName ("*"),function (index,item){
-      console.log(item);
-    })
-    $.each({ name :"珠峰", age: 7}, function (index,item){
-      console.log(item);
-    })
+    // $.each ([12,23,34],function (index,item){
+    //   console.log(item);
+    // })
+    // $.each(document.getElementsByTagName ("*"),function (index,item){
+    //   console.log(item);
+    // })
+    // $.each({ name :"珠峰", age: 7}, function (index,item){
+    //   console.log(item);
+    // })
     //->$.makeArray ==> listToArray
     //->动画
     //->stop:结束之前正在运行的动画,开启下一个新的动画
@@ -108,7 +108,7 @@
 
     //->fadeIn(淡入)、 fadeout(淡出)、 fadeToggle
     //->show. hide. toggle
-    //->slideUp. slideDown、slideToggle
+    //->slideUp、slideDown、slideToggle
   </script>
 </body>
 </html>

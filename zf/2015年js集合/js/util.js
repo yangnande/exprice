@@ -306,7 +306,7 @@ var utils = {
   //->css:此方法实现了获取、单独设置、批量设置元素的样式值
   css:function (curEle) {
     var argTwo = arguments[1];
-    if (typeof argTwo === "string"){//->第个参数值是一个字符串,这样的话很有可能就是在获取样式;为什么说是很有可能呢?因为还需要判断是否存在第三个参数,如果第三个参数存在的话,不是获取了,而是在单独的设置样式属性值
+    if (typeof argTwo === "string"){//->第二个参数值是一个字符串,这样的话很有可能就是在获取样式;为什么说是很有可能呢?因为还需要判断是否存在第三个参数,如果第三个参数存在的话,不是获取了,而是在单独的设置样式属性值
       var argThree = arguments[2];
       if (typeof argThree === 'undefined') {//->第三个参数不存在
         return this.getCss(curEle,argTwo);

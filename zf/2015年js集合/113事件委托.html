@@ -74,7 +74,7 @@
         </div>
     </div>
     <script>
-        // 1 什么是事件委托/时间代理
+        // 1 什么是事件委托/事件代理
         // //->利用事件的冒泡传播机制(触发当前元素的某个行为,它父级所有元素的相关行为都会被触发),如果一个容器中有很多元素都要绑定点击事件,我们没有必要一个个的绑定了,只需要给最外层容器绑定一个点击事件即可,在这个方法执行的时候,通过事件源的区分来进行不同的操作
         // var outer = document.getElementById("outer"),inner = document.getElementById("inner"),center = document. getElementById("center");
         // document.body.onclick = function(e){
@@ -87,8 +87,7 @@
             e.target = e.target || e.srcElement
             //->如果点击的是#box或者是#box下的span,我们判断nark是否显示,显示的话让其隐藏,反之隐藏的话让其显示
             if (e.target.id === "box"|| (e.target.tagName.toLowerCase()=== "span" && e.target.parentNode.id === "box")) {
-            console.log(mark.style.display === 'none');
-
+                console.log(mark.style.display === 'none');
                 if(mark.style.display === 'none'){
                     mark.style.display = 'block'
                 } else {
@@ -101,7 +100,6 @@
             }
             // 以上都不是的话,我们直接让#mark隐藏
             mark.style.display = 'none'
-            
         }
     </script>
 </body>

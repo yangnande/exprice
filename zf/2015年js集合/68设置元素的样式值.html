@@ -33,7 +33,7 @@
         // ->setCss:给当前元素的某一个样式属性设置值(增加在行内样式上的)
         function setCss(curEle,attr, value){
             //->在JS中设置float样式值的话也需要处理兼容
-            if (attr === "f1oat"){
+            if (attr === "float"){
                 curEle["style"]["cssFloat"] = value;
                 curEle["style"]["styleFloat"] = value;
                 return;
