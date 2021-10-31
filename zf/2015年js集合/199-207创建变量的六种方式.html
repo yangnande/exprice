@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ●变量和数据类型(varisble && data type)
+    //   [变量]]
+    //   多种定义方式: var / let / const / function / import / class
+    //   严谨的命名规范:区分大小写/驼峰命名/关键字保窗字
+    //   [数据类型]
+    //   基本数据类型(值类型) :数字number、 字符串string、布尔boolean, null, undefined
+    //   引用数据类型: oubject (数组、对象、正则..)、function
+    //   Smbol:唯一值
+    // 五:变量(variable)
+    // 它不是具体的值，只是个用来存储具体值的容器或者代名词，因为它存储的值可以改变，所以称为变量
+    // 基于es语法规范，在JS中创建变量有以下方式
+    // - var (E83)
+    // - Function (ES3) 创建函数(函数名也是变量，只不过存储的值是函数类型的而己)
+    // - let (ES6)
+    // - const (ES6) 创建的是常量
+    // - import (ES6) 基于ES6的模块规范导出需要的信息
+    // - class (ES6) 基于ES6创建类
+    //  语法
+    //  var[变量名]=值
+    //  let[变量名]=值
+    //  const[变量名]=值
+    //  function 函数名(){}
+    // js的命名规范
+    // 创建变量，命名的时候要遵循一些规范
+    // -严格区分大小写
+    // -遵循驼峰命名法:按照数字、字母、下划线或者$来命名(数字不能做为名字的开头)，命名的时候基于英文单诃拼接成一个完整的名字(第一个单词字母小s写，其余每一个有意义单词的首字母都大写)
+    // . 不能使用关键字和保留字:在JS中有特殊含义的叫做关键词，未来可能会成为关键字的叫做保留字
+    // 六:数据值是一门编程语言进行生产的材料，JS中包含的值有以下这些类型
+    //   基本数据类型(值类型)
+    //   数字number
+    //   +字符串string
+    //   +布尔boolean
+    //   + null
+    //   + undefined
+    //   引用数据类型
+    // +对象object
+    // +普通对象
+    // +数组对象
+    // +正则对象
+    // +函数funcLion
+    //   - ES6中新增加的一个特殊的类型: Symbol, 唯一的值
+    // [基本数据类型]
+    var n=13; //->0 -13 13.2 数字类型中有一个特殊的值NaN (not a number代表不是一个有效的数字，但是属于number类型的)
+    // var s = '';//->"" '13' "{}" JS中所有用单引号或者双引号包裹起来的都是字符串，里而的内容是当前字符串中的字符(一个字符串由零到多个字符组成)
+    // var b = true;//=>布尔类型只有两个值true真false假
+    // [引用数据类型]
+    // 基于alert:输出的结果都会转换为字符串:把值(如果是表达式先计算出结果)
+    // 通过toString这个方法转换为字符串，然后再输出
+    // 七、数据类型的详细剖析
+    //   1. number数字类型
+    //   NaN: not a number 但是它是数字类型的
+    //   isNaN: 检测当前值是否不是有效数字，返回true代表不是有效数字，返回false是有效数字
+      //=>语法: isNaN([value1)
+        // var num= 12;
+        // isNaN (num); //-> 检测num变量存储的值是否为非有效数字false
+        // i9NaN('13') =>false
+        // isNaN('珠峰') =>true
+        // isNaN(true) -> false
+        // isNaN(false) =>false
+        // isNaN (null) ->false
+        // isNaN (undefined) =>true
+        // iaNaN({age:9}) ->true
+        // isNaN([12,23]) =>true
+        // isNaN([12]) ->false
+        // isNaN(/^$/) =>true
+        // isNaN (function() {}) =>true
+        // 重要: isNaN检测的机制
+        // 1、首先验证当前要检测的值是否为数字类型的，如果不是，浏览器会默认的把值转换为数字类型
+        // 2、当前检测的信已经是数字类型，是有效数字返回false,不是返回true (数字类型中只有NaN不是有效数字，其余都是有效数字)
+        // [字符串转数字]
+        // Number('137) ->13
+        // Number('13px') ->NaN 如果当前字符串中出现任意一个非有效数字字符，结果则为NaN
+        // Nunber('13.5') ->13.5 可以识别小数
+        // [布尔转数字]
+        // Number (true) ->1
+        // Number (false) ->0
+        // [其它」
+        // Number (null) ->0
+        // Number (undefined) - >NaN
+        // 把引用数据类型值转换为数字:先把引用值调取toString转换为字符串，然后再把字符串调收Number转换为数字
+        // [对象]
+        // ({}) .toString() -> '[object 0bject] ' ->NaN
+        // [数组]
+        // [12,23] .toString() ->'12,23'
+        // - >NaN
+        // [12]. tostring() ->'12' ->12|
+        // [正则]
+        // /^$/.tostring() ->'/^$/' ->NaN
+        // Number('') ->0
+        // [].tostring() ->
+        // -> isNaN([]): false
+        // 2. parseInt / parseFloat
+        // >等同于Number， 也是为了把其它类型的值转换为数字类型
+        // >和Number的区别在于字符申转换分析上
+        // > Number: 出现任意非有效数字字符，结果就是NaN
+        // > parseInt: 把一个字符串中的整数部分解析出米，parseFloat是把一个字符串中小数(浮点数)部分解析出来
+        // parseTnt('13.5px') ->13
+        // parseFloat('13.5px') ->13.5
+        // parseInt ('width:13.5px') - >NaN从字符串最左边字符开始查找有效数字字符，并且转换为数字，但是一但遇到一个非有效数字字符，查找结束
+        // 3. NaN的比较
+        // NaN==NaN: false NaN和谁都不相等，包括自己
+
+        // 思考题:有一个变量num,存储的值不知道，我想检测它是否为一个有效数字 下面方案是否可以
+        // if (Number (num) == NaN) {
+        //   alert(num不是有效数字!');
+        // }
+        // NaN和谁都不相等，条件水远不成立(即使num确实不是有效数字，转换的结果确实是NaN,但是NaN !=NaN的)
+        // if (isNaN (num)) (
+        //   //->检测是否为有效数字，只有这一种方案
+        //   alert('num不是有效数字!')
+        // }
+        // 如何把其它数据类型转换为布尔类型?
+        // Boolean
+        // !
+        // !!
+        // javascript
+        // Boolean(1) =>true
+        // !珠峰培训 =>先把其它数据类型转换为布尔类型然后取反
+        // !!null =>去两次反，等价于没取反，也就剩下转换为布尔类型了
+        // 规律: "在J5中只有“0/NaN/空字符/null/unde fined"这五个值转换为布尔类型的false,其余都转换为true
+        // ### null && undefined
+        // ●都代表空或者没有
+        // null:空对象指针
+        // undefined :未定义
+        // null一般都是意料之中的没有(通俗理解:一般都是
+        // 人为手动的先赋值为null ,后面的程序中我们会再 给他赋值)
+        // var num = null; / /=>nuL1是手动赋值。预示着若后面我会把num变量的值进行修改
+        // num=12;
+        // undefined代表的没有一般都不是人为手动控制的，
+        // 大部分都是浏览器自主为空(后面可以赋值也可以不
+        // 赋值)
+        // var num;//=>此时变量的值浏览器给分配的就是undefined 
+        // 后面可以赋值也可以不赋值
+        // object对象数据类型
+        // 普通对象
+        // ●由大括号包裹起来的
+        // ●由零到多组属性名和属性值(键值对)组成
+        // 属性足用来描述当前对象特征的，属性名是当前具各这个特征，属性值是对这个特征的描述(专业语法，属性名称为键[key]，属性值称为值[value]，一组属性名和属性值称为一组健值对)
+        // var obj={
+        //   name: '珠峰培训'，
+        //   age:9 
+        // };
+        // //=>对象的操作:对键值对的增利改直
+        // 语法:对象.属性/对象[属性] 
+        // [获取]
+        // obj.name
+        // obj['name']一般来说，对象的属件名都
+        // 是字符申格式的(属性值不固定，任何格式都
+        // 可以)
+        // [增/改]
+        // JS对象中属性名是不允许重复的，是唯一的
+        // obj.name='周哺天'; //=>原有对象中存在NAME属性，此处属于修改属性值
+        // obj.sex='男'; //=>原有对象中不存在sex。此处相当于给当前对象新增加一个属性sex
+        // obj['age']=28;
+        // [删]
+        // 彻底删除:对象中不存在这个属性了
+        // delete obj['age'];
+
+        // 假删除:并没有移除这个属性，只是让当前属
+        // 性的值为空
+        // obj.sex=null;
+        // 在获取属性值的时候，如果当前对象有这个属性名,则可以正常获取到值(哪怕足null)，但是如果没有这个属性名，则获取的结果是undefined 
+        // obj['friends'] =>undefined
+        // 思考题
+        // var obj= {
+        //   name: '珠峰培训'，
+        //   age:9
+        // };
+        // var name = " zhufeng' ;
+        // obj.name => '珠峰培训' 获取的是NAME
+        // 属性的值
+        // obj['name'] =>'珠峰培训'获取的是NAME
+        // 属性的值
+        // obj [name] => 此处的NAME是一个变盘，我们
+        // 要获取的属性名不叫做NAME.是NAME存储的
+        // 值”zhufeng' =>obj ['zhufeng'] =>没有
+        // 这个属性,网性值是undefined
+        // 'name'和name的区别?
+        //   => 'name'是个字行申值，它代表的是本身
+        //   => name是一个变量，它代表的是本身存储的这个值
+        // 一个对象中的属性名不仅仅是字符串格式的，还有可
+        // 能是数字格式的
+        // var obj={
+        //   name: '珠峰培训' ,
+        //   0: 100
+        // };
+        // obj[0] ->100
+        // obj['0'] =>100
+        // obj.0 ->Uncaught SyntaxError: Unexpected number
+        // 当我们存储的属性名不是字符中也不是数字的
+        // 时候。浏览器会把这个值转换为字符申(tost
+        // ring) ，然后再进行存储
+        // obj[{}]=300; =>先把({}). toStrin
+        // g()后的结果作为对象的属性名存储进来 ob
+        // j['[object Object]"] =300
+        // obj[{}}] =》 获取的时侯也足先把对象转换为
+        // 字符中'[object object]'，然后获取之前
+        // 存储的300
+        // 数组对象(对象由键值对组成的)
+        // var 00={
+        // a: 12
+        // };
+        // var ary = [12 ,23]; //=>12和23都是属
+        // 性值，属性名呢?
+        // 通过观察结果，我们发现数组对象的属性名是
+        // 数字(我们把数字属性名称为当前对象的索
+        // 引)
+        // ary[e]
+        // ary['0']
+        // ary.0 =>报错
+
+
+
+  </script>
+</body>
+</html>

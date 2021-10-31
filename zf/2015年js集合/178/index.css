@@ -1,0 +1,111 @@
+html,body {
+  width: 100%;
+  overflow-x: hidden;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover,a:active {
+  color: #000;
+}
+.con {
+  margin: 0 auto;
+  width: 960px;
+}
+/* header */
+.header,.headerBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 89px;
+  overflow: hidden;
+}
+.header {
+  box-shadow: 0 1px 2px 0 #BBB;
+}
+.headerBg {
+  z-index: 9;
+  opacity: 0.1;
+  filter: alpha(opacity=10);
+  background: #000;
+}
+.header .logo {
+  float: left;
+  margin-top: 19px;
+  width: 270px;
+  height: 51px;
+  font-size: 0;
+}
+.header .logo img {
+  width: 270px;
+  height: 51px;
+}
+ul {
+  height: 89px;
+}
+.header .nav {
+  float: right;
+}
+.header .nav li {
+  float: left;
+  position: relative;
+}
+.header .nav li a{
+  display: block;
+  padding: 0 30px;
+  height: 89px;
+  line-height: 89px;
+  color: #f4f4f4;
+  font-size: 18px;
+}
+.header .nav li.bg a{
+  color: #fff;
+}
+.header .nav li a i{
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  margin-left: 0;
+  width: 0;
+  height: 89px;
+  background: #000;
+  opacity: 0.1;
+  filter: alpha(opacity=10);
+  /* 过渡动画:pc端使用写5套 移动端使用只留第一个和最后一个，而且顺序不能变 */
+  -webkit-transition: all .3s linear 0s;
+  -moz-transition: all .3s linear 0s;
+  -ms-transition: all .3s linear 0s;
+  -o-transition: all .3s linear 0s;
+  transition: all .3s linear 0s;
+}
+.header .nav li a:hover i {
+  margin-left: -50%;
+  width: 100%;
+}
+/* banner */
+.banner {
+  height: 490px;
+  background: #ff6900;
+}
+/* 响应式 */
+@media all and (max-width: 760px) {
+  .con {
+    width: 100%;
+  }
+  .header .headerBg {
+    height: 46px;
+  }
+  .header .logo {
+    margin-top: 9px;
+    margin-left: 10px;
+    width: 148px;
+    height: 28px;
+  }
+  .header .nav {
+    display: none;
+  }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // JS中的判断操作语句
+    // 1、if/else if/ else
+    // javascript
+    // var num = 12;
+    // if (num>10){
+    //   num++; //=>num=num+1 num+=1 在自身的基础上累加1
+    // }else if(num>=0 && num<=10){
+    //  num--
+    // }else{
+    //   num+=2
+    // }
+    // console.log(num);
+    // 只要有一个条件成立，后面不管是否还有成立的条件，都不在判断执行了
+    // javascript
+    // var num = 10;
+    // if(num>5){
+    // num+=2 ;
+    // }else if(num>8){
+    // num+-3 ;
+    // }else{
+    // num+=4;
+    // }
+    // console.log(num) //=>12
+    //>=/<=/==常规比较
+    // if(0){
+    // =>不管你在条件判断中写什么，最后总要把其计算出TRUE/FALSE来判断条件是否成立(把其它类型的值转换为布尔类型，只有0/NaN/''/null/undefined是false,其余都是true)
+    // }
+    // if('3px'+3){
+    //->在J5中,+-*/ %都是数学运算，除+以外，共余运算符在运算的时候，如果遇至了非数字类型的值。首先会转换为数字类型(Number)，然后再进行运算
+    //=>+ 在JS中除了数学相加,还有宁符申拼接的作用(如果运算中遇到了字符中，则为字符申拼接，而不是数学相加) 
+    // }
+    // '3px'+3 => '3px3 '
+    // if('3px'-3){
+    // 3px'-3 =>NaN
+    // BAT面试题:
+    // javascript
+    // var num = parseInt('width:35.5px');
+    // if (num==35.5){
+    //   alert(0);
+    // }else if(num==35){
+    //   alert(1) ;
+    // }else if(num==NaN){
+    //   alert(2) ;
+    // }else if(typeof num== "number"){
+    //   alert(3);
+    // }else{
+    //   alert(4);
+    // }
+    // typeof
+    // >在IS中用米检测数据类型的方式之一，除了它以外，还有:
+    // > - instanceof
+    // > constructor
+    // >- Object.prototype.toString.call()
+    // 语法: typeof [value] -> 检测value的数
+    // 据类型
+    // 返回值:使用typeof检测出来的结果是一个字
+    // 符串，字符中中包含着对应的数据类型，例
+    // 如: 'number' /"string" /"boolen" /"undefined"/"object"/"function" 
+    // typeof null ->"object" 因为null代表空对象指针(没有指向任何的内存空间)
+    // typeof检测数组/正则/对象，最后返回的都
+    // 是"object",也就是基于这种方式无法细分
+    // 对象
+    // 面试题:
+    // console.log(typeof []); 
+    // //=>"object"
+    // console.log(typeof typeof [])
+    // 2、三元运算符
+    // >语法:条件?成立做的事情:不成立做的事情; <=>相当于简单的if/else判断
+    // 特殊情况
+    // javascript 
+    //->如果三元运算符中的某一部分不需要做任向的处理，我们用null/undefined/void 0... 占位即可
+    // var num = 12;
+    // num> 10 ? num++ : null;
+    //=>如果需安执行多项操作，我们把其用小括号包裹起来，每条操作评句用逗号分隔
+    // num=10;
+    // num>=10 ?(num++,num*=19) :null;
+    // 3 三元运算符
+    //=>switch case应用于变量(或者表达式等)在不同值情况下的不同操作，每种case结束后都要加
+    // break(结束整个判断)
+    // switch case中每一种case情况的比较都是基于"==="绝
+    // 对相等来完成的
+    // javascript
+    // '10'==10
+    // => true 
+    // 相等比较，如果等号左右两边的类型不一样，首先
+    // 会转实为一样的数据类型， 然后可进行比较
+    // =>当前案例中，就是把字物申'10'转换为数字了，然后再比较的
+    // 10'===10 绝对比较，如果两边的数据类型
+    // 不样，则直接不相等，它要求类型和值都完
+    // 全一样才会相等(真实项目中为了保证代码的
+    // 严谨性，我们应该更多使用绝对比较) 
+
+  </script>
+</body>
+</html>
