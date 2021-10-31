@@ -1,9 +1,9 @@
 /** 
  * bind: 处理DoM2级事件绑定的兼容性问题(绑定方法)
  * * @parameter:
- * curEle->.要绑定事件的元素
+ * curEle->要绑定事件的元素
  * evenType->要绑定的事件类型("click"、"mouseover". . .)
- * evenFn->.要绑定的方法
+ * evenFn->要绑定的方法
 */
 function bind(curEle, evenType, evenFn) {
     if ('addEventListener' in document ) {
@@ -35,7 +35,7 @@ function unbind (curEle,evenType, evenFn) {
         curEle.removeEventListener(evenType, evenFn, false) ;
         return
     }
-    //->. 拿evenFn到curEle["myBind"]这里找化妆后的结果,找到之后在事件池中把换装后的结果给移出事件池
+    //->拿evenFn到curEle["myBind"]这里找化妆后的结果,找到之后在事件池中把换装后的结果给移出事件池
     var ary = curEle["myBind"+evenType] ;
     for(var i=0;i<ary.length;i++){
         var cur = ary[i]
@@ -92,7 +92,7 @@ function run(e) {
             e.cancelBubble=true;
         }
     }
-    //this->.当前点击的这个元素curEle e.target存储的是当前触发的元素curEle
+    //this->当前点击的这个元素curEle e.target存储的是当前触发的元素curEle
     //->获取自己事件池中绑定的那些方法,并且让这些方法依次的执行
     var ary = this["myEvent" + e.type];
     for(var i = 0;i<ary.length;i++){
