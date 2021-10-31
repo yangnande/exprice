@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <title>Document</title>
+  <!-- 
+    我们有些时候需要检测一下当前的浏览器是PC端的还是移动端的->如果当前的浏览器是PC的端，但是我们访问的页面是移动端的页面，我们让其跳转到PC端的页面
+    ->.如果当前的浏览器是移动端的，但是我们访问的页面是PC端的页面，我们让其跳转到移动端的页面
+    跳转:window. location. href= 'xxx'
+  -->
+    
+  <script>
+    
+  </script>
+  <link rel="stylesheet" href="./css/public.css">
+  <style>
+    /*REM: 当前页面中元素的REM单位的样式值都是针对FHTML元素的fontsize的值进行动态计算的 */
+    html {
+      font-size: 100px; /*1rem=100px*/
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .box {
+      position: absolute;
+      /* top:0;
+      left: 0;
+      right: 0;
+      bottom:0;
+      margin: auto; 
+      width: 2rem;
+      height: 2rem;*/
+      margin: 0 .2rem;
+      height: 3rem;
+      background:green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box"></div>
+  <script>
+    // REM响应式布局
+    // -> 我们做的H5页面只在移动端访问(REM不兼容低版本的浏览器)
+    // 第一步:从UI设计师拿到设计稿(PSD格式的设计稿) 640*1136
+    // 第二步:在样式中给HTML设定一个fontSize的值，我们一般都设置一个方便后面计算的值，例如:
+    // 10px、100px...这里我们之所以用100px，主要是浏览器最小的字体大小都是12px，用10px比例
+    // 计算的结果和真实UI设计稿会存在那么一点点的偏差
+    // html{font-size:100px}  1rem=100px
+    // 第三步:写页面，写样式
+    // 完全按照设计稿的尺寸来写样式，此时不用管任何的事情，设计稿给你的宽度、高度、字体大小、margin、padding的值是多少，我们就写多少
+    // ->但是我们在写样式值的时候，需要把得到的像素值除以100，计算出对应的REM的值，我们设定的也都是REM的值
+    // (值的注意的是:真实项目中外层盒子的宽度我们一般还是不写固定值，沿用流式布局法的思想，我们用百分比的方式布局)
+    // 第四步:根据当前屏幕的宽度和设计稿的宽度来计算我们HTML的fontsize的值
+    // 设计稿:640 600*300 fontSize=100 6rem*3rem
+    // 手机:320 300*150 fontsize=50
+    // 手机:375 (375/640) *100 ->fontSize=58.59375 351. 5625*175.78125
+
+    //->根据当前屏幕宽度和设计稿宽度的比例，动态计算一下当前宽度下的fontsize值应该是多少，如果fontsize的值改变了，之前设定的所有REM单位的值自动会跟着放大或者缩小
+    // 在设计稿中有一部分是轮播图，设计稿中的尺寸是600*300
+    ~function(){
+        var desW = 640,
+            winW = document.documentElement.clientWidth,
+            ratio = winW/desW;
+        //-> 如果当前屏幕的宽度已经大于设计稿了,为了保证图片的良好展示,我们一般都不让其在继续变大了,以设计稿的宽度为最后宽度,剩余的部分留空白显示(京东...)
+        if(winW > desW){
+          box.style.width = desW + 'px'
+          oMain.style.margin = '0 auto'
+          return 
+        }
+        document.documentElement.style.fontSize = ratio*100+'px'
+      }()
+  </script>
+</body>
+</html>

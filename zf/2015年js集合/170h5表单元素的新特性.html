@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* input {
+      outline: none;
+    }
+    #userEmailTwo:valid{
+      border: 1px solid green;
+    }
+    #userEmailTwo:invalid{
+      border: 1px solid red;
+    } */
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html,body {
+      width: 100%;
+      color: #000;
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+    input {
+      display: inline-block;
+      outline: none;
+    }
+    .box {
+      position: relative;
+      width: 200px;
+      margin: 20px auto;
+    }
+    .box input,.box .tip {
+      padding: 0 5px;
+      width: 188px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #ccc;
+    }
+    .box .tip {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      color:#ccc;
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+  <!-- <input type="password" name="" > -->
+  <!-- <input type="radio" name="sex" value="man" checked id="sexMan"><label for="sexMan">男</label>
+  <input type="radio" name="sex" value="woman" id="sexWomen"><label for="sexWomen">女</label>
+  -->
+  <!-- <input type="checkbox" name="hobby" value="游泳" id="swim"><label for="swim">游泳</label>
+  <input type="checkbox" name="hobby" value="唱歌"  id="sing"><label for="sing">唱歌</label>
+  <input type="checkbox" name="hobby" value="爬山"  id="climb"><label for="climb">爬山</label>
+  <input type="checkbox" name="hobby" value="摄影"  id="photo"><label for="photo">摄影</label>
+  <input type="checkbox" name="hobby" value="敲代码"  id="code"><label for="code">敲代码</label>
+  <input type="submit" id="submit" value="提交"> 
+  <input type="file" name="" id="">
+  <input type="number" name="" id="number" style="width:50px;text-align:center;" value="25" disabled>
+  <input type="range" name="" id="range" min="18" max="65" step="1" value="25" disabled>
+  <input type="text" id="userEmailFir"><br/><br/>
+  <input type="email" name="" id="userEmailTwo"> -->
+  <!-- <div class="box">
+    <input type="email" name="" id="userEmail" placeholder="请输入您常用的邮箱" >
+    <span class="tip" id="tipEmail">请输入您常用的邮箱！</span>
+  </div> -->
+  <input type="search" name="" id="searchInp" list="searchList">
+  <datalist id="searchList">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </datalist>
+  <script>
+    // var submit = document.getElementById('submit'),
+    //  sexMan = document.getElementById('sexMan'),
+    //  sexWomen = document.getElementById('sexWomen');
+    //  submit.onclick=function(){
+    //   console.log(submit);
+    //   console.log(1);
+    //   var sexType = 0
+    //   !sexMan.checked ? sexType=1:null
+    //   console.log(sexType);
+    // }
+    // sexMan.onclick=sexWomen.onclick= function(){
+    //   console.log(this.value);
+    // }
+    // var submit = document.getElementById('submit'),
+    // hobbyList = document.getElementsByName('hobby');
+    // console.log(submit);
+    // submit.onclick=function(){
+      // for(var i = 0;i<hobbyList.length;i++){
+      //   var curHobby = hobbyList[i]
+      //   if(curHobby.Checked){
+      //     console.log(curHobby.value);
+      //   }
+      // }
+    // }
+    // var range = document.getElementById('range')
+    // var number = document.getElementById('number')
+    // range.ondrag=function(){
+    //   number.value = this.value
+    // }
+    // ~function(pro){
+    //   function myTrim() {
+    //     return this.replace(/^ +| +$/,'')
+    //   }
+    //   pro.myTrim = myTrim
+    // } (String.prototype)
+    // var userEmailFir = document.getElementById('userEmailFir')
+    // var userEmailTwo = document.getElementById('userEmailTwo')
+    // userEmailFir.onblur= function(){
+    //   var val = this.value.myTrim()
+    //   var reg = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+*\.[A-Za-z0-9]+$/
+    //   if(!reg.test(val)){
+    //     console.log('邮箱格式不正确！');
+    //   }
+    // }
+    // userEmailTwo.onblur= function(){
+    //   var val = this.value.myTrim()
+    //   if(!this.checkValidity()){
+    //     console.log('邮箱格式不正确！');
+    //   }
+    // }
+    // userEmailFir.onkeyup= function(){
+    //   var val = this.value.myTrim()
+    //   var reg = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+*\.[A-Za-z0-9]+$/
+    //   if(!reg.test(val)){
+    //     this.style.border='1px solid red'
+    //   }else{
+    //     this.style.border='1px solid green'
+    //   }
+    // }
+    if(navigator.userAgent.indexOf('MISE')>-1){
+      var userEmail = document.getElementById('userEmail')
+      var tipEmail = document.getElementById('tipEmail')
+      userEmail.placeholder = ''
+      tipEmail.style.display = 'block'
+      tipEmail.onclick = function(){
+        userEmail.onfocus()
+      }
+      userEmail.onkeyup = userEmail.onkeydown = userEmail.onfocus = function(){
+        tipEmail.style.display = this.value.length === 0 ? 'blick' : 'none'
+      }
+    }
+   
+  </script>
+  <script>
+    // pc端表单元素常用的事件都有哪些：click,change,focus,blur,keydown,keyup..
+    // 移动端表单元素的事件：在移动端没有keydown.keyup事件（当然有的手机是识别的）因为移动端使用的键盘是虚拟的键盘；移动端多了一个事件类型：input事件
+    // 传统的input表单的类型：text,password,submit,reset,button,radio,checkbox,file,hidden
+    // html5中新增了一些类型：search,url,email,tel,number,color,date,time,dataTime...
+    // 作用：
+    // 提供了更加强大的功能,方便我们的开发
+    // 在移动端使用对应的input类型，当用户输入的时候可以调取出对应的虚拟键盘，方便用户的快速输入（这个是html5表单新类型最核心的作用）
+    // 相对于传统的表单类型提供了新的验证方式
+    // js中新提供的是input.checkValidity()
+    // css中新提供的是input:valid input:invalid
+    // html5除了给input新增加类型外，还新增加一个常用的属性placeholder,用来给文本框设置默认提示信息的，但是在IE浏览器中支持的不是特别好
+    // html5还提供了一些新的表单元素：dataList,progress...
+    
+  </script>
+</body>
+</html>

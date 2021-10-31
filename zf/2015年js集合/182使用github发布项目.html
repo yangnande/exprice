@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // https://github.com/zhufengpeixun/
+    // 珠峰培训:使用GitHub发布项目
+    // ->GitHub:
+    // https://github.com/一个网站,网站搭建了一个供用户管理代码的平台(而且是基于GIT操作进行管理的一个平台)
+    // GitHub在全是世界都是比较权威的,我们前端开发工程师所需要的框架、类库、插件的源代码基本上都在GitHub上有托管
+    // 建议:初期回去后先把自己所了解的关于框架、类库、插件的源代码在GitHub上找到，然后FORK到自己的仓库一份，以后有时间尽量去研究一下源代码:后期当自已有一定能力的时候，写一些插件或者类库，上传到GitHub 上供别人研究使用，培养自己的粉丝...
+    // GitHub还有一个作用:可以在这个平台上发布前端的项目文件(GitHub本身就是一个资源文件托管的平台，我们把项目资源文件上传到这个平台下，平台帮我们发布，以后只需输入对应的网址就可以把这个平台中托管文件的源代码返回到用户的客户端进行谊染)
+    // ->使用GitHub建议:
+    // 注册一个GitHub账号(用户名是自己的中文全拼)，注意在GitHub中注册一个账号后，只有验证邮箱后续创建仓库托管文件才可以操作
+    // GitHub中的一个账号可以创建多个仓库，每一个仓库一般只存储和管理一个项目
+    // README.MD文件是对仓库的说明，里面的内容采用MARK语法进行编写
+    // 通过$ git clone xxx.git把远程仓库中的文件下载到本地,此时本地的这个文件夹就和我们的远程仓库保持了连接,我们可以通过连接把本地的文件推送到远程仓库上，也可以从远程仓库上下载最新的文件等
+    // GIT教程:http://www.zhufengpeixun.cn/course/20
+    // ->使用GitHub发布项目，创建自己的静态博客:
+    // 1、创建一个新的仓库(新仓库默认只有一个主分支master,我们如果要托管的是源代码的话，都是把源代码上传到master这个分支下->$ git push origin master)
+    // 2、基于当前的仓库发布我们的博客
+    // Settings->Options->GitHub Pages->Launch Automatic page generator (按钮)->Continue to Layouts->Publish Page (在这一步我们可以选择一个我们中意的模板，当然也可以不用管,我们可以后期上传自己的项目来展示)
+    // RESULT:
+    // 提示一句话:Your project page has been created at http:// zhouxiaotian.github.io/myB1og/. Read more at https://help.gi thub.com/pages.
+    // https://zhouxiaotian.github.io/myBlog/就是我们生成的博客访问地址:
+    // https://用户名.github.io/仓库名/ ( 以后我们可以通过https://github.com/用户名/仓库名/看到别人博客的原代码)
+    // GitHub在访问页面的时候，如果不指定具体访问的xxx.html的话,默认找index.html，所以我们使用生成的地址可以不用编写myBlog/index.html,但是注意只有index.html才可以省略,其他的文件名都是需要加上的
+    // gitHub默认为当前的仓库创建了一个gh-pages这个分支, GitHub默认生成的项目的原代码都在gh-pages这个分支下(也就是，以后想管理发布项目的文件或者内容都需要在gh-pages这个分支下进行管理
+    // 3、为了方便后期的管理，我们把仓库的默认分支切换为gh-pages
+    // Settings->Branches->Default branch
+    // 4、把自已开发的项目上传到仓库的gh-pages分支下，替换默认生成的文件
+    // 例如:
+    // ->. $. git clone https://github.com/zhouxiaotian/myBlog.git把远程仓库中的项目文件克隆到本地
+    // ->把除了.git文件以外的其它文件没有用的话都可以删掉
+    // ->把自已需要展示上传的文件copy到项目文件中
+    // -> $ git add.
+    // -> $ git commit -m'备注信息'
+    // -> $ git push origin gh-pages 传到的是gh-pages分支下而不是原先的master了
+    // 这样以后就可以把地址告诉给别人访问了:https://zhouxiaotian.github.io/myBlog/
+    // 5、锦上添花:把地址生成-一个二维码，让别人扫码访问
+    // 草料:http://cli.im/
+    
+  </script>
+</body>
+</html>

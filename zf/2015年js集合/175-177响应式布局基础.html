@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+    .box{
+      margin: 0 10px;
+      height: 150px;
+      background: url('./58/1.jpg') no-repeat;
+      background-size: cover;
+      border: 1px solid black;
+    }
+    @media all and (-webkit-device-pixel-ratio:2) {
+      .box {
+        background: url('./58/1@2x.jpg') no-repeat;
+        background-size: cover;
+        border: 5px solid red;
+      }
+    }
+    @media all and (-webkit-device-pixel-ratio:3) {
+      .box {
+        background: url('./58/1@3x.jpg') no-repeat;
+        background-size: cover;
+        border: 5px solid green;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+
+  </div>
+  <script>
+    // 第二部分:响应式布局
+    // ->搭建一个H5页面，我们需要在HEAD中添加一个META标签(WB中输入meta:vp按下TAB键自动生成)
+    // <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    // js动态设置vp
+    // var oMeta = document.createElement('meta')
+    // oMeta.name = 'viewport'
+    // oMeta.content = "width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+    // document.head.appendChild(oMeta)
+    // viewport:视口
+    // width-device-width设置视口的宽度等于设备的宽度,如果不设置的话，默认视口的宽度是980px ->通俗理解:我们这个操作其实就是告诉当前的浏览器按照多少宽度来渲染页面，换句话说就是展示当前这个页面的区域-共有多宽(浏览器的宽度)
+    // user-scalable=no:禁止用户手动缩放
+    // initial-scale=1.0:设置屏幕最大、最小、默认的缩放比例
+    // maximum-scale=1.0
+    // minimum-scale=1.0 
+    // ->高清屏
+    // 苹果手机是2倍高清屏幕的，也就是我们在手机上看到的那张100*100图片，其实苹果手机是按照200* 200的尺寸给我们进行渲染的，这样的话，如果我们真实图片本身才100*100，最后呈现出来的就是被拉伸后变模糊的效果
+    // ->苹果手机上需要的素材图片都需要比看到的尺寸大一倍才可以
+    // DPI适配思想:我们在做页面的时候，最好每一张素材图片 都准备两套或者三套，比如:
+    // logo.png 100*100
+    // 1ogo@2x.png 200*200
+    // 1ogo@3x.png 300*300
+    // ...
+
+    // - >响应式布局的解决方案:
+    // 1)流式布局法
+    // ->容器或者盒子的宽度一般都不写固定的值，而是使用百分比(相对于视口区域的百分比)
+    // 媒体查询:@media
+    // ->媒体设备:all所有设备screen所有屏幕设备PC+移动端print打印机设备 ...
+    // ->媒体条件:指定在什么样的条件下执行对应的样式
+    // @media all and (max-width:319px) { //->宽度小于320px
+    //   .box {
+    //     height: 120px;
+    //   }
+    // }
+    // @media all and (min-width:320px) and (max-width:359px) {//->印320 <360
+    //   .box {
+    //     height: 120px;
+    //   }
+    // }
+    // 苹果手机的尺寸:5s及以下都是320px 6是375px宽度 6plus是414px宽度
+    // 常用的安卓机尺寸:320、360、480、540、 640、720...|
+    // 在真实项目中，设计师给我们的设计稿一般都是: 640*960 / 640*1136 / 750*1334 
+    // ->响应式布局的解决方案:
+    // 1)流式布局法
+    // ->容器或者盒子的宽度一般都不写固定的值,而是使用百分比(相对于视口区域的百分比)
+    // ->其余的样式:字体、高度、MARGIN、PADDING等等都按照设计稿上标注尺寸的一半来设置
+    // ->对于有些屏幕尺寸下，我们设置的固定值看起来不是特别的好看的话,使用@media进行微调整
+    // 特殊情况:设计是的设计稿是640px，我们的索材图也是640px的，这样的话在iphone6
+    // /iphone6 plus展示的时候，图片不够大，对于这种情况我们需要单独的找设计师要一张更大的图，在腾讯的时候一 般我要的大图都是1280px的
+    // @media all and (-webkit-device-pixel-ratio:2) and(min-width:321px){
+    //   .box {
+    //     background: url('./58/1@big.jpg') no-repeat;
+    //   }
+    // }
+    // @media all and(min-width:641px){
+    //   .box {
+    //     background: url('./58/1@big.jpg') no-repeat;
+    //   }
+    // }
+  </script>
+</body>
+</html>
